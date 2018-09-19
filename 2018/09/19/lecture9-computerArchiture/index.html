@@ -7,17 +7,17 @@
   
   <title>lecture9.computerArchiture | pwu4</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="L1 split cachemultiple ports mean multiple accesscause larger overhead eg: avoid hazard, multiple ports mltiple exclusion and mutiple inclusion:L1 and L2L1 or L2 multiple level cache">
+  <meta name="description" content="L1 split cachemultiple ports mean multiple accesscause larger overhead eg: avoid hazard, multiple ports mltiple exclusion and mutiple inclusion:L1 and L2L1 or L2 multiple level cache  write through an">
 <meta property="og:type" content="article">
 <meta property="og:title" content="lecture9.computerArchiture">
 <meta property="og:url" content="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/index.html">
 <meta property="og:site_name" content="pwu4">
-<meta property="og:description" content="L1 split cachemultiple ports mean multiple accesscause larger overhead eg: avoid hazard, multiple ports mltiple exclusion and mutiple inclusion:L1 and L2L1 or L2 multiple level cache">
+<meta property="og:description" content="L1 split cachemultiple ports mean multiple accesscause larger overhead eg: avoid hazard, multiple ports mltiple exclusion and mutiple inclusion:L1 and L2L1 or L2 multiple level cache  write through an">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2018-09-19T18:17:58.904Z">
+<meta property="og:updated_time" content="2018-09-19T18:32:37.483Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lecture9.computerArchiture">
-<meta name="twitter:description" content="L1 split cachemultiple ports mean multiple accesscause larger overhead eg: avoid hazard, multiple ports mltiple exclusion and mutiple inclusion:L1 and L2L1 or L2 multiple level cache">
+<meta name="twitter:description" content="L1 split cachemultiple ports mean multiple accesscause larger overhead eg: avoid hazard, multiple ports mltiple exclusion and mutiple inclusion:L1 and L2L1 or L2 multiple level cache  write through an">
   
     <link rel="alternate" href="/atom.xml" title="pwu4" type="application/atom+xml">
   
@@ -90,11 +90,21 @@
 <p>eg: avoid hazard, multiple ports</p>
 <p>mltiple exclusion and mutiple inclusion:<br>L1 and L2<br>L1 or L2</p>
 <p>multiple level cache</p>
+<ol>
+<li>write through and write back<br>readhit: read hit time + miss penalty<br>read miss: read hit time + miss penalty<br>write hit: write hit time  + wirte time to lower level<br>wirte miss: write hit time + write time to lower level + read block from lower level</li>
+</ol>
+<ol start="2">
+<li><p>write through plus non-write allocate </p>
+</li>
+<li><p>write back and write allocate<br>read hit: read hit time<br>read miss: read hit time + miss penalty plus time to write dirty block if it is dirty</p>
+</li>
+</ol>
+<p>write hit: </p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="cjm9h19830004k024xk0s5abw" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="cjm9hj1om0004ln249a17jnoc" class="article-share-link">Share</a>
       
       
     </footer>
