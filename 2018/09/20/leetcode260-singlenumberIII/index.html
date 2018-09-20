@@ -5,19 +5,19 @@
   
 
   
-  <title>leetcode.752 Open the lock | pwu4</title>
+  <title>leetcode260_singlenumberIII | pwu4</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##BFS + 剪枝 + 去重 经典dfs层次遍历剪枝相当于backtrack 采用queque 和unordered_set 减少遍历次数可正转反转.">
+  <meta name="description" content="思路：所有🌲异或完后只剩下两个数的异或，把每个数理解为二进制数，在异或的结果上的每一个1的位置，两个素总过出现的情况只能是0和1，如果都是0或都是1就不可能， 所有可以将异或结果和每个数二次异或分成两组，每一个组必然包含单独一个数，异或就可以求出结果；核心代码：    diff &amp;amp;= -diff; //取最高位的1，任意一个1就可以，注意diff是所有数异或以后的结果    //seco">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode.752 Open the lock">
-<meta property="og:url" content="http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/index.html">
+<meta property="og:title" content="leetcode260_singlenumberIII">
+<meta property="og:url" content="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/index.html">
 <meta property="og:site_name" content="pwu4">
-<meta property="og:description" content="##BFS + 剪枝 + 去重 经典dfs层次遍历剪枝相当于backtrack 采用queque 和unordered_set 减少遍历次数可正转反转.">
+<meta property="og:description" content="思路：所有🌲异或完后只剩下两个数的异或，把每个数理解为二进制数，在异或的结果上的每一个1的位置，两个素总过出现的情况只能是0和1，如果都是0或都是1就不可能， 所有可以将异或结果和每个数二次异或分成两组，每一个组必然包含单独一个数，异或就可以求出结果；核心代码：    diff &amp;amp;= -diff; //取最高位的1，任意一个1就可以，注意diff是所有数异或以后的结果    //seco">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2018-09-14T05:15:14.855Z">
+<meta property="og:updated_time" content="2018-09-20T21:50:17.275Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode.752 Open the lock">
-<meta name="twitter:description" content="##BFS + 剪枝 + 去重 经典dfs层次遍历剪枝相当于backtrack 采用queque 和unordered_set 减少遍历次数可正转反转.">
+<meta name="twitter:title" content="leetcode260_singlenumberIII">
+<meta name="twitter:description" content="思路：所有🌲异或完后只剩下两个数的异或，把每个数理解为二进制数，在异或的结果上的每一个1的位置，两个素总过出现的情况只能是0和1，如果都是0或都是1就不可能， 所有可以将异或结果和每个数二次异或分成两组，每一个组必然包含单独一个数，异或就可以求出结果；核心代码：    diff &amp;amp;= -diff; //取最高位的1，任意一个1就可以，注意diff是所有数异或以后的结果    //seco">
   
     <link rel="alternate" href="/atom.xml" title="pwu4" type="application/atom+xml">
   
@@ -64,10 +64,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-leetcode-752-Open-the-lock" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-leetcode260-singlenumberIII" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/14/leetcode-752-Open-the-lock/" class="article-date">
-  <time datetime="2018-09-14T05:02:30.000Z" itemprop="datePublished">2018-09-14</time>
+    <a href="/2018/09/20/leetcode260-singlenumberIII/" class="article-date">
+  <time datetime="2018-09-20T21:41:54.000Z" itemprop="datePublished">2018-09-20</time>
 </a>
     
   </div>
@@ -78,7 +78,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      leetcode.752 Open the lock
+      leetcode260_singlenumberIII
     </h1>
   
 
@@ -86,12 +86,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##BFS + 剪枝 + 去重 经典dfs层次遍历<br>剪枝相当于backtrack 采用queque 和unordered_set<string> 减少遍历次数<br>可正转反转.</string></p>
+        <p>思路：所有🌲异或完后只剩下两个数的异或，把每个数理解为二进制数，在异或的结果上的每一个1的位置，两个素<br>总过出现的情况只能是0和1，如果都是0或都是1就不可能， 所有可以将异或结果和每个数二次异或分成两组，<br>每一个组必然包含单独一个数，异或就可以求出结果；<br>核心代码：<br>    diff &amp;= -diff; //取最高位的1，任意一个1就可以，注意diff是所有数异或以后的结果<br>    //second pass:<br>    for(int num: nums){<br>        if(num&amp;diff == 0){<br>            a ^= num;<br>        else{<br>            b ^= num;<br>    }<br>    }<br>    return {a, b};<br>}</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/" data-id="cjmb418ys00077v24113g8t7e" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="cjmb418yn00037v24u3didto0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -100,19 +100,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/09/14/Daily-Friday/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Daily Friday
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/09/13/leetcode474/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/09/19/lecture9-computerArchiture/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Leetcode 474. Ones and Zeroes</div>
+      <div class="article-nav-title">lecture9.computerArchiture</div>
     </a>
   
 </nav>
