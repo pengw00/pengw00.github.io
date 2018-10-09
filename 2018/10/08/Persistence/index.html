@@ -7,14 +7,17 @@
   
   <title>Persistence | pwu4</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="Understanding the meaning of persistence is important for evaluating different data store system Given the importance of the data store in most modern applications, making a poorly informed choice cou">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Persistence">
 <meta property="og:url" content="http://pengw00.github.io/2018/10/08/Persistence/index.html">
 <meta property="og:site_name" content="pwu4">
+<meta property="og:description" content="Understanding the meaning of persistence is important for evaluating different data store system Given the importance of the data store in most modern applications, making a poorly informed choice cou">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2018-10-08T21:57:08.378Z">
+<meta property="og:updated_time" content="2018-10-09T16:36:44.980Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Persistence">
+<meta name="twitter:description" content="Understanding the meaning of persistence is important for evaluating different data store system Given the importance of the data store in most modern applications, making a poorly informed choice cou">
   
     <link rel="alternate" href="/atom.xml" title="pwu4" type="application/atom+xml">
   
@@ -83,11 +86,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>Understanding the meaning of persistence is important for evaluating different data store system</p>
+<p>Given the importance of the data store in most modern applications, making a poorly informed choice could mean substantial downtime or loss of data.</p>
+<p>Persistence is “the continuance of an effect after its cause is removed”. In the context of storing data in a computer system, this means that the data survives after the process with which it was created has ended. In other words, for a data store to be considered persistent, it must write to non-volatile storage.</p>
+<p>If you need persistence in your data store, then you need to also understand the four main design approaches that a data store can take and how (or if) these designs provide persistence:</p>
+<p>Pure in-memory, no persistence at all, such as memcached or Scalaris<br>In-memory with periodic snapshots, such as Oracle Coherence or Redis<br>Disk-based with update-in-place writes, such as MySQL ISAM or MongoDB<br>Commitlog-based, such as all traditional OLTP databases (Oracle,<br>SQL Server, etc.)</p>
+<p>In-memory approaches can achieve blazing speed, but at the cost of being limited to a relatively small data set. Most workloads have relatively small “hot” (active) subset of their total data; systems that require the whole dataset to fit in memory rather than just the active part are fine for caches but a bad fit for most other applications. Because the data is in memory only, it will not survive process termination. Therefore these types of data stores are not considered persistent.</p>
+<p>The easiest way to add persistence to an in-memory system is with periodic snapshots to disk at a configurable interval. Thus, you can lose up to that interval’s worth of updates.</p>
+<p>Update-in-place and commitlog-based systems store to non-volatile memory immediately, but only commitlog-based persistence provides Durability – the D in ACID – with every write persisted before success is returned to the client.<br>Reference from below link.<br><a href="https://www.datastax.com/dev/blog/what-persistence-and-why-does-it-matter" target="_blank" rel="noopener">https://www.datastax.com/dev/blog/what-persistence-and-why-does-it-matter</a></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/10/08/Persistence/" data-id="cjn0udykz0002df24mapquzbl" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/10/08/Persistence/" data-id="cjn1y8fnj0000vw24t3mzt3fk" class="article-share-link">Share</a>
       
       
     </footer>
