@@ -5,19 +5,20 @@
   
 
   
-  <title>Daily Friday | pwu4</title>
+  <title>spring_depend_injection.md | pwu4</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##秋雨绵绵顾自怜 独坐室中狂刷题 ##管他日日笙箫起 我自地里刨根底leetcode304. Range Sum Query 2D- Immutable Example:Given matrix = [  [3, 0, 1, 4, 2],  [5, 6, 3, 2, 1],  [1, 2, 0, 1, 5],  [4, 1, 0, 1, 7],  [1, 0, 3, 0, 5]] sumRegi">
+  <meta name="description" content="Two Types of Dependency injection types  the setter injectionThe setter injection is used to inject the dependencies through setter methods. In the following example, the instance of DataService uses">
+<meta name="keywords" content="From &lt;Mastering spring&gt;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Daily Friday">
-<meta property="og:url" content="http://pengw00.github.io/2018/09/14/Daily-Friday/index.html">
+<meta property="og:title" content="spring_depend_injection.md">
+<meta property="og:url" content="http://pengw00.github.io/2018/11/01/spring-depend-injection-md/index.html">
 <meta property="og:site_name" content="pwu4">
-<meta property="og:description" content="##秋雨绵绵顾自怜 独坐室中狂刷题 ##管他日日笙箫起 我自地里刨根底leetcode304. Range Sum Query 2D- Immutable Example:Given matrix = [  [3, 0, 1, 4, 2],  [5, 6, 3, 2, 1],  [1, 2, 0, 1, 5],  [4, 1, 0, 1, 7],  [1, 0, 3, 0, 5]] sumRegi">
+<meta property="og:description" content="Two Types of Dependency injection types  the setter injectionThe setter injection is used to inject the dependencies through setter methods. In the following example, the instance of DataService uses">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2018-09-14T16:33:08.990Z">
+<meta property="og:updated_time" content="2018-11-01T17:28:55.124Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Daily Friday">
-<meta name="twitter:description" content="##秋雨绵绵顾自怜 独坐室中狂刷题 ##管他日日笙箫起 我自地里刨根底leetcode304. Range Sum Query 2D- Immutable Example:Given matrix = [  [3, 0, 1, 4, 2],  [5, 6, 3, 2, 1],  [1, 2, 0, 1, 5],  [4, 1, 0, 1, 7],  [1, 0, 3, 0, 5]] sumRegi">
+<meta name="twitter:title" content="spring_depend_injection.md">
+<meta name="twitter:description" content="Two Types of Dependency injection types  the setter injectionThe setter injection is used to inject the dependencies through setter methods. In the following example, the instance of DataService uses">
   
     <link rel="alternate" href="/atom.xml" title="pwu4" type="application/atom+xml">
   
@@ -64,10 +65,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Daily-Friday" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-spring-depend-injection-md" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/14/Daily-Friday/" class="article-date">
-  <time datetime="2018-09-14T16:16:17.000Z" itemprop="datePublished">2018-09-14</time>
+    <a href="/2018/11/01/spring-depend-injection-md/" class="article-date">
+  <time datetime="2018-11-01T17:23:34.000Z" itemprop="datePublished">2018-11-01</time>
 </a>
     
   </div>
@@ -78,7 +79,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Daily Friday
+      spring_depend_injection.md
     </h1>
   
 
@@ -86,37 +87,38 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##秋雨绵绵顾自怜 独坐室中狂刷题</p>
-<p>##管他日日笙箫起 我自地里刨根底<br>leetcode304. Range Sum Query 2D- Immutable</p>
-<p>Example:<br>Given matrix = [<br>  [3, 0, 1, 4, 2],<br>  [5, 6, 3, 2, 1],<br>  [1, 2, 0, 1, 5],<br>  [4, 1, 0, 1, 7],<br>  [1, 0, 3, 0, 5]<br>]</p>
-<p>sumRegion(2, 1, 4, 3) -&gt; 8<br>sumRegion(1, 1, 2, 2) -&gt; 11<br>sumRegion(1, 2, 2, 4) -&gt; 12</p>
-<p>dp solution:</p>
+        <p>Two Types of Dependency injection types</p>
+<ol>
+<li>the setter injection<br>The setter injection is used to inject the dependencies through setter methods. In the following example, the instance of DataService uses the setter injection:<br>  public class BusinessServiceImpl {<pre><code>private DataService dataService;
+@Autowired
+public void setDataService(DataService dataService) {
+  this.dataService = dataService;
+}
+</code></pre> }<br>Actually, in order to use the setter injection, you do not even need to declare a setter method. If you specify @Autowired on the variable, Spring automatically uses the setter injection. So, the following code is all that you need for the setter injection for DataService:<br> public class BusinessServiceImpl {<pre><code>@Autowired
+private DataService dataService;
+</code></pre> }</li>
+<li>the constructor injection</li>
+</ol>
+<p>The constructor injection, on the other hand, uses a constructor to inject dependencies. The following code shows how to use a constructor for injecting in DataService:<br>       public class BusinessServiceImpl {<br>         private DataService dataService;<br>         @Autowired<br>         public BusinessServiceImpl(DataService dataService) {<br>        super();<br>           this.dataService = dataService;<br>         }<br>}<br>When you run the code with the preceding implementation of BusinessServiceImpl, you<br>will see this statement in the log, asserting that autowiring took place using the constructor:<br>       Autowiring by type from bean name ‘businessServiceImpl’ via<br>       constructor to bean named ‘dataServiceImpl’</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/14/Daily-Friday/" data-id="cjnyv8f0d00005q24fy0asn0g" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/11/01/spring-depend-injection-md/" data-id="cjnyv8f0q00075q24rkvf9rlp" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/From-Mastering-spring/">From <Mastering spring></a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2018/09/18/dailylearning/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/09/14/leetcode-752-Open-the-lock/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/10/08/Persistence/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">leetcode.752 Open the lock</div>
+      <div class="article-nav-title">Persistence</div>
     </a>
   
 </nav>
