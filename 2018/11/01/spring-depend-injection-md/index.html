@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="pwu4">
 <meta property="og:description" content="Two Types of Dependency injection types  the setter injectionThe setter injection is used to inject the dependencies through setter methods. In the following example, the instance of DataService uses">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2018-11-01T17:28:55.124Z">
+<meta property="og:updated_time" content="2018-11-01T17:31:50.059Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spring_depend_injection.md">
 <meta name="twitter:description" content="Two Types of Dependency injection types  the setter injectionThe setter injection is used to inject the dependencies through setter methods. In the following example, the instance of DataService uses">
@@ -99,12 +99,12 @@ private DataService dataService;
 </code></pre> }</li>
 <li>the constructor injection</li>
 </ol>
-<p>The constructor injection, on the other hand, uses a constructor to inject dependencies. The following code shows how to use a constructor for injecting in DataService:<br>       public class BusinessServiceImpl {<br>         private DataService dataService;<br>         @Autowired<br>         public BusinessServiceImpl(DataService dataService) {<br>        super();<br>           this.dataService = dataService;<br>         }<br>}<br>When you run the code with the preceding implementation of BusinessServiceImpl, you<br>will see this statement in the log, asserting that autowiring took place using the constructor:<br>       Autowiring by type from bean name ‘businessServiceImpl’ via<br>       constructor to bean named ‘dataServiceImpl’</p>
+<p>The constructor injection, on the other hand, uses a constructor to inject dependencies. The following code shows how to use a constructor for injecting in DataService:<br>    public class BusinessServiceImpl {<br>        private DataService dataService;<br>        @Autowired<br>        public BusinessServiceImpl(DataService dataService) {<br>        super();<br>           this.dataService = dataService;<br>        }<br>    }<br>When you run the code with the preceding implementation of BusinessServiceImpl, you<br>will see this statement in the log, asserting that autowiring took place using the constructor:<br>       Autowiring by type from bean name ‘businessServiceImpl’ via<br>       constructor to bean named ‘dataServiceImpl’</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/11/01/spring-depend-injection-md/" data-id="cjnyv8f0q00075q24rkvf9rlp" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/11/01/spring-depend-injection-md/" data-id="cjnyvajol000a6p241ix1zfqp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/From-Mastering-spring/">From <Mastering spring></a></li></ul>
