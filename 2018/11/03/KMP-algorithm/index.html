@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>KMP_algorithm | pwu4</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="//Fromhttps://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/KMP Algorithm for Pattern SearchingGiven a text txt[0..n-1] and a pattern pat[0..m-1], write a function search(char pat[], char">
+<meta name="keywords" content="algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KMP_algorithm">
+<meta property="og:url" content="http://pengw00.github.io/2018/11/03/KMP-algorithm/index.html">
+<meta property="og:site_name" content="pwu4">
+<meta property="og:description" content="//Fromhttps://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/KMP Algorithm for Pattern SearchingGiven a text txt[0..n-1] and a pattern pat[0..m-1], write a function search(char pat[], char">
+<meta property="og:locale" content="us-EN">
+<meta property="og:updated_time" content="2018-11-04T05:05:02.871Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="KMP_algorithm">
+<meta name="twitter:description" content="//Fromhttps://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/KMP Algorithm for Pattern SearchingGiven a text txt[0..n-1] and a pattern pat[0..m-1], write a function search(char pat[], char">
+  
+    <link rel="alternate" href="/atom.xml" title="pwu4" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">pwu4</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pengw00.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-KMP-algorithm" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/03/KMP-algorithm/" class="article-date">
+  <time datetime="2018-11-04T04:38:34.000Z" itemprop="datePublished">2018-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      KMP_algorithm
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>//From<a href="https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/</a><br>KMP Algorithm for Pattern Searching<br>Given a text txt[0..n-1] and a pattern pat[0..m-1], write a function search(char pat[], char txt[]) that prints all occurrences of pat[] in txt[]. You may assume that n &gt; m.</p>
+<p>Pattern searching is an important problem in computer science. When we do search for a string in notepad/word file or browser or database, pattern searching algorithms are used to show the search results.</p>
+<p>We have discussed Naive pattern searching algorithm in the previous post. The worst case complexity of the Naive algorithm is O(m(n-m+1)). The time complexity of KMP algorithm is O(n) in the worst case.</p>
+<p>Most important part is that: use a helper int[] to preprocess the pattern.<br>    Matching Overview<br>    txt = “AAAAABAAABA”<br>    pat = “AAAA”</p>
+<pre><code>We compare first window of txt with pat
+txt = &quot;AAAAABAAABA&quot;
+pat = &quot;AAAA&quot;  [Initial position]
+We find a match. This is same as Naive String Matching.
+
+In the next step, we compare next window of txt with pat.
+    txt = &quot;AAAAABAAABA&quot;
+    pat =  &quot;AAAA&quot; [Pattern shifted one position]
+    This is where KMP does optimization over Naive. In this
+    second window, we only compare fourth A of pattern
+    with fourth character of current window of text to decide
+    whether current window matches or not. Since we know
+    first three characters will anyway match, we skipped
+    matching first three characters.
+
+Need of Preprocessing?
+    An important question arises from the above explanation,
+    how to know how many characters to be skipped. To know this,
+    we pre-process pattern and prepare an integer array
+    lps[] that tells us the count of characters to be skipped.
+</code></pre><p>//Preprocessing Overview:</p>
+<p>KMP algorithm preprocesses pat[] and constructs an auxiliary lps[] of size m (same as size of pattern) which is used to skip characters while matching.<br>name lps indicates longest proper prefix which is also suffix.. A proper prefix is prefix with whole string not allowed. For example, prefixes of “ABC” are “”, “A”, “AB” and “ABC”. Proper prefixes are “”, “A” and “AB”. Suffixes of the string are “”, “C”, “BC” and “ABC”.<br>We search for lps in sub-patterns. More clearly we focus on sub-strings of patterns that are either prefix and suffix.<br>For each sub-pattern pat[0..i] where i = 0 to m-1, lps[i] stores length of the maximum matching proper prefix which is also a suffix of the sub-pattern pat[0..i].</p>
+<p>//Note :<br>lps[i] could also be defined as longest prefix which is also proper suffix. We need to use properly at one place to make sure that the whole substring is not considered.<br>EX: Examples of lps[] construction:<br>For the pattern “AAAA”,<br>    lps[] is [0, 1, 2, 3]</p>
+<pre><code>For the pattern “ABCDE”,
+lps[] is [0, 0, 0, 0, 0]
+
+For the pattern “AABAACAABAA”,
+lps[] is [0, 1, 0, 1, 2, 0, 1, 2, 3, 4, 5]
+
+For the pattern “AAACAAAAAC”,
+lps[] is [0, 1, 2, 0, 1, 2, 3, 3, 3, 4]
+
+For the pattern “AAABAAA”,
+lps[] is [0, 1, 2, 0, 1, 2, 3]
+</code></pre><p>Searching Algorithm:<br>    Unlike Naive algorithm, where we slide the pattern by one and compare all characters at each shift, we use a value from lps[] to decide the next characters to be matched. The idea is to not match a character that we know will anyway match.<br>    How to use lps[] to decide next positions (or to know a number of characters to be skipped)?</p>
+<p>We start comparison of pat[j] with j = 0 with characters of current window of text.<br>    We keep matching characters txt[i] and pat[j] and keep incrementing i and j while pat[j] and txt[i] keep matching.<br>    When we see a mismatch<br>    We know that characters pat[0..j-1] match with txt[i-j+1…i-1] (Note that j starts with 0 and increment it only when there is a match).<br>    We also know (from above definition) that lps[j-1] is count of characters of pat[0…j-1] that are both proper prefix and suffix.<br>    From above two points, we can conclude that we do not need to match these lps[j-1] characters with txt[i-j…i-1] because we know that these characters will anyway match. Let us consider above example to understand this.</p>
+<p>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>lps[] = {0, 1, 2, 3}</p>
+<p>i = 0, j = 0<br>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>txt[i] and pat[j] match, do i++, j++</p>
+<p>i = 1, j = 1<br>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>txt[i] and pat[j] match, do i++, j++</p>
+<p>i = 2, j = 2<br>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>pat[i] and pat[j] match, do i++, j++</p>
+<p>i = 3, j = 3<br>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>txt[i] and pat[j] match, do i++, j++</p>
+<p>i = 4, j = 4<br>Since j == M, print pattern found and reset j,<br>j = lps[j-1] = lps[3] = 3</p>
+<p>Here unlike Naive algorithm, we do not match first three<br>characters of this window. Value of lps[j-1] (in above<br>step) gave us index of next character to match.<br>Example Process:<br>Most important thing here easy to understand<br>    i = 4, j = 3<br>    txt[] = “AAAAABAAABA”<br>    pat[] =  “AAAA”<br>    txt[i] and pat[j] match, do i++, j++</p>
+<pre><code>i = 5, j = 4
+Since j == M, print pattern found and reset j,
+j = lps[j-1] = lps[3] = 3
+
+Again unlike Naive algorithm, we do not match first three
+characters of this window. Value of lps[j-1] (in above
+step) gave us index of next character to match.
+i = 5, j = 3
+txt[] = &quot;AAAAABAAABA&quot;
+pat[] =   &quot;AAAA&quot;
+txt[i] and pat[j] do NOT match and j &gt; 0, change only j
+j = lps[j-1] = lps[2] = 2
+
+i = 5, j = 2
+txt[] = &quot;AAAAABAAABA&quot;
+pat[] =    &quot;AAAA&quot;
+txt[i] and pat[j] do NOT match and j &gt; 0, change only j
+j = lps[j-1] = lps[1] = 1
+
+i = 5, j = 1
+txt[] = &quot;AAAAABAAABA&quot;
+pat[] =     &quot;AAAA&quot;
+txt[i] and pat[j] do NOT match and j &gt; 0, change only j
+j = lps[j-1] = lps[0] = 0
+
+i = 5, j = 0
+txt[] = &quot;AAAAABAAABA&quot;
+pat[] =      &quot;AAAA&quot;
+txt[i] and pat[j] do NOT match and j is 0, we do i++.
+
+i = 6, j = 0
+txt[] = &quot;AAAAABAAABA&quot;
+pat[] =       &quot;AAAA&quot;
+txt[i] and pat[j] match, do i++ and j++
+
+i = 7, j = 1
+txt[] = &quot;AAAAABAAABA&quot;
+pat[] =       &quot;AAAA&quot;
+txt[i] and pat[j] match, do i++ and j++
+</code></pre><p>We continue this way…<br>Don’t talk, Show the code:(java)<br>class KMP_String_Matching{<br>    void KMPSearch(String pat, String txt){<br>        int m = pat.length();<br>        int n = txt.length();<br>        int[] lps = new int[m]; //preprocess array<br>        computeLPSArray(pat, m, lps);<br>        int i = 0;<br>        while(i &lt; n){<br>            if(pat.charAt(j)==txt.charAt(i)){<br>                j++;<br>                i++;<br>                }<br>            if(j==m){<br>                System.out.println(“Found pattern at index”);<br>                j = lps[j-1];<br>            }<br>            else if(i &lt; N &amp;&amp; pat.charAt(j) != txt.charAt(i)){<br>                if(j != 0)<br>                    j = lps[j-1];<br>                else<br>                    i = i+1;<br>                }<br>            }<br>        }<br>    void computeLPSArray(String pat, int m, int lps[]){<br>        int len = 0;<br>        int i = 1;<br>        lps[0] = 0;<br>        while(i&lt;m){<br>            if(pat.charAt(i) == pat.charAt(len)){<br>                len++;<br>                lps[i] = len;<br>                i++;<br>            }else{<br>                if(len != 0){<br>                len = lps[len-1];<br>                }else{<br>                    lps[i] = len;<br>                    i++;<br>            }<br>        }<br>        }<br>    }<br>    public static void main(String args[]){<br>        String txt = “ABABDABACDABABCABAB”;<br>        String pat = “ABABCABAB”;<br>        new KMP_String_Matching().KMPSearch(pat, txt);<br>    }<br>    }</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2018/11/03/KMP-algorithm/" data-id="cjo2eyb9200025s24oewfb38u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/11/01/spring-depend-injection-md/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">spring_depend_injection.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/From-Mastering-spring/">From <Mastering spring></a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <Mastering spring></a> <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/03/KMP-algorithm/">KMP_algorithm</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/01/spring-depend-injection-md/">spring_depend_injection.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/08/Persistence/">Persistence</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/08/maxcycle-subarray/">maxcycle_subarray</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/20/leetcode260-singlenumberIII/">leetcode260_singlenumberIII</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 pengw00<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
