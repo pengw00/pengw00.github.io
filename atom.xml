@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>pwu4</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://pengw00.github.io/"/>
+  <updated>2018-12-24T00:38:30.888Z</updated>
+  <id>http://pengw00.github.io/</id>
+  
+  <author>
+    <name>pengw00</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaSpringApp</title>
+    <link href="http://pengw00.github.io/2018/12/23/JavaSpringApp/"/>
+    <id>http://pengw00.github.io/2018/12/23/JavaSpringApp/</id>
+    <published>2018-12-23T22:20:46.000Z</published>
+    <updated>2018-12-24T00:38:30.888Z</updated>
+    
+    <content type="html"><![CDATA[<p>Java Springframework简单模型：</p><ol><li>jar file: need to down load and put in the exernal lib file on local</li><li><p>xml: need to using Springframework to load and parsing into bean object</p></li><li><p>java 普通类: inject to beans</p></li><li>javabeans： The model level of MVC, provide get/set proberty</li><li>springframework: load jar file and xml file to be beans</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Java Springframework简单模型：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;jar file: need to down load and put in the exernal lib file on local&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;xml: need to usin
+      
+    
+    </summary>
+    
+    
+      <category term="Spring&amp;Java" scheme="http://pengw00.github.io/tags/Spring-Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>StdinStdout</title>
+    <link href="http://pengw00.github.io/2018/11/07/StdinStdout/"/>
+    <id>http://pengw00.github.io/2018/11/07/StdinStdout/</id>
+    <published>2018-11-07T17:00:51.000Z</published>
+    <updated>2018-11-07T17:04:59.544Z</updated>
+    
+    <content type="html"><![CDATA[<p>Interview Question for STDIN and STDOUT(java)</p><p>BufferedReader br = new BufferedReader(new InputStreamReader(System.in));<br>String = line br.readLine();<br>int N = Integer.parseInt(line);</p><p>or:<br>    Scanner n = new Scanner(System.in);<br>    int N = n.nextInt();<br>    and so one…</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Interview Question for STDIN and STDOUT(java)&lt;/p&gt;
+&lt;p&gt;BufferedReader br = new BufferedReader(new InputStreamReader(System.in));&lt;br&gt;String 
+      
+    
+    </summary>
+    
+    
+      <category term="hackrrank" scheme="http://pengw00.github.io/tags/hackrrank/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>KMP_algorithm</title>
+    <link href="http://pengw00.github.io/2018/11/03/KMP-algorithm/"/>
+    <id>http://pengw00.github.io/2018/11/03/KMP-algorithm/</id>
+    <published>2018-11-04T04:38:34.000Z</published>
+    <updated>2018-11-04T05:05:02.871Z</updated>
+    
+    <content type="html"><![CDATA[<p>//From<a href="https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/</a><br>KMP Algorithm for Pattern Searching<br>Given a text txt[0..n-1] and a pattern pat[0..m-1], write a function search(char pat[], char txt[]) that prints all occurrences of pat[] in txt[]. You may assume that n &gt; m.</p><p>Pattern searching is an important problem in computer science. When we do search for a string in notepad/word file or browser or database, pattern searching algorithms are used to show the search results.</p><p>We have discussed Naive pattern searching algorithm in the previous post. The worst case complexity of the Naive algorithm is O(m(n-m+1)). The time complexity of KMP algorithm is O(n) in the worst case.</p><p>Most important part is that: use a helper int[] to preprocess the pattern.<br>    Matching Overview<br>    txt = “AAAAABAAABA”<br>    pat = “AAAA”</p><pre><code>We compare first window of txt with pattxt = &quot;AAAAABAAABA&quot;pat = &quot;AAAA&quot;  [Initial position]We find a match. This is same as Naive String Matching.In the next step, we compare next window of txt with pat.    txt = &quot;AAAAABAAABA&quot;    pat =  &quot;AAAA&quot; [Pattern shifted one position]    This is where KMP does optimization over Naive. In this    second window, we only compare fourth A of pattern    with fourth character of current window of text to decide    whether current window matches or not. Since we know    first three characters will anyway match, we skipped    matching first three characters.Need of Preprocessing?    An important question arises from the above explanation,    how to know how many characters to be skipped. To know this,    we pre-process pattern and prepare an integer array    lps[] that tells us the count of characters to be skipped.</code></pre><p>//Preprocessing Overview:</p><p>KMP algorithm preprocesses pat[] and constructs an auxiliary lps[] of size m (same as size of pattern) which is used to skip characters while matching.<br>name lps indicates longest proper prefix which is also suffix.. A proper prefix is prefix with whole string not allowed. For example, prefixes of “ABC” are “”, “A”, “AB” and “ABC”. Proper prefixes are “”, “A” and “AB”. Suffixes of the string are “”, “C”, “BC” and “ABC”.<br>We search for lps in sub-patterns. More clearly we focus on sub-strings of patterns that are either prefix and suffix.<br>For each sub-pattern pat[0..i] where i = 0 to m-1, lps[i] stores length of the maximum matching proper prefix which is also a suffix of the sub-pattern pat[0..i].</p><p>//Note :<br>lps[i] could also be defined as longest prefix which is also proper suffix. We need to use properly at one place to make sure that the whole substring is not considered.<br>EX: Examples of lps[] construction:<br>For the pattern “AAAA”,<br>    lps[] is [0, 1, 2, 3]</p><pre><code>For the pattern “ABCDE”,lps[] is [0, 0, 0, 0, 0]For the pattern “AABAACAABAA”,lps[] is [0, 1, 0, 1, 2, 0, 1, 2, 3, 4, 5]For the pattern “AAACAAAAAC”,lps[] is [0, 1, 2, 0, 1, 2, 3, 3, 3, 4]For the pattern “AAABAAA”,lps[] is [0, 1, 2, 0, 1, 2, 3]</code></pre><p>Searching Algorithm:<br>    Unlike Naive algorithm, where we slide the pattern by one and compare all characters at each shift, we use a value from lps[] to decide the next characters to be matched. The idea is to not match a character that we know will anyway match.<br>    How to use lps[] to decide next positions (or to know a number of characters to be skipped)?</p><p>We start comparison of pat[j] with j = 0 with characters of current window of text.<br>    We keep matching characters txt[i] and pat[j] and keep incrementing i and j while pat[j] and txt[i] keep matching.<br>    When we see a mismatch<br>    We know that characters pat[0..j-1] match with txt[i-j+1…i-1] (Note that j starts with 0 and increment it only when there is a match).<br>    We also know (from above definition) that lps[j-1] is count of characters of pat[0…j-1] that are both proper prefix and suffix.<br>    From above two points, we can conclude that we do not need to match these lps[j-1] characters with txt[i-j…i-1] because we know that these characters will anyway match. Let us consider above example to understand this.</p><p>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>lps[] = {0, 1, 2, 3}</p><p>i = 0, j = 0<br>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>txt[i] and pat[j] match, do i++, j++</p><p>i = 1, j = 1<br>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>txt[i] and pat[j] match, do i++, j++</p><p>i = 2, j = 2<br>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>pat[i] and pat[j] match, do i++, j++</p><p>i = 3, j = 3<br>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>txt[i] and pat[j] match, do i++, j++</p><p>i = 4, j = 4<br>Since j == M, print pattern found and reset j,<br>j = lps[j-1] = lps[3] = 3</p><p>Here unlike Naive algorithm, we do not match first three<br>characters of this window. Value of lps[j-1] (in above<br>step) gave us index of next character to match.<br>Example Process:<br>Most important thing here easy to understand<br>    i = 4, j = 3<br>    txt[] = “AAAAABAAABA”<br>    pat[] =  “AAAA”<br>    txt[i] and pat[j] match, do i++, j++</p><pre><code>i = 5, j = 4Since j == M, print pattern found and reset j,j = lps[j-1] = lps[3] = 3Again unlike Naive algorithm, we do not match first threecharacters of this window. Value of lps[j-1] (in abovestep) gave us index of next character to match.i = 5, j = 3txt[] = &quot;AAAAABAAABA&quot;pat[] =   &quot;AAAA&quot;txt[i] and pat[j] do NOT match and j &gt; 0, change only jj = lps[j-1] = lps[2] = 2i = 5, j = 2txt[] = &quot;AAAAABAAABA&quot;pat[] =    &quot;AAAA&quot;txt[i] and pat[j] do NOT match and j &gt; 0, change only jj = lps[j-1] = lps[1] = 1i = 5, j = 1txt[] = &quot;AAAAABAAABA&quot;pat[] =     &quot;AAAA&quot;txt[i] and pat[j] do NOT match and j &gt; 0, change only jj = lps[j-1] = lps[0] = 0i = 5, j = 0txt[] = &quot;AAAAABAAABA&quot;pat[] =      &quot;AAAA&quot;txt[i] and pat[j] do NOT match and j is 0, we do i++.i = 6, j = 0txt[] = &quot;AAAAABAAABA&quot;pat[] =       &quot;AAAA&quot;txt[i] and pat[j] match, do i++ and j++i = 7, j = 1txt[] = &quot;AAAAABAAABA&quot;pat[] =       &quot;AAAA&quot;txt[i] and pat[j] match, do i++ and j++</code></pre><p>We continue this way…<br>Don’t talk, Show the code:(java)<br>class KMP_String_Matching{<br>    void KMPSearch(String pat, String txt){<br>        int m = pat.length();<br>        int n = txt.length();<br>        int[] lps = new int[m]; //preprocess array<br>        computeLPSArray(pat, m, lps);<br>        int i = 0;<br>        while(i &lt; n){<br>            if(pat.charAt(j)==txt.charAt(i)){<br>                j++;<br>                i++;<br>                }<br>            if(j==m){<br>                System.out.println(“Found pattern at index”);<br>                j = lps[j-1];<br>            }<br>            else if(i &lt; N &amp;&amp; pat.charAt(j) != txt.charAt(i)){<br>                if(j != 0)<br>                    j = lps[j-1];<br>                else<br>                    i = i+1;<br>                }<br>            }<br>        }<br>    void computeLPSArray(String pat, int m, int lps[]){<br>        int len = 0;<br>        int i = 1;<br>        lps[0] = 0;<br>        while(i&lt;m){<br>            if(pat.charAt(i) == pat.charAt(len)){<br>                len++;<br>                lps[i] = len;<br>                i++;<br>            }else{<br>                if(len != 0){<br>                len = lps[len-1];<br>                }else{<br>                    lps[i] = len;<br>                    i++;<br>            }<br>        }<br>        }<br>    }<br>    public static void main(String args[]){<br>        String txt = “ABABDABACDABABCABAB”;<br>        String pat = “ABABCABAB”;<br>        new KMP_String_Matching().KMPSearch(pat, txt);<br>    }<br>    }</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;//From&lt;a href=&quot;https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.geeksforgee
+      
+    
+    </summary>
+    
+    
+      <category term="algorithm" scheme="http://pengw00.github.io/tags/algorithm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>spring_depend_injection.md</title>
+    <link href="http://pengw00.github.io/2018/11/01/spring-depend-injection-md/"/>
+    <id>http://pengw00.github.io/2018/11/01/spring-depend-injection-md/</id>
+    <published>2018-11-01T17:23:34.000Z</published>
+    <updated>2018-11-01T17:34:03.119Z</updated>
+    
+    <content type="html"><![CDATA[<p>Two Types of Dependency injection types</p><ol><li>the setter injection<br>The setter injection is used to inject the dependencies through setter methods. In the following example, the instance of DataService uses the setter injection:<br>  public class BusinessServiceImpl {<pre><code>private DataService dataService;@Autowiredpublic void setDataService(DataService dataService) {  this.dataService = dataService;}</code></pre> }<br>Actually, in order to use the setter injection, you do not even need to declare a setter method. If you specify @Autowired on the variable, Spring automatically uses the setter injection. So, the following code is all that you need for the setter injection for DataService:<br> public class BusinessServiceImpl {<pre><code>@Autowiredprivate DataService dataService;</code></pre> }</li><li>the constructor injection</li></ol><p>The constructor injection, on the other hand, uses a constructor to inject dependencies. The following code shows how to use a constructor for injecting in DataService:<br>    public class BusinessServiceImpl {<br>        private DataService dataService;<br>        @Autowired<br>        public BusinessServiceImpl(DataService dataService) {<br>        super();<br>           this.dataService = dataService;<br>        }<br>    }<br>When you run the code with the preceding implementation of BusinessServiceImpl, you<br>will see this statement in the log, asserting that autowiring took place using the constructor:<br>       Autowiring by type from bean name ‘businessServiceImpl’ via<br>       constructor to bean named ‘dataServiceImpl’</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Two Types of Dependency injection types&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;the setter injection&lt;br&gt;The setter injection is used to inject the dependencies thro
+      
+    
+    </summary>
+    
+    
+      <category term="From &lt;Mastering spring&gt;" scheme="http://pengw00.github.io/tags/From-Mastering-spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Persistence</title>
+    <link href="http://pengw00.github.io/2018/10/08/Persistence/"/>
+    <id>http://pengw00.github.io/2018/10/08/Persistence/</id>
+    <published>2018-10-08T21:57:08.000Z</published>
+    <updated>2018-10-09T16:36:44.980Z</updated>
+    
+    <content type="html"><![CDATA[<p>Understanding the meaning of persistence is important for evaluating different data store system</p><p>Given the importance of the data store in most modern applications, making a poorly informed choice could mean substantial downtime or loss of data.</p><p>Persistence is “the continuance of an effect after its cause is removed”. In the context of storing data in a computer system, this means that the data survives after the process with which it was created has ended. In other words, for a data store to be considered persistent, it must write to non-volatile storage.</p><p>If you need persistence in your data store, then you need to also understand the four main design approaches that a data store can take and how (or if) these designs provide persistence:</p><p>Pure in-memory, no persistence at all, such as memcached or Scalaris<br>In-memory with periodic snapshots, such as Oracle Coherence or Redis<br>Disk-based with update-in-place writes, such as MySQL ISAM or MongoDB<br>Commitlog-based, such as all traditional OLTP databases (Oracle,<br>SQL Server, etc.)</p><p>In-memory approaches can achieve blazing speed, but at the cost of being limited to a relatively small data set. Most workloads have relatively small “hot” (active) subset of their total data; systems that require the whole dataset to fit in memory rather than just the active part are fine for caches but a bad fit for most other applications. Because the data is in memory only, it will not survive process termination. Therefore these types of data stores are not considered persistent.</p><p>The easiest way to add persistence to an in-memory system is with periodic snapshots to disk at a configurable interval. Thus, you can lose up to that interval’s worth of updates.</p><p>Update-in-place and commitlog-based systems store to non-volatile memory immediately, but only commitlog-based persistence provides Durability – the D in ACID – with every write persisted before success is returned to the client.<br>Reference from below link.<br><a href="https://www.datastax.com/dev/blog/what-persistence-and-why-does-it-matter" target="_blank" rel="noopener">https://www.datastax.com/dev/blog/what-persistence-and-why-does-it-matter</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Understanding the meaning of persistence is important for evaluating different data store system&lt;/p&gt;
+&lt;p&gt;Given the importance of the data 
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>maxcycle_subarray</title>
+    <link href="http://pengw00.github.io/2018/10/08/maxcycle-subarray/"/>
+    <id>http://pengw00.github.io/2018/10/08/maxcycle-subarray/</id>
+    <published>2018-10-08T19:56:17.000Z</published>
+    <updated>2018-10-08T19:56:17.538Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>leetcode260_singlenumberIII</title>
+    <link href="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/"/>
+    <id>http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/</id>
+    <published>2018-09-20T21:41:54.000Z</published>
+    <updated>2018-09-20T21:50:17.275Z</updated>
+    
+    <content type="html"><![CDATA[<p>思路：所有🌲异或完后只剩下两个数的异或，把每个数理解为二进制数，在异或的结果上的每一个1的位置，两个素<br>总过出现的情况只能是0和1，如果都是0或都是1就不可能， 所有可以将异或结果和每个数二次异或分成两组，<br>每一个组必然包含单独一个数，异或就可以求出结果；<br>核心代码：<br>    diff &amp;= -diff; //取最高位的1，任意一个1就可以，注意diff是所有数异或以后的结果<br>    //second pass:<br>    for(int num: nums){<br>        if(num&amp;diff == 0){<br>            a ^= num;<br>        else{<br>            b ^= num;<br>    }<br>    }<br>    return {a, b};<br>}</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;思路：所有🌲异或完后只剩下两个数的异或，把每个数理解为二进制数，在异或的结果上的每一个1的位置，两个素&lt;br&gt;总过出现的情况只能是0和1，如果都是0或都是1就不可能， 所有可以将异或结果和每个数二次异或分成两组，&lt;br&gt;每一个组必然包含单独一个数，异或就可以求出结果；&lt;b
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>lecture9.computerArchiture</title>
+    <link href="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/"/>
+    <id>http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/</id>
+    <published>2018-09-19T18:05:05.000Z</published>
+    <updated>2018-09-19T18:32:37.483Z</updated>
+    
+    <content type="html"><![CDATA[<p>L1 split cache<br>multiple ports mean multiple access<br>cause larger overhead</p><p>eg: avoid hazard, multiple ports</p><p>mltiple exclusion and mutiple inclusion:<br>L1 and L2<br>L1 or L2</p><p>multiple level cache</p><ol><li>write through and write back<br>readhit: read hit time + miss penalty<br>read miss: read hit time + miss penalty<br>write hit: write hit time  + wirte time to lower level<br>wirte miss: write hit time + write time to lower level + read block from lower level</li></ol><ol start="2"><li><p>write through plus non-write allocate </p></li><li><p>write back and write allocate<br>read hit: read hit time<br>read miss: read hit time + miss penalty plus time to write dirty block if it is dirty</p></li></ol><p>write hit: </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;L1 split cache&lt;br&gt;multiple ports mean multiple access&lt;br&gt;cause larger overhead&lt;/p&gt;
+&lt;p&gt;eg: avoid hazard, multiple ports&lt;/p&gt;
+&lt;p&gt;mltiple exc
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Daily KMP Algrithm</title>
+    <link href="http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/"/>
+    <id>http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/</id>
+    <published>2018-09-18T20:46:00.000Z</published>
+    <updated>2018-09-18T21:24:23.023Z</updated>
+    
+    <content type="html"><![CDATA[<p>problem1:<br>不匹配从不匹配点重新匹配，如果起始点和不匹配点之间有可以匹配的信息呢？？what happende？？</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;problem1:&lt;br&gt;不匹配从不匹配点重新匹配，如果起始点和不匹配点之间有可以匹配的信息呢？？what happende？？&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://pengw00.github.io/2018/09/18/dailylearning/"/>
+    <id>http://pengw00.github.io/2018/09/18/dailylearning/</id>
+    <published>2018-09-18T19:09:37.865Z</published>
+    <updated>2018-09-18T21:21:15.744Z</updated>
+    
+    <content type="html"><![CDATA[<p>add header and footer partials<br>add in bootstrap</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;add header and footer partials&lt;br&gt;add in bootstrap&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Daily Friday</title>
+    <link href="http://pengw00.github.io/2018/09/14/Daily-Friday/"/>
+    <id>http://pengw00.github.io/2018/09/14/Daily-Friday/</id>
+    <published>2018-09-14T16:16:17.000Z</published>
+    <updated>2018-09-14T16:33:08.990Z</updated>
+    
+    <content type="html"><![CDATA[<p>##秋雨绵绵顾自怜 独坐室中狂刷题</p><p>##管他日日笙箫起 我自地里刨根底<br>leetcode304. Range Sum Query 2D- Immutable</p><p>Example:<br>Given matrix = [<br>  [3, 0, 1, 4, 2],<br>  [5, 6, 3, 2, 1],<br>  [1, 2, 0, 1, 5],<br>  [4, 1, 0, 1, 7],<br>  [1, 0, 3, 0, 5]<br>]</p><p>sumRegion(2, 1, 4, 3) -&gt; 8<br>sumRegion(1, 1, 2, 2) -&gt; 11<br>sumRegion(1, 2, 2, 4) -&gt; 12</p><p>dp solution:</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;##秋雨绵绵顾自怜 独坐室中狂刷题&lt;/p&gt;
+&lt;p&gt;##管他日日笙箫起 我自地里刨根底&lt;br&gt;leetcode304. Range Sum Query 2D- Immutable&lt;/p&gt;
+&lt;p&gt;Example:&lt;br&gt;Given matrix = [&lt;br&gt;  [3, 0, 
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>leetcode.752 Open the lock</title>
+    <link href="http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/"/>
+    <id>http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/</id>
+    <published>2018-09-14T05:02:30.000Z</published>
+    <updated>2018-09-14T05:15:14.855Z</updated>
+    
+    <content type="html"><![CDATA[<p>##BFS + 剪枝 + 去重 经典dfs层次遍历<br>剪枝相当于backtrack 采用queque 和unordered_set<string> 减少遍历次数<br>可正转反转.</string></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;##BFS + 剪枝 + 去重 经典dfs层次遍历&lt;br&gt;剪枝相当于backtrack 采用queque 和unordered_set&lt;string&gt; 减少遍历次数&lt;br&gt;可正转反转.&lt;/string&gt;&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode 474. Ones and Zeroes</title>
+    <link href="http://pengw00.github.io/2018/09/13/leetcode474/"/>
+    <id>http://pengw00.github.io/2018/09/13/leetcode474/</id>
+    <published>2018-09-13T20:47:12.000Z</published>
+    <updated>2018-09-14T04:32:23.780Z</updated>
+    
+    <content type="html"><![CDATA[<p>In the computer world, use restricted resource you have to generate maximum benefit is what we always want to pursue.</p><p>For now, suppose you are a dominator of m 0s and n 1s respectively. On the other hand, there is an array with strings consisting of only 0s and 1s.</p><p>Now your task is to find the maximum number of strings that you can form with given m 0s and n 1s. Each 0 and 1 can be used at most once.</p><p>Note:<br>The given numbers of 0s and 1s will both not exceed 100<br>The size of given string array won’t exceed 600.</p><p>Example1:<br>Intput: Array = {“10”, “0001”, “111001”, “1”, “0”}, m = 5, n = 3<br>Output: 4<br>01背包问题</p><p>Solution1: Dynamic Programing<br>类似01背包问题，采用dp[i][j], i表示采用了i个0， j表示j个1， 对于每个string，可以决定采用或者不采用，放入包里，那么决定于<br>i， j减去当前需要的还能装入的最大值， 所以dp公式： dp[i][j] = max(dp[i-i_need][j-j_need] + 1, dp[i][j]);<br>因为字符串的顺序是有长有短，不按顺序，所以并不能确定dp[i-i_need][j-j_need]已经更新到最大，所以不能滚动数组操作??（可以）<br>对于每个字符采用一个新二维矩阵。 </p><p>Solution2: DP 采用单二维矩阵解法，空间复杂度为O(mn)<br>更新次序从bottom right往top left更新，每次会在更大容量的包dp[i][j]中从左向右加<br>1， 如果从左上到右下更新，会重复计算。<br>核心代码：<br>for(int i = m; i &gt;= numZeros; i–){<br>    for(int j = n; j &gt;= numsOnes; j–){<br>        memo[i][j] = max(memo[i][j], memo[i-numZeros][j-numOnes]+1);<br>    }<br>}<br>return memo[m][n];</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;In the computer world, use restricted resource you have to generate maximum benefit is what we always want to pursue.&lt;/p&gt;
+&lt;p&gt;For now, sup
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Welcome to Pengw00&#39;s Blog!</title>
+    <link href="http://pengw00.github.io/2018/09/13/hello-world/"/>
+    <id>http://pengw00.github.io/2018/09/13/hello-world/</id>
+    <published>2018-09-13T16:23:36.826Z</published>
+    <updated>2018-09-13T20:52:41.410Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
