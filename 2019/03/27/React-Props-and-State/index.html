@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>React Props and State | pwu4</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="@octocat :+1: Props looks great - it’s ready to mount! :shipit: # ###The data in React flows from top to down(parent to child) and store in Props and state, when flow between cpmponnets it is in Props">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Props and State">
+<meta property="og:url" content="http://pengw00.github.io/2019/03/27/React-Props-and-State/index.html">
+<meta property="og:site_name" content="pwu4">
+<meta property="og:description" content="@octocat :+1: Props looks great - it’s ready to mount! :shipit: # ###The data in React flows from top to down(parent to child) and store in Props and state, when flow between cpmponnets it is in Props">
+<meta property="og:locale" content="us-EN">
+<meta property="og:updated_time" content="2019-03-28T03:38:36.290Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React Props and State">
+<meta name="twitter:description" content="@octocat :+1: Props looks great - it’s ready to mount! :shipit: # ###The data in React flows from top to down(parent to child) and store in Props and state, when flow between cpmponnets it is in Props">
+  
+    <link rel="alternate" href="/atom.xml" title="pwu4" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">pwu4</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pengw00.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-React-Props-and-State" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/27/React-Props-and-State/" class="article-date">
+  <time datetime="2019-03-28T03:12:33.000Z" itemprop="datePublished">2019-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React Props and State
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@octocat :+1: Props looks great - it’s ready to mount! :shipit:</p>
+<p>#</p>
+<p>###The data in React flows from top to down(parent to child) and store in Props and state, when flow between cpmponnets it is in Props while in the component inside it is in the component. </p>
+<p>###Props: for a component, it can acepts some params from outside, which is so called Props(either from parents or store). </p>
+<p>###Property of Props: props used to decrate the component, so when the component is initialed and got instance, the props is unchangable and readable only. because when the props is changed during mounting the componet, if the props is changed, the component will be unpreditable.<br>所以只有通过父组件渲染方式才可以把props传进去。</p>
+<p>##总结：props是一个从外部传进组件的参数，主要作为就是从父组件向子组件传递数据，它具有可读性和不变性，只能通过外部组件主动传入新的props来重新渲染子组件，否则子组件的props以及展现形式不会改变。</p>
+<h2 id="what-about-state-State-is-similar-to-props-but-it-is-private-and-fully-controlled-by-the-component"><a href="#what-about-state-State-is-similar-to-props-but-it-is-private-and-fully-controlled-by-the-component" class="headerlink" title="what about state?? State is similar to props, but it is private and fully controlled by the component."></a>what about state?? State is similar to props, but it is private and fully controlled by the component.</h2><p>###一个组件的显示形态可以由数据状态和外部参数所决定，外部参数也就是props，而数据状态就是state</p>
+<p>首先，在组件初始化的时候，通过this.state给组件设定一个初始的state，在第一次render的时候就会用这个数据来渲染组件。</p>
+<p>state不同于props的一点是，state是可以被改变的。不过，不可以直接通过this.state=的方式来修改，而需要通过this.setState()方法来修改state。</p>
+<p>比如，我们经常会通过异步操作来获取数据，我们需要在didMount阶段来执行异步操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  fetch(&apos;url&apos;)</span><br><span class="line">    .then(response =&gt; response.json())</span><br><span class="line">    .then((data) =&gt; &#123;</span><br><span class="line">      this.setState(&#123;itemList:item&#125;);  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>setState接受一个对象或者函数作为第一个参数，只需要传入需要更新的部分即可，不需要传入整个对象，比如:<br><figure class="highlight plain"><figcaption><span>default class ItemList extends React.Component&#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  constructor()&#123;</span><br><span class="line">    super();</span><br><span class="line">    this.state = &#123;</span><br><span class="line">      name:&apos;axuebin&apos;,</span><br><span class="line">      age:25,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  componentDidMount()&#123;</span><br><span class="line">    this.setState(&#123;age:18&#125;)  </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在执行完setState之后的state应该是{name:’axuebin’,age:18}。</p>
+<p>setState还可以接受第二个参数，它是一个函数，会在setState调用完成并且组件开始重新渲染时被调用，可以用来监听渲染是否完成：<br>this.setState({<br>  name:’xb’<br>},()=&gt;console.log(‘setState finished’))</p>
+<p>##总结<br>state的主要作用是用于组件保存、控制以及修改自己的状态，它只能在constructor中初始化，它算是组件的私有属性，不可通过外部访问和修改，只能通过组件内部的this.setState来修改，修改state属性会导致组件的重新渲染</p>
+<p>##Summary</p>
+<p>###1.state是组件自己管理数据，控制自己的状态，可变；</p>
+<p>###2.props是外部传入的数据参数，不可变；</p>
+<p>###3.没有state的叫做无状态组件，有state的叫做有状态组件；</p>
+<p>###4.多用props，少用state。也就是多写无状态组件。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/03/27/React-Props-and-State/" data-id="cjts39gw800091jzua8txyze6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/12/23/JavaBeans/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JavaBeans Definition</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/27/React-Props-and-State/">React Props and State</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/23/JavaBeans/">JavaBeans Definition</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/23/JavaSpringApp/">JavaSpringApp</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/07/StdinStdout/">StdinStdout</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/03/KMP-algorithm/">KMP_algorithm</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 pengw00<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
