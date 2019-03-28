@@ -65,6 +65,50 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Persistence" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/08/Persistence/" class="article-date">
+  <time datetime="2018-10-08T20:57:08.000Z" itemprop="datePublished">2018-10-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/08/Persistence/">Persistence</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Understanding the meaning of persistence is important for evaluating different data store system</p>
+<p>Given the importance of the data store in most modern applications, making a poorly informed choice could mean substantial downtime or loss of data.</p>
+<p>Persistence is “the continuance of an effect after its cause is removed”. In the context of storing data in a computer system, this means that the data survives after the process with which it was created has ended. In other words, for a data store to be considered persistent, it must write to non-volatile storage.</p>
+<p>If you need persistence in your data store, then you need to also understand the four main design approaches that a data store can take and how (or if) these designs provide persistence:</p>
+<p>Pure in-memory, no persistence at all, such as memcached or Scalaris<br>In-memory with periodic snapshots, such as Oracle Coherence or Redis<br>Disk-based with update-in-place writes, such as MySQL ISAM or MongoDB<br>Commitlog-based, such as all traditional OLTP databases (Oracle,<br>SQL Server, etc.)</p>
+<p>In-memory approaches can achieve blazing speed, but at the cost of being limited to a relatively small data set. Most workloads have relatively small “hot” (active) subset of their total data; systems that require the whole dataset to fit in memory rather than just the active part are fine for caches but a bad fit for most other applications. Because the data is in memory only, it will not survive process termination. Therefore these types of data stores are not considered persistent.</p>
+<p>The easiest way to add persistence to an in-memory system is with periodic snapshots to disk at a configurable interval. Thus, you can lose up to that interval’s worth of updates.</p>
+<p>Update-in-place and commitlog-based systems store to non-volatile memory immediately, but only commitlog-based persistence provides Durability – the D in ACID – with every write persisted before success is returned to the client.<br>Reference from below link.<br><a href="https://www.datastax.com/dev/blog/what-persistence-and-why-does-it-matter" target="_blank" rel="noopener">https://www.datastax.com/dev/blog/what-persistence-and-why-does-it-matter</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2018/10/08/Persistence/" data-id="cjtsqinji00084u24yxzwl34u" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-maxcycle-subarray" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/10/08/maxcycle-subarray/" class="article-date">
@@ -91,7 +135,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/10/08/maxcycle-subarray/" data-id="cjtsoijhz000qtyzu47zpwu6z" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/10/08/maxcycle-subarray/" data-id="cjtsqinkk000p4u24gvnlha3w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -128,7 +172,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="cjtsoijhy000otyzuthapxtka" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="cjtsqinkm000r4u24sq6nwtn4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -178,7 +222,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="cjtsoijhv000ktyzu0i3l2gux" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="cjtsqinkh000l4u245lor3srz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -215,7 +259,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/" data-id="cjtsoijh10001tyzucnh4pn01" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/" data-id="cjtsqinja00014u24hc9w5euh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -242,7 +286,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/18/dailylearning/" data-id="cjtsoijhm000etyzu36ixfikm" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/18/dailylearning/" data-id="cjtsqink7000f4u24qacolvdt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -283,7 +327,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/14/Daily-Friday/" data-id="cjtsoijh70003tyzuq9is7xj8" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/14/Daily-Friday/" data-id="cjtsqinjd00034u24gk7hai79" class="article-share-link">Share</a>
       
       
     </footer>
@@ -320,7 +364,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/" data-id="cjtsoijhx000mtyzu4fe0m282" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/" data-id="cjtsqinke000k4u24n4etl7dm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -363,7 +407,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/13/leetcode474/" data-id="cjtsoiji3000utyzuxq0bdk61" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/13/leetcode474/" data-id="cjtsqinkn000t4u24tdxptyyt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -408,7 +452,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/13/hello-world/" data-id="cjtsoijhk000dtyzukpvsfhk9" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/13/hello-world/" data-id="cjtsqink9000g4u24v4cs14g0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -446,7 +490,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a>
+      <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a>
     </div>
   </div>
 
@@ -468,6 +512,10 @@
       <ul>
         
           <li>
+            <a href="/2019/03/28/props-and-state-new-example/">props and state new example</a>
+          </li>
+        
+          <li>
             <a href="/2019/03/28/leetcode-924-Minimize-Malware-Spread/">leetcode 924. Minimize Malware Spread</a>
           </li>
         
@@ -481,10 +529,6 @@
         
           <li>
             <a href="/2019/03/27/React-Props-and-State/">React Props and State</a>
-          </li>
-        
-          <li>
-            <a href="/2018/12/23/JavaBeans/">JavaBeans Definition</a>
           </li>
         
       </ul>
