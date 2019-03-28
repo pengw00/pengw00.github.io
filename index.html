@@ -65,6 +65,82 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-get-and-post-differ-s" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/28/get-and-post-differ-s/" class="article-date">
+  <time datetime="2019-03-28T04:26:37.000Z" itemprop="datePublished">2019-03-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/28/get-and-post-differ-s/">get and post differ&#39;s</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>GET和POST两种基本请求方法的区别</p>
+<p>最直观的区别就是GET把参数包含在URL中，POST通过request body传递参数</p>
+<p>你轻轻松松的给出了一个“标准答案”：</p>
+<p>GET在浏览器回退时是无害的，而POST会再次提交请求。</p>
+<p>GET产生的URL地址可以被Bookmark，而POST不可以。</p>
+<p>GET请求会被浏览器主动cache，而POST不会，除非手动设置。</p>
+<p>GET请求只能进行url编码，而POST支持多种编码方式。</p>
+<p>GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。</p>
+<p>GET请求在URL中传送的参数是有长度限制的，而POST么有。</p>
+<p>对参数的数据类型，GET只接受ASCII字符，而POST没有限制。</p>
+<p>GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。</p>
+<p>GET参数通过URL传递，POST放在Request body中。</p>
+<p>让我们扒下GET和POST的外衣，坦诚相见吧！</p>
+<p>GET和POST是什么？HTTP协议中的两种发送请求的方法。</p>
+<p>HTTP是什么？HTTP是基于TCP/IP的关于数据如何在万维网中如何通信的协议。</p>
+<p>HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，GET/POST都是TCP链接。GET和POST能做的事情是一样一样的。你要给GET加上request body，给POST带上url参数，技术上是完全行的通的。 </p>
+<p>在我大万维网世界中，TCP就像汽车，我们用TCP来运输数据，它很可靠，从来不会发生丢件少件的现象。但是如果路上跑的全是看起来一模一样的汽车，那这个世界看起来是一团混乱，送急件的汽车可能被前面满载货物的汽车拦堵在路上，整个交通系统一定会瘫痪。为了避免这种情况发生，交通规则HTTP诞生了。HTTP给汽车运输设定了好几个服务类别，有GET, POST, PUT, DELETE等等，HTTP规定，当执行GET请求的时候，要给汽车贴上GET的标签（设置method为GET），而且要求把传送的数据放在车顶上（url中）以方便记录。如果是POST请求，就要在车上贴上POST的标签，并把货物放在车厢里。当然，你也可以在GET的时候往车厢内偷偷藏点货物，但是这是很不光彩；也可以在POST的时候在车顶上也放一些数据，让人觉得傻乎乎的。HTTP只是个行为准则，而TCP才是GET和POST怎么实现的基本。</p>
+<p>但是，我们只看到HTTP对GET和POST参数的传送渠道（url还是requrest body）提出了要求。“标准答案”里关于参数大小的限制又是从哪来的呢？</p>
+<p>在我大万维网世界中，还有另一个重要的角色：运输公司。不同的浏览器（发起http请求）和服务器（接受http请求）就是不同的运输公司。 虽然理论上，你可以在车顶上无限的堆货物（url中无限加参数）。但是运输公司可不傻，装货和卸货也是有很大成本的，他们会限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很大负担。业界不成文的规定是，（大多数）浏览器通常都会限制url长度在2K个字节，而（大多数）服务器最多处理64K大小的url。超过的部分，恕不处理。如果你用GET服务，在request body偷偷藏了数据，不同服务器的处理方式也是不同的，有些服务器会帮你卸货，读出数据，有些服务器直接忽略，所以，虽然GET可以带request body，也不能保证一定能被接收到哦。</p>
+<p>好了，现在你知道，GET和POST本质上就是TCP链接，并无差别。但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中体现出一些不同。</p>
+<p>我们的大BOSS还等着出场呢。。。</p>
+<p>这位BOSS有多神秘？当你试图在网上找“GET和POST的区别”的时候，那些你会看到的搜索结果里，从没有提到他。他究竟是什么呢。。。</p>
+<p>GET和POST还有一个重大区别，简单的说：</p>
+<p>GET产生一个TCP数据包；POST产生两个TCP数据包。</p>
+<p>长的说：</p>
+<p>对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；</p>
+<p>而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。</p>
+<p>也就是说，GET只需要汽车跑一趟就把货送到了，而POST得跑两趟，第一趟，先去和服务器打个招呼“嗨，我等下要送一批货来，你们打开门迎接我”，然后再回头把货送过去。</p>
+<p>因为POST需要两步，时间上消耗的要多一点，看起来GET比POST更有效。因此Yahoo团队有推荐用GET替换POST来优化网站性能。但这是一个坑！跳入需谨慎。为什么？</p>
+<ol>
+<li><p>GET与POST都有自己的语义，不能随便混用。</p>
+</li>
+<li><p>据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而在网络环境差的情况下，两次包的TCP在验证数据包完整性上，有非常大的优点。</p>
+</li>
+<li><p>并不是所有浏览器都会在POST中发送两次包，Firefox就只发送一次。</p>
+</li>
+</ol>
+<p>现在，当面试官再问你“GET与POST的区别”的时候，你的内心是不是这样的？</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/03/28/get-and-post-differ-s/" data-id="cjts54wu6000akuzuhjcyyf22" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-React-Props-and-State" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/03/27/React-Props-and-State/" class="article-date">
@@ -115,7 +191,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/27/React-Props-and-State/" data-id="cjts4m3o30003f3zuj2kuf8lc" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/27/React-Props-and-State/" data-id="cjts54wu40009kuzuf9e7g555" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -205,7 +281,7 @@ public String getProduct_name() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/12/23/JavaBeans/" data-id="cjts4m3o20002f3zummr5rpgn" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/12/23/JavaBeans/" data-id="cjts54wtt0001kuzucqqjh6ut" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
@@ -253,7 +329,7 @@ public String getProduct_name() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/12/23/JavaSpringApp/" data-id="cjts4m3o80006f3zu6yautjsp" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/12/23/JavaSpringApp/" data-id="cjts54wu10005kuzujqo9ak5u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li></ul>
@@ -294,7 +370,7 @@ public String getProduct_name() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/11/07/StdinStdout/" data-id="cjts4m3ob000af3zu6lrzofs3" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/11/07/StdinStdout/" data-id="cjts54wu8000bkuzus0uwysyn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hackrrank/">hackrrank</a></li></ul>
@@ -419,7 +495,7 @@ txt[i] and pat[j] match, do i++ and j++
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/11/03/KMP-algorithm/" data-id="cjts4m3o90007f3zujifxvol3" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/11/03/KMP-algorithm/" data-id="cjts54wu30006kuzuify2btvm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -470,7 +546,7 @@ private DataService dataService;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/11/01/spring-depend-injection-md/" data-id="cjts4m3on000nf3zubui0rlle" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/11/01/spring-depend-injection-md/" data-id="cjts54wum000rkuzus5n2hy1f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li></ul>
@@ -516,7 +592,7 @@ private DataService dataService;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/10/08/Persistence/" data-id="cjts4m3o70005f3zuln6sqydk" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/10/08/Persistence/" data-id="cjts54wtz0004kuzu9ygaoigv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -552,7 +628,7 @@ private DataService dataService;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/10/08/maxcycle-subarray/" data-id="cjts4m3ol000jf3zunj0urnhv" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/10/08/maxcycle-subarray/" data-id="cjts54wul000pkuzuo2mv006w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -589,57 +665,7 @@ private DataService dataService;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="cjts4m3om000lf3zuuclxij14" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-lecture9-computerArchiture" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/19/lecture9-computerArchiture/" class="article-date">
-  <time datetime="2018-09-19T17:05:05.000Z" itemprop="datePublished">2018-09-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/19/lecture9-computerArchiture/">lecture9.computerArchiture</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>L1 split cache<br>multiple ports mean multiple access<br>cause larger overhead</p>
-<p>eg: avoid hazard, multiple ports</p>
-<p>mltiple exclusion and mutiple inclusion:<br>L1 and L2<br>L1 or L2</p>
-<p>multiple level cache</p>
-<ol>
-<li>write through and write back<br>readhit: read hit time + miss penalty<br>read miss: read hit time + miss penalty<br>write hit: write hit time  + wirte time to lower level<br>wirte miss: write hit time + write time to lower level + read block from lower level</li>
-</ol>
-<ol start="2">
-<li><p>write through plus non-write allocate </p>
-</li>
-<li><p>write back and write allocate<br>read hit: read hit time<br>read miss: read hit time + miss penalty plus time to write dirty block if it is dirty</p>
-</li>
-</ol>
-<p>write hit: </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="cjts4m3oj000hf3zu7y6zk2kw" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="cjts54wuh000jkuzu3hi76rr4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -667,7 +693,7 @@ private DataService dataService;
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li></ul>
     </div>
   </div>
 
@@ -677,7 +703,7 @@ private DataService dataService;
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a>
+      <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/http/" style="font-size: 10px;">http</a>
     </div>
   </div>
 
@@ -699,6 +725,10 @@ private DataService dataService;
       <ul>
         
           <li>
+            <a href="/2019/03/28/get-and-post-differ-s/">get and post differ&#39;s</a>
+          </li>
+        
+          <li>
             <a href="/2019/03/27/React-Props-and-State/">React Props and State</a>
           </li>
         
@@ -712,10 +742,6 @@ private DataService dataService;
         
           <li>
             <a href="/2018/11/07/StdinStdout/">StdinStdout</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/03/KMP-algorithm/">KMP_algorithm</a>
           </li>
         
       </ul>
