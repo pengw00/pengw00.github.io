@@ -65,6 +65,43 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode260-singlenumberIII" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/20/leetcode260-singlenumberIII/" class="article-date">
+  <time datetime="2018-09-20T20:41:54.000Z" itemprop="datePublished">2018-09-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/20/leetcode260-singlenumberIII/">leetcode260_singlenumberIII</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>思路：所有🌲异或完后只剩下两个数的异或，把每个数理解为二进制数，在异或的结果上的每一个1的位置，两个素<br>总过出现的情况只能是0和1，如果都是0或都是1就不可能， 所有可以将异或结果和每个数二次异或分成两组，<br>每一个组必然包含单独一个数，异或就可以求出结果；<br>核心代码：<br>    diff &amp;= -diff; //取最高位的1，任意一个1就可以，注意diff是所有数异或以后的结果<br>    //second pass:<br>    for(int num: nums){<br>        if(num&amp;diff == 0){<br>            a ^= num;<br>        else{<br>            b ^= num;<br>    }<br>    }<br>    return {a, b};<br>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="cjts70yb4000pyczubmkrya3g" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-lecture9-computerArchiture" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/09/19/lecture9-computerArchiture/" class="article-date">
@@ -105,7 +142,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="cjts54wuk000nkuzucx7xj7tl" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="cjts70yb0000jyczuu2yk2ozx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -142,7 +179,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/" data-id="cjts54wtv0002kuzuyh8dm8it" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/" data-id="cjts70yah0003yczunfqol5rx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -169,7 +206,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/18/dailylearning/" data-id="cjts54wue000fkuzuqwwlx7ga" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/18/dailylearning/" data-id="cjts70yat000eyczus9mm8ug6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -210,7 +247,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/14/Daily-Friday/" data-id="cjts54wto0000kuzunrhwi6n3" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/14/Daily-Friday/" data-id="cjts70yad0001yczu1to5j071" class="article-share-link">Share</a>
       
       
     </footer>
@@ -247,7 +284,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/" data-id="cjts54wuf000hkuzupxsiugb6" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/" data-id="cjts70yay000hyczucq7xfs9u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -290,7 +327,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/13/leetcode474/" data-id="cjts54wui000lkuzuidla32rh" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/13/leetcode474/" data-id="cjts70yb5000ryczufqnuxkju" class="article-share-link">Share</a>
       
       
     </footer>
@@ -335,7 +372,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/13/hello-world/" data-id="cjts54wuc000ekuzuoj27dm8k" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/13/hello-world/" data-id="cjts70yar000byczuj6avcfxc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -395,6 +432,10 @@
       <ul>
         
           <li>
+            <a href="/2019/03/28/props-and-constructor-super-sweetie/">props and constructor &amp;&amp; super sweetie</a>
+          </li>
+        
+          <li>
             <a href="/2019/03/28/get-and-post-differ-s/">get and post differ&#39;s</a>
           </li>
         
@@ -408,10 +449,6 @@
         
           <li>
             <a href="/2018/12/23/JavaSpringApp/">JavaSpringApp</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/07/StdinStdout/">StdinStdout</a>
           </li>
         
       </ul>
