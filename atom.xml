@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-03-28T05:28:02.264Z</updated>
+  <updated>2019-03-28T13:33:37.024Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode 924. Minimize Malware Spread</title>
+    <link href="http://pengw00.github.io/2019/03/28/leetcode-924-Minimize-Malware-Spread/"/>
+    <id>http://pengw00.github.io/2019/03/28/leetcode-924-Minimize-Malware-Spread/</id>
+    <published>2019-03-28T13:32:41.000Z</published>
+    <updated>2019-03-28T13:33:37.024Z</updated>
+    
+    <content type="html"><![CDATA[<p>Union Find and bfs and dfs</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Union Find and bfs and dfs&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>props and constructor &amp;&amp; super sweetie</title>
