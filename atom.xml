@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-03-30T16:19:25.060Z</updated>
+  <updated>2019-03-30T19:18:27.437Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,111 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>被amazon开出两次的经验总结</title>
+    <link href="http://pengw00.github.io/2019/03/30/%E8%A2%ABamazon%E5%BC%80%E5%87%BA%E4%B8%A4%E6%AC%A1%E7%9A%84%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+    <id>http://pengw00.github.io/2019/03/30/被amazon开出两次的经验总结/</id>
+    <published>2019-03-30T19:04:14.000Z</published>
+    <updated>2019-03-30T19:18:27.437Z</updated>
+    
+    <content type="html"><![CDATA[<p>1.政治斗争： fight all days, impossible to work</p><ol start="2"><li>status: hardworking, burn the middnight oil</li></ol><p>收获： 学会了亚马逊的生存法则<br>为什么离开： 需要pip， ？？<br>进去三个月被dev， 第二次因为组里launch新的项目，没有和其他组员抢活，被安排做operating&amp;&amp; bug之类的活，导致没有大项目来support 年度review</p><ol start="2"><li>把项目技术挖深了，确保工作安全。<br>和老板沟通，确定目前最重要的活是什么，focus在老板最关心的活上。确定掌握核心资源的是谁，积极主动去合作，拿可见度最高的活儿。</li><li>学会说不，组里同事塞给你，一般是知道是坑，学会优雅避开，比如我觉得xxx优先级比较高，我先focus on做完x，别的组找你帮忙，尽量给点帮助，别花太多时间，如果需要花很多时间，赵老板，老板会帮你退掉。<br>4.留证据<br>每周把做过的事给老板总结，要feedback，可以提高自己，也可以留证据，别人要开你的话，你都有wittern证据。</li><li><p>别的组问问题，不要给书面承诺，比如我会帮你debug之类，第一对方可能得寸进尺。第二，等别人要你帮忙的时候你可能没时间了真，问别人组的问题，尽量要书面email node， 或者可以开个简会马上把meeting note发出来，没人能赖账。 </p></li><li><p>后来加一点，能不去tech debt重的组就就尽量不去，天天修东西，没时间学习，没时间做项目。比如某语音助手的内核组。</p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1.政治斗争： fight all days, impossible to work&lt;/p&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;status: hardworking, burn the middnight oil&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;收获： 学会了亚马逊的生存
+      
+    
+    </summary>
+    
+    
+      <category term="career" scheme="http://pengw00.github.io/tags/career/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leetcode 10 Regular expression</title>
+    <link href="http://pengw00.github.io/2019/03/30/leetcode-10-Regular-expression/"/>
+    <id>http://pengw00.github.io/2019/03/30/leetcode-10-Regular-expression/</id>
+    <published>2019-03-30T18:22:18.000Z</published>
+    <updated>2019-03-30T18:23:54.145Z</updated>
+    
+    <content type="html"><![CDATA[<p>leetcode 10: Regular express</p><p>题目难理解。。。<em> 号match 0个或者以上的前字符，那不就是 a</em> 变成a或aa aaa aaaa</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;leetcode 10: Regular express&lt;/p&gt;
+&lt;p&gt;题目难理解。。。&lt;em&gt; 号match 0个或者以上的前字符，那不就是 a&lt;/em&gt; 变成a或aa aaa aaaa&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>March/30/2019 Study plan</title>
+    <link href="http://pengw00.github.io/2019/03/30/March-30-2019-Study-plan/"/>
+    <id>http://pengw00.github.io/2019/03/30/March-30-2019-Study-plan/</id>
+    <published>2019-03-30T16:42:03.000Z</published>
+    <updated>2019-03-30T19:18:30.894Z</updated>
+    
+    <content type="html"><![CDATA[<p>leetcode:</p><ol><li>3 union find</li><li>3 dp </li><li>3 breadfirst search</li><li>binary index tree &amp; segment tree</li></ol><p>Resume: finish 4 project and get some stuff of the compony.</p><p>React: Redux review</p><p>System design one question: grokking the System design</p><p>Using formik library</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;leetcode:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;3 union find&lt;/li&gt;
+&lt;li&gt;3 dp &lt;/li&gt;
+&lt;li&gt;3 breadfirst search&lt;/li&gt;
+&lt;li&gt;binary index tree &amp;amp; segment tree&lt;/li&gt;
+&lt;/ol&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="Study plan" scheme="http://pengw00.github.io/tags/Study-plan/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>react factory and functional component</title>
+    <link href="http://pengw00.github.io/2019/03/30/react-factory-and-functional-component/"/>
+    <id>http://pengw00.github.io/2019/03/30/react-factory-and-functional-component/</id>
+    <published>2019-03-30T16:33:07.000Z</published>
+    <updated>2019-03-30T16:41:10.554Z</updated>
+    
+    <content type="html"><![CDATA[<p>React factory pattern: react.createClass();<br>functioal component only return component while it is opposite of factory pattern. can combination with Redux data flow.<br>such as container component and presental component, which is pretty much like factory pattern, but the data is connect to the redux status. </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;React factory pattern: react.createClass();&lt;br&gt;functioal component only return component while it is opposite of factory pattern. can com
+      
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://pengw00.github.io/tags/React/"/>
+    
+  </entry>
   
   <entry>
     <title>factory pattern</title>
@@ -378,95 +483,6 @@
         &lt;p&gt;L1 split cache&lt;br&gt;multiple ports mean multiple access&lt;br&gt;cause larger overhead&lt;/p&gt;
 &lt;p&gt;eg: avoid hazard, multiple ports&lt;/p&gt;
 &lt;p&gt;mltiple exc
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Daily KMP Algrithm</title>
-    <link href="http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/"/>
-    <id>http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/</id>
-    <published>2018-09-18T19:46:00.000Z</published>
-    <updated>2018-09-18T21:24:23.023Z</updated>
-    
-    <content type="html"><![CDATA[<p>problem1:<br>不匹配从不匹配点重新匹配，如果起始点和不匹配点之间有可以匹配的信息呢？？what happende？？</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;problem1:&lt;br&gt;不匹配从不匹配点重新匹配，如果起始点和不匹配点之间有可以匹配的信息呢？？what happende？？&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://pengw00.github.io/2018/09/18/dailylearning/"/>
-    <id>http://pengw00.github.io/2018/09/18/dailylearning/</id>
-    <published>2018-09-18T19:09:37.865Z</published>
-    <updated>2018-09-18T21:21:15.744Z</updated>
-    
-    <content type="html"><![CDATA[<p>add header and footer partials<br>add in bootstrap</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;add header and footer partials&lt;br&gt;add in bootstrap&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Daily Friday</title>
-    <link href="http://pengw00.github.io/2018/09/14/Daily-Friday/"/>
-    <id>http://pengw00.github.io/2018/09/14/Daily-Friday/</id>
-    <published>2018-09-14T15:16:17.000Z</published>
-    <updated>2018-09-14T16:33:08.990Z</updated>
-    
-    <content type="html"><![CDATA[<p>##秋雨绵绵顾自怜 独坐室中狂刷题</p><p>##管他日日笙箫起 我自地里刨根底<br>leetcode304. Range Sum Query 2D- Immutable</p><p>Example:<br>Given matrix = [<br>  [3, 0, 1, 4, 2],<br>  [5, 6, 3, 2, 1],<br>  [1, 2, 0, 1, 5],<br>  [4, 1, 0, 1, 7],<br>  [1, 0, 3, 0, 5]<br>]</p><p>sumRegion(2, 1, 4, 3) -&gt; 8<br>sumRegion(1, 1, 2, 2) -&gt; 11<br>sumRegion(1, 2, 2, 4) -&gt; 12</p><p>dp solution:</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;##秋雨绵绵顾自怜 独坐室中狂刷题&lt;/p&gt;
-&lt;p&gt;##管他日日笙箫起 我自地里刨根底&lt;br&gt;leetcode304. Range Sum Query 2D- Immutable&lt;/p&gt;
-&lt;p&gt;Example:&lt;br&gt;Given matrix = [&lt;br&gt;  [3, 0, 
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode.752 Open the lock</title>
-    <link href="http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/"/>
-    <id>http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/</id>
-    <published>2018-09-14T04:02:30.000Z</published>
-    <updated>2018-09-14T05:15:14.855Z</updated>
-    
-    <content type="html"><![CDATA[<p>##BFS + 剪枝 + 去重 经典dfs层次遍历<br>剪枝相当于backtrack 采用queque 和unordered_set<string> 减少遍历次数<br>可正转反转.</string></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;##BFS + 剪枝 + 去重 经典dfs层次遍历&lt;br&gt;剪枝相当于backtrack 采用queque 和unordered_set&lt;string&gt; 减少遍历次数&lt;br&gt;可正转反转.&lt;/string&gt;&lt;/p&gt;
-
       
     
     </summary>
