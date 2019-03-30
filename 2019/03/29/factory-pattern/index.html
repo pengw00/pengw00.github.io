@@ -7,18 +7,18 @@
   
   <title>factory pattern | Pengw00&#39;s Tech Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758// A design without factory pattern #include &amp;lt;iostream&amp;gt; using namespace std;   // Libra">
+  <meta name="description" content="1Factory  react example: export default class SlideFactory {    static build(data) {        switch (data.source) {            case ‘brand’:                return ;            case ‘article’:">
 <meta name="keywords" content="Design pattern">
 <meta property="og:type" content="article">
 <meta property="og:title" content="factory pattern">
 <meta property="og:url" content="http://pengw00.github.io/2019/03/29/factory-pattern/index.html">
 <meta property="og:site_name" content="Pengw00&#39;s Tech Road">
-<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758// A design without factory pattern #include &amp;lt;iostream&amp;gt; using namespace std;   // Libra">
+<meta property="og:description" content="1Factory  react example: export default class SlideFactory {    static build(data) {        switch (data.source) {            case ‘brand’:                return ;            case ‘article’:">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2019-03-30T05:19:53.535Z">
+<meta property="og:updated_time" content="2019-03-30T16:19:25.060Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="factory pattern">
-<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758// A design without factory pattern #include &amp;lt;iostream&amp;gt; using namespace std;   // Libra">
+<meta name="twitter:description" content="1Factory  react example: export default class SlideFactory {    static build(data) {        switch (data.source) {            case ‘brand’:                return ;            case ‘article’:">
   
     <link rel="alternate" href="/atom.xml" title="Pengw00&#39;s Tech Road" type="application/atom+xml">
   
@@ -87,14 +87,65 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">// A design without factory pattern </span><br><span class="line">#include &lt;iostream&gt; </span><br><span class="line">using namespace std; </span><br><span class="line">  </span><br><span class="line">// Library classes </span><br><span class="line">class Vehicle &#123; </span><br><span class="line">public: </span><br><span class="line">    virtual void printVehicle() = 0; </span><br><span class="line">&#125;; </span><br><span class="line">class TwoWheeler : public Vehicle &#123; </span><br><span class="line">public: </span><br><span class="line">    void printVehicle()  &#123; </span><br><span class="line">        cout &lt;&lt; &quot;I am two wheeler&quot; &lt;&lt; endl; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line">class FourWheeler : public Vehicle &#123; </span><br><span class="line">    public: </span><br><span class="line">    void printVehicle()  &#123; </span><br><span class="line">        cout &lt;&lt; &quot;I am four wheeler&quot; &lt;&lt; endl; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line">  </span><br><span class="line">// Client (or user) class </span><br><span class="line">class Client &#123; </span><br><span class="line">public: </span><br><span class="line">    Client(int type)  &#123; </span><br><span class="line">  </span><br><span class="line">        // Client explicitly creates classes according to type </span><br><span class="line">        if (type == 1) </span><br><span class="line">            pVehicle = new TwoWheeler(); </span><br><span class="line">        else if (type == 2) </span><br><span class="line">            pVehicle = new FourWheeler(); </span><br><span class="line">        else</span><br><span class="line">            pVehicle = NULL; </span><br><span class="line">    &#125; </span><br><span class="line">  </span><br><span class="line">    ~Client()   &#123; </span><br><span class="line">        if (pVehicle) </span><br><span class="line">        &#123; </span><br><span class="line">            delete[] pVehicle; </span><br><span class="line">            pVehicle = NULL; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">  </span><br><span class="line">    Vehicle* getVehicle() &#123; </span><br><span class="line">        return pVehicle; </span><br><span class="line">    &#125; </span><br><span class="line">private: </span><br><span class="line">    Vehicle *pVehicle; </span><br><span class="line">&#125;; </span><br><span class="line">  </span><br><span class="line">// Driver program </span><br><span class="line">int main() &#123; </span><br><span class="line">    Client *pClient = new Client(1); </span><br><span class="line">    Vehicle * pVehicle = pClient-&gt;getVehicle(); </span><br><span class="line">    pVehicle-&gt;printVehicle(); </span><br><span class="line">    return 0; </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p> What is the problems with above design?<br>As you must have observed in the above example, Client creates objects of either TwoWheeler or FourWheeler based on some input during constructing its object.<br>Say, library introduces a new class ThreeWheeler to incorporate three wheeler vehicles also. What would happen? Client will end up chaining a new else if in the conditional ladder to create objects of ThreeWheeler. Which in turn will need Client to be recompiled. So, each time a new change is made at the library side, Client would need to make some corresponding changes at its end and recompile the code. Sounds bad? This is a very bad practice of design.</p>
-<p>How to avoid the problem?<br>The answer is, create a static (or factory) method. Let us see below code.</p>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Factory  react example:</span><br></pre></td></tr></table></figure>
+<p>export default class SlideFactory {<br>    static build(data) {<br>        switch (data.source) {<br>            case ‘brand’:<br>                return <brandfeedslide slidedata="{data}/">;<br>            case ‘article’:<br>                return <articlefeedslide slidedata="{data}">;<br>            default:<br>                return undefined;<br>        }<br>    }<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">const  items = [</span><br><span class="line">   &#123;    </span><br><span class="line">          source: ‘brand’,</span><br><span class="line">        title: ‘title’</span><br><span class="line">   &#125;    </span><br><span class="line">]</span><br><span class="line">const renderedItems = items.map((item) =&gt; SlideFactory.build(item));</span><br></pre></td></tr></table></figure></articlefeedslide></brandfeedslide></p>
+<p>the items can have properties for different kinds of slider. </p>
+<p>// A design without factory pattern </p>
+<p>#include <iostream><br>using namespace std; </iostream></p>
+<p>// Library classes<br>class Vehicle {<br>public:<br>    virtual void printVehicle() = 0;<br>};<br>class TwoWheeler : public Vehicle {<br>public:<br>    void printVehicle()  {<br>        cout &lt;&lt; “I am two wheeler” &lt;&lt; endl;<br>    }<br>};<br>class FourWheeler : public Vehicle {<br>    public:<br>    void printVehicle()  {<br>        cout &lt;&lt; “I am four wheeler” &lt;&lt; endl;<br>    }<br>}; </p>
+<p>// Client (or user) class<br>class Client {<br>public:<br>    Client(int type)  { </p>
+<pre><code>    // Client explicitly creates classes according to type 
+    if (type == 1) 
+        pVehicle = new TwoWheeler(); 
+    else if (type == 2) 
+        pVehicle = new FourWheeler(); 
+    else
+        pVehicle = NULL; 
+} 
+
+~Client()   { 
+    if (pVehicle) 
+    { 
+        delete[] pVehicle; 
+        pVehicle = NULL; 
+    } 
+} 
+
+Vehicle* getVehicle() { 
+    return pVehicle; 
+} 
+</code></pre><p>private:<br>    Vehicle *pVehicle;<br>}; </p>
+<p>// Driver program<br>int main() {<br>    Client <em>pClient = new Client(1);<br>    Vehicle </em> pVehicle = pClient-&gt;getVehicle();<br>    pVehicle-&gt;printVehicle();<br>    return 0;<br>    }<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> What is the problems with above design?</span><br><span class="line">As you must have observed in the above example, Client creates objects of either TwoWheeler or FourWheeler based on some input during constructing its object.</span><br><span class="line">Say, library introduces a new class ThreeWheeler to incorporate three wheeler vehicles also. What would happen? Client will end up chaining a new else if in the conditional ladder to create objects of ThreeWheeler. Which in turn will need Client to be recompiled. So, each time a new change is made at the library side, Client would need to make some corresponding changes at its end and recompile the code. Sounds bad? This is a very bad practice of design.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">How to avoid the problem?</span><br><span class="line">The answer is, create a static (or factory) method. Let us see below code.</span><br></pre></td></tr></table></figure></p>
+<p>// C++ program to demonstrate factory method design pattern </p>
+<p>#include <iostream><br>using namespace std; </iostream></p>
+<p>enum VehicleType {<br>    VT_TwoWheeler,    VT_ThreeWheeler,    VT_FourWheeler<br>}; </p>
+<p>// Library classes<br>class Vehicle {<br>public:<br>    virtual void printVehicle() = 0;<br>    static Vehicle* Create(VehicleType type);<br>};<br>class TwoWheeler : public Vehicle {<br>public:<br>    void printVehicle() {<br>        cout &lt;&lt; “I am two wheeler” &lt;&lt; endl;<br>    }<br>};<br>class ThreeWheeler : public Vehicle {<br>public:<br>    void printVehicle() {<br>        cout &lt;&lt; “I am three wheeler” &lt;&lt; endl;<br>    }<br>};<br>class FourWheeler : public Vehicle {<br>    public:<br>    void printVehicle() {<br>        cout &lt;&lt; “I am four wheeler” &lt;&lt; endl;<br>    }<br>}; </p>
+<p>// Factory method to create objects of different types.<br>// Change is required only in this function to create a new object type<br>Vehicle* Vehicle::Create(VehicleType type) {<br>    if (type == VT_TwoWheeler)<br>        return new TwoWheeler();<br>    else if (type == VT_ThreeWheeler)<br>        return new ThreeWheeler();<br>    else if (type == VT_FourWheeler)<br>        return new FourWheeler();<br>    else return NULL;<br>} </p>
+<p>// Client class<br>class Client {<br>public: </p>
+<pre><code>// Client doesn&apos;t explicitly create objects 
+// but passes type to factory method &quot;Create()&quot; 
+Client() 
+{ 
+    VehicleType type = VT_ThreeWheeler; 
+    pVehicle = Vehicle::Create(type); 
+} 
+~Client() { 
+    if (pVehicle) { 
+        delete[] pVehicle; 
+        pVehicle = NULL; 
+    } 
+} 
+Vehicle* getVehicle()  { 
+    return pVehicle; 
+} 
+</code></pre><p>private:<br>    Vehicle *pVehicle;<br>}; </p>
+<p>// Driver program<br>int main() {<br>    Client <em>pClient = new Client();<br>    Vehicle </em> pVehicle = pClient-&gt;getVehicle();<br>    pVehicle-&gt;printVehicle();<br>    return 0;<br>}<br><code>`</code></p>
+<p>In the above example, we have totally decoupled the selection of type for object creation from Client. The library is now responsible to decide which object type to create based on an input. Client just needs to make call to library’s factory Create method and pass the type it wants without worrying about the actual implementation of creation of objects.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/29/factory-pattern/" data-id="cjtv1ranj000ep7zukewkoc99" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/29/factory-pattern/" data-id="cjtvpb990000bii24v8lx7fmy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li></ul>
