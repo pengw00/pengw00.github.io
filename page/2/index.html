@@ -65,6 +65,182 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-KMP-algorithm" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/03/KMP-algorithm/" class="article-date">
+  <time datetime="2018-11-04T03:38:34.000Z" itemprop="datePublished">2018-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/03/KMP-algorithm/">KMP_algorithm</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>//From<a href="https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/</a><br>KMP Algorithm for Pattern Searching<br>Given a text txt[0..n-1] and a pattern pat[0..m-1], write a function search(char pat[], char txt[]) that prints all occurrences of pat[] in txt[]. You may assume that n &gt; m.</p>
+<p>Pattern searching is an important problem in computer science. When we do search for a string in notepad/word file or browser or database, pattern searching algorithms are used to show the search results.</p>
+<p>We have discussed Naive pattern searching algorithm in the previous post. The worst case complexity of the Naive algorithm is O(m(n-m+1)). The time complexity of KMP algorithm is O(n) in the worst case.</p>
+<p>Most important part is that: use a helper int[] to preprocess the pattern.<br>    Matching Overview<br>    txt = “AAAAABAAABA”<br>    pat = “AAAA”</p>
+<pre><code>We compare first window of txt with pat
+txt = &quot;AAAAABAAABA&quot;
+pat = &quot;AAAA&quot;  [Initial position]
+We find a match. This is same as Naive String Matching.
+
+In the next step, we compare next window of txt with pat.
+    txt = &quot;AAAAABAAABA&quot;
+    pat =  &quot;AAAA&quot; [Pattern shifted one position]
+    This is where KMP does optimization over Naive. In this
+    second window, we only compare fourth A of pattern
+    with fourth character of current window of text to decide
+    whether current window matches or not. Since we know
+    first three characters will anyway match, we skipped
+    matching first three characters.
+
+Need of Preprocessing?
+    An important question arises from the above explanation,
+    how to know how many characters to be skipped. To know this,
+    we pre-process pattern and prepare an integer array
+    lps[] that tells us the count of characters to be skipped.
+</code></pre><p>//Preprocessing Overview:</p>
+<p>KMP algorithm preprocesses pat[] and constructs an auxiliary lps[] of size m (same as size of pattern) which is used to skip characters while matching.<br>name lps indicates longest proper prefix which is also suffix.. A proper prefix is prefix with whole string not allowed. For example, prefixes of “ABC” are “”, “A”, “AB” and “ABC”. Proper prefixes are “”, “A” and “AB”. Suffixes of the string are “”, “C”, “BC” and “ABC”.<br>We search for lps in sub-patterns. More clearly we focus on sub-strings of patterns that are either prefix and suffix.<br>For each sub-pattern pat[0..i] where i = 0 to m-1, lps[i] stores length of the maximum matching proper prefix which is also a suffix of the sub-pattern pat[0..i].</p>
+<p>//Note :<br>lps[i] could also be defined as longest prefix which is also proper suffix. We need to use properly at one place to make sure that the whole substring is not considered.<br>EX: Examples of lps[] construction:<br>For the pattern “AAAA”,<br>    lps[] is [0, 1, 2, 3]</p>
+<pre><code>For the pattern “ABCDE”,
+lps[] is [0, 0, 0, 0, 0]
+
+For the pattern “AABAACAABAA”,
+lps[] is [0, 1, 0, 1, 2, 0, 1, 2, 3, 4, 5]
+
+For the pattern “AAACAAAAAC”,
+lps[] is [0, 1, 2, 0, 1, 2, 3, 3, 3, 4]
+
+For the pattern “AAABAAA”,
+lps[] is [0, 1, 2, 0, 1, 2, 3]
+</code></pre><p>Searching Algorithm:<br>    Unlike Naive algorithm, where we slide the pattern by one and compare all characters at each shift, we use a value from lps[] to decide the next characters to be matched. The idea is to not match a character that we know will anyway match.<br>    How to use lps[] to decide next positions (or to know a number of characters to be skipped)?</p>
+<p>We start comparison of pat[j] with j = 0 with characters of current window of text.<br>    We keep matching characters txt[i] and pat[j] and keep incrementing i and j while pat[j] and txt[i] keep matching.<br>    When we see a mismatch<br>    We know that characters pat[0..j-1] match with txt[i-j+1…i-1] (Note that j starts with 0 and increment it only when there is a match).<br>    We also know (from above definition) that lps[j-1] is count of characters of pat[0…j-1] that are both proper prefix and suffix.<br>    From above two points, we can conclude that we do not need to match these lps[j-1] characters with txt[i-j…i-1] because we know that these characters will anyway match. Let us consider above example to understand this.</p>
+<p>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>lps[] = {0, 1, 2, 3}</p>
+<p>i = 0, j = 0<br>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>txt[i] and pat[j] match, do i++, j++</p>
+<p>i = 1, j = 1<br>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>txt[i] and pat[j] match, do i++, j++</p>
+<p>i = 2, j = 2<br>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>pat[i] and pat[j] match, do i++, j++</p>
+<p>i = 3, j = 3<br>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>txt[i] and pat[j] match, do i++, j++</p>
+<p>i = 4, j = 4<br>Since j == M, print pattern found and reset j,<br>j = lps[j-1] = lps[3] = 3</p>
+<p>Here unlike Naive algorithm, we do not match first three<br>characters of this window. Value of lps[j-1] (in above<br>step) gave us index of next character to match.<br>Example Process:<br>Most important thing here easy to understand<br>    i = 4, j = 3<br>    txt[] = “AAAAABAAABA”<br>    pat[] =  “AAAA”<br>    txt[i] and pat[j] match, do i++, j++</p>
+<pre><code>i = 5, j = 4
+Since j == M, print pattern found and reset j,
+j = lps[j-1] = lps[3] = 3
+
+Again unlike Naive algorithm, we do not match first three
+characters of this window. Value of lps[j-1] (in above
+step) gave us index of next character to match.
+i = 5, j = 3
+txt[] = &quot;AAAAABAAABA&quot;
+pat[] =   &quot;AAAA&quot;
+txt[i] and pat[j] do NOT match and j &gt; 0, change only j
+j = lps[j-1] = lps[2] = 2
+
+i = 5, j = 2
+txt[] = &quot;AAAAABAAABA&quot;
+pat[] =    &quot;AAAA&quot;
+txt[i] and pat[j] do NOT match and j &gt; 0, change only j
+j = lps[j-1] = lps[1] = 1
+
+i = 5, j = 1
+txt[] = &quot;AAAAABAAABA&quot;
+pat[] =     &quot;AAAA&quot;
+txt[i] and pat[j] do NOT match and j &gt; 0, change only j
+j = lps[j-1] = lps[0] = 0
+
+i = 5, j = 0
+txt[] = &quot;AAAAABAAABA&quot;
+pat[] =      &quot;AAAA&quot;
+txt[i] and pat[j] do NOT match and j is 0, we do i++.
+
+i = 6, j = 0
+txt[] = &quot;AAAAABAAABA&quot;
+pat[] =       &quot;AAAA&quot;
+txt[i] and pat[j] match, do i++ and j++
+
+i = 7, j = 1
+txt[] = &quot;AAAAABAAABA&quot;
+pat[] =       &quot;AAAA&quot;
+txt[i] and pat[j] match, do i++ and j++
+</code></pre><p>We continue this way…<br>Don’t talk, Show the code:(java)<br>class KMP_String_Matching{<br>    void KMPSearch(String pat, String txt){<br>        int m = pat.length();<br>        int n = txt.length();<br>        int[] lps = new int[m]; //preprocess array<br>        computeLPSArray(pat, m, lps);<br>        int i = 0;<br>        while(i &lt; n){<br>            if(pat.charAt(j)==txt.charAt(i)){<br>                j++;<br>                i++;<br>                }<br>            if(j==m){<br>                System.out.println(“Found pattern at index”);<br>                j = lps[j-1];<br>            }<br>            else if(i &lt; N &amp;&amp; pat.charAt(j) != txt.charAt(i)){<br>                if(j != 0)<br>                    j = lps[j-1];<br>                else<br>                    i = i+1;<br>                }<br>            }<br>        }<br>    void computeLPSArray(String pat, int m, int lps[]){<br>        int len = 0;<br>        int i = 1;<br>        lps[0] = 0;<br>        while(i&lt;m){<br>            if(pat.charAt(i) == pat.charAt(len)){<br>                len++;<br>                lps[i] = len;<br>                i++;<br>            }else{<br>                if(len != 0){<br>                len = lps[len-1];<br>                }else{<br>                    lps[i] = len;<br>                    i++;<br>            }<br>        }<br>        }<br>    }<br>    public static void main(String args[]){<br>        String txt = “ABABDABACDABABCABAB”;<br>        String pat = “ABABCABAB”;<br>        new KMP_String_Matching().KMPSearch(pat, txt);<br>    }<br>    }</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2018/11/03/KMP-algorithm/" data-id="cjtv1ran80005p7zu3gdwnrzx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring-depend-injection-md" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/01/spring-depend-injection-md/" class="article-date">
+  <time datetime="2018-11-01T16:23:34.000Z" itemprop="datePublished">2018-11-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/01/spring-depend-injection-md/">spring_depend_injection.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Two Types of Dependency injection types</p>
+<ol>
+<li>the setter injection<br>The setter injection is used to inject the dependencies through setter methods. In the following example, the instance of DataService uses the setter injection:<br>  public class BusinessServiceImpl {<pre><code>private DataService dataService;
+@Autowired
+public void setDataService(DataService dataService) {
+  this.dataService = dataService;
+}
+</code></pre> }<br>Actually, in order to use the setter injection, you do not even need to declare a setter method. If you specify @Autowired on the variable, Spring automatically uses the setter injection. So, the following code is all that you need for the setter injection for DataService:<br> public class BusinessServiceImpl {<pre><code>@Autowired
+private DataService dataService;
+</code></pre> }</li>
+<li>the constructor injection</li>
+</ol>
+<p>The constructor injection, on the other hand, uses a constructor to inject dependencies. The following code shows how to use a constructor for injecting in DataService:<br>    public class BusinessServiceImpl {<br>        private DataService dataService;<br>        @Autowired<br>        public BusinessServiceImpl(DataService dataService) {<br>        super();<br>           this.dataService = dataService;<br>        }<br>    }<br>When you run the code with the preceding implementation of BusinessServiceImpl, you<br>will see this statement in the log, asserting that autowiring took place using the constructor:<br>       Autowiring by type from bean name ‘businessServiceImpl’ via<br>       constructor to bean named ‘dataServiceImpl’</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2018/11/01/spring-depend-injection-md/" data-id="cjtv1rao2000zp7zusc92yw7f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Persistence" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/10/08/Persistence/" class="article-date">
@@ -99,7 +275,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/10/08/Persistence/" data-id="cjtsqinji00084u24yxzwl34u" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/10/08/Persistence/" data-id="cjtv1ran60004p7zu1s5f9pup" class="article-share-link">Share</a>
       
       
     </footer>
@@ -135,7 +311,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/10/08/maxcycle-subarray/" data-id="cjtsqinkk000p4u24gvnlha3w" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/10/08/maxcycle-subarray/" data-id="cjtv1ranw000tp7zu7uwkg70u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -172,7 +348,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="cjtsqinkm000r4u24sq6nwtn4" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="cjtv1ranx000vp7zuagkvitqz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -222,7 +398,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="cjtsqinkh000l4u245lor3srz" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="cjtv1ranp000lp7zuef4xq4nk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -259,7 +435,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/" data-id="cjtsqinja00014u24hc9w5euh" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/" data-id="cjtv1ran10002p7zuq430ozso" class="article-share-link">Share</a>
       
       
     </footer>
@@ -286,7 +462,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/18/dailylearning/" data-id="cjtsqink7000f4u24qacolvdt" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/18/dailylearning/" data-id="cjtv1rank000fp7zuj7xl42tj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -327,7 +503,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/14/Daily-Friday/" data-id="cjtsqinjd00034u24gk7hai79" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/14/Daily-Friday/" data-id="cjtv1ramt0000p7zu69m7gfkn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -364,95 +540,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/" data-id="cjtsqinke000k4u24n4etl7dm" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode474" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/13/leetcode474/" class="article-date">
-  <time datetime="2018-09-13T19:47:12.000Z" itemprop="datePublished">2018-09-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/13/leetcode474/">Leetcode 474. Ones and Zeroes</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>In the computer world, use restricted resource you have to generate maximum benefit is what we always want to pursue.</p>
-<p>For now, suppose you are a dominator of m 0s and n 1s respectively. On the other hand, there is an array with strings consisting of only 0s and 1s.</p>
-<p>Now your task is to find the maximum number of strings that you can form with given m 0s and n 1s. Each 0 and 1 can be used at most once.</p>
-<p>Note:<br>The given numbers of 0s and 1s will both not exceed 100<br>The size of given string array won’t exceed 600.</p>
-<p>Example1:<br>Intput: Array = {“10”, “0001”, “111001”, “1”, “0”}, m = 5, n = 3<br>Output: 4<br>01背包问题</p>
-<p>Solution1: Dynamic Programing<br>类似01背包问题，采用dp[i][j], i表示采用了i个0， j表示j个1， 对于每个string，可以决定采用或者不采用，放入包里，那么决定于<br>i， j减去当前需要的还能装入的最大值， 所以dp公式： dp[i][j] = max(dp[i-i_need][j-j_need] + 1, dp[i][j]);<br>因为字符串的顺序是有长有短，不按顺序，所以并不能确定dp[i-i_need][j-j_need]已经更新到最大，所以不能滚动数组操作??（可以）<br>对于每个字符采用一个新二维矩阵。 </p>
-<p>Solution2: DP 采用单二维矩阵解法，空间复杂度为O(mn)<br>更新次序从bottom right往top left更新，每次会在更大容量的包dp[i][j]中从左向右加<br>1， 如果从左上到右下更新，会重复计算。<br>核心代码：<br>for(int i = m; i &gt;= numZeros; i–){<br>    for(int j = n; j &gt;= numsOnes; j–){<br>        memo[i][j] = max(memo[i][j], memo[i-numZeros][j-numOnes]+1);<br>    }<br>}<br>return memo[m][n];</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/13/leetcode474/" data-id="cjtsqinkn000t4u24tdxptyyt" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/13/hello-world/" class="article-date">
-  <time datetime="2018-09-13T16:23:36.826Z" itemprop="datePublished">2018-09-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/13/hello-world/">Welcome to Pengw00&#39;s Blog!</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/13/hello-world/" data-id="cjtsqink9000g4u24v4cs14g0" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/" data-id="cjtv1rans000pp7zuw21eqvq1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -466,7 +554,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -480,7 +568,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
     </div>
   </div>
 
@@ -490,7 +578,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a>
+      <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a>
     </div>
   </div>
 
@@ -512,6 +600,14 @@
       <ul>
         
           <li>
+            <a href="/2019/03/29/factory-pattern/">factory pattern</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/28/Design-high-quality-React-component/">Design high quality React component</a>
+          </li>
+        
+          <li>
             <a href="/2019/03/28/props-and-state-new-example/">props and state new example</a>
           </li>
         
@@ -521,14 +617,6 @@
         
           <li>
             <a href="/2019/03/28/props-and-constructor-super-sweetie/">props and constructor &amp;&amp; super sweetie</a>
-          </li>
-        
-          <li>
-            <a href="/2019/03/28/get-and-post-differ-s/">get and post differ&#39;s</a>
-          </li>
-        
-          <li>
-            <a href="/2019/03/27/React-Props-and-State/">React Props and State</a>
           </li>
         
       </ul>

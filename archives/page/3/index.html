@@ -5,19 +5,18 @@
   
 
   
-  <title>Leetcode 474. Ones and Zeroes | Pengw00&#39;s Tech Road</title>
+  <title>Archives | Pengw00&#39;s Tech Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="In the computer world, use restricted resource you have to generate maximum benefit is what we always want to pursue. For now, suppose you are a dominator of m 0s and n 1s respectively. On the other h">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode 474. Ones and Zeroes">
-<meta property="og:url" content="http://pengw00.github.io/2018/09/13/leetcode474/index.html">
+  <meta name="description" content="Peng Wu&apos;s Tech road!">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pengw00&#39;s Tech Road">
+<meta property="og:url" content="http://pengw00.github.io/archives/page/3/index.html">
 <meta property="og:site_name" content="Pengw00&#39;s Tech Road">
-<meta property="og:description" content="In the computer world, use restricted resource you have to generate maximum benefit is what we always want to pursue. For now, suppose you are a dominator of m 0s and n 1s respectively. On the other h">
+<meta property="og:description" content="Peng Wu&apos;s Tech road!">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2018-09-14T04:32:23.780Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode 474. Ones and Zeroes">
-<meta name="twitter:description" content="In the computer world, use restricted resource you have to generate maximum benefit is what we always want to pursue. For now, suppose you are a dominator of m 0s and n 1s respectively. On the other h">
+<meta name="twitter:title" content="Pengw00&#39;s Tech Road">
+<meta name="twitter:description" content="Peng Wu&apos;s Tech road!">
   
     <link rel="alternate" href="/atom.xml" title="Pengw00&#39;s Tech Road" type="application/atom+xml">
   
@@ -64,67 +63,64 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-leetcode474" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/13/leetcode474/" class="article-date">
-  <time datetime="2018-09-13T19:47:12.000Z" itemprop="datePublished">2018-09-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      Leetcode 474. Ones and Zeroes
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2018/09/13/leetcode474/" class="archive-article-date">
+  <time datetime="2018-09-13T19:47:12.000Z" itemprop="datePublished">Sep 13</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/09/13/leetcode474/">Leetcode 474. Ones and Zeroes</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>In the computer world, use restricted resource you have to generate maximum benefit is what we always want to pursue.</p>
-<p>For now, suppose you are a dominator of m 0s and n 1s respectively. On the other hand, there is an array with strings consisting of only 0s and 1s.</p>
-<p>Now your task is to find the maximum number of strings that you can form with given m 0s and n 1s. Each 0 and 1 can be used at most once.</p>
-<p>Note:<br>The given numbers of 0s and 1s will both not exceed 100<br>The size of given string array won’t exceed 600.</p>
-<p>Example1:<br>Intput: Array = {“10”, “0001”, “111001”, “1”, “0”}, m = 5, n = 3<br>Output: 4<br>01背包问题</p>
-<p>Solution1: Dynamic Programing<br>类似01背包问题，采用dp[i][j], i表示采用了i个0， j表示j个1， 对于每个string，可以决定采用或者不采用，放入包里，那么决定于<br>i， j减去当前需要的还能装入的最大值， 所以dp公式： dp[i][j] = max(dp[i-i_need][j-j_need] + 1, dp[i][j]);<br>因为字符串的顺序是有长有短，不按顺序，所以并不能确定dp[i-i_need][j-j_need]已经更新到最大，所以不能滚动数组操作??（可以）<br>对于每个字符采用一个新二维矩阵。 </p>
-<p>Solution2: DP 采用单二维矩阵解法，空间复杂度为O(mn)<br>更新次序从bottom right往top left更新，每次会在更大容量的包dp[i][j]中从左向右加<br>1， 如果从左上到右下更新，会重复计算。<br>核心代码：<br>for(int i = m; i &gt;= numZeros; i–){<br>    for(int j = n; j &gt;= numsOnes; j–){<br>        memo[i][j] = max(memo[i][j], memo[i-numZeros][j-numOnes]+1);<br>    }<br>}<br>return memo[m][n];</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/13/leetcode474/" data-id="cjtv1ranv000rp7zuji9dtsrn" class="article-share-link">Share</a>
-      
-      
-    </footer>
+    </header>
   </div>
+</article>
   
     
-<nav id="article-nav">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2018/09/13/hello-world/" class="archive-article-date">
+  <time datetime="2018-09-13T16:23:36.826Z" itemprop="datePublished">Sep 13</time>
+</a>
+      
   
-    <a href="/2018/09/14/leetcode-752-Open-the-lock/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          leetcode.752 Open the lock
-        
-      </div>
-    </a>
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/09/13/hello-world/">Welcome to Pengw00&#39;s Blog!</a>
+    </h1>
   
-  
-    <a href="/2018/09/13/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Welcome to Pengw00&#39;s Blog!</div>
-    </a>
-  
-</nav>
 
-  
+    </header>
+  </div>
 </article>
+  
+  
+    </div></section>
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/archives/page/2/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 
 </section>
         

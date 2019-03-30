@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-03-28T14:29:45.505Z</updated>
+  <updated>2019-03-30T05:19:53.535Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>factory pattern</title>
+    <link href="http://pengw00.github.io/2019/03/29/factory-pattern/"/>
+    <id>http://pengw00.github.io/2019/03/29/factory-pattern/</id>
+    <published>2019-03-29T17:56:22.000Z</published>
+    <updated>2019-03-30T05:19:53.535Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">// A design without factory pattern </span><br><span class="line">#include &lt;iostream&gt; </span><br><span class="line">using namespace std; </span><br><span class="line">  </span><br><span class="line">// Library classes </span><br><span class="line">class Vehicle &#123; </span><br><span class="line">public: </span><br><span class="line">    virtual void printVehicle() = 0; </span><br><span class="line">&#125;; </span><br><span class="line">class TwoWheeler : public Vehicle &#123; </span><br><span class="line">public: </span><br><span class="line">    void printVehicle()  &#123; </span><br><span class="line">        cout &lt;&lt; &quot;I am two wheeler&quot; &lt;&lt; endl; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line">class FourWheeler : public Vehicle &#123; </span><br><span class="line">    public: </span><br><span class="line">    void printVehicle()  &#123; </span><br><span class="line">        cout &lt;&lt; &quot;I am four wheeler&quot; &lt;&lt; endl; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line">  </span><br><span class="line">// Client (or user) class </span><br><span class="line">class Client &#123; </span><br><span class="line">public: </span><br><span class="line">    Client(int type)  &#123; </span><br><span class="line">  </span><br><span class="line">        // Client explicitly creates classes according to type </span><br><span class="line">        if (type == 1) </span><br><span class="line">            pVehicle = new TwoWheeler(); </span><br><span class="line">        else if (type == 2) </span><br><span class="line">            pVehicle = new FourWheeler(); </span><br><span class="line">        else</span><br><span class="line">            pVehicle = NULL; </span><br><span class="line">    &#125; </span><br><span class="line">  </span><br><span class="line">    ~Client()   &#123; </span><br><span class="line">        if (pVehicle) </span><br><span class="line">        &#123; </span><br><span class="line">            delete[] pVehicle; </span><br><span class="line">            pVehicle = NULL; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">  </span><br><span class="line">    Vehicle* getVehicle() &#123; </span><br><span class="line">        return pVehicle; </span><br><span class="line">    &#125; </span><br><span class="line">private: </span><br><span class="line">    Vehicle *pVehicle; </span><br><span class="line">&#125;; </span><br><span class="line">  </span><br><span class="line">// Driver program </span><br><span class="line">int main() &#123; </span><br><span class="line">    Client *pClient = new Client(1); </span><br><span class="line">    Vehicle * pVehicle = pClient-&gt;getVehicle(); </span><br><span class="line">    pVehicle-&gt;printVehicle(); </span><br><span class="line">    return 0; </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p> What is the problems with above design?<br>As you must have observed in the above example, Client creates objects of either TwoWheeler or FourWheeler based on some input during constructing its object.<br>Say, library introduces a new class ThreeWheeler to incorporate three wheeler vehicles also. What would happen? Client will end up chaining a new else if in the conditional ladder to create objects of ThreeWheeler. Which in turn will need Client to be recompiled. So, each time a new change is made at the library side, Client would need to make some corresponding changes at its end and recompile the code. Sounds bad? This is a very bad practice of design.</p><p>How to avoid the problem?<br>The answer is, create a static (or factory) method. Let us see below code.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
+      
+    
+    </summary>
+    
+    
+      <category term="Design pattern" scheme="http://pengw00.github.io/tags/Design-pattern/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Design high quality React component</title>
+    <link href="http://pengw00.github.io/2019/03/28/Design-high-quality-React-component/"/>
+    <id>http://pengw00.github.io/2019/03/28/Design-high-quality-React-component/</id>
+    <published>2019-03-28T15:55:48.000Z</published>
+    <updated>2019-03-29T17:56:02.634Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Design-high-quality-React-component"><a href="#Design-high-quality-React-component" class="headerlink" title="Design high quality React component"></a>Design high quality React component</h1><p>作为一个合格的开发者，不要只满足于编写了可以运行的代码。而要了解代码背后的工作原理；不要只满足于自己的程序能够运行，还要让自己的代码可读而且易于维护。这样才能开发出高质量的软件.</p><h2 id="构建高质量React组件的原则和方法"><a href="#构建高质量React组件的原则和方法" class="headerlink" title="构建高质量React组件的原则和方法"></a>构建高质量React组件的原则和方法</h2><pre><code>### 划分组件边界的原则 ###### React组件的数据种类 ###### React组件的生命周期 ###</code></pre><p>React组件设计的基础知识，因为React应用都是围绕组件的设计，所以关于组件的设计介绍将贯穿全书.</p><p>我会继续用react，四点理由：第一，“继续”说明我17年就在用react，最熟悉。虽然vue我也熟悉，毕竟放了一年了。angular我确实不太熟悉。第二，react生态现在确实非常好。而且前端生态的下一步进展（全链路，设计开发打通，组件市场，在线ide什么的），目前看来基于react的探索居多，未来会有技术红利。第三，不得不承认jsx真是好用，模板scope和js scope合一，而且可以面向过程任意分解render函数。不得不说，jsx的设计思想我当时花了几个月才真正理解其高明。第四，react有一个3k大小的小兄弟叫preact，这个非常有用。因为我们有时候希望把组件打包成不依赖任何框架的内嵌模块发布，但是把框架打包进去，会很大。这时把组件适配到preact，把preact打包进去就好了。<br>作者：匿名用户<br>链接：<a href="https://www.zhihu.com/question/266823404/answer/409100494" target="_blank" rel="noopener">https://www.zhihu.com/question/266823404/answer/409100494</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Design-high-quality-React-component&quot;&gt;&lt;a href=&quot;#Design-high-quality-React-component&quot; class=&quot;headerlink&quot; title=&quot;Design high quality Re
+      
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://pengw00.github.io/tags/React/"/>
+    
+  </entry>
   
   <entry>
     <title>props and state new example</title>
@@ -421,49 +467,6 @@
       
         &lt;p&gt;##BFS + 剪枝 + 去重 经典dfs层次遍历&lt;br&gt;剪枝相当于backtrack 采用queque 和unordered_set&lt;string&gt; 减少遍历次数&lt;br&gt;可正转反转.&lt;/string&gt;&lt;/p&gt;
 
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode 474. Ones and Zeroes</title>
-    <link href="http://pengw00.github.io/2018/09/13/leetcode474/"/>
-    <id>http://pengw00.github.io/2018/09/13/leetcode474/</id>
-    <published>2018-09-13T19:47:12.000Z</published>
-    <updated>2018-09-14T04:32:23.780Z</updated>
-    
-    <content type="html"><![CDATA[<p>In the computer world, use restricted resource you have to generate maximum benefit is what we always want to pursue.</p><p>For now, suppose you are a dominator of m 0s and n 1s respectively. On the other hand, there is an array with strings consisting of only 0s and 1s.</p><p>Now your task is to find the maximum number of strings that you can form with given m 0s and n 1s. Each 0 and 1 can be used at most once.</p><p>Note:<br>The given numbers of 0s and 1s will both not exceed 100<br>The size of given string array won’t exceed 600.</p><p>Example1:<br>Intput: Array = {“10”, “0001”, “111001”, “1”, “0”}, m = 5, n = 3<br>Output: 4<br>01背包问题</p><p>Solution1: Dynamic Programing<br>类似01背包问题，采用dp[i][j], i表示采用了i个0， j表示j个1， 对于每个string，可以决定采用或者不采用，放入包里，那么决定于<br>i， j减去当前需要的还能装入的最大值， 所以dp公式： dp[i][j] = max(dp[i-i_need][j-j_need] + 1, dp[i][j]);<br>因为字符串的顺序是有长有短，不按顺序，所以并不能确定dp[i-i_need][j-j_need]已经更新到最大，所以不能滚动数组操作??（可以）<br>对于每个字符采用一个新二维矩阵。 </p><p>Solution2: DP 采用单二维矩阵解法，空间复杂度为O(mn)<br>更新次序从bottom right往top left更新，每次会在更大容量的包dp[i][j]中从左向右加<br>1， 如果从左上到右下更新，会重复计算。<br>核心代码：<br>for(int i = m; i &gt;= numZeros; i–){<br>    for(int j = n; j &gt;= numsOnes; j–){<br>        memo[i][j] = max(memo[i][j], memo[i-numZeros][j-numOnes]+1);<br>    }<br>}<br>return memo[m][n];</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;In the computer world, use restricted resource you have to generate maximum benefit is what we always want to pursue.&lt;/p&gt;
-&lt;p&gt;For now, sup
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Welcome to Pengw00&#39;s Blog!</title>
-    <link href="http://pengw00.github.io/2018/09/13/hello-world/"/>
-    <id>http://pengw00.github.io/2018/09/13/hello-world/</id>
-    <published>2018-09-13T16:23:36.826Z</published>
-    <updated>2018-09-13T20:52:41.410Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
       
     
     </summary>
