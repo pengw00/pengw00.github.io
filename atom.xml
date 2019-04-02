@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-03-30T19:18:27.437Z</updated>
+  <updated>2019-04-02T04:03:59.330Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hibernate</title>
+    <link href="http://pengw00.github.io/2019/04/02/Hibernate/"/>
+    <id>http://pengw00.github.io/2019/04/02/Hibernate/</id>
+    <published>2019-04-02T04:00:27.000Z</published>
+    <updated>2019-04-02T04:03:59.330Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>Hibernate的工作原理是什么？为什么要用hibernate？</li></ol><p>（1）Hibernate可以理解为一个中间件。它负责把java程序的SQL语句接收过来并发送到数据库，而数据库返回的信息由Hibernate接收后直接生成一个对象传给java.</p><p>在Hibernate中有两个特有的文件，一个是以.hbm.xml结尾的映射文件，一个是以.cfg.xml结尾的配置文件。.cfg.xml文件的作用是连接数据库，文件内部其实就是一个由user,password，url,driver组成的链接库的基本信息。.hbm.xml文件是对数据库中表的映射文件。</p><p>（2）Hibernate工作原理</p><p>①读取并解析hibernate.cfg.xml配置文件；</p><p>②由hibernate.cfg.xml中的<mapping resource="com/xx/user.hbm.xml">读取并解析映射信息；</mapping></p><p>③.通过SessionFactory sf = config.buildSessionFactory();创建SessionFactory</p><p>④Session session = sf.openSession();//打开Sesssion</p><p>⑤Transaction tx = session.beginTransaction();//创建并启动事务Transation</p><p>⑥persistent operate操作数据，持久化操作</p><p>⑦tx.commit();//提交事务</p><p>⑧关闭Session</p><p>⑨关闭SesstionFactory</p><p>3）使用Hibernate的原因如下：</p><p>① 对JDBC访问数据库的代码做了封装，大大简化了数据访问层繁琐的重复性代码。</p><p>②HIbernate是基于JDBC的主流持久化框架，是一个优秀的对象关系映射实现，它在很大程度上简化了DAO层的编码工作；</p><p>③Hibernate使用java反射机制，而不是字节码增强程序来实现透明性；</p><h2 id="④Hibernate性能非常好，因为它是一个轻量级框架，映射的灵活性很出色，它支持各种关系数据库，从一对一到多对多的各种复杂关系。"><a href="#④Hibernate性能非常好，因为它是一个轻量级框架，映射的灵活性很出色，它支持各种关系数据库，从一对一到多对多的各种复杂关系。" class="headerlink" title="④Hibernate性能非常好，因为它是一个轻量级框架，映射的灵活性很出色，它支持各种关系数据库，从一对一到多对多的各种复杂关系。"></a>④Hibernate性能非常好，因为它是一个轻量级框架，映射的灵活性很出色，它支持各种关系数据库，从一对一到多对多的各种复杂关系。</h2><p>为什么要持久化？ 持久化技术封装了数据访问细节，为大部分业务逻辑提供面向对象的API。 ● 通过持久化技术可以减少访问数据库数据次数，增加应用程序执行速度； ● 代码重用性高，能够完成大部分数据库操作； ● 松散耦合，使持久化不依赖于底层数据库和上层业务逻辑实现，更换数据库时只需修改配置文件而不用修改代码。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;Hibernate的工作原理是什么？为什么要用hibernate？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;（1）Hibernate可以理解为一个中间件。它负责把java程序的SQL语句接收过来并发送到数据库，而数据库返回的信息由Hibernate接收后直接生成一个对象传给
+      
+    
+    </summary>
+    
+    
+      <category term="hibernate" scheme="http://pengw00.github.io/tags/hibernate/"/>
+    
+  </entry>
   
   <entry>
     <title>被amazon开出两次的经验总结</title>
@@ -460,29 +486,6 @@
       
       
         &lt;p&gt;思路：所有🌲异或完后只剩下两个数的异或，把每个数理解为二进制数，在异或的结果上的每一个1的位置，两个素&lt;br&gt;总过出现的情况只能是0和1，如果都是0或都是1就不可能， 所有可以将异或结果和每个数二次异或分成两组，&lt;br&gt;每一个组必然包含单独一个数，异或就可以求出结果；&lt;b
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>lecture9.computerArchiture</title>
-    <link href="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/"/>
-    <id>http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/</id>
-    <published>2018-09-19T17:05:05.000Z</published>
-    <updated>2018-09-19T18:32:37.483Z</updated>
-    
-    <content type="html"><![CDATA[<p>L1 split cache<br>multiple ports mean multiple access<br>cause larger overhead</p><p>eg: avoid hazard, multiple ports</p><p>mltiple exclusion and mutiple inclusion:<br>L1 and L2<br>L1 or L2</p><p>multiple level cache</p><ol><li>write through and write back<br>readhit: read hit time + miss penalty<br>read miss: read hit time + miss penalty<br>write hit: write hit time  + wirte time to lower level<br>wirte miss: write hit time + write time to lower level + read block from lower level</li></ol><ol start="2"><li><p>write through plus non-write allocate </p></li><li><p>write back and write allocate<br>read hit: read hit time<br>read miss: read hit time + miss penalty plus time to write dirty block if it is dirty</p></li></ol><p>write hit: </p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;L1 split cache&lt;br&gt;multiple ports mean multiple access&lt;br&gt;cause larger overhead&lt;/p&gt;
-&lt;p&gt;eg: avoid hazard, multiple ports&lt;/p&gt;
-&lt;p&gt;mltiple exc
       
     
     </summary>
