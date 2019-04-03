@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-04-02T04:25:57.506Z</updated>
+  <updated>2019-04-03T04:32:39.244Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>回溯，递归，dp三法leetcode 题目“ </title>
+    <link href="http://pengw00.github.io/2019/04/03/%E5%9B%9E%E6%BA%AF%EF%BC%8C%E9%80%92%E5%BD%92%EF%BC%8Cdp%E4%B8%89%E6%B3%95leetcode-%E9%A2%98%E7%9B%AE%E2%80%9C/"/>
+    <id>http://pengw00.github.io/2019/04/03/回溯，递归，dp三法leetcode-题目“/</id>
+    <published>2019-04-03T04:30:53.000Z</published>
+    <updated>2019-04-03T04:32:39.244Z</updated>
+    
+    <content type="html"><![CDATA[<p>leetcode 10  regular expression matching 可以减去一字符<br>leetcode wildcard matching 可以匹配一个字符<br>leetcode edit distance</p><p>回溯法解决leetcode10注意递归和回溯的区别</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;leetcode 10  regular expression matching 可以减去一字符&lt;br&gt;leetcode wildcard matching 可以匹配一个字符&lt;br&gt;leetcode edit distance&lt;/p&gt;
+&lt;p&gt;回溯法解决leetcode10注
+      
+    
+    </summary>
+    
+    
+      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>springSecurity Bcrypt hash password</title>
@@ -477,20 +501,6 @@
         &lt;p&gt;Understanding the meaning of persistence is important for evaluating different data store system&lt;/p&gt;
 &lt;p&gt;Given the importance of the data 
       
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>maxcycle_subarray</title>
-    <link href="http://pengw00.github.io/2018/10/08/maxcycle-subarray/"/>
-    <id>http://pengw00.github.io/2018/10/08/maxcycle-subarray/</id>
-    <published>2018-10-08T18:56:17.000Z</published>
-    <updated>2018-10-08T19:56:17.538Z</updated>
-    
-    <summary type="html">
     
     </summary>
     
