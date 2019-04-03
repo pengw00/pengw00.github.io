@@ -5,18 +5,20 @@
   
 
   
-  <title>Archives | Pengw00&#39;s Tech Road</title>
+  <title>Quick Sort&#39;  | Pengw00&#39;s Tech Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Peng Wu&apos;s Tech road!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Pengw00&#39;s Tech Road">
-<meta property="og:url" content="http://pengw00.github.io/archives/page/4/index.html">
+  <meta name="description" content="12345678910111213141516171819public void quickSort(int[] arr, int low, int high)&amp;#123;	if(low&amp;gt;high) return;	int i = low, int j = high, base = arr[low];	while(i &amp;lt; j)&amp;#123;		while(arr[i]&amp;lt;base &amp;">
+<meta name="keywords" content="algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Quick Sort&#39; ">
+<meta property="og:url" content="http://pengw00.github.io/2019/04/03/Quick-Sort/index.html">
 <meta property="og:site_name" content="Pengw00&#39;s Tech Road">
-<meta property="og:description" content="Peng Wu&apos;s Tech road!">
+<meta property="og:description" content="12345678910111213141516171819public void quickSort(int[] arr, int low, int high)&amp;#123;	if(low&amp;gt;high) return;	int i = low, int j = high, base = arr[low];	while(i &amp;lt; j)&amp;#123;		while(arr[i]&amp;lt;base &amp;">
 <meta property="og:locale" content="us-EN">
+<meta property="og:updated_time" content="2019-04-03T15:50:48.701Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pengw00&#39;s Tech Road">
-<meta name="twitter:description" content="Peng Wu&apos;s Tech road!">
+<meta name="twitter:title" content="Quick Sort&#39; ">
+<meta name="twitter:description" content="12345678910111213141516171819public void quickSort(int[] arr, int low, int high)&amp;#123;	if(low&amp;gt;high) return;	int i = low, int j = high, base = arr[low];	while(i &amp;lt; j)&amp;#123;		while(arr[i]&amp;lt;base &amp;">
   
     <link rel="alternate" href="/atom.xml" title="Pengw00&#39;s Tech Road" type="application/atom+xml">
   
@@ -63,64 +65,53 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/09/13/leetcode474/" class="archive-article-date">
-  <time datetime="2018-09-13T19:47:12.000Z" itemprop="datePublished">Sep 13</time>
+        <section id="main"><article id="post-Quick-Sort" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/03/Quick-Sort/" class="article-date">
+  <time datetime="2019-04-03T15:43:47.000Z" itemprop="datePublished">2019-04-03</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/13/leetcode474/">Leetcode 474. Ones and Zeroes</a>
+    <h1 class="article-title" itemprop="name">
+      Quick Sort&#39; 
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/09/13/hello-world/" class="archive-article-date">
-  <time datetime="2018-09-13T16:23:36.826Z" itemprop="datePublished">Sep 13</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/13/hello-world/">Welcome to Pengw00&#39;s Blog!</a>
-    </h1>
-  
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public void quickSort(int[] arr, int low, int high)&#123;</span><br><span class="line">	if(low&gt;high) return;</span><br><span class="line">	int i = low, int j = high, base = arr[low];</span><br><span class="line">	while(i &lt; j)&#123;</span><br><span class="line">		while(arr[i]&lt;base &amp;&amp; i&lt;j)&#123;i++;&#125;</span><br><span class="line">		while(arr[j]&gt;base &amp;&amp; i &lt; j)&#123; j--;&#125;</span><br><span class="line">		//after that the order is messy</span><br><span class="line">		swap(arr, low, j);</span><br><span class="line">	&#125;</span><br><span class="line">	swap(arr, base, j);</span><br><span class="line">	quickSort(arr, low, j-1);</span><br><span class="line">	quickSort(arr, j+1, high);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void swap(int[] arr, int i, int j)&#123;</span><br><span class="line">	int temp = arr[i];</span><br><span class="line">	arr[i] = arr[j];</span><br><span class="line">	arr[j] = tamp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/03/Quick-Sort/" data-id="cju1e1v7n000n2024xiseg6uw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
   
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/archives/page/3/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="page-number current">4</span>
-  </nav>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/04/03/axios-instance/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">axios instance</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         
