@@ -89,12 +89,13 @@
       
         <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">export default class A extends React.Component &#123;</span><br><span class="line"></span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">        super(props);</span><br><span class="line">    &#125;</span><br><span class="line">    scroll1（）&#123;&#125;</span><br><span class="line"></span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        window.addEventListener(&apos;scroll&apos;, this.srcoll1.bind(this));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    componentWillUnmount()&#123;</span><br><span class="line">        window.removeEventListener(&apos;scroll&apos;, this.srcoll1);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>when using event handler in render(), need to bind this to the function<br>inside constructor, it will be global. otherwise, everytime inside render() we need to bind this when we use the method everytime, it will be awaste of time.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">export default class A extends React.Component &#123;</span><br><span class="line"></span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">        super(props);</span><br><span class="line">        this.scroll1 = this.scroll1.bind(this)</span><br><span class="line">    &#125;</span><br><span class="line">    scroll1（）&#123;&#125;</span><br><span class="line"></span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        window.addEventListener(&apos;scroll&apos;, this.scroll1);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    componentWillUnmount()&#123;</span><br><span class="line">        window.removeEventListener(&apos;scroll&apos;, this.scroll1);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>bind的使用和call，apply的区别：都是将方法的主人绑定，this指向全局object。<br>bind will not be executed imediately while call, aply will execute right away.</p>
+<p>bind方法，顾名思义，就是绑定的意思，到底是怎么绑定然后怎么用呢，下面就来说说我对这个方法的理解。</p>
+<p>bind的使用和call，apply的区别：都是将方法的主人绑定，this指向全局object。<br>bind will not be executed imediately while call, aply will execute right away.<br>为什么要创建绑定函数，就是当我们调用某些函数的时候是要在特定环境下才能调用到，所以我们就要把函数放在特定环境下，就是使用bind把函数绑定到特定的所需的环境下。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/didmount-willunmount/" data-id="cju2qz4dg000qrc24lv3tnne9" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/didmount-willunmount/" data-id="cju2ramcp000qsd24l1vvn0vy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -132,7 +133,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/topological-sort-template/" data-id="cju2qz4e0001prc24pm6svs8z" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/topological-sort-template/" data-id="cju2ramd7001osd24phs9fpa5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -178,7 +179,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/路径选择的dp问题之三角形最小路径和/" data-id="cju2qz4e4001vrc24sxajw2iq" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/路径选择的dp问题之三角形最小路径和/" data-id="cju2ramda001usd24juc49ixi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -217,7 +218,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/topK-and-quickSort-and-QuickSelect/" data-id="cju2qz4dz001mrc241npbry4h" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/topK-and-quickSort-and-QuickSelect/" data-id="cju2ramd6001lsd244nzpta5m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
@@ -255,7 +256,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/Quick-Sort/" data-id="cju2qz4d5000drc249ln8j742" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/Quick-Sort/" data-id="cju2ramci000dsd24hi3mnx9y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -297,7 +298,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/axios-instance/" data-id="cju2qz4dc000jrc24awyjy8m2" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/axios-instance/" data-id="cju2ramcm000jsd24xcz8rg9f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -343,7 +344,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/dfs和回溯模版/" data-id="cju2qz4de000orc240yystgce" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/dfs和回溯模版/" data-id="cju2ramco000osd241eg62rdx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -387,7 +388,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/回溯，递归，dp三法leetcode-题目“/" data-id="cju2qz4e1001rrc24k43ptvgf" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/回溯，递归，dp三法leetcode-题目“/" data-id="cju2ramd8001qsd245ddb2srz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -455,7 +456,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/02/springSecurity-Bcrypt-hash-password/" data-id="cju2qz4ea0021rc24l95f3t2p" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/02/springSecurity-Bcrypt-hash-password/" data-id="cju2ramdg0022sd24ur1kx56c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
@@ -513,7 +514,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/02/Hibernate/" data-id="cju2qz4cr0003rc24uvz9rano" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/02/Hibernate/" data-id="cju2ramc00003sd24lk2j1m59" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hibernate/">hibernate</a></li></ul>
