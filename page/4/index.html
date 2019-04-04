@@ -65,6 +65,43 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode260-singlenumberIII" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/20/leetcode260-singlenumberIII/" class="article-date">
+  <time datetime="2018-09-20T20:41:54.000Z" itemprop="datePublished">2018-09-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/20/leetcode260-singlenumberIII/">leetcode260_singlenumberIII</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>思路：所有🌲异或完后只剩下两个数的异或，把每个数理解为二进制数，在异或的结果上的每一个1的位置，两个素<br>总过出现的情况只能是0和1，如果都是0或都是1就不可能， 所有可以将异或结果和每个数二次异或分成两组，<br>每一个组必然包含单独一个数，异或就可以求出结果；<br>核心代码：<br>    diff &amp;= -diff; //取最高位的1，任意一个1就可以，注意diff是所有数异或以后的结果<br>    //second pass:<br>    for(int num: nums){<br>        if(num&amp;diff == 0){<br>            a ^= num;<br>        else{<br>            b ^= num;<br>    }<br>    }<br>    return {a, b};<br>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="cju2z9lbd001255248l0tcx6q" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-lecture9-computerArchiture" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/09/19/lecture9-computerArchiture/" class="article-date">
@@ -105,7 +142,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="cju2su9sg0013wg245vjv1wt4" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="cju2z9lbb000y55246mdvp4eu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -142,7 +179,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/" data-id="cju2su9rf0001wg24w0hd9lb4" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/" data-id="cju2z9laa00015524ln6ujqh2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -169,7 +206,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/18/dailylearning/" data-id="cju2su9s6000mwg2437ec6gst" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/18/dailylearning/" data-id="cju2z9lb3000m5524b49do4dp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -210,7 +247,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/14/Daily-Friday/" data-id="cju2su9rb0000wg24452ceslm" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/14/Daily-Friday/" data-id="cju2z9la500005524cvpnqeeh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -247,7 +284,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/" data-id="cju2su9sh0015wg24yidm601g" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/" data-id="cju2z9lbc00105524t0p3bod1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -290,7 +327,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/13/leetcode474/" data-id="cju2su9sk001bwg24cg921g9g" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/13/leetcode474/" data-id="cju2z9lbg00185524exukyrrs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -335,7 +372,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/13/hello-world/" data-id="cju2su9sd000xwg24ze1nhnnq" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/13/hello-world/" data-id="cju2z9lb8000t55242iywb8c3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -373,7 +410,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 13.33px;">algorithm</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 16.67px;">leetcode</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/Javascript/" style="font-size: 12.5px;">Javascript</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 15px;">algorithm</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
@@ -395,6 +432,10 @@
       <ul>
         
           <li>
+            <a href="/2019/04/04/babel-and-webpack/">babel and webpack</a>
+          </li>
+        
+          <li>
             <a href="/2019/04/04/js-null-vs-undefined/">js null vs undefined</a>
           </li>
         
@@ -408,10 +449,6 @@
         
           <li>
             <a href="/2019/04/03/路径选择的dp问题之三角形最小路径和/">路径选择的dp问题之三角形最小路径和</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/03/topK-and-quickSort-and-QuickSelect/">topK and quickSort and QuickSelect</a>
           </li>
         
       </ul>

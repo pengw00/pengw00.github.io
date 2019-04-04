@@ -65,6 +65,74 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-springSecurity-Bcrypt-hash-password" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/02/springSecurity-Bcrypt-hash-password/" class="article-date">
+  <time datetime="2019-04-02T04:12:46.000Z" itemprop="datePublished">2019-04-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/02/springSecurity-Bcrypt-hash-password/">springSecurity Bcrypt hash password</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>SpringSecurity之加密篇—BCryptpassword类</p>
+<ol>
+<li>要点概括<br>BCryptpassword类是SpringSecurity的加密工具，封装了对密码混淆加密的方法，主要是采用盐（salt）对原始密码进行混淆。<br>本篇介绍的是利用BCryptpassword随机生成盐（salt），使用该盐值对原始密码进行混淆加密。<br>这种加密方式有两个特点：（1）将随机生成的盐（salt）存到混淆后的代码中；（2）对于相同的明文每一次加密，加密之后的密文都是不一样的；因为盐值（salt）不同。这样的好处就是更增加了密码的安全性。</li>
+</ol>
+<p>SpringSecurity中的BCryptPassword采用Hash处理，其过程是不可逆的。</p>
+<p>BCryptPassword的加密过程：<br>（1）加密(encode)：用户注册时，使用SHA256+盐（salt）把用户输入的密码进行hash混淆处理，得到密码的hash值，然后将其存入数据库中。<br>（2）密码校验(matches)：用户登录时，密码匹配阶段并没有进行密码解密（因为密码经过Hash处理，是不可逆的），而是使用相同的算法结合盐值salt把用户输入的密码进行hash处理，得到密码的hash值，然后将其与从数据库中查询到的密码hash值进行比较。如果两者相同，说明用户输入的密码正确，这里的盐值（salt）是从数据库中查询到的密码hash值中解析出来的。</p>
+<ol start="2">
+<li>核心代码分析<br>//1. BCryptPasswordEncoder类，生成盐salt并混淆rawpassword的代码；<br>//涉及到两个问题，生成salt盐gensalt()，混淆密码hashpw()<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public String encode(CharSequence rawPassword) &#123;</span><br><span class="line">    String salt;</span><br><span class="line">    if (this.strength &gt; 0) &#123;</span><br><span class="line">        if (this.random != null) &#123;</span><br><span class="line">            salt = BCrypt.gensalt(this.strength, this.random);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            salt = BCrypt.gensalt(this.strength);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        salt = BCrypt.gensalt();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return BCrypt.hashpw(rawPassword.toString(), salt);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>2.1 生成盐（salt）：<br>:包名：org.springframework.security.crypto.bcrypt；类名：BCrypt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//生成salt盐gensalt() </span><br><span class="line">   public static String gensalt(int log_rounds, SecureRandom random) &#123;</span><br><span class="line">       if (log_rounds &gt;= 4 &amp;&amp; log_rounds &lt;= 31) &#123;</span><br><span class="line">           StringBuilder rs = new StringBuilder();</span><br><span class="line">           byte[] rnd = new byte[16];</span><br><span class="line">           random.nextBytes(rnd);</span><br><span class="line">           rs.append(&quot;$2a$&quot;);</span><br><span class="line">           if (log_rounds &lt; 10) &#123;</span><br><span class="line">               rs.append(&quot;0&quot;);</span><br><span class="line">           &#125;</span><br><span class="line">           </span><br><span class="line">           rs.append(log_rounds);</span><br><span class="line">           rs.append(&quot;$&quot;);</span><br><span class="line">           encode_base64(rnd, rnd.length, rs);</span><br><span class="line">           return rs.toString();</span><br><span class="line">       &#125; else &#123;</span><br><span class="line">           throw new IllegalArgumentException(&quot;Bad number of rounds&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.2 混淆方法：<br>包名：org.springframework.security.crypto.bcrypt；类名：BCrypt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">//混淆密码hashpw()</span><br><span class="line">public static String hashpw(String password, String salt) throws IllegalArgumentException &#123;</span><br><span class="line">        char minor = 0;</span><br><span class="line">        int off = false;</span><br><span class="line">        StringBuilder rs = new StringBuilder();</span><br><span class="line">        if (salt == null) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;salt cannot be null&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            int saltLength = salt.length();</span><br><span class="line">            if (saltLength &lt; 28) &#123;</span><br><span class="line">                throw new IllegalArgumentException(&quot;Invalid salt&quot;);</span><br><span class="line">            &#125; else if (salt.charAt(0) == &apos;$&apos; &amp;&amp; salt.charAt(1) == &apos;2&apos;) &#123;</span><br><span class="line">                byte off;</span><br><span class="line">                if (salt.charAt(2) == &apos;$&apos;) &#123;</span><br><span class="line">                    off = 3;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    minor = salt.charAt(2);</span><br><span class="line">                    if (minor != &apos;a&apos; || salt.charAt(3) != &apos;$&apos;) &#123;</span><br><span class="line">                        throw new IllegalArgumentException(&quot;Invalid salt revision&quot;);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    off = 4;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (saltLength - off &lt; 25) &#123;</span><br><span class="line">                    throw new IllegalArgumentException(&quot;Invalid salt&quot;);</span><br><span class="line">                &#125; else if (salt.charAt(off + 2) &gt; &apos;$&apos;) &#123;</span><br><span class="line">                    throw new IllegalArgumentException(&quot;Missing salt rounds&quot;);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    int rounds = Integer.parseInt(salt.substring(off, off + 2));</span><br><span class="line">                    String real_salt = salt.substring(off + 3, off + 25);</span><br><span class="line"></span><br><span class="line">                    byte[] passwordb;</span><br><span class="line">                    try &#123;</span><br><span class="line">                        passwordb = (password + (minor &gt;= &apos;a&apos; ? &quot;\u0000&quot; : &quot;&quot;)).getBytes(&quot;UTF-8&quot;);</span><br><span class="line">                    &#125; catch (UnsupportedEncodingException var13) &#123;</span><br><span class="line">                        throw new AssertionError(&quot;UTF-8 is not supported&quot;);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    byte[] saltb = decode_base64(real_salt, 16);</span><br><span class="line">                    BCrypt B = new BCrypt();</span><br><span class="line">                    byte[] hashed = B.crypt_raw(passwordb, saltb, rounds);</span><br><span class="line">                    rs.append(&quot;$2&quot;);</span><br><span class="line">                    if (minor &gt;= &apos;a&apos;) &#123;</span><br><span class="line">                        rs.append(minor);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    rs.append(&quot;$&quot;);</span><br><span class="line">                    if (rounds &lt; 10) &#123;</span><br><span class="line">                        rs.append(&quot;0&quot;);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    rs.append(rounds);</span><br><span class="line">                    rs.append(&quot;$&quot;);</span><br><span class="line">                    encode_base64(saltb, saltb.length, rs);</span><br><span class="line">                    encode_base64(hashed, bf_crypt_ciphertext.length * 4 - 1, rs);</span><br><span class="line">                    return rs.toString();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                throw new IllegalArgumentException(&quot;Invalid salt version&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.3 密码的校验<br>提供的密码与加密之后的密码的校验，使用是BCryptpassword的matches()接口；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public boolean matches(CharSequence rawPassword, String encodedPassword) &#123;</span><br><span class="line">    if (encodedPassword != null &amp;&amp; encodedPassword.length() != 0) &#123;</span><br><span class="line">        if (!this.BCRYPT_PATTERN.matcher(encodedPassword).matches()) &#123;</span><br><span class="line">            this.logger.warn(&quot;Encoded password does not look like BCrypt&quot;);</span><br><span class="line">            return false;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return BCrypt.checkpw(rawPassword.toString(), encodedPassword);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        this.logger.warn(&quot;Empty encoded password&quot;);</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<pre><code>/**
+ * 密码比较入口，同样是调用了hashpw()方法: 使用的是hashpw()方法，有两个参数：原始明文与数据库中获取的密文。
+ * hashpw()方法是从密文中解析出藏在其中的盐salt值，用此值混淆明文，与密文做比较。
+ */
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">   public static boolean checkpw(String plaintext, String hashed) &#123;</span><br><span class="line">       return equalsNoEarlyReturn(hashed, hashpw(plaintext, hashed)); </span><br><span class="line">   &#125;</span><br><span class="line">//这个方法就是比较是否相同而已，无他。</span><br><span class="line">   static boolean equalsNoEarlyReturn(String a, String b) &#123;</span><br><span class="line">       char[] caa = a.toCharArray();</span><br><span class="line">       char[] cab = b.toCharArray();</span><br><span class="line">       if (caa.length != cab.length) &#123;</span><br><span class="line">           return false;</span><br><span class="line">       &#125; else &#123;</span><br><span class="line">           byte ret = 0;</span><br><span class="line"></span><br><span class="line">           for(int i = 0; i &lt; caa.length; ++i) &#123;</span><br><span class="line">               ret = (byte)(ret | caa[i] ^ cab[i]);</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           return ret == 0;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><p>总结<br>以上是SpringSecurity的BCryptPassword加密方式，上面是介绍其SHA256+随机salt生成密文的基本点。应该还有其他的一些用法，容当后研究。</p>
+</li>
+<li><p>其它<br>Springboot框架整合SpringSecurity组件，使用需要使用该加密方式，有一点需要注意，就是在springSecurity的配置文件中注入PasswordEncode的bean</p>
+<p> //SpringSecurityConfigutarion配置类中加入<br> @Bean<br> public PasswordEncoder passwordEncoder() {</p>
+<pre><code>return new BCryptPasswordEncoder();
+</code></pre><p> }<br>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">       String password = &quot;leo_epam&quot;;</span><br><span class="line">        System.out.println(password + &quot;: encrypt&quot;);</span><br><span class="line">        int i = 0;</span><br><span class="line">        while(i &lt; 10)&#123;</span><br><span class="line">            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();</span><br><span class="line">            String hashedPassword = passwordEncoder.encode(password);</span><br><span class="line">            System.out.println(&quot;encryptPassword:&quot; + hashedPassword);</span><br><span class="line">            System.out.println(&quot;match result:&quot; + passwordEncoder.matches(password,hashedPassword));</span><br><span class="line">            i ++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>代码输出：</p>
+<p>leo_epam: encrypt<br>encryptPassword:$2a$10$/WIa4YbBMGQX7dBbYwRKx.AmQ3sJ8Ta5wYHh8a7jPlYDbNgMSD/hC<br>match result:true<br>encryptPassword:$2a$10$VryRC1lFaTEqUbOUyvu18ulSSGH5hK7JPzAG17ehtkL8aV6fot1ru<br>match result:true<br>encryptPassword:$2a$10$0SVRXbfgsqMvpmNDeeqNl.eFPvQ0ojdazk5.x8YDZxIOOP1D4xXge<br>match result:true<br>encryptPassword:$2a$10$yWdI4q6DXDZhknTxiT/9ROdhcAARAEY5q4L2YI5uQ3C52Q7Lt/IAa<br>match result:true<br>encryptPassword:$2a$10$8yy0.NdQSD2Cig5yIri2eu1XmDRpZSPjsmxDyRg9CZ5afwp/36H2S<br>match result:true<br>encryptPassword:$2a$10$QTJpm3jYUCjAoHPVI/uon.FDusm.9tPSc.mk6m.l/kx8aKbIzov3i<br>match result:true<br>encryptPassword:$2a$10$CkoGrZqDE86LM1yiX89cpuNDAMdDqemEKMSS3/jquFsxocizgBbX2<br>match result:true<br>encryptPassword:$2a$10$6M0N6cQp6kKeXgRl8ftqyOlikAV9YwfMS93xlqTXbd/tmDjFDv3iG<br>match result:true<br>encryptPassword:$2a$10$LboMUNAF7vOmucxJI3G/w.cliDRxH1exOmsfy2IlPCUpZU8N7XoO.<br>match result:true<br>encryptPassword:$2a$10$ezB0okY.JHv1gt4Y3chiu.5e5R9.vXqd7kNaYH14Vigm9wZ02D8Pe<br>match result:true<br>以上代码就是BCryptPassword的代码简单效果示例，相同的明文，每次生成的密文都是不同的，但是和明文做密码校验都是通过的。<br>还有一个就是密码字段的长度，如果打算采用bcrypt加密存储，字段长度不得低于60.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/02/springSecurity-Bcrypt-hash-password/" data-id="cju2z9lc2002655246fc3g8js" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Hibernate" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/02/Hibernate/" class="article-date">
@@ -111,7 +179,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/02/Hibernate/" data-id="cju2su9rj0003wg247xwp2igo" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/02/Hibernate/" data-id="cju2z9lao000a5524pcrmzkrf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hibernate/">hibernate</a></li></ul>
@@ -162,7 +230,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/被amazon开出两次的经验总结/" data-id="cju2su9sy001ywg24ade661xa" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/被amazon开出两次的经验总结/" data-id="cju2z9lbv001y55240tpjqedt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/career/">career</a></li></ul>
@@ -202,7 +270,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/leetcode-10-Regular-expression/" data-id="cju2su9sf0011wg24b6n80f51" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/leetcode-10-Regular-expression/" data-id="cju2z9lbo001m55242lzymc4l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -251,7 +319,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/March-30-2019-Study-plan/" data-id="cju2su9rt000awg24u3ju5al9" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/March-30-2019-Study-plan/" data-id="cju2z9lb1000i5524uk3034i6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Study-plan/">Study plan</a></li></ul>
@@ -290,7 +358,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/react-factory-and-functional-component/" data-id="cju2su9sp001kwg246r2sdagc" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/react-factory-and-functional-component/" data-id="cju2z9lbl001h5524s73shrh3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -382,7 +450,7 @@ Vehicle* getVehicle()  {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/29/factory-pattern/" data-id="cju2su9s9000twg24qscq9qg1" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/29/factory-pattern/" data-id="cju2z9lb9000u5524f4d06z99" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li></ul>
@@ -428,7 +496,7 @@ Vehicle* getVehicle()  {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/Design-high-quality-React-component/" data-id="cju2su9ri0002wg24wbx865u7" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/28/Design-high-quality-React-component/" data-id="cju2z9lac00025524m4ew7aym" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -486,7 +554,7 @@ Vehicle* getVehicle()  {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/props-and-state-new-example/" data-id="cju2su9sn001gwg24h4hel6yi" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/28/props-and-state-new-example/" data-id="cju2z9lbk001f5524w04bxahj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -525,49 +593,11 @@ Vehicle* getVehicle()  {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/leetcode-924-Minimize-Malware-Spread/" data-id="cju2su9si0017wg24phha2cgn" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/28/leetcode-924-Minimize-Malware-Spread/" data-id="cju2z9lbi001a5524fko6kpea" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-props-and-constructor-super-sweetie" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/28/props-and-constructor-super-sweetie/" class="article-date">
-  <time datetime="2019-03-28T04:57:36.000Z" itemprop="datePublished">2019-03-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/28/props-and-constructor-super-sweetie/">props and constructor &amp;&amp; super sweetie</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Look at this post!</p>
-<p><a href="https://www.cnblogs.com/faith3/p/9219446.html" target="_blank" rel="noopener">https://www.cnblogs.com/faith3/p/9219446.html</a><br><a href="https://www.jianshu.com/p/1b5e86c68458" target="_blank" rel="noopener">https://www.jianshu.com/p/1b5e86c68458</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/props-and-constructor-super-sweetie/" data-id="cju2su9so001hwg246ixwane4" class="article-share-link">Share</a>
-      
-      
     </footer>
   </div>
   
@@ -603,7 +633,7 @@ Vehicle* getVehicle()  {
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 13.33px;">algorithm</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 16.67px;">leetcode</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/Javascript/" style="font-size: 12.5px;">Javascript</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 15px;">algorithm</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
@@ -625,6 +655,10 @@ Vehicle* getVehicle()  {
       <ul>
         
           <li>
+            <a href="/2019/04/04/babel-and-webpack/">babel and webpack</a>
+          </li>
+        
+          <li>
             <a href="/2019/04/04/js-null-vs-undefined/">js null vs undefined</a>
           </li>
         
@@ -638,10 +672,6 @@ Vehicle* getVehicle()  {
         
           <li>
             <a href="/2019/04/03/路径选择的dp问题之三角形最小路径和/">路径选择的dp问题之三角形最小路径和</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/03/topK-and-quickSort-and-QuickSelect/">topK and quickSort and QuickSelect</a>
           </li>
         
       </ul>
