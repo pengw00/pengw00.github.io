@@ -5,20 +5,20 @@
   
 
   
-  <title>JavaSpringApp | Pengw00&#39;s Tech Road</title>
+  <title>js null vs undefined | Pengw00&#39;s Tech Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java Springframework简单模型：  jar file: need to down load and put in the exernal lib file on local xml: need to using Springframework to load and parsing into bean object  java 普通类: inject to beans  java">
-<meta name="keywords" content="Spring&amp;Java">
+  <meta name="description" content="null vs undefinedWhat is null?There are two features of null you should understand: null is an empty or non-existent value. null must be assigned. ex:123let a = null;console.log(a);// null Undefined m">
+<meta name="keywords" content="Javascript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaSpringApp">
-<meta property="og:url" content="http://pengw00.github.io/2018/12/23/JavaSpringApp/index.html">
+<meta property="og:title" content="js null vs undefined">
+<meta property="og:url" content="http://pengw00.github.io/2019/04/04/js-null-vs-undefined/index.html">
 <meta property="og:site_name" content="Pengw00&#39;s Tech Road">
-<meta property="og:description" content="Java Springframework简单模型：  jar file: need to down load and put in the exernal lib file on local xml: need to using Springframework to load and parsing into bean object  java 普通类: inject to beans  java">
+<meta property="og:description" content="null vs undefinedWhat is null?There are two features of null you should understand: null is an empty or non-existent value. null must be assigned. ex:123let a = null;console.log(a);// null Undefined m">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2018-12-24T00:38:30.888Z">
+<meta property="og:updated_time" content="2019-04-04T15:32:35.816Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaSpringApp">
-<meta name="twitter:description" content="Java Springframework简单模型：  jar file: need to down load and put in the exernal lib file on local xml: need to using Springframework to load and parsing into bean object  java 普通类: inject to beans  java">
+<meta name="twitter:title" content="js null vs undefined">
+<meta name="twitter:description" content="null vs undefinedWhat is null?There are two features of null you should understand: null is an empty or non-existent value. null must be assigned. ex:123let a = null;console.log(a);// null Undefined m">
   
     <link rel="alternate" href="/atom.xml" title="Pengw00&#39;s Tech Road" type="application/atom+xml">
   
@@ -65,10 +65,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-JavaSpringApp" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-js-null-vs-undefined" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/12/23/JavaSpringApp/" class="article-date">
-  <time datetime="2018-12-23T21:20:46.000Z" itemprop="datePublished">2018-12-23</time>
+    <a href="/2019/04/04/js-null-vs-undefined/" class="article-date">
+  <time datetime="2019-04-04T15:19:28.000Z" itemprop="datePublished">2019-04-04</time>
 </a>
     
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      JavaSpringApp
+      js null vs undefined
     </h1>
   
 
@@ -87,24 +87,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Java Springframework简单模型：</p>
-<ol>
-<li>jar file: need to down load and put in the exernal lib file on local</li>
-<li><p>xml: need to using Springframework to load and parsing into bean object</p>
-</li>
-<li><p>java 普通类: inject to beans</p>
-</li>
-<li>javabeans： The model level of MVC, provide get/set proberty</li>
-<li>springframework: load jar file and xml file to be beans</li>
-</ol>
+        <h1 id="null-vs-undefined"><a href="#null-vs-undefined" class="headerlink" title="null vs undefined"></a>null vs undefined</h1><p>What is null?<br>There are two features of null you should understand:</p>
+<pre><code>null is an empty or non-existent value.
+null must be assigned.
+</code></pre><p>ex:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let a = null;</span><br><span class="line">console.log(a);</span><br><span class="line">// null</span><br></pre></td></tr></table></figure></p>
+<p>Undefined most typically means a variable has been declared, but not defined. For example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let b;</span><br><span class="line">console.log(b);</span><br><span class="line">// undefined</span><br><span class="line"></span><br><span class="line">let c = undefined;</span><br><span class="line">console.log(c);</span><br><span class="line">// undefined</span><br></pre></td></tr></table></figure></p>
+<p>Finally, when looking up non-existent properties in an object, you will receive undefined:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var d = &#123;&#125;;</span><br><span class="line">console.log(d.fake);</span><br><span class="line">// undefined</span><br></pre></td></tr></table></figure></p>
+<p>Here’s a full list for six falsy values:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">false</span><br><span class="line">0 (zero)</span><br><span class="line">“” (empty string)</span><br><span class="line">null</span><br><span class="line">undefined</span><br><span class="line">NaN (Not A Number)</span><br></pre></td></tr></table></figure></p>
+<p>Interestingly enough, when using typeof to test null, it returns object:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let a = null;</span><br><span class="line">let b;</span><br><span class="line">console.log(typeof a);</span><br><span class="line">// object</span><br><span class="line">console.log(typeof b);</span><br><span class="line">// undefined</span><br></pre></td></tr></table></figure></p>
+<p>Null !== undefined<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">null !== undefined</span><br></pre></td></tr></table></figure></p>
+<p>But, and this may surprise you, null loosely equals undefined.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">null == undefined</span><br></pre></td></tr></table></figure></p>
+<p>a great example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let logHi = (str = &apos;hi&apos;) =&gt; &#123;</span><br><span class="line">  console.log(str);</span><br></pre></td></tr></table></figure></p>
+<p>This function requires one parameter and sets the default of that parameter to hi if it isn’t supplied. Here’s what that looks like:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">logHi();</span><br><span class="line">// hi</span><br><span class="line">logHi(&apos;bye&apos;);</span><br><span class="line">// bye</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>With default parameters, undefined will use the default while null does not.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">logHi(undefined);</span><br><span class="line">// hi</span><br><span class="line">logHi(null);</span><br><span class="line">// null</span><br></pre></td></tr></table></figure></p>
+<p>Summary<br>null is an assigned value. It means nothing.<br>undefined typically means a variable has been declared but not defined yet.<br>null and undefined are falsy values.<br>null and undefined are both primitives. However an error shows that typeof null = object.<br>null !== undefined but null == undefined.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/12/23/JavaSpringApp/" data-id="cju2su9rq0006wg24td2xw8ij" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/js-null-vs-undefined/" data-id="cju2su9se000zwg24k3amsthh" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
 
     </footer>
   </div>
@@ -112,19 +116,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/12/23/JavaBeans/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          JavaBeans Definition
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/11/07/StdinStdout/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/04/04/didmount-willunmount/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">StdinStdout</div>
+      <div class="article-nav-title">didmount&amp;&amp;willunmount</div>
     </a>
   
 </nav>

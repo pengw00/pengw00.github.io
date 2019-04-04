@@ -65,6 +65,64 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Hibernate" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/02/Hibernate/" class="article-date">
+  <time datetime="2019-04-02T04:00:27.000Z" itemprop="datePublished">2019-04-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/02/Hibernate/">Hibernate</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>Hibernate的工作原理是什么？为什么要用hibernate？</li>
+</ol>
+<p>（1）Hibernate可以理解为一个中间件。它负责把java程序的SQL语句接收过来并发送到数据库，而数据库返回的信息由Hibernate接收后直接生成一个对象传给java.</p>
+<p>在Hibernate中有两个特有的文件，一个是以.hbm.xml结尾的映射文件，一个是以.cfg.xml结尾的配置文件。.cfg.xml文件的作用是连接数据库，文件内部其实就是一个由user,password，url,driver组成的链接库的基本信息。.hbm.xml文件是对数据库中表的映射文件。</p>
+<p>（2）Hibernate工作原理</p>
+<p>①读取并解析hibernate.cfg.xml配置文件；</p>
+<p>②由hibernate.cfg.xml中的<mapping resource="com/xx/user.hbm.xml">读取并解析映射信息；</mapping></p>
+<p>③.通过SessionFactory sf = config.buildSessionFactory();创建SessionFactory</p>
+<p>④Session session = sf.openSession();//打开Sesssion</p>
+<p>⑤Transaction tx = session.beginTransaction();//创建并启动事务Transation</p>
+<p>⑥persistent operate操作数据，持久化操作</p>
+<p>⑦tx.commit();//提交事务</p>
+<p>⑧关闭Session</p>
+<p>⑨关闭SesstionFactory</p>
+<p>3）使用Hibernate的原因如下：</p>
+<p>① 对JDBC访问数据库的代码做了封装，大大简化了数据访问层繁琐的重复性代码。</p>
+<p>②HIbernate是基于JDBC的主流持久化框架，是一个优秀的对象关系映射实现，它在很大程度上简化了DAO层的编码工作；</p>
+<p>③Hibernate使用java反射机制，而不是字节码增强程序来实现透明性；</p>
+<h2 id="④Hibernate性能非常好，因为它是一个轻量级框架，映射的灵活性很出色，它支持各种关系数据库，从一对一到多对多的各种复杂关系。"><a href="#④Hibernate性能非常好，因为它是一个轻量级框架，映射的灵活性很出色，它支持各种关系数据库，从一对一到多对多的各种复杂关系。" class="headerlink" title="④Hibernate性能非常好，因为它是一个轻量级框架，映射的灵活性很出色，它支持各种关系数据库，从一对一到多对多的各种复杂关系。"></a>④Hibernate性能非常好，因为它是一个轻量级框架，映射的灵活性很出色，它支持各种关系数据库，从一对一到多对多的各种复杂关系。</h2><p>为什么要持久化？ 持久化技术封装了数据访问细节，为大部分业务逻辑提供面向对象的API。 ● 通过持久化技术可以减少访问数据库数据次数，增加应用程序执行速度； ● 代码重用性高，能够完成大部分数据库操作； ● 松散耦合，使持久化不依赖于底层数据库和上层业务逻辑实现，更换数据库时只需修改配置文件而不用修改代码。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/02/Hibernate/" data-id="cju2su9rj0003wg247xwp2igo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hibernate/">hibernate</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-被amazon开出两次的经验总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/03/30/被amazon开出两次的经验总结/" class="article-date">
@@ -104,7 +162,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/被amazon开出两次的经验总结/" data-id="cju2ramd9001ssd24kg4jj6y6" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/被amazon开出两次的经验总结/" data-id="cju2su9sy001ywg24ade661xa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/career/">career</a></li></ul>
@@ -144,7 +202,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/leetcode-10-Regular-expression/" data-id="cju2ramcw0011sd24ggmn2krr" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/leetcode-10-Regular-expression/" data-id="cju2su9sf0011wg24b6n80f51" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -193,7 +251,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/March-30-2019-Study-plan/" data-id="cju2ramcc000asd24kbni2h37" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/March-30-2019-Study-plan/" data-id="cju2su9rt000awg24u3ju5al9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Study-plan/">Study plan</a></li></ul>
@@ -232,7 +290,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/react-factory-and-functional-component/" data-id="cju2ramd4001gsd24c63rk2cx" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/react-factory-and-functional-component/" data-id="cju2su9sp001kwg246r2sdagc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -324,7 +382,7 @@ Vehicle* getVehicle()  {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/29/factory-pattern/" data-id="cju2ramcq000tsd248vyghvqe" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/29/factory-pattern/" data-id="cju2su9s9000twg24qscq9qg1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li></ul>
@@ -370,7 +428,7 @@ Vehicle* getVehicle()  {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/Design-high-quality-React-component/" data-id="cju2rambz0002sd244duu2t04" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/28/Design-high-quality-React-component/" data-id="cju2su9ri0002wg24wbx865u7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -428,7 +486,7 @@ Vehicle* getVehicle()  {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/props-and-state-new-example/" data-id="cju2ramd3001fsd24vneaeiam" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/28/props-and-state-new-example/" data-id="cju2su9sn001gwg24h4hel6yi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -467,7 +525,7 @@ Vehicle* getVehicle()  {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/leetcode-924-Minimize-Malware-Spread/" data-id="cju2ramcx0013sd24xxvv5zjt" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/28/leetcode-924-Minimize-Malware-Spread/" data-id="cju2su9si0017wg24phha2cgn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -507,85 +565,9 @@ Vehicle* getVehicle()  {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/props-and-constructor-super-sweetie/" data-id="cju2ramd2001csd24m45v4atv" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/28/props-and-constructor-super-sweetie/" data-id="cju2su9so001hwg246ixwane4" class="article-share-link">Share</a>
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-get-and-post-differ-s" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/28/get-and-post-differ-s/" class="article-date">
-  <time datetime="2019-03-28T04:26:37.000Z" itemprop="datePublished">2019-03-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/28/get-and-post-differ-s/">get and post differ&#39;s</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>GET和POST两种基本请求方法的区别</p>
-<p>最直观的区别就是GET把参数包含在URL中，POST通过request body传递参数</p>
-<p>你轻轻松松的给出了一个“标准答案”：</p>
-<p>GET在浏览器回退时是无害的，而POST会再次提交请求。</p>
-<p>GET产生的URL地址可以被Bookmark，而POST不可以。</p>
-<p>GET请求会被浏览器主动cache，而POST不会，除非手动设置。</p>
-<p>GET请求只能进行url编码，而POST支持多种编码方式。</p>
-<p>GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。</p>
-<p>GET请求在URL中传送的参数是有长度限制的，而POST么有。</p>
-<p>对参数的数据类型，GET只接受ASCII字符，而POST没有限制。</p>
-<p>GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。</p>
-<p>GET参数通过URL传递，POST放在Request body中。</p>
-<p>让我们扒下GET和POST的外衣，坦诚相见吧！</p>
-<p>GET和POST是什么？HTTP协议中的两种发送请求的方法。</p>
-<p>HTTP是什么？HTTP是基于TCP/IP的关于数据如何在万维网中如何通信的协议。</p>
-<p>HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，GET/POST都是TCP链接。GET和POST能做的事情是一样一样的。你要给GET加上request body，给POST带上url参数，技术上是完全行的通的。 </p>
-<p>在我大万维网世界中，TCP就像汽车，我们用TCP来运输数据，它很可靠，从来不会发生丢件少件的现象。但是如果路上跑的全是看起来一模一样的汽车，那这个世界看起来是一团混乱，送急件的汽车可能被前面满载货物的汽车拦堵在路上，整个交通系统一定会瘫痪。为了避免这种情况发生，交通规则HTTP诞生了。HTTP给汽车运输设定了好几个服务类别，有GET, POST, PUT, DELETE等等，HTTP规定，当执行GET请求的时候，要给汽车贴上GET的标签（设置method为GET），而且要求把传送的数据放在车顶上（url中）以方便记录。如果是POST请求，就要在车上贴上POST的标签，并把货物放在车厢里。当然，你也可以在GET的时候往车厢内偷偷藏点货物，但是这是很不光彩；也可以在POST的时候在车顶上也放一些数据，让人觉得傻乎乎的。HTTP只是个行为准则，而TCP才是GET和POST怎么实现的基本。</p>
-<p>但是，我们只看到HTTP对GET和POST参数的传送渠道（url还是requrest body）提出了要求。“标准答案”里关于参数大小的限制又是从哪来的呢？</p>
-<p>在我大万维网世界中，还有另一个重要的角色：运输公司。不同的浏览器（发起http请求）和服务器（接受http请求）就是不同的运输公司。 虽然理论上，你可以在车顶上无限的堆货物（url中无限加参数）。但是运输公司可不傻，装货和卸货也是有很大成本的，他们会限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很大负担。业界不成文的规定是，（大多数）浏览器通常都会限制url长度在2K个字节，而（大多数）服务器最多处理64K大小的url。超过的部分，恕不处理。如果你用GET服务，在request body偷偷藏了数据，不同服务器的处理方式也是不同的，有些服务器会帮你卸货，读出数据，有些服务器直接忽略，所以，虽然GET可以带request body，也不能保证一定能被接收到哦。</p>
-<p>好了，现在你知道，GET和POST本质上就是TCP链接，并无差别。但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中体现出一些不同。</p>
-<p>我们的大BOSS还等着出场呢。。。</p>
-<p>这位BOSS有多神秘？当你试图在网上找“GET和POST的区别”的时候，那些你会看到的搜索结果里，从没有提到他。他究竟是什么呢。。。</p>
-<p>GET和POST还有一个重大区别，简单的说：</p>
-<p>GET产生一个TCP数据包；POST产生两个TCP数据包。</p>
-<p>长的说：</p>
-<p>对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；</p>
-<p>而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。</p>
-<p>也就是说，GET只需要汽车跑一趟就把货送到了，而POST得跑两趟，第一趟，先去和服务器打个招呼“嗨，我等下要送一批货来，你们打开门迎接我”，然后再回头把货送过去。</p>
-<p>因为POST需要两步，时间上消耗的要多一点，看起来GET比POST更有效。因此Yahoo团队有推荐用GET替换POST来优化网站性能。但这是一个坑！跳入需谨慎。为什么？</p>
-<ol>
-<li><p>GET与POST都有自己的语义，不能随便混用。</p>
-</li>
-<li><p>据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而在网络环境差的情况下，两次包的TCP在验证数据包完整性上，有非常大的优点。</p>
-</li>
-<li><p>并不是所有浏览器都会在POST中发送两次包，Firefox就只发送一次。</p>
-</li>
-</ol>
-<p>现在，当面试官再问你“GET与POST的区别”的时候，你的内心是不是这样的？</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/get-and-post-differ-s/" data-id="cju2ramcr000vsd24l72nz8jt" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
-
     </footer>
   </div>
   
@@ -611,7 +593,7 @@ Vehicle* getVehicle()  {
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
     </div>
   </div>
 
@@ -621,7 +603,7 @@ Vehicle* getVehicle()  {
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 13.33px;">algorithm</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 16.67px;">leetcode</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 13.33px;">algorithm</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 16.67px;">leetcode</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
@@ -643,6 +625,10 @@ Vehicle* getVehicle()  {
       <ul>
         
           <li>
+            <a href="/2019/04/04/js-null-vs-undefined/">js null vs undefined</a>
+          </li>
+        
+          <li>
             <a href="/2019/04/04/didmount-willunmount/">didmount&amp;&amp;willunmount</a>
           </li>
         
@@ -656,10 +642,6 @@ Vehicle* getVehicle()  {
         
           <li>
             <a href="/2019/04/03/topK-and-quickSort-and-QuickSelect/">topK and quickSort and QuickSelect</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/03/Quick-Sort/">Quick Sort&#39; </a>
           </li>
         
       </ul>
