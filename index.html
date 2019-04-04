@@ -87,7 +87,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#Babel and webpack<br>In this unit, you modify the existing application and use some new ECMAScript 6 features. You then set up a build environment using Babel and Webpack.</p>
+        <p>#Babel and webpack</p>
+<h2 id="Babel-is-Javacsript-compiler"><a href="#Babel-is-Javacsript-compiler" class="headerlink" title="Babel is Javacsript compiler."></a>Babel is Javacsript compiler.</h2><p>webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging ##</p>
+<p>In this unit, you modify the existing application and use some new ECMAScript 6 features. You then set up a build environment using Babel and Webpack.</p>
 <p>Step 1: using new ECMAScript 6 Features</p>
 <p>in app.js with arrow functions and let %!#$!#</p>
 <p>Step 2: Setup Babel and Webpack<br>install webpack and babel<br>in folder create webpack.config.js:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">var path = require(&apos;path&apos;);</span><br><span class="line"> var webpack = require(&apos;webpack&apos;);</span><br><span class="line"> module.exports = &#123;</span><br><span class="line">     entry: &apos;./js/app.js&apos;,</span><br><span class="line">     output: &#123;</span><br><span class="line">         path: path.resolve(__dirname, &apos;build&apos;),</span><br><span class="line">         filename: &apos;app.bundle.js&apos;</span><br><span class="line">     &#125;,</span><br><span class="line">     module: &#123;</span><br><span class="line">         loaders: [</span><br><span class="line">             &#123;</span><br><span class="line">                 test: /\.js$/,</span><br><span class="line">                 loader: &apos;babel-loader&apos;,</span><br><span class="line">                 query: &#123;</span><br><span class="line">                     presets: [&apos;es2015&apos;]</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">         ]</span><br><span class="line">     &#125;,</span><br><span class="line">     stats: &#123;</span><br><span class="line">         colors: true</span><br><span class="line">     &#125;,</span><br><span class="line">     devtool: &apos;source-map&apos;</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure></p>
@@ -106,7 +108,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/babel-and-webpack/" data-id="cju2z9lb5000q55248m59dzxk" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/babel-and-webpack/" data-id="cju2zc93q000m6224v0wbb6us" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -158,7 +160,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/js-null-vs-undefined/" data-id="cju2z9lbe001455243esjrxws" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/js-null-vs-undefined/" data-id="cju2zc93y00116224nstora2b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -200,7 +202,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/didmount-willunmount/" data-id="cju2z9lbf00165524x56tz4v8" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/didmount-willunmount/" data-id="cju2zc93t000t6224922kgh5c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -238,7 +240,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/topological-sort-template/" data-id="cju2z9lbs001u5524u3vf7766" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/topological-sort-template/" data-id="cju2zc94c001s6224ocperxrb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -284,7 +286,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/路径选择的dp问题之三角形最小路径和/" data-id="cju2z9lbw00205524ieserq55" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/路径选择的dp问题之三角形最小路径和/" data-id="cju2zc94g001y6224qj39dmyv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -323,7 +325,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/topK-and-quickSort-and-QuickSelect/" data-id="cju2z9lbq001r5524d0e4vwbc" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/topK-and-quickSort-and-QuickSelect/" data-id="cju2zc94b001p6224lsyubl2b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
@@ -361,7 +363,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/Quick-Sort/" data-id="cju2z9lar000b55240ww6swf1" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/Quick-Sort/" data-id="cju2zc93g000d6224qj9qt8hh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -403,7 +405,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/axios-instance/" data-id="cju2z9lb2000k5524xnswxnbe" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/axios-instance/" data-id="cju2zc93p000j6224bfcqjbdb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -449,7 +451,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/dfs和回溯模版/" data-id="cju2z9lb4000o5524x1d0rdlr" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/dfs和回溯模版/" data-id="cju2zc93s000q62242ivyjc4q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -493,7 +495,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/回溯，递归，dp三法leetcode-题目“/" data-id="cju2z9lbt001w5524utrrwh6q" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/回溯，递归，dp三法leetcode-题目“/" data-id="cju2zc94e001u6224bhlv3g5x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
