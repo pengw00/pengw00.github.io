@@ -7,17 +7,18 @@
   
   <title>topological sort template | Pengw00&#39;s Tech Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Peng Wu&apos;s Tech road!">
+  <meta name="description" content="2.怎么得出拓扑序？ 有两种方法，分别基于BFS和DFS，时间复杂度都是O(|V| + |E|)。Topological Sort: DFS and BFSDFS:据说这是神书《算法导论》中提到的算法：用深度搜索来遍历整个图，采用一个数组来保存每个顶点完成的时间，这样这个数组就存放了按先后顺序访问完成的顶点了。然后我们按照顶点访问的完成时间从大到小排序，得到的就是一个拓扑序了，具体证明如下（来自其">
+<meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="topological sort template">
 <meta property="og:url" content="http://pengw00.github.io/2019/04/04/topological-sort-template/index.html">
 <meta property="og:site_name" content="Pengw00&#39;s Tech Road">
-<meta property="og:description" content="Peng Wu&apos;s Tech road!">
+<meta property="og:description" content="2.怎么得出拓扑序？ 有两种方法，分别基于BFS和DFS，时间复杂度都是O(|V| + |E|)。Topological Sort: DFS and BFSDFS:据说这是神书《算法导论》中提到的算法：用深度搜索来遍历整个图，采用一个数组来保存每个顶点完成的时间，这样这个数组就存放了按先后顺序访问完成的顶点了。然后我们按照顶点访问的完成时间从大到小排序，得到的就是一个拓扑序了，具体证明如下（来自其">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2019-04-04T04:46:18.164Z">
+<meta property="og:updated_time" content="2019-04-04T21:15:45.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="topological sort template">
-<meta name="twitter:description" content="Peng Wu&apos;s Tech road!">
+<meta name="twitter:description" content="2.怎么得出拓扑序？ 有两种方法，分别基于BFS和DFS，时间复杂度都是O(|V| + |E|)。Topological Sort: DFS and BFSDFS:据说这是神书《算法导论》中提到的算法：用深度搜索来遍历整个图，采用一个数组来保存每个顶点完成的时间，这样这个数组就存放了按先后顺序访问完成的顶点了。然后我们按照顶点访问的完成时间从大到小排序，得到的就是一个拓扑序了，具体证明如下（来自其">
   
     <link rel="alternate" href="/atom.xml" title="Pengw00&#39;s Tech Road" type="application/atom+xml">
   
@@ -86,13 +87,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>2.怎么得出拓扑序？</p>
+<p>有两种方法，分别基于BFS和DFS，时间复杂度都是O(|V| + |E|)。<br>Topological Sort: DFS and BFS<br>DFS:<br>据说这是神书《算法导论》中提到的算法：用深度搜索来遍历整个图，采用一个数组来保存每个顶点完成的时间，这样这个数组就存放了按先后顺序访问完成的顶点了。然后我们按照顶点访问的完成时间从大到小排序，得到的就是一个拓扑序了，具体证明如下（来自其他博客）：&amp;……%¥¥……&amp;&amp;</p>
+<p>Coding:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; topologicalSort(int n, vector&lt;pair&lt;int, int&gt; &gt;&amp; edges) &#123;</span><br><span class="line">        vector&lt;int&gt; res;</span><br><span class="line">        stack&lt;int&gt; s;</span><br><span class="line">        int * isVisited = new int[n];</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            isVisited[i] = 0;</span><br><span class="line">        &#125; </span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            if (!isVisited[i]) dfs(edges, s, isVisited, i);</span><br><span class="line">        &#125;</span><br><span class="line">        while (!s.empty()) &#123;</span><br><span class="line">            res.push_back(s.top());</span><br><span class="line">            s.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">    void dfs(vector&lt;pair&lt;int, int&gt; &gt;&amp; edges, stack&lt;int&gt; &amp; s, int * isVisited, int u) &#123;</span><br><span class="line">        isVisited[u] = 1;</span><br><span class="line">        for (int i = 0; i &lt; edges.size(); i++) &#123;</span><br><span class="line">            if (edges[i].first == u &amp;&amp; !isVisited[edges[i].second]) &#123;</span><br><span class="line">                dfs(edges, s, isVisited, edges[i].second);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        s.push(u);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>BFS:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; topologicalSort(int n, vector&lt;pair&lt;int, int&gt; &gt;&amp; edges) &#123;</span><br><span class="line">        vector&lt;int&gt; res;</span><br><span class="line">        vector&lt;vector&lt;int&gt; &gt; newedges(n, vector&lt;int&gt;());</span><br><span class="line">        queue&lt;int&gt; q;</span><br><span class="line">        vector&lt;int&gt; in_degree(n, 0);</span><br><span class="line">        for (int i = 0; i &lt; edges.size(); i++) &#123;</span><br><span class="line">            in_degree[edges[i].second]++;</span><br><span class="line">            newedges[edges[i].first].push_back(edges[i].second);</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            if (in_degree[i] == 0) &#123;</span><br><span class="line">                q.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        while (!q.empty()) &#123;</span><br><span class="line">            int front = q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            res.push_back(front);</span><br><span class="line">            for (int i = 0; i &lt; newedges[front].size(); i++) &#123;</span><br><span class="line">                in_degree[newedges[front][i]]--;</span><br><span class="line">                if (in_degree[newedges[front][i]] == 0) q.push(newedges[front][i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>4.抛开这道题目——有环情况的判断</p>
+<p>可以利用上面的dfs方法，比如isVisited这个数组，我们可以多增一种情况，比如0为未访问，1为已访问，-1为正在访问，当dfs搜索时遇到了一条边终止顶点对应的isVisited元素为-1时，就说明图中有环了（为-1说明我们是从这个顶点开始dfs的，现在又遇到了这个顶点…）。</p>
+<p>另外一种判断图是否有环的方法，借助bfs（dfs也可，但既然用了dfs，直接用上面的方法好了），假如“生成拓扑序”后，还有顶点不在这个“拓扑序”里面，则图就有环了（加双引号是因为不能真正称作“拓扑序”啊）。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/topological-sort-template/" data-id="cju2zc94c001s6224ocperxrb" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/topological-sort-template/" data-id="cju3ir68d001owmzunevjfbsg" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
+
     </footer>
   </div>
   
@@ -140,7 +150,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/Javascript/" style="font-size: 12.5px;">Javascript</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 15px;">algorithm</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/Javascript/" style="font-size: 13.33px;">Javascript</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 16.67px;">algorithm</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 16.67px;">leetcode</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
@@ -162,6 +172,10 @@
       <ul>
         
           <li>
+            <a href="/2019/04/04/viewEncasulation/">viewEncasulation</a>
+          </li>
+        
+          <li>
             <a href="/2019/04/04/babel-and-webpack/">babel and webpack</a>
           </li>
         
@@ -175,10 +189,6 @@
         
           <li>
             <a href="/2019/04/04/topological-sort-template/">topological sort template</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/03/路径选择的dp问题之三角形最小路径和/">路径选择的dp问题之三角形最小路径和</a>
           </li>
         
       </ul>
