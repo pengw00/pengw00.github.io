@@ -65,6 +65,47 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-find-celebrity" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/06/find-celebrity/" class="article-date">
+  <time datetime="2019-04-06T04:42:24.000Z" itemprop="datePublished">2019-04-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/06/find-celebrity/">find celebrity</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这道题类似于997 find the town judge。<br>但可以采用graph的方法，topological的bfs方法，计算每个点的入度和出度，找出那个入读为n-1的就是解。<br>另一个种方法是find celebrity的方法，先定义i=0；遍历找出一个candidate， 再遍历判断是否这个candidate满足谁都认识他和他不认识任何人两个条件，如果可以100%确定就是他。<br>废话不说：coding：<br>方法1: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int findJudge(int N, vector&lt;vector&lt;int&gt;&gt;&amp; trust) &#123;</span><br><span class="line">  vector&lt;vector&lt;int&gt;&gt; knows(N + 1, vector&lt;int&gt;(N + 1));</span><br><span class="line">  for (auto &amp;t : trust) knows[t[0]][t[1]] = 1;</span><br><span class="line">  return findCelebrity(N, knows);</span><br><span class="line">&#125;</span><br><span class="line">int findCelebrity(int n, vector&lt;vector&lt;int&gt;&gt;&amp; knows, int i = 1) &#123;</span><br><span class="line">  for (auto j = i + 1; j &lt;= n; ++j) if (knows[i][j]) i = j;</span><br><span class="line">  for (auto j = 1; j &lt; i; ++j) if (knows[i][j]) return -1;</span><br><span class="line">  for (auto j = 1; j &lt;= n; ++j) if (i != j &amp;&amp; !knows[j][i]) return -1;</span><br><span class="line">  return i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>方法二：<br>directed graph：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int findJudge(int N, vector&lt;vector&lt;int&gt;&gt;&amp; trust) &#123;</span><br><span class="line">        vector&lt;int&gt; count(N + 1, 0);</span><br><span class="line">        for (auto&amp; t : trust)</span><br><span class="line">            count[t[0]]--, count[t[1]]++;</span><br><span class="line">        for (int i = 1; i &lt;= N; ++i) &#123;</span><br><span class="line">            if (count[i] == N - 1) return i;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/06/find-celebrity/" data-id="cju50pk34000nhezu3z0ne93h" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-viewEncasulation" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/04/viewEncasulation/" class="article-date">
@@ -91,7 +132,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/viewEncasulation/" data-id="cju3ir68h001twmzudoi6nroj" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/viewEncasulation/" data-id="cju50pk420025hezuovl09wbc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -144,7 +185,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/babel-and-webpack/" data-id="cju3ir66i000hwmzu2qc70fqw" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/babel-and-webpack/" data-id="cju50pk3a000whezuldmkq3z5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -196,7 +237,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/js-null-vs-undefined/" data-id="cju3ir67o0013wmzuaiosex5f" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/js-null-vs-undefined/" data-id="cju50pk3i001ahezurf3l21o2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -238,7 +279,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/didmount-willunmount/" data-id="cju3ir66m000mwmzu8yqbd14d" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/didmount-willunmount/" data-id="cju50pk3o001lhezufh5yuavq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -283,7 +324,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/topological-sort-template/" data-id="cju3ir68d001owmzunevjfbsg" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/topological-sort-template/" data-id="cju50pk3w001zhezup4czya1x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -331,7 +372,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/路径选择的dp问题之三角形最小路径和/" data-id="cju3ir68j001wwmzuoywv5vfd" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/路径选择的dp问题之三角形最小路径和/" data-id="cju50pk420027hezu07cjw3nf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -370,7 +411,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/topK-and-quickSort-and-QuickSelect/" data-id="cju3ir68e001pwmzuqjzby19e" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/topK-and-quickSort-and-QuickSelect/" data-id="cju50pk3t001uhezu5uyduy26" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
@@ -408,7 +449,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/Quick-Sort/" data-id="cju3ir66b000bwmzu6tdpfa0i" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/Quick-Sort/" data-id="cju50pk22000ahezuxvlrqffb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -450,56 +491,10 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/axios-instance/" data-id="cju3ir66e000fwmzur7ggkgjb" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/axios-instance/" data-id="cju50pk33000mhezuad7uzzsj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-dfs和回溯模版" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/03/dfs和回溯模版/" class="article-date">
-  <time datetime="2019-04-03T05:12:04.000Z" itemprop="datePublished">2019-04-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/03/dfs和回溯模版/">dfs和回溯模版</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>dfs template<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">void f()  </span><br><span class="line">&#123;  </span><br><span class="line">     if(符合边界条件)  </span><br><span class="line">     &#123;  </span><br><span class="line"></span><br><span class="line">        ///////  </span><br><span class="line">        return;  </span><br><span class="line">     &#125;  </span><br><span class="line"></span><br><span class="line">     //某种形式的调用  </span><br><span class="line">     f();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>回溯模版： 限制条件 if，选择 （for。。。）结束条件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">void DFS(int 当前状态)  </span><br><span class="line">&#123;  </span><br><span class="line">      if(当前状态为边界状态)  </span><br><span class="line">      &#123;  </span><br><span class="line">        记录或输出  </span><br><span class="line">        return;  </span><br><span class="line">      &#125;  </span><br><span class="line">      for(i=0;i&lt;n;i++)       //横向遍历解答树所有子节点  </span><br><span class="line">      &#123;  </span><br><span class="line">           //扩展出一个子状态。  </span><br><span class="line">           修改了全局变量  </span><br><span class="line">           if(子状态满足约束条件)  </span><br><span class="line">            &#123;  </span><br><span class="line">              dfs(子状态)  </span><br><span class="line">           &#125;  </span><br><span class="line">            恢复全局变量//回溯部分  </span><br><span class="line">      &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>BFS和DFS相似。BFS显式用队列，DFS隐式用栈，即递归。<br>当然，对于DFS，用递归可能会造成栈溢出，所以也可以更改为显示栈。</p>
-<p>经典例题： 走迷宫<br>*表示可走 </p>
-<p>#表示障碍<br>T表示出口<br>入口是(1,1)，数据保证左上角是入口。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">char maze[100][100];</span><br><span class="line">bool flag[100][100];</span><br><span class="line">int dx[]=&#123;0,0,1,-1&#125;;</span><br><span class="line">int dy[]=&#123;1,-1,0,0&#125;;</span><br><span class="line">int m,n;</span><br><span class="line"></span><br><span class="line">bool dfs(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">    flag[x][y]=1;              //走过的路标记为1</span><br><span class="line">    if(maze[x][y]==&apos;T&apos;)return true;</span><br><span class="line">    for(int i=0;i&lt;4;i++)       //四个方向</span><br><span class="line">    &#123;</span><br><span class="line">        int nx=x+dx[i];</span><br><span class="line">        int ny=y+dy[i];</span><br><span class="line">        if(flag[nx][ny]==0||maze[nx][ny]==&apos;*&apos;||maze[nx][ny]==&apos;T&apos;&amp;&amp;nx&gt;0&amp;&amp;ny&gt;0&amp;&amp;nx&lt;m+1&amp;&amp;ny&lt;n+1)</span><br><span class="line">        &#123;</span><br><span class="line">            return dfs(nx,ny);   </span><br><span class="line">            flag[nx][ny]=0;    //回溯，将标记重新标记为0</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;             //找不到返回false</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    while(cin&gt;&gt;m&gt;&gt;n)&#123;</span><br><span class="line">    memset(maze,0,sizeof(maze));</span><br><span class="line">    memset(flag,0,sizeof(flag));</span><br><span class="line">    for(int i=1;i&lt;=m;i++)</span><br><span class="line">        for(int j=1;j&lt;=n;j++)</span><br><span class="line">            cin&gt;&gt;maze[i][j];</span><br><span class="line">    if(dfs(1,1))cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl;</span><br><span class="line">    else cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>回溯的两种写法：</p>
-<p>递归写法和迭代写法，链接：<a href="https://blog.csdn.net/man_sion/article/details/74993907" target="_blank" rel="noopener">https://blog.csdn.net/man_sion/article/details/74993907</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/dfs和回溯模版/" data-id="cju3ir66n000owmzuwmguosfe" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
 
     </footer>
   </div>
@@ -536,7 +531,7 @@ null must be assigned.
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/Javascript/" style="font-size: 13.33px;">Javascript</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 16.67px;">algorithm</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 16.67px;">leetcode</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/Javascript/" style="font-size: 12.5px;">Javascript</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 15px;">algorithm</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
@@ -558,6 +553,10 @@ null must be assigned.
       <ul>
         
           <li>
+            <a href="/2019/04/06/find-celebrity/">find celebrity</a>
+          </li>
+        
+          <li>
             <a href="/2019/04/04/viewEncasulation/">viewEncasulation</a>
           </li>
         
@@ -571,10 +570,6 @@ null must be assigned.
         
           <li>
             <a href="/2019/04/04/didmount-willunmount/">didmount&amp;&amp;willunmount</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/04/topological-sort-template/">topological sort template</a>
           </li>
         
       </ul>
