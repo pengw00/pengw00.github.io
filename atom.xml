@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-04-06T04:48:24.694Z</updated>
+  <updated>2019-04-06T06:58:21.070Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -17,11 +17,57 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>stack&amp;calculator problem(recursive a little bit)</title>
+    <link href="http://pengw00.github.io/2019/04/06/stack-calculator-problem-recursive-a-little-bit/"/>
+    <id>http://pengw00.github.io/2019/04/06/stack-calculator-problem-recursive-a-little-bit/</id>
+    <published>2019-04-06T06:57:25.000Z</published>
+    <updated>2019-04-06T06:58:21.070Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="stack-amp-calculator-problem"><a href="#stack-amp-calculator-problem" class="headerlink" title="stack&amp;calculator problem"></a>stack&amp;calculator problem</h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;stack-amp-calculator-problem&quot;&gt;&lt;a href=&quot;#stack-amp-calculator-problem&quot; class=&quot;headerlink&quot; title=&quot;stack&amp;amp;calculator problem&quot;&gt;&lt;/a&gt;st
+      
+    
+    </summary>
+    
+    
+      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>背包问题 </title>
+    <link href="http://pengw00.github.io/2019/04/06/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E2%80%9C/"/>
+    <id>http://pengw00.github.io/2019/04/06/背包问题“/</id>
+    <published>2019-04-06T06:22:15.000Z</published>
+    <updated>2019-04-06T06:23:11.634Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="背包问题及dp"><a href="#背包问题及dp" class="headerlink" title="背包问题及dp"></a>背包问题及dp</h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;背包问题及dp&quot;&gt;&lt;a href=&quot;#背包问题及dp&quot; class=&quot;headerlink&quot; title=&quot;背包问题及dp&quot;&gt;&lt;/a&gt;背包问题及dp&lt;/h1&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="algorithm" scheme="http://pengw00.github.io/tags/algorithm/"/>
+    
+  </entry>
+  
+  <entry>
     <title>find celebrity</title>
     <link href="http://pengw00.github.io/2019/04/06/find-celebrity/"/>
     <id>http://pengw00.github.io/2019/04/06/find-celebrity/</id>
     <published>2019-04-06T04:42:24.000Z</published>
-    <updated>2019-04-06T04:48:24.694Z</updated>
+    <updated>2019-04-06T04:48:52.976Z</updated>
     
     <content type="html"><![CDATA[<p>这道题类似于997 find the town judge。<br>但可以采用graph的方法，topological的bfs方法，计算每个点的入度和出度，找出那个入读为n-1的就是解。<br>另一个种方法是find celebrity的方法，先定义i=0；遍历找出一个candidate， 再遍历判断是否这个candidate满足谁都认识他和他不认识任何人两个条件，如果可以100%确定就是他。<br>废话不说：coding：<br>方法1: </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int findJudge(int N, vector&lt;vector&lt;int&gt;&gt;&amp; trust) &#123;</span><br><span class="line">  vector&lt;vector&lt;int&gt;&gt; knows(N + 1, vector&lt;int&gt;(N + 1));</span><br><span class="line">  for (auto &amp;t : trust) knows[t[0]][t[1]] = 1;</span><br><span class="line">  return findCelebrity(N, knows);</span><br><span class="line">&#125;</span><br><span class="line">int findCelebrity(int n, vector&lt;vector&lt;int&gt;&gt;&amp; knows, int i = 1) &#123;</span><br><span class="line">  for (auto j = i + 1; j &lt;= n; ++j) if (knows[i][j]) i = j;</span><br><span class="line">  for (auto j = 1; j &lt; i; ++j) if (knows[i][j]) return -1;</span><br><span class="line">  for (auto j = 1; j &lt;= n; ++j) if (i != j &amp;&amp; !knows[j][i]) return -1;</span><br><span class="line">  return i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>方法二：<br>directed graph：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int findJudge(int N, vector&lt;vector&lt;int&gt;&gt;&amp; trust) &#123;</span><br><span class="line">        vector&lt;int&gt; count(N + 1, 0);</span><br><span class="line">        for (auto&amp; t : trust)</span><br><span class="line">            count[t[0]]--, count[t[1]]++;</span><br><span class="line">        for (int i = 1; i &lt;= N; ++i) &#123;</span><br><span class="line">            if (count[i] == N - 1) return i;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>]]></content>
     
@@ -433,52 +479,6 @@
       
       
         &lt;p&gt;React factory pattern: react.createClass();&lt;br&gt;functioal component only return component while it is opposite of factory pattern. can com
-      
-    
-    </summary>
-    
-    
-      <category term="React" scheme="http://pengw00.github.io/tags/React/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>factory pattern</title>
-    <link href="http://pengw00.github.io/2019/03/29/factory-pattern/"/>
-    <id>http://pengw00.github.io/2019/03/29/factory-pattern/</id>
-    <published>2019-03-29T17:56:22.000Z</published>
-    <updated>2019-03-30T16:19:25.060Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Factory  react example:</span><br></pre></td></tr></table></figure><p>export default class SlideFactory {<br>    static build(data) {<br>        switch (data.source) {<br>            case ‘brand’:<br>                return <brandfeedslide slidedata="{data}/">;<br>            case ‘article’:<br>                return <articlefeedslide slidedata="{data}">;<br>            default:<br>                return undefined;<br>        }<br>    }<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">const  items = [</span><br><span class="line">   &#123;    </span><br><span class="line">          source: ‘brand’,</span><br><span class="line">        title: ‘title’</span><br><span class="line">   &#125;    </span><br><span class="line">]</span><br><span class="line">const renderedItems = items.map((item) =&gt; SlideFactory.build(item));</span><br></pre></td></tr></table></figure></articlefeedslide></brandfeedslide></p><p>the items can have properties for different kinds of slider. </p><p>// A design without factory pattern </p><p>#include <iostream><br>using namespace std; </iostream></p><p>// Library classes<br>class Vehicle {<br>public:<br>    virtual void printVehicle() = 0;<br>};<br>class TwoWheeler : public Vehicle {<br>public:<br>    void printVehicle()  {<br>        cout &lt;&lt; “I am two wheeler” &lt;&lt; endl;<br>    }<br>};<br>class FourWheeler : public Vehicle {<br>    public:<br>    void printVehicle()  {<br>        cout &lt;&lt; “I am four wheeler” &lt;&lt; endl;<br>    }<br>}; </p><p>// Client (or user) class<br>class Client {<br>public:<br>    Client(int type)  { </p><pre><code>    // Client explicitly creates classes according to type     if (type == 1)         pVehicle = new TwoWheeler();     else if (type == 2)         pVehicle = new FourWheeler();     else        pVehicle = NULL; } ~Client()   {     if (pVehicle)     {         delete[] pVehicle;         pVehicle = NULL;     } } Vehicle* getVehicle() {     return pVehicle; } </code></pre><p>private:<br>    Vehicle *pVehicle;<br>}; </p><p>// Driver program<br>int main() {<br>    Client <em>pClient = new Client(1);<br>    Vehicle </em> pVehicle = pClient-&gt;getVehicle();<br>    pVehicle-&gt;printVehicle();<br>    return 0;<br>    }<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> What is the problems with above design?</span><br><span class="line">As you must have observed in the above example, Client creates objects of either TwoWheeler or FourWheeler based on some input during constructing its object.</span><br><span class="line">Say, library introduces a new class ThreeWheeler to incorporate three wheeler vehicles also. What would happen? Client will end up chaining a new else if in the conditional ladder to create objects of ThreeWheeler. Which in turn will need Client to be recompiled. So, each time a new change is made at the library side, Client would need to make some corresponding changes at its end and recompile the code. Sounds bad? This is a very bad practice of design.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">How to avoid the problem?</span><br><span class="line">The answer is, create a static (or factory) method. Let us see below code.</span><br></pre></td></tr></table></figure></p><p>// C++ program to demonstrate factory method design pattern </p><p>#include <iostream><br>using namespace std; </iostream></p><p>enum VehicleType {<br>    VT_TwoWheeler,    VT_ThreeWheeler,    VT_FourWheeler<br>}; </p><p>// Library classes<br>class Vehicle {<br>public:<br>    virtual void printVehicle() = 0;<br>    static Vehicle* Create(VehicleType type);<br>};<br>class TwoWheeler : public Vehicle {<br>public:<br>    void printVehicle() {<br>        cout &lt;&lt; “I am two wheeler” &lt;&lt; endl;<br>    }<br>};<br>class ThreeWheeler : public Vehicle {<br>public:<br>    void printVehicle() {<br>        cout &lt;&lt; “I am three wheeler” &lt;&lt; endl;<br>    }<br>};<br>class FourWheeler : public Vehicle {<br>    public:<br>    void printVehicle() {<br>        cout &lt;&lt; “I am four wheeler” &lt;&lt; endl;<br>    }<br>}; </p><p>// Factory method to create objects of different types.<br>// Change is required only in this function to create a new object type<br>Vehicle* Vehicle::Create(VehicleType type) {<br>    if (type == VT_TwoWheeler)<br>        return new TwoWheeler();<br>    else if (type == VT_ThreeWheeler)<br>        return new ThreeWheeler();<br>    else if (type == VT_FourWheeler)<br>        return new FourWheeler();<br>    else return NULL;<br>} </p><p>// Client class<br>class Client {<br>public: </p><pre><code>// Client doesn&apos;t explicitly create objects // but passes type to factory method &quot;Create()&quot; Client() {     VehicleType type = VT_ThreeWheeler;     pVehicle = Vehicle::Create(type); } ~Client() {     if (pVehicle) {         delete[] pVehicle;         pVehicle = NULL;     } } Vehicle* getVehicle()  {     return pVehicle; } </code></pre><p>private:<br>    Vehicle *pVehicle;<br>}; </p><p>// Driver program<br>int main() {<br>    Client <em>pClient = new Client();<br>    Vehicle </em> pVehicle = pClient-&gt;getVehicle();<br>    pVehicle-&gt;printVehicle();<br>    return 0;<br>}<br><code>`</code></p><p>In the above example, we have totally decoupled the selection of type for object creation from Client. The library is now responsible to decide which object type to create based on an input. Client just needs to make call to library’s factory Create method and pass the type it wants without worrying about the actual implementation of creation of objects.</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span cla
-      
-    
-    </summary>
-    
-    
-      <category term="Design pattern" scheme="http://pengw00.github.io/tags/Design-pattern/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Design high quality React component</title>
-    <link href="http://pengw00.github.io/2019/03/28/Design-high-quality-React-component/"/>
-    <id>http://pengw00.github.io/2019/03/28/Design-high-quality-React-component/</id>
-    <published>2019-03-28T15:55:48.000Z</published>
-    <updated>2019-03-29T17:56:02.634Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Design-high-quality-React-component"><a href="#Design-high-quality-React-component" class="headerlink" title="Design high quality React component"></a>Design high quality React component</h1><p>作为一个合格的开发者，不要只满足于编写了可以运行的代码。而要了解代码背后的工作原理；不要只满足于自己的程序能够运行，还要让自己的代码可读而且易于维护。这样才能开发出高质量的软件.</p><h2 id="构建高质量React组件的原则和方法"><a href="#构建高质量React组件的原则和方法" class="headerlink" title="构建高质量React组件的原则和方法"></a>构建高质量React组件的原则和方法</h2><pre><code>### 划分组件边界的原则 ###### React组件的数据种类 ###### React组件的生命周期 ###</code></pre><p>React组件设计的基础知识，因为React应用都是围绕组件的设计，所以关于组件的设计介绍将贯穿全书.</p><p>我会继续用react，四点理由：第一，“继续”说明我17年就在用react，最熟悉。虽然vue我也熟悉，毕竟放了一年了。angular我确实不太熟悉。第二，react生态现在确实非常好。而且前端生态的下一步进展（全链路，设计开发打通，组件市场，在线ide什么的），目前看来基于react的探索居多，未来会有技术红利。第三，不得不承认jsx真是好用，模板scope和js scope合一，而且可以面向过程任意分解render函数。不得不说，jsx的设计思想我当时花了几个月才真正理解其高明。第四，react有一个3k大小的小兄弟叫preact，这个非常有用。因为我们有时候希望把组件打包成不依赖任何框架的内嵌模块发布，但是把框架打包进去，会很大。这时把组件适配到preact，把preact打包进去就好了。<br>作者：匿名用户<br>链接：<a href="https://www.zhihu.com/question/266823404/answer/409100494" target="_blank" rel="noopener">https://www.zhihu.com/question/266823404/answer/409100494</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Design-high-quality-React-component&quot;&gt;&lt;a href=&quot;#Design-high-quality-React-component&quot; class=&quot;headerlink&quot; title=&quot;Design high quality Re
       
     
     </summary>

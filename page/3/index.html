@@ -65,6 +65,144 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-factory-pattern" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/29/factory-pattern/" class="article-date">
+  <time datetime="2019-03-29T17:56:22.000Z" itemprop="datePublished">2019-03-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/29/factory-pattern/">factory pattern</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Factory  react example:</span><br></pre></td></tr></table></figure>
+<p>export default class SlideFactory {<br>    static build(data) {<br>        switch (data.source) {<br>            case ‘brand’:<br>                return <brandfeedslide slidedata="{data}/">;<br>            case ‘article’:<br>                return <articlefeedslide slidedata="{data}">;<br>            default:<br>                return undefined;<br>        }<br>    }<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">const  items = [</span><br><span class="line">   &#123;    </span><br><span class="line">          source: ‘brand’,</span><br><span class="line">        title: ‘title’</span><br><span class="line">   &#125;    </span><br><span class="line">]</span><br><span class="line">const renderedItems = items.map((item) =&gt; SlideFactory.build(item));</span><br></pre></td></tr></table></figure></articlefeedslide></brandfeedslide></p>
+<p>the items can have properties for different kinds of slider. </p>
+<p>// A design without factory pattern </p>
+<p>#include <iostream><br>using namespace std; </iostream></p>
+<p>// Library classes<br>class Vehicle {<br>public:<br>    virtual void printVehicle() = 0;<br>};<br>class TwoWheeler : public Vehicle {<br>public:<br>    void printVehicle()  {<br>        cout &lt;&lt; “I am two wheeler” &lt;&lt; endl;<br>    }<br>};<br>class FourWheeler : public Vehicle {<br>    public:<br>    void printVehicle()  {<br>        cout &lt;&lt; “I am four wheeler” &lt;&lt; endl;<br>    }<br>}; </p>
+<p>// Client (or user) class<br>class Client {<br>public:<br>    Client(int type)  { </p>
+<pre><code>    // Client explicitly creates classes according to type 
+    if (type == 1) 
+        pVehicle = new TwoWheeler(); 
+    else if (type == 2) 
+        pVehicle = new FourWheeler(); 
+    else
+        pVehicle = NULL; 
+} 
+
+~Client()   { 
+    if (pVehicle) 
+    { 
+        delete[] pVehicle; 
+        pVehicle = NULL; 
+    } 
+} 
+
+Vehicle* getVehicle() { 
+    return pVehicle; 
+} 
+</code></pre><p>private:<br>    Vehicle *pVehicle;<br>}; </p>
+<p>// Driver program<br>int main() {<br>    Client <em>pClient = new Client(1);<br>    Vehicle </em> pVehicle = pClient-&gt;getVehicle();<br>    pVehicle-&gt;printVehicle();<br>    return 0;<br>    }<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> What is the problems with above design?</span><br><span class="line">As you must have observed in the above example, Client creates objects of either TwoWheeler or FourWheeler based on some input during constructing its object.</span><br><span class="line">Say, library introduces a new class ThreeWheeler to incorporate three wheeler vehicles also. What would happen? Client will end up chaining a new else if in the conditional ladder to create objects of ThreeWheeler. Which in turn will need Client to be recompiled. So, each time a new change is made at the library side, Client would need to make some corresponding changes at its end and recompile the code. Sounds bad? This is a very bad practice of design.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">How to avoid the problem?</span><br><span class="line">The answer is, create a static (or factory) method. Let us see below code.</span><br></pre></td></tr></table></figure></p>
+<p>// C++ program to demonstrate factory method design pattern </p>
+<p>#include <iostream><br>using namespace std; </iostream></p>
+<p>enum VehicleType {<br>    VT_TwoWheeler,    VT_ThreeWheeler,    VT_FourWheeler<br>}; </p>
+<p>// Library classes<br>class Vehicle {<br>public:<br>    virtual void printVehicle() = 0;<br>    static Vehicle* Create(VehicleType type);<br>};<br>class TwoWheeler : public Vehicle {<br>public:<br>    void printVehicle() {<br>        cout &lt;&lt; “I am two wheeler” &lt;&lt; endl;<br>    }<br>};<br>class ThreeWheeler : public Vehicle {<br>public:<br>    void printVehicle() {<br>        cout &lt;&lt; “I am three wheeler” &lt;&lt; endl;<br>    }<br>};<br>class FourWheeler : public Vehicle {<br>    public:<br>    void printVehicle() {<br>        cout &lt;&lt; “I am four wheeler” &lt;&lt; endl;<br>    }<br>}; </p>
+<p>// Factory method to create objects of different types.<br>// Change is required only in this function to create a new object type<br>Vehicle* Vehicle::Create(VehicleType type) {<br>    if (type == VT_TwoWheeler)<br>        return new TwoWheeler();<br>    else if (type == VT_ThreeWheeler)<br>        return new ThreeWheeler();<br>    else if (type == VT_FourWheeler)<br>        return new FourWheeler();<br>    else return NULL;<br>} </p>
+<p>// Client class<br>class Client {<br>public: </p>
+<pre><code>// Client doesn&apos;t explicitly create objects 
+// but passes type to factory method &quot;Create()&quot; 
+Client() 
+{ 
+    VehicleType type = VT_ThreeWheeler; 
+    pVehicle = Vehicle::Create(type); 
+} 
+~Client() { 
+    if (pVehicle) { 
+        delete[] pVehicle; 
+        pVehicle = NULL; 
+    } 
+} 
+Vehicle* getVehicle()  { 
+    return pVehicle; 
+} 
+</code></pre><p>private:<br>    Vehicle *pVehicle;<br>}; </p>
+<p>// Driver program<br>int main() {<br>    Client <em>pClient = new Client();<br>    Vehicle </em> pVehicle = pClient-&gt;getVehicle();<br>    pVehicle-&gt;printVehicle();<br>    return 0;<br>}<br><code>`</code></p>
+<p>In the above example, we have totally decoupled the selection of type for object creation from Client. The library is now responsible to decide which object type to create based on an input. Client just needs to make call to library’s factory Create method and pass the type it wants without worrying about the actual implementation of creation of objects.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/03/29/factory-pattern/" data-id="cju55cr880012o5zuoehq9u2n" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Design-high-quality-React-component" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/28/Design-high-quality-React-component/" class="article-date">
+  <time datetime="2019-03-28T15:55:48.000Z" itemprop="datePublished">2019-03-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/28/Design-high-quality-React-component/">Design high quality React component</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Design-high-quality-React-component"><a href="#Design-high-quality-React-component" class="headerlink" title="Design high quality React component"></a>Design high quality React component</h1><p>作为一个合格的开发者，不要只满足于编写了可以运行的代码。而要了解代码背后的工作原理；不要只满足于自己的程序能够运行，还要让自己的代码可读而且易于维护。这样才能开发出高质量的软件.</p>
+<h2 id="构建高质量React组件的原则和方法"><a href="#构建高质量React组件的原则和方法" class="headerlink" title="构建高质量React组件的原则和方法"></a>构建高质量React组件的原则和方法</h2><pre><code>### 划分组件边界的原则 ###
+
+### React组件的数据种类 ###
+
+### React组件的生命周期 ###
+</code></pre><p>React组件设计的基础知识，因为React应用都是围绕组件的设计，所以关于组件的设计介绍将贯穿全书.</p>
+<p>我会继续用react，四点理由：第一，“继续”说明我17年就在用react，最熟悉。虽然vue我也熟悉，毕竟放了一年了。angular我确实不太熟悉。第二，react生态现在确实非常好。而且前端生态的下一步进展（全链路，设计开发打通，组件市场，在线ide什么的），目前看来基于react的探索居多，未来会有技术红利。第三，不得不承认jsx真是好用，模板scope和js scope合一，而且可以面向过程任意分解render函数。不得不说，jsx的设计思想我当时花了几个月才真正理解其高明。第四，react有一个3k大小的小兄弟叫preact，这个非常有用。因为我们有时候希望把组件打包成不依赖任何框架的内嵌模块发布，但是把框架打包进去，会很大。这时把组件适配到preact，把preact打包进去就好了。<br>作者：匿名用户<br>链接：<a href="https://www.zhihu.com/question/266823404/answer/409100494" target="_blank" rel="noopener">https://www.zhihu.com/question/266823404/answer/409100494</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/03/28/Design-high-quality-React-component/" data-id="cju55cr7c0005o5zu8tliuwkx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-props-and-state-new-example" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/03/28/props-and-state-new-example/" class="article-date">
@@ -111,7 +249,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/props-and-state-new-example/" data-id="cju50pk3s001shezuom33aedy" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/28/props-and-state-new-example/" data-id="cju55cr8l001so5zuqzk9h0xg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -150,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/leetcode-924-Minimize-Malware-Spread/" data-id="cju50pk3j001chezuink31wqd" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/28/leetcode-924-Minimize-Malware-Spread/" data-id="cju55cr8d001co5zui1fyga9t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -190,7 +328,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/props-and-constructor-super-sweetie/" data-id="cju50pk3r001qhezuo91tak6s" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/28/props-and-constructor-super-sweetie/" data-id="cju55cr8i001no5zu3njhtb4c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -264,7 +402,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/get-and-post-differ-s/" data-id="cju50pk3c0010hezun7l4nlu8" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/28/get-and-post-differ-s/" data-id="cju55cr86000xo5zuww08p1j1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
@@ -326,7 +464,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/27/React-Props-and-State/" data-id="cju50pk2r000ihezuwqn31xex" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/27/React-Props-and-State/" data-id="cju55cr7o000go5zu3n9v0qee" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -416,7 +554,7 @@ public String getProduct_name() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/12/23/JavaBeans/" data-id="cju50pk1o0000hezuzan9v3d5" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/12/23/JavaBeans/" data-id="cju55cr760001o5zukust58fi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
@@ -464,7 +602,7 @@ public String getProduct_name() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/12/23/JavaSpringApp/" data-id="cju50pk36000qhezup8p59nkn" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/12/23/JavaSpringApp/" data-id="cju55cr7d0006o5zu6zks559p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li></ul>
@@ -505,186 +643,10 @@ public String getProduct_name() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/11/07/StdinStdout/" data-id="cju50pk32000lhezu0jf7txm8" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/11/07/StdinStdout/" data-id="cju55cr7q000io5zuzbyxf740" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hackrrank/">hackrrank</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-KMP-algorithm" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/11/03/KMP-algorithm/" class="article-date">
-  <time datetime="2018-11-04T03:38:34.000Z" itemprop="datePublished">2018-11-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/03/KMP-algorithm/">KMP_algorithm</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>//From<a href="https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/</a><br>KMP Algorithm for Pattern Searching<br>Given a text txt[0..n-1] and a pattern pat[0..m-1], write a function search(char pat[], char txt[]) that prints all occurrences of pat[] in txt[]. You may assume that n &gt; m.</p>
-<p>Pattern searching is an important problem in computer science. When we do search for a string in notepad/word file or browser or database, pattern searching algorithms are used to show the search results.</p>
-<p>We have discussed Naive pattern searching algorithm in the previous post. The worst case complexity of the Naive algorithm is O(m(n-m+1)). The time complexity of KMP algorithm is O(n) in the worst case.</p>
-<p>Most important part is that: use a helper int[] to preprocess the pattern.<br>    Matching Overview<br>    txt = “AAAAABAAABA”<br>    pat = “AAAA”</p>
-<pre><code>We compare first window of txt with pat
-txt = &quot;AAAAABAAABA&quot;
-pat = &quot;AAAA&quot;  [Initial position]
-We find a match. This is same as Naive String Matching.
-
-In the next step, we compare next window of txt with pat.
-    txt = &quot;AAAAABAAABA&quot;
-    pat =  &quot;AAAA&quot; [Pattern shifted one position]
-    This is where KMP does optimization over Naive. In this
-    second window, we only compare fourth A of pattern
-    with fourth character of current window of text to decide
-    whether current window matches or not. Since we know
-    first three characters will anyway match, we skipped
-    matching first three characters.
-
-Need of Preprocessing?
-    An important question arises from the above explanation,
-    how to know how many characters to be skipped. To know this,
-    we pre-process pattern and prepare an integer array
-    lps[] that tells us the count of characters to be skipped.
-</code></pre><p>//Preprocessing Overview:</p>
-<p>KMP algorithm preprocesses pat[] and constructs an auxiliary lps[] of size m (same as size of pattern) which is used to skip characters while matching.<br>name lps indicates longest proper prefix which is also suffix.. A proper prefix is prefix with whole string not allowed. For example, prefixes of “ABC” are “”, “A”, “AB” and “ABC”. Proper prefixes are “”, “A” and “AB”. Suffixes of the string are “”, “C”, “BC” and “ABC”.<br>We search for lps in sub-patterns. More clearly we focus on sub-strings of patterns that are either prefix and suffix.<br>For each sub-pattern pat[0..i] where i = 0 to m-1, lps[i] stores length of the maximum matching proper prefix which is also a suffix of the sub-pattern pat[0..i].</p>
-<p>//Note :<br>lps[i] could also be defined as longest prefix which is also proper suffix. We need to use properly at one place to make sure that the whole substring is not considered.<br>EX: Examples of lps[] construction:<br>For the pattern “AAAA”,<br>    lps[] is [0, 1, 2, 3]</p>
-<pre><code>For the pattern “ABCDE”,
-lps[] is [0, 0, 0, 0, 0]
-
-For the pattern “AABAACAABAA”,
-lps[] is [0, 1, 0, 1, 2, 0, 1, 2, 3, 4, 5]
-
-For the pattern “AAACAAAAAC”,
-lps[] is [0, 1, 2, 0, 1, 2, 3, 3, 3, 4]
-
-For the pattern “AAABAAA”,
-lps[] is [0, 1, 2, 0, 1, 2, 3]
-</code></pre><p>Searching Algorithm:<br>    Unlike Naive algorithm, where we slide the pattern by one and compare all characters at each shift, we use a value from lps[] to decide the next characters to be matched. The idea is to not match a character that we know will anyway match.<br>    How to use lps[] to decide next positions (or to know a number of characters to be skipped)?</p>
-<p>We start comparison of pat[j] with j = 0 with characters of current window of text.<br>    We keep matching characters txt[i] and pat[j] and keep incrementing i and j while pat[j] and txt[i] keep matching.<br>    When we see a mismatch<br>    We know that characters pat[0..j-1] match with txt[i-j+1…i-1] (Note that j starts with 0 and increment it only when there is a match).<br>    We also know (from above definition) that lps[j-1] is count of characters of pat[0…j-1] that are both proper prefix and suffix.<br>    From above two points, we can conclude that we do not need to match these lps[j-1] characters with txt[i-j…i-1] because we know that these characters will anyway match. Let us consider above example to understand this.</p>
-<p>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>lps[] = {0, 1, 2, 3}</p>
-<p>i = 0, j = 0<br>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>txt[i] and pat[j] match, do i++, j++</p>
-<p>i = 1, j = 1<br>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>txt[i] and pat[j] match, do i++, j++</p>
-<p>i = 2, j = 2<br>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>pat[i] and pat[j] match, do i++, j++</p>
-<p>i = 3, j = 3<br>txt[] = “AAAAABAAABA”<br>pat[] = “AAAA”<br>txt[i] and pat[j] match, do i++, j++</p>
-<p>i = 4, j = 4<br>Since j == M, print pattern found and reset j,<br>j = lps[j-1] = lps[3] = 3</p>
-<p>Here unlike Naive algorithm, we do not match first three<br>characters of this window. Value of lps[j-1] (in above<br>step) gave us index of next character to match.<br>Example Process:<br>Most important thing here easy to understand<br>    i = 4, j = 3<br>    txt[] = “AAAAABAAABA”<br>    pat[] =  “AAAA”<br>    txt[i] and pat[j] match, do i++, j++</p>
-<pre><code>i = 5, j = 4
-Since j == M, print pattern found and reset j,
-j = lps[j-1] = lps[3] = 3
-
-Again unlike Naive algorithm, we do not match first three
-characters of this window. Value of lps[j-1] (in above
-step) gave us index of next character to match.
-i = 5, j = 3
-txt[] = &quot;AAAAABAAABA&quot;
-pat[] =   &quot;AAAA&quot;
-txt[i] and pat[j] do NOT match and j &gt; 0, change only j
-j = lps[j-1] = lps[2] = 2
-
-i = 5, j = 2
-txt[] = &quot;AAAAABAAABA&quot;
-pat[] =    &quot;AAAA&quot;
-txt[i] and pat[j] do NOT match and j &gt; 0, change only j
-j = lps[j-1] = lps[1] = 1
-
-i = 5, j = 1
-txt[] = &quot;AAAAABAAABA&quot;
-pat[] =     &quot;AAAA&quot;
-txt[i] and pat[j] do NOT match and j &gt; 0, change only j
-j = lps[j-1] = lps[0] = 0
-
-i = 5, j = 0
-txt[] = &quot;AAAAABAAABA&quot;
-pat[] =      &quot;AAAA&quot;
-txt[i] and pat[j] do NOT match and j is 0, we do i++.
-
-i = 6, j = 0
-txt[] = &quot;AAAAABAAABA&quot;
-pat[] =       &quot;AAAA&quot;
-txt[i] and pat[j] match, do i++ and j++
-
-i = 7, j = 1
-txt[] = &quot;AAAAABAAABA&quot;
-pat[] =       &quot;AAAA&quot;
-txt[i] and pat[j] match, do i++ and j++
-</code></pre><p>We continue this way…<br>Don’t talk, Show the code:(java)<br>class KMP_String_Matching{<br>    void KMPSearch(String pat, String txt){<br>        int m = pat.length();<br>        int n = txt.length();<br>        int[] lps = new int[m]; //preprocess array<br>        computeLPSArray(pat, m, lps);<br>        int i = 0;<br>        while(i &lt; n){<br>            if(pat.charAt(j)==txt.charAt(i)){<br>                j++;<br>                i++;<br>                }<br>            if(j==m){<br>                System.out.println(“Found pattern at index”);<br>                j = lps[j-1];<br>            }<br>            else if(i &lt; N &amp;&amp; pat.charAt(j) != txt.charAt(i)){<br>                if(j != 0)<br>                    j = lps[j-1];<br>                else<br>                    i = i+1;<br>                }<br>            }<br>        }<br>    void computeLPSArray(String pat, int m, int lps[]){<br>        int len = 0;<br>        int i = 1;<br>        lps[0] = 0;<br>        while(i&lt;m){<br>            if(pat.charAt(i) == pat.charAt(len)){<br>                len++;<br>                lps[i] = len;<br>                i++;<br>            }else{<br>                if(len != 0){<br>                len = lps[len-1];<br>                }else{<br>                    lps[i] = len;<br>                    i++;<br>            }<br>        }<br>        }<br>    }<br>    public static void main(String args[]){<br>        String txt = “ABABDABACDABABCABAB”;<br>        String pat = “ABABCABAB”;<br>        new KMP_String_Matching().KMPSearch(pat, txt);<br>    }<br>    }</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/11/03/KMP-algorithm/" data-id="cju50pk210009hezu54p116rs" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-spring-depend-injection-md" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/11/01/spring-depend-injection-md/" class="article-date">
-  <time datetime="2018-11-01T16:23:34.000Z" itemprop="datePublished">2018-11-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/01/spring-depend-injection-md/">spring_depend_injection.md</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Two Types of Dependency injection types</p>
-<ol>
-<li>the setter injection<br>The setter injection is used to inject the dependencies through setter methods. In the following example, the instance of DataService uses the setter injection:<br>  public class BusinessServiceImpl {<pre><code>private DataService dataService;
-@Autowired
-public void setDataService(DataService dataService) {
-  this.dataService = dataService;
-}
-</code></pre> }<br>Actually, in order to use the setter injection, you do not even need to declare a setter method. If you specify @Autowired on the variable, Spring automatically uses the setter injection. So, the following code is all that you need for the setter injection for DataService:<br> public class BusinessServiceImpl {<pre><code>@Autowired
-private DataService dataService;
-</code></pre> }</li>
-<li>the constructor injection</li>
-</ol>
-<p>The constructor injection, on the other hand, uses a constructor to inject dependencies. The following code shows how to use a constructor for injecting in DataService:<br>    public class BusinessServiceImpl {<br>        private DataService dataService;<br>        @Autowired<br>        public BusinessServiceImpl(DataService dataService) {<br>        super();<br>           this.dataService = dataService;<br>        }<br>    }<br>When you run the code with the preceding implementation of BusinessServiceImpl, you<br>will see this statement in the log, asserting that autowiring took place using the constructor:<br>       Autowiring by type from bean name ‘businessServiceImpl’ via<br>       constructor to bean named ‘dataServiceImpl’</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/11/01/spring-depend-injection-md/" data-id="cju50pk3u001whezu7gboj5vp" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li></ul>
 
     </footer>
   </div>
@@ -697,7 +659,7 @@ private DataService dataService;
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -721,7 +683,7 @@ private DataService dataService;
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/Javascript/" style="font-size: 12.5px;">Javascript</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 15px;">algorithm</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/Javascript/" style="font-size: 13.33px;">Javascript</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 16.67px;">algorithm</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
@@ -743,6 +705,14 @@ private DataService dataService;
       <ul>
         
           <li>
+            <a href="/2019/04/06/stack-calculator-problem-recursive-a-little-bit/">stack&amp;calculator problem(recursive a little bit)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/06/背包问题“/">背包问题 </a>
+          </li>
+        
+          <li>
             <a href="/2019/04/06/find-celebrity/">find celebrity</a>
           </li>
         
@@ -752,14 +722,6 @@ private DataService dataService;
         
           <li>
             <a href="/2019/04/04/babel-and-webpack/">babel and webpack</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/04/js-null-vs-undefined/">js null vs undefined</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/04/didmount-willunmount/">didmount&amp;&amp;willunmount</a>
           </li>
         
       </ul>
