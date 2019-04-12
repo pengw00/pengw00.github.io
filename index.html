@@ -65,6 +65,128 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Jest" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/11/Jest/" class="article-date">
+  <time datetime="2019-04-11T13:56:24.000Z" itemprop="datePublished">2019-04-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/11/Jest/">Jest</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Run:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add --dev react-test-renderer</span><br></pre></td></tr></table></figure></p>
+<p>Setup without Create React App</p>
+<p>If you have an existing application you’ll need to install a few packages to make everything work well together. We are using the babel-jest package and the react babel preset to transform our code inside of the test environment.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add --dev jest babel-jest @babel/preset-env @babel/preset-react react-test-renderer</span><br></pre></td></tr></table></figure>
+<p>Example<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// package.json</span><br><span class="line">  &quot;dependencies&quot;: &#123;</span><br><span class="line">    &quot;react&quot;: &quot;&lt;current-version&gt;&quot;,</span><br><span class="line">    &quot;react-dom&quot;: &quot;&lt;current-version&gt;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;@babel/preset-env&quot;: &quot;&lt;current-version&gt;&quot;,</span><br><span class="line">    &quot;@babel/preset-react&quot;: &quot;&lt;current-version&gt;&quot;,</span><br><span class="line">    &quot;babel-jest&quot;: &quot;&lt;current-version&gt;&quot;,</span><br><span class="line">    &quot;jest&quot;: &quot;&lt;current-version&gt;&quot;,</span><br><span class="line">    &quot;react-test-renderer&quot;: &quot;&lt;current-version&gt;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;jest&quot;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  // babel.config.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">  presets: [&apos;@babel/preset-env&apos;, &apos;@babel/preset-react&apos;],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">// Link.react.js</span><br><span class="line">import React from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">const STATUS = &#123;</span><br><span class="line">  HOVERED: &apos;hovered&apos;,</span><br><span class="line">  NORMAL: &apos;normal&apos;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export default class Link extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line"></span><br><span class="line">    this._onMouseEnter = this._onMouseEnter.bind(this);</span><br><span class="line">    this._onMouseLeave = this._onMouseLeave.bind(this);</span><br><span class="line"></span><br><span class="line">    this.state = &#123;</span><br><span class="line">      class: STATUS.NORMAL,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  _onMouseEnter() &#123;</span><br><span class="line">    this.setState(&#123;class: STATUS.HOVERED&#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  _onMouseLeave() &#123;</span><br><span class="line">    this.setState(&#123;class: STATUS.NORMAL&#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;a</span><br><span class="line">        className=&#123;this.state.class&#125;</span><br><span class="line">        href=&#123;this.props.page || &apos;#&apos;&#125;</span><br><span class="line">        onMouseEnter=&#123;this._onMouseEnter&#125;</span><br><span class="line">        onMouseLeave=&#123;this._onMouseLeave&#125;</span><br><span class="line">      &gt;</span><br><span class="line">        &#123;this.props.children&#125;</span><br><span class="line">      &lt;/a&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>example: </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/11/Jest/" data-id="cjudi0f050005fazuqnekooqb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-leetcode380InsertDeleteGetRandom" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/10/leetcode380InsertDeleteGetRandom/" class="article-date">
+  <time datetime="2019-04-10T16:16:16.000Z" itemprop="datePublished">2019-04-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/10/leetcode380InsertDeleteGetRandom/">leetcode380InsertDeleteGetRandom</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/10/leetcode380InsertDeleteGetRandom/" data-id="cjudi0f19001dfazuk112vbqs" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-babel-gulp-ESlint" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/09/babel-gulp-ESlint/" class="article-date">
+  <time datetime="2019-04-10T01:12:05.000Z" itemprop="datePublished">2019-04-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/09/babel-gulp-ESlint/">babel+gulp+ESlint</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Use Babel in Build tools<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --save-dev gulp </span><br><span class="line">$ npm install --save-dev gulp-babel</span><br></pre></td></tr></table></figure></p>
+<p>Following gulp code demonstrates how to compile all JS files in a src/js directory into ES5 JS files and output to a dist/js directory.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var gulp = require(&quot;gulp&quot;);</span><br><span class="line">var babel = require(&quot;gulp-babel&quot;);</span><br><span class="line"></span><br><span class="line">gulp.task(&quot;default&quot;, function () &#123;</span><br><span class="line">    return gulp.src(&quot;src/js/*.js&quot;)</span><br><span class="line">        .pipe(babel())</span><br><span class="line">        .pipe(gulp.dest(&quot;dist/js&quot;));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/09/babel-gulp-ESlint/" data-id="cjudi0f0o000hfazuplhaxxv2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-stack-calculator-problem-recursive-a-little-bit" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/06/stack-calculator-problem-recursive-a-little-bit/" class="article-date">
@@ -91,7 +213,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/06/stack-calculator-problem-recursive-a-little-bit/" data-id="cju55cr8j001po5zu0z5krlaf" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/06/stack-calculator-problem-recursive-a-little-bit/" data-id="cjudi0f1g001sfazuvjb1wor1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -129,7 +251,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/06/背包问题“/" data-id="cju55cr8t0026o5zu2v226u1t" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/06/背包问题“/" data-id="cjudi0f1m0025fazurjhce5a3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -170,7 +292,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/06/find-celebrity/" data-id="cju55cr85000vo5zuw0iqz3cu" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/06/find-celebrity/" data-id="cjudi0f0z000xfazufbvgyc46" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -208,7 +330,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/viewEncasulation/" data-id="cju55cr8q0021o5zu6chb9eh7" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/viewEncasulation/" data-id="cjudi0f1o0027fazu9reib8q7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -261,7 +383,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/babel-and-webpack/" data-id="cju55cr7x000no5zu2aamdo12" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/babel-and-webpack/" data-id="cjudi0f0w000qfazu2cw4zaec" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -313,7 +435,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/js-null-vs-undefined/" data-id="cju55cr890014o5zudnn0d67r" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/js-null-vs-undefined/" data-id="cjudi0f120013fazu61qz8qez" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -355,142 +477,10 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/didmount-willunmount/" data-id="cju55cr82000to5zuryq1czo4" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/didmount-willunmount/" data-id="cjudi0f0y000ufazurz5w690q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-topological-sort-template" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/04/topological-sort-template/" class="article-date">
-  <time datetime="2019-04-04T04:46:18.000Z" itemprop="datePublished">2019-04-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/04/topological-sort-template/">topological sort template</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>2.怎么得出拓扑序？</p>
-<p>有两种方法，分别基于BFS和DFS，时间复杂度都是O(|V| + |E|)。<br>Topological Sort: DFS and BFS<br>DFS:<br>据说这是神书《算法导论》中提到的算法：用深度搜索来遍历整个图，采用一个数组来保存每个顶点完成的时间，这样这个数组就存放了按先后顺序访问完成的顶点了。然后我们按照顶点访问的完成时间从大到小排序，得到的就是一个拓扑序了，具体证明如下（来自其他博客）：&amp;……%¥¥……&amp;&amp;</p>
-<p>Coding:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; topologicalSort(int n, vector&lt;pair&lt;int, int&gt; &gt;&amp; edges) &#123;</span><br><span class="line">        vector&lt;int&gt; res;</span><br><span class="line">        stack&lt;int&gt; s;</span><br><span class="line">        int * isVisited = new int[n];</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            isVisited[i] = 0;</span><br><span class="line">        &#125; </span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            if (!isVisited[i]) dfs(edges, s, isVisited, i);</span><br><span class="line">        &#125;</span><br><span class="line">        while (!s.empty()) &#123;</span><br><span class="line">            res.push_back(s.top());</span><br><span class="line">            s.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">    void dfs(vector&lt;pair&lt;int, int&gt; &gt;&amp; edges, stack&lt;int&gt; &amp; s, int * isVisited, int u) &#123;</span><br><span class="line">        isVisited[u] = 1;</span><br><span class="line">        for (int i = 0; i &lt; edges.size(); i++) &#123;</span><br><span class="line">            if (edges[i].first == u &amp;&amp; !isVisited[edges[i].second]) &#123;</span><br><span class="line">                dfs(edges, s, isVisited, edges[i].second);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        s.push(u);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>BFS:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; topologicalSort(int n, vector&lt;pair&lt;int, int&gt; &gt;&amp; edges) &#123;</span><br><span class="line">        vector&lt;int&gt; res;</span><br><span class="line">        vector&lt;vector&lt;int&gt; &gt; newedges(n, vector&lt;int&gt;());</span><br><span class="line">        queue&lt;int&gt; q;</span><br><span class="line">        vector&lt;int&gt; in_degree(n, 0);</span><br><span class="line">        for (int i = 0; i &lt; edges.size(); i++) &#123;</span><br><span class="line">            in_degree[edges[i].second]++;</span><br><span class="line">            newedges[edges[i].first].push_back(edges[i].second);</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            if (in_degree[i] == 0) &#123;</span><br><span class="line">                q.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        while (!q.empty()) &#123;</span><br><span class="line">            int front = q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            res.push_back(front);</span><br><span class="line">            for (int i = 0; i &lt; newedges[front].size(); i++) &#123;</span><br><span class="line">                in_degree[newedges[front][i]]--;</span><br><span class="line">                if (in_degree[newedges[front][i]] == 0) q.push(newedges[front][i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>4.抛开这道题目——有环情况的判断</p>
-<p>可以利用上面的dfs方法，比如isVisited这个数组，我们可以多增一种情况，比如0为未访问，1为已访问，-1为正在访问，当dfs搜索时遇到了一条边终止顶点对应的isVisited元素为-1时，就说明图中有环了（为-1说明我们是从这个顶点开始dfs的，现在又遇到了这个顶点…）。</p>
-<p>另外一种判断图是否有环的方法，借助bfs（dfs也可，但既然用了dfs，直接用上面的方法好了），假如“生成拓扑序”后，还有顶点不在这个“拓扑序”里面，则图就有环了（加双引号是因为不能真正称作“拓扑序”啊）。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/topological-sort-template/" data-id="cju55cr8s0023o5zur4e6gmpc" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-路径选择的dp问题之三角形最小路径和" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/03/路径选择的dp问题之三角形最小路径和/" class="article-date">
-  <time datetime="2019-04-04T03:16:36.000Z" itemprop="datePublished">2019-04-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/03/路径选择的dp问题之三角形最小路径和/">路径选择的dp问题之三角形最小路径和</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文链接：<a href="https://blog.csdn.net/xdzhangzhenhao/article/details/81356095" target="_blank" rel="noopener">https://blog.csdn.net/xdzhangzhenhao/article/details/81356095</a><br><a href="http://www.cnblogs.com/shizhh/p/5302852.html" target="_blank" rel="noopener">http://www.cnblogs.com/shizhh/p/5302852.html</a> 动态规划</p>
-<ol start="120">
-<li>三角形最小路径和</li>
-</ol>
-<p>给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。</p>
-<p>例如，给定三角形：</p>
-<p>[<br>     [2],<br>    [3,4],<br>   [6,5,7],<br>  [4,1,8,3]<br>]<br>自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。</p>
-<p>如果你可以只使用 O(n) 的额外空间（n 为三角形的总行数）来解决这个问题，那么你的算法会很加分.暂时没想到。。。（可能是用in-place方法）可行。</p>
-<p>这道题类似于hmm的路径中选择概率最大的乘织。<br>采用topdown的dp 方法，最顶端的点决定于左右下方两侧的点的minsum，不能采用bottomup的方法。因为可能出现local最优值。<br>思路是经过当前节点的最小路径为左右节点的路径的最小值加自身，从上往下递归（top down），如果从下往上选，这个思路将是错的，因为你的局部最小并不可以确定最优会经过这里，所以从源头定点开始。<br>采用递归的方法构造，minsum(trangle, 0, 0).<br>代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">class Solution1 &#123;</span><br><span class="line"> </span><br><span class="line">private:</span><br><span class="line"> </span><br><span class="line">	vector&lt;vector&lt;int&gt;&gt; memo;</span><br><span class="line">	//cache</span><br><span class="line">	int m;		// 行数</span><br><span class="line"> </span><br><span class="line">	// i,j代表当前节点的索引</span><br><span class="line">	int minPathSum(vector&lt;vector&lt;int&gt;&gt;&amp; triangle, int i, int j) &#123;</span><br><span class="line"> </span><br><span class="line">		if (i == m - 1)</span><br><span class="line">			return triangle[i][j];</span><br><span class="line"> </span><br><span class="line">		// 相同结构子问题的递归</span><br><span class="line">		if (memo[i][j] == -1) &#123;</span><br><span class="line">			memo[i][j] = min(minPathSum(triangle, i + 1, j), minPathSum(triangle, i + 1, j + 1)) + triangle[i][j];</span><br><span class="line">			cout &lt;&lt;&quot;memo[&quot;&lt;&lt;i&lt;&lt;&quot;][&quot;&lt;&lt;j&lt;&lt;&quot;] : &quot;&lt;&lt; memo[i][j] &lt;&lt; endl;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		return memo[i][j];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">	int minimumTotal(vector&lt;vector&lt;int&gt;&gt;&amp; triangle) &#123;</span><br><span class="line"> </span><br><span class="line">		if (triangle.size() == 0)</span><br><span class="line">			return 0;</span><br><span class="line"> </span><br><span class="line">		// triangle中应该都是正数吧</span><br><span class="line">		int res;</span><br><span class="line">		m = triangle.size();</span><br><span class="line">		//构造cache容器</span><br><span class="line">		for (int i = 0; i &lt; m; i++) &#123;</span><br><span class="line">			vector&lt;int&gt; tmp(triangle[i].size(), -1);</span><br><span class="line">			memo.push_back(tmp);</span><br><span class="line">		&#125;</span><br><span class="line"> </span><br><span class="line">		res = minPathSum(triangle, 0, 0);</span><br><span class="line">		return res;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>//犹记得当日的nlp课程的hmm状态转移方法，yangsky算法，一个句子在一个概率字典里找出最有可能的点。当时查找路径。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/路径选择的dp问题之三角形最小路径和/" data-id="cju55cr8v002ao5zupa082ohp" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-topK-and-quickSort-and-QuickSelect" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/03/topK-and-quickSort-and-QuickSelect/" class="article-date">
-  <time datetime="2019-04-03T17:36:40.000Z" itemprop="datePublished">2019-04-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/03/topK-and-quickSort-and-QuickSelect/">topK and quickSort and QuickSelect</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>quick select 和quick sort方法</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/topK-and-quickSort-and-QuickSelect/" data-id="cju55cr8n001wo5zucqnb7hq8" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
 
     </footer>
   </div>
@@ -517,7 +507,7 @@ null must be assigned.
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
     </div>
   </div>
 
@@ -527,7 +517,7 @@ null must be assigned.
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/Javascript/" style="font-size: 13.33px;">Javascript</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 16.67px;">algorithm</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Javascript/" style="font-size: 12.5px;">Javascript</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 15px;">algorithm</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
@@ -549,23 +539,23 @@ null must be assigned.
       <ul>
         
           <li>
+            <a href="/2019/04/11/Jest/">Jest</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/leetcode380InsertDeleteGetRandom/">leetcode380InsertDeleteGetRandom</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/09/babel-gulp-ESlint/">babel+gulp+ESlint</a>
+          </li>
+        
+          <li>
             <a href="/2019/04/06/stack-calculator-problem-recursive-a-little-bit/">stack&amp;calculator problem(recursive a little bit)</a>
           </li>
         
           <li>
             <a href="/2019/04/06/背包问题“/">背包问题 </a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/06/find-celebrity/">find celebrity</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/04/viewEncasulation/">viewEncasulation</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/04/babel-and-webpack/">babel and webpack</a>
           </li>
         
       </ul>
