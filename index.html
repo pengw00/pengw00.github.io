@@ -65,6 +65,85 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ngrx-for-flux" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/12/ngrx-for-flux/" class="article-date">
+  <time datetime="2019-04-12T05:22:31.000Z" itemprop="datePublished">2019-04-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/12/ngrx-for-flux/">ngrx for flux</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>What is NGRX<br>NGRX is a group of libraries “inspired” by the Redux pattern which in turn is “inspired” by the Flux pattern. Being a little more concise, this means that redux pattern is a simplified version of the Flux pattern and NGRX is an angular/rxjs version of the redux pattern.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">What do I mean with “angular/rxjs” version of redux… The “angular” part is because ngrx is a library to use within an angular application. The “rxjs” part is because the implementation of ngrx works around a rxjs flow. This means that it works using observables and the different observable operators provided by “rxjs”.</span><br></pre></td></tr></table></figure></p>
+<p>The main purpose of this pattern is<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">to provide a predictable state container, based on three main principles.</span><br></pre></td></tr></table></figure></p>
+<p>Let’s go through the three principles of the Redux pattern and point out the most important benefits they provide.</p>
+<p>Single source of truth<br>In the case of a redux/ngrx architecture, this means that the state of your whole application is <figure class="highlight plain"><figcaption><span>in an object tree within a single store.```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Within a single store? We are going to talk later about stores, but in a general definition, they have the responsibility of holding the state and applying changes to it when they are told to do so (when an action is dispatched, we are also going to talk about them later).</span><br><span class="line"></span><br><span class="line">The benefits of having a single source of truth are plenty, but for me, the most interesting one (because is the one that is going to impact on any angular app) is the following:</span><br><span class="line"></span><br><span class="line">When you are building an angular app ``` usually you have the state split and handle in multiple services ```. ``` As your app growth keeping track of your state changes starts to get messy and hard to debug and maintain. Having a single source of truth resolves this problem since the state is handled only in one object and in one place, so debugging or adding changes becomes way easier.</span><br></pre></td></tr></table></figure></p>
+<h2 id="State-is-read-only"><a href="#State-is-read-only" class="headerlink" title="State is read-only"></a>State is read-only</h2><p>You are never going to change the state directly instead you are going to dispatch actions. These actions describe what’s happening (can be things like getting, adding, removing, updating the state).</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/12/ngrx-for-flux/" data-id="cjudn0y2n001mvgzuc7zyga13" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/">angular</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-TDD-concept" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/11/TDD-concept/" class="article-date">
+  <time datetime="2019-04-12T03:26:17.000Z" itemprop="datePublished">2019-04-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/11/TDD-concept/">TDD concept</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/11/TDD-concept/" data-id="cjudn0y28000ovgzukql418q8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Jest" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/11/Jest/" class="article-date">
@@ -99,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/11/Jest/" data-id="cjudi0f050005fazuqnekooqb" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/11/Jest/" data-id="cjudn0y1m0003vgzukze1m09w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -133,13 +212,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>Leetcode 380 insert delete getRandom O(1)</p>
+<p>Folowup: duplicated number is allowed.<br><code>`</code><br>public class RandomizedSet{<br>    ArrayList<integer> nums;</integer></p>
+<p>}</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/10/leetcode380InsertDeleteGetRandom/" data-id="cjudi0f19001dfazuk112vbqs" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/10/leetcode380InsertDeleteGetRandom/" data-id="cjudn0y2k001fvgzuyozt5fev" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
     </footer>
   </div>
   
@@ -175,7 +259,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/09/babel-gulp-ESlint/" data-id="cjudi0f0o000hfazuplhaxxv2" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/09/babel-gulp-ESlint/" data-id="cjudn0y27000mvgzuorljka1z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
@@ -213,7 +297,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/06/stack-calculator-problem-recursive-a-little-bit/" data-id="cjudi0f1g001sfazuvjb1wor1" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/06/stack-calculator-problem-recursive-a-little-bit/" data-id="cjudn0y2u0021vgzugrqgfc4q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -251,7 +335,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/06/背包问题“/" data-id="cjudi0f1m0025fazurjhce5a3" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/06/背包问题“/" data-id="cjudn0y3h002jvgzurwv2gv4z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -292,7 +376,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/06/find-celebrity/" data-id="cjudi0f0z000xfazufbvgyc46" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/06/find-celebrity/" data-id="cjudn0y2e0013vgzujj5ulszz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -330,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/viewEncasulation/" data-id="cjudi0f1o0027fazu9reib8q7" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/viewEncasulation/" data-id="cjudn0y3a002evgzu7xj9zdfv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -383,104 +467,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/babel-and-webpack/" data-id="cjudi0f0w000qfazu2cw4zaec" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/babel-and-webpack/" data-id="cjudn0y2a000svgzuk9sksjrv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-js-null-vs-undefined" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/04/js-null-vs-undefined/" class="article-date">
-  <time datetime="2019-04-04T15:19:28.000Z" itemprop="datePublished">2019-04-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/04/js-null-vs-undefined/">js null vs undefined</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="null-vs-undefined"><a href="#null-vs-undefined" class="headerlink" title="null vs undefined"></a>null vs undefined</h1><p>What is null?<br>There are two features of null you should understand:</p>
-<pre><code>null is an empty or non-existent value.
-null must be assigned.
-</code></pre><p>ex:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let a = null;</span><br><span class="line">console.log(a);</span><br><span class="line">// null</span><br></pre></td></tr></table></figure></p>
-<p>Undefined most typically means a variable has been declared, but not defined. For example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let b;</span><br><span class="line">console.log(b);</span><br><span class="line">// undefined</span><br><span class="line"></span><br><span class="line">let c = undefined;</span><br><span class="line">console.log(c);</span><br><span class="line">// undefined</span><br></pre></td></tr></table></figure></p>
-<p>Finally, when looking up non-existent properties in an object, you will receive undefined:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var d = &#123;&#125;;</span><br><span class="line">console.log(d.fake);</span><br><span class="line">// undefined</span><br></pre></td></tr></table></figure></p>
-<p>Here’s a full list for six falsy values:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">false</span><br><span class="line">0 (zero)</span><br><span class="line">“” (empty string)</span><br><span class="line">null</span><br><span class="line">undefined</span><br><span class="line">NaN (Not A Number)</span><br></pre></td></tr></table></figure></p>
-<p>Interestingly enough, when using typeof to test null, it returns object:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let a = null;</span><br><span class="line">let b;</span><br><span class="line">console.log(typeof a);</span><br><span class="line">// object</span><br><span class="line">console.log(typeof b);</span><br><span class="line">// undefined</span><br></pre></td></tr></table></figure></p>
-<p>Null !== undefined<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">null !== undefined</span><br></pre></td></tr></table></figure></p>
-<p>But, and this may surprise you, null loosely equals undefined.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">null == undefined</span><br></pre></td></tr></table></figure></p>
-<p>a great example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let logHi = (str = &apos;hi&apos;) =&gt; &#123;</span><br><span class="line">  console.log(str);</span><br></pre></td></tr></table></figure></p>
-<p>This function requires one parameter and sets the default of that parameter to hi if it isn’t supplied. Here’s what that looks like:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">logHi();</span><br><span class="line">// hi</span><br><span class="line">logHi(&apos;bye&apos;);</span><br><span class="line">// bye</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>With default parameters, undefined will use the default while null does not.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">logHi(undefined);</span><br><span class="line">// hi</span><br><span class="line">logHi(null);</span><br><span class="line">// null</span><br></pre></td></tr></table></figure></p>
-<p>Summary<br>null is an assigned value. It means nothing.<br>undefined typically means a variable has been declared but not defined yet.<br>null and undefined are falsy values.<br>null and undefined are both primitives. However an error shows that typeof null = object.<br>null !== undefined but null == undefined.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/js-null-vs-undefined/" data-id="cjudi0f120013fazu61qz8qez" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-didmount-willunmount" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/04/didmount-willunmount/" class="article-date">
-  <time datetime="2019-04-04T14:21:11.000Z" itemprop="datePublished">2019-04-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/04/didmount-willunmount/">didmount&amp;&amp;willunmount</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">export default class A extends React.Component &#123;</span><br><span class="line"></span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">        super(props);</span><br><span class="line">    &#125;</span><br><span class="line">    scroll1（）&#123;&#125;</span><br><span class="line"></span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        window.addEventListener(&apos;scroll&apos;, this.srcoll1.bind(this));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    componentWillUnmount()&#123;</span><br><span class="line">        window.removeEventListener(&apos;scroll&apos;, this.srcoll1);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>when using event handler in render(), need to bind this to the function<br>inside constructor, it will be global. otherwise, everytime inside render() we need to bind this when we use the method everytime, it will be awaste of time.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">export default class A extends React.Component &#123;</span><br><span class="line"></span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">        super(props);</span><br><span class="line">        this.scroll1 = this.scroll1.bind(this)</span><br><span class="line">    &#125;</span><br><span class="line">    scroll1（）&#123;&#125;</span><br><span class="line"></span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        window.addEventListener(&apos;scroll&apos;, this.scroll1);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    componentWillUnmount()&#123;</span><br><span class="line">        window.removeEventListener(&apos;scroll&apos;, this.scroll1);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>bind方法，顾名思义，就是绑定的意思，到底是怎么绑定然后怎么用呢，下面就来说说我对这个方法的理解。</p>
-<p>bind的使用和call，apply的区别：都是将方法的主人绑定，this指向全局object。<br>bind will not be executed imediately while call, aply will execute right away.<br>为什么要创建绑定函数，就是当我们调用某些函数的时候是要在特定环境下才能调用到，所以我们就要把函数放在特定环境下，就是使用bind把函数绑定到特定的所需的环境下。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/didmount-willunmount/" data-id="cjudi0f0y000ufazurz5w690q" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
 
     </footer>
   </div>
@@ -507,7 +497,7 @@ null must be assigned.
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
     </div>
   </div>
 
@@ -517,7 +507,7 @@ null must be assigned.
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Javascript/" style="font-size: 12.5px;">Javascript</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 15px;">algorithm</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 17.5px;">leetcode</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Javascript/" style="font-size: 13.33px;">Javascript</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 16.67px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
@@ -539,6 +529,14 @@ null must be assigned.
       <ul>
         
           <li>
+            <a href="/2019/04/12/ngrx-for-flux/">ngrx for flux</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/11/TDD-concept/">TDD concept</a>
+          </li>
+        
+          <li>
             <a href="/2019/04/11/Jest/">Jest</a>
           </li>
         
@@ -548,14 +546,6 @@ null must be assigned.
         
           <li>
             <a href="/2019/04/09/babel-gulp-ESlint/">babel+gulp+ESlint</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/06/stack-calculator-problem-recursive-a-little-bit/">stack&amp;calculator problem(recursive a little bit)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/06/背包问题“/">背包问题 </a>
           </li>
         
       </ul>
