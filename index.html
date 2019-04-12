@@ -114,12 +114,32 @@
 <p>If you were expecting a simple answer to decide when to use ngrx, you are not going to obtain it, and don’t trust anyone giving you this answer from outside your organization or team. The decision depends on studying the pros and cons, understanding your team and considering their opinion.</p>
 <h2 id="NGRX-Actions-Reducers-Selectors-Store-and-Effects"><a href="#NGRX-Actions-Reducers-Selectors-Store-and-Effects" class="headerlink" title="NGRX Actions, Reducers, Selectors, Store, and Effects"></a>NGRX Actions, Reducers, Selectors, Store, and Effects</h2><p>These are the core building units of the ngrx flow. Each of them takes care of a part of the process of starting an operation to changing our state and retrieving data.</p>
 <p><img src="https://github.com/pengw00/pengw00.github.io/raw/master/image/ngrx.png" alt="image"></p>
-<p><a href="https://medium.com/frontend-fun/angular-ngrx-a-clean-and-clear-introduction-4ed61c89c1fc" target="_blank" rel="noopener">https://medium.com/frontend-fun/angular-ngrx-a-clean-and-clear-introduction-4ed61c89c1fc</a></p>
+<p>###<br><a href="https://medium.com/frontend-fun/angular-ngrx-a-clean-and-clear-introduction-4ed61c89c1fc" target="_blank" rel="noopener">https://medium.com/frontend-fun/angular-ngrx-a-clean-and-clear-introduction-4ed61c89c1fc</a></p>
+<p>###</p>
+<h4 id="payload-the-type-of-this-property-depends-on-what-type-of-data-this-action-needs-to-send-to-the-reducer-In-the-case-of-the-previous-example-is-going-to-be-a-string-containing-the-user-name-Not-all-actions-needs-a-payload"><a href="#payload-the-type-of-this-property-depends-on-what-type-of-data-this-action-needs-to-send-to-the-reducer-In-the-case-of-the-previous-example-is-going-to-be-a-string-containing-the-user-name-Not-all-actions-needs-a-payload" class="headerlink" title="payload: the type of this property depends on what type of data this action needs to send to the reducer. In the case of the previous example, is going to be a string containing the user name. Not all actions needs a payload."></a>payload: the type of this property depends on what type of data this action needs to send to the reducer. In the case of the previous example, is going to be a string containing the user name. Not all actions needs a payload.</h4><p>###</p>
+<ol>
+<li>view dispatch a actions. </li>
+</ol>
+<p>In the store object, you have a function to dispatch (trigger) actions. Actions are classes that implemenets the NGRX Action interface. These Action classes have two properties (let’s take as an example an action class called GetUserName):type: it’s a read only string describing what the action stand for. For example: ‘[User] Get User Name’</p>
+<p>2.1. If this action doesn’t trigger an effect then a reducer is going to analyze the action (usually using a switch statement) and return a new state that’s is going to be the result of merging the old state with the value that changed by calling the action.</p>
+<p>Reducers…<br>Reducers are pure functions accepting two arguments, the previous state and an Action. When an Action is dispatched ngrx goes through all the reducers passing as arguments the previous state and the Action, in the order that the reducers where created, until it finds a case for that action.</p>
+<p>2.2. If an effect gets triggered by dispatching an action is because some side effects are going to happen before calling the reducer. This can probably be something like calling an HTTP service to get data.</p>
+<p>Effects…<br>Effects, on the ngrx libraries ecosystem, allow us to deal with side-effects caused from dispatching an action outside angular components or the ngrx store.</p>
+<p>The Effects listen if any action is dispatched, then, similar to what reducers do, it checks if the action is one of the actions type it has a case for.<br>Then is going to perform a side-effect, usually getting or sending data to an API.<br>Finally is going to emit another action, usually, an action referring to the result-state of the side effect (success, error, etc), then a reducer is going to enter in the scene as we already mention in the ngrx flow.</p>
+<p>2.2.1. After the effect is done (side effects are finished) a new “state-result” action gets fired by the effect (it can be that the side effects succeeded or failed), and we are back to point 2.1.</p>
+<h2 id="NGRX-example"><a href="#NGRX-example" class="headerlink" title="NGRX example"></a>NGRX example</h2><p>Our example is going to have a list of users, the user detail page and some initial configuration information that you need to get when the app starts. We are going to be able to implement some important ngrx flows.</p>
+<p>These are the things that we are going to do:</p>
+<p>Installation of the library<br>Folder structure for the store<br>Create State and initial values<br>Create Actions<br>Create Reducers<br>Create Effects<br>Create Selectors<br>Setting everything up<br>Using the store in some components</p>
+<h2 id="1-Installation-of-the-library"><a href="#1-Installation-of-the-library" class="headerlink" title="1. Installation of the library"></a>1. Installation of the library</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng new angular-ngrx --style=scss</span><br></pre></td></tr></table></figure>
+<p>Let’s add the ngrx libraries that we are going to use:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install @ngrx/core @ngrx/store @ngrx/effects @ngrx/store-devtools @ngrx/router-store --save</span><br></pre></td></tr></table></figure></p>
+<p>We are installing almost all the libraries of the ngrx ecosystem. Most of them are quite clear about their purpose like core, store, effects, but there are a couple that you may wonder what they are for.</p>
+<h3 id="store-devtools-Some-powerful-tooling-for-debugging"><a href="#store-devtools-Some-powerful-tooling-for-debugging" class="headerlink" title="store-devtools ###. Some powerful tooling for debugging."></a>store-devtools ###. Some powerful tooling for debugging.</h3><h3 id="router-store-Keeps-the-state-of-the-angular-router-in-the-store"><a href="#router-store-Keeps-the-state-of-the-angular-router-in-the-store" class="headerlink" title="router-store ### . Keeps the state of the angular router in the store."></a>router-store ### . Keeps the state of the angular router in the store.</h3><h2 id="Folder-structure-for-the-Store"><a href="#Folder-structure-for-the-Store" class="headerlink" title="Folder structure for the Store"></a>Folder structure for the Store</h2><p>Let’s start by discussing the file structure of the store. This file structure and all the store configuration should exist within the core module of your application but in our example, we don’t have one so the store is going to exist within our app module (the steps are pretty much the same if you are doing it in your core module).</p>
+<p><img src alt="image"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/12/ngrx-for-flux/" data-id="cjue5zte3002me124h13a2zyt" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/12/ngrx-for-flux/" data-id="cjue6x0ts002nft24oihh8zf1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/">angular</a></li></ul>
@@ -157,7 +177,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/11/TDD-concept/" data-id="cjue5ztct000ne124wnar2d44" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/11/TDD-concept/" data-id="cjue6x0sg000kft2484f75h4j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -201,7 +221,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/11/Jest/" data-id="cjue5ztcc0009e124yabo4700" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/11/Jest/" data-id="cjue6x0s10006ft24qthchbj3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -242,7 +262,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/10/leetcode380InsertDeleteGetRandom/" data-id="cjue5ztdb001pe124xiqn8w0r" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/10/leetcode380InsertDeleteGetRandom/" data-id="cjue6x0t1001nft24kyevhcpy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -282,7 +302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/09/babel-gulp-ESlint/" data-id="cjue5ztcw000ue124my082op6" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/09/babel-gulp-ESlint/" data-id="cjue6x0sk000uft24sebmbaap" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
@@ -320,7 +340,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/06/stack-calculator-problem-recursive-a-little-bit/" data-id="cjue5ztdi0023e1246qr4viku" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/06/stack-calculator-problem-recursive-a-little-bit/" data-id="cjue6x0tb0027ft24gw847cqs" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -358,7 +378,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/06/背包问题“/" data-id="cjue5ztdn002de124qntyamsl" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/06/背包问题“/" data-id="cjue6x0ti002gft24oh8utbwa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -399,7 +419,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/06/find-celebrity/" data-id="cjue5ztd20014e124fi097l41" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/06/find-celebrity/" data-id="cjue6x0sq0014ft24pwlqiuer" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -437,7 +457,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/viewEncasulation/" data-id="cjue5ztdl0028e124a8cj12ru" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/viewEncasulation/" data-id="cjue6x0tc0029ft246pema6jg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -490,7 +510,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/babel-and-webpack/" data-id="cjue5ztcv000se124u7o2vkui" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/babel-and-webpack/" data-id="cjue6x0si000pft240a4but56" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
