@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>transaction meaning | Pengw00&#39;s Tech Road</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Definition - What does Transaction mean?A transaction, in the context of a database, is a logical unit that is independently executed for data retrieval or updates. In relational databases, database t">
+<meta name="keywords" content="spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="transaction meaning">
+<meta property="og:url" content="http://pengw00.github.io/2019/04/15/transaction-meaning/index.html">
+<meta property="og:site_name" content="Pengw00&#39;s Tech Road">
+<meta property="og:description" content="Definition - What does Transaction mean?A transaction, in the context of a database, is a logical unit that is independently executed for data retrieval or updates. In relational databases, database t">
+<meta property="og:locale" content="us-EN">
+<meta property="og:updated_time" content="2019-04-16T04:29:15.078Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="transaction meaning">
+<meta name="twitter:description" content="Definition - What does Transaction mean?A transaction, in the context of a database, is a logical unit that is independently executed for data retrieval or updates. In relational databases, database t">
+  
+    <link rel="alternate" href="/atom.xml" title="Pengw00&#39;s Tech Road" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Pengw00&#39;s Tech Road</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pengw00.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-transaction-meaning" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/15/transaction-meaning/" class="article-date">
+  <time datetime="2019-04-16T02:48:08.000Z" itemprop="datePublished">2019-04-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      transaction meaning
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Definition-What-does-Transaction-mean"><a href="#Definition-What-does-Transaction-mean" class="headerlink" title="Definition - What does Transaction mean?"></a>Definition - What does Transaction mean?</h1><p>A transaction, in the context of a database, is a logical unit that is independently executed for data retrieval or updates. In relational databases, database transactions must be atomic, consistent, isolated and durable–summarized as the ACID acronym.</p>
+<p>Transactions are completed by COMMIT or ROLLBACK SQL statements.</p>
+<p>which indicate a transaction’s beginning or end.<br>The ACID acronym defines the properties of a database transaction, as follows:</p>
+<ol>
+<li><p>Atomicity: A transaction must be fully complete, saved (committed) or completely undone (rolled back). A sale in a retail store database illustrates a scenario which explains atomicity, e.g., the sale consists of an inventory reduction and a record of incoming cash. Both either happen together or do not happen - it’s all or nothing.</p>
+</li>
+<li><p>Consistency: The transaction must be fully compliant with the state of the database as it was prior to the transaction. In other words, the transaction cannot break the database’s constraints. For example, if a database table’s Phone Number column can only contain numerals, then consistency dictates that any transaction attempting to enter an alphabetical letter may not commit.</p>
+</li>
+</ol>
+<p>Isolation: Transaction data must not be available to other transactions until the original transaction is committed or rolled back.</p>
+<p>Durability: Transaction data changes must be available, even in the event of database failure.</p>
+<p>评论要点：<br>金融类应用非常适用，尤其是要求超高并发的。</p>
+<p>不过实际环境下这类应用又要求安全可靠性，所以一般要配合多种数据存储方式。</p>
+<p>Mongodb碎片、依赖内存，所以如果出现某些特殊意外可能会出现数据遗失；</p>
+<p>关系型数据库虽然具备事务处理，可靠程度高，但性能不占优。<br>1楼：<br>例如一个金融股票系统，用mysql存储历史数据，Mongodb临时存储当天分时数据，加快读写。晚上收盘后再把Mongodb数据整理写入mysql。</p>
+<p>适合：<br>楼2: 某种数据提取十分频繁，你又不想在oracle里面join来join去浪费处理时间，然后你就存在mongodb里面把以前在oracle中要join的几个列存成一个列合并在一个列上然后查的时候直接查一个列出来 说白了就是节约时间：eg :{name:leilei,warehouse:beijing, order:23} ,比如这三个字段以前分散在oracle的好几个表里面你要取得时候要join,现在你发现这个信息用户访问十分频繁你存的时候就存着三个j在mongo里面，这样就不用去oracle里join拿了而且又没有事务又没有锁理论上相对快</p>
+<p>3楼：不过说白了，其实关系型数据库够用了，那些使用nosql的个人以为没必要。获取他们设计的程序有问题或许不会调优数据库 导致性能低下所以要尝尝新玩意吧</p>
+<p>8楼： 适合树型数据，比如无限分类，网易评论盖楼，多级权限  这种用传统关联表做的话要么递归查询，要么要写很多额外的代码， 用mogodb只要拼字符串把键名拼对了就可以了</p>
+<p>15楼： 存日志之类的，比方osc的动态，把各类动态组装好直接存，以后就可以直接读出来解析</p>
+<h2 id="classic-review："><a href="#classic-review：" class="headerlink" title="classic review："></a>classic review：</h2><p>The purpose of a transaction is to make sure that the whole database stays consistent while multiple operations take place. But in contrary to most relational databases, MongoDB isn’t designed to run on a single host. It is designed to be set up as a cluster of multiple shards where each shard is a replica-sets of multiple servers (optionally at different geographical locations).</p>
+<p>A transaction can potentially affect lots of hosts of the database. That means that the transaction would have to be synchronized between all of these hosts. This would mean quite a lot of overhead and would scale very badly when increasing the size of the database by adding more servers.</p>
+<p>MongoDB does not have support for traditional locking or complex transactions with rollback. MongoDB aims to be lightweight, fast, and predictable in its performance. This is similar to the MySQL MyISAM autocommit model. By keeping transaction support extremely simple, MongoDB can provide greater performance especially for partitioned or replicated systems with a number of database server processes.</p>
+<p>CAP定理<br>维基百科，自由的百科全书<br>跳到导航跳到搜索<br>在理论计算机科学中，CAP定理（CAP theorem），又被称作布鲁尔定理（Brewer’s theorem），它指出对于一个分布式计算系统来说，不可能同时满足以下三点：[1][2]</p>
+<p>一致性（Consistency） （等同于所有节点访问同一份最新的数据副本）<br>可用性（Availability）（每次请求都能获取到非错的响应——但是不保证获取的数据为最新数据）<br>分区容错性（Partition tolerance）（以实际效果而言，分区相当于对通信的时限要求。系统如果不能在时限内达成数据一致性，就意味着发生了分区的情况，必须就当前操作在C和A之间做出选择[3]。）</p>
+<p>分布式系统只能满足三项中的两项而不可能满足全部三项[4]。理解CAP理论的最简单方式是想象两个节点分处分区两侧。允许至少一个节点更新状态会导致数据不一致，即丧失了C性质。如果为了保证数据一致性，将分区一侧的节点设置为不可用，那么又丧失了A性质。除非两个节点可以互相通信，才能既保证C又保证A，这又会导致丧失P性质。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/15/transaction-meaning/" data-id="cjujafhel0029iezu50t7skpt" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/04/12/ngrx-for-flux/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ngrx for flux</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Javascript/" style="font-size: 13.33px;">Javascript</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 16.67px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/15/transaction-meaning/">transaction meaning</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/12/ngrx-for-flux/">ngrx for flux</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/11/TDD-concept/">TDD concept</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/11/Jest/">Jest</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/10/leetcode380InsertDeleteGetRandom/">leetcode380InsertDeleteGetRandom</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 pengw00<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
