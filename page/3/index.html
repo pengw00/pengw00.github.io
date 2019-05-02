@@ -65,6 +65,176 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Quick-Sort" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/03/Quick-Sort/" class="article-date">
+  <time datetime="2019-04-03T15:43:47.000Z" itemprop="datePublished">2019-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/03/Quick-Sort/">Quick Sort&#39; </a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public void quickSort(int[] arr, int low, int high)&#123;</span><br><span class="line">	if(low&gt;high) return;</span><br><span class="line">	int i = low, int j = high, base = arr[low];</span><br><span class="line">	while(i &lt; j)&#123;</span><br><span class="line">		while(arr[i]&lt;base &amp;&amp; i&lt;j)&#123;i++;&#125;</span><br><span class="line">		while(arr[j]&gt;base &amp;&amp; i &lt; j)&#123; j--;&#125;</span><br><span class="line">		//after that the order is messy</span><br><span class="line">		swap(arr, low, j);</span><br><span class="line">	&#125;</span><br><span class="line">	swap(arr, base, j);</span><br><span class="line">	quickSort(arr, low, j-1);</span><br><span class="line">	quickSort(arr, j+1, high);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void swap(int[] arr, int i, int j)&#123;</span><br><span class="line">	int temp = arr[i];</span><br><span class="line">	arr[i] = arr[j];</span><br><span class="line">	arr[j] = tamp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/03/Quick-Sort/" data-id="cjv66qfng000hmzzupzcw71ui" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-axios-instance" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/03/axios-instance/" class="article-date">
+  <time datetime="2019-04-03T14:31:17.000Z" itemprop="datePublished">2019-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/03/axios-instance/">axios instance</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Question??<br>axios.create({ baseURL: ajaxUrl,timeout: 30000,withCredentials: true}) 创建实例作用是啥 没有不行吗### 问题描述<br>引入axios,然后在页面中进行请求axios.get(‘url’).then(res=&gt;{}),这里的创建实例充当什么角色</p>
+<p>Answer:<br>默认会导出实例axios，通常你只需使用这个axios就可以了。</p>
+<p>但是有时候你需要创建多个实例，比如你需要访问多个服务地址，而这些服务请求和响应的结构都完全不同，那么你可以通过axios.create创建不同的实例来处理。</p>
+<p>比如axios1是用http状态码确定响应是否正常，而axios2是服务器自己定义的状态码，又或者他们请求头不同，支持的content-type不同，那么我可以单独为axios1和axios2写拦截器。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/03/axios-instance/" data-id="cjv66qfnh000jmzzus3g27pwq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-dfs和回溯模版" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/03/dfs和回溯模版/" class="article-date">
+  <time datetime="2019-04-03T05:12:04.000Z" itemprop="datePublished">2019-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/03/dfs和回溯模版/">dfs和回溯模版</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>dfs template<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">void f()  </span><br><span class="line">&#123;  </span><br><span class="line">     if(符合边界条件)  </span><br><span class="line">     &#123;  </span><br><span class="line"></span><br><span class="line">        ///////  </span><br><span class="line">        return;  </span><br><span class="line">     &#125;  </span><br><span class="line"></span><br><span class="line">     //某种形式的调用  </span><br><span class="line">     f();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>回溯模版： 限制条件 if，选择 （for。。。）结束条件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">void DFS(int 当前状态)  </span><br><span class="line">&#123;  </span><br><span class="line">      if(当前状态为边界状态)  </span><br><span class="line">      &#123;  </span><br><span class="line">        记录或输出  </span><br><span class="line">        return;  </span><br><span class="line">      &#125;  </span><br><span class="line">      for(i=0;i&lt;n;i++)       //横向遍历解答树所有子节点  </span><br><span class="line">      &#123;  </span><br><span class="line">           //扩展出一个子状态。  </span><br><span class="line">           修改了全局变量  </span><br><span class="line">           if(子状态满足约束条件)  </span><br><span class="line">            &#123;  </span><br><span class="line">              dfs(子状态)  </span><br><span class="line">           &#125;  </span><br><span class="line">            恢复全局变量//回溯部分  </span><br><span class="line">      &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>BFS和DFS相似。BFS显式用队列，DFS隐式用栈，即递归。<br>当然，对于DFS，用递归可能会造成栈溢出，所以也可以更改为显示栈。</p>
+<p>经典例题： 走迷宫<br>*表示可走 </p>
+<p>#表示障碍<br>T表示出口<br>入口是(1,1)，数据保证左上角是入口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">char maze[100][100];</span><br><span class="line">bool flag[100][100];</span><br><span class="line">int dx[]=&#123;0,0,1,-1&#125;;</span><br><span class="line">int dy[]=&#123;1,-1,0,0&#125;;</span><br><span class="line">int m,n;</span><br><span class="line"></span><br><span class="line">bool dfs(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">    flag[x][y]=1;              //走过的路标记为1</span><br><span class="line">    if(maze[x][y]==&apos;T&apos;)return true;</span><br><span class="line">    for(int i=0;i&lt;4;i++)       //四个方向</span><br><span class="line">    &#123;</span><br><span class="line">        int nx=x+dx[i];</span><br><span class="line">        int ny=y+dy[i];</span><br><span class="line">        if(flag[nx][ny]==0||maze[nx][ny]==&apos;*&apos;||maze[nx][ny]==&apos;T&apos;&amp;&amp;nx&gt;0&amp;&amp;ny&gt;0&amp;&amp;nx&lt;m+1&amp;&amp;ny&lt;n+1)</span><br><span class="line">        &#123;</span><br><span class="line">            return dfs(nx,ny);   </span><br><span class="line">            flag[nx][ny]=0;    //回溯，将标记重新标记为0</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;             //找不到返回false</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    while(cin&gt;&gt;m&gt;&gt;n)&#123;</span><br><span class="line">    memset(maze,0,sizeof(maze));</span><br><span class="line">    memset(flag,0,sizeof(flag));</span><br><span class="line">    for(int i=1;i&lt;=m;i++)</span><br><span class="line">        for(int j=1;j&lt;=n;j++)</span><br><span class="line">            cin&gt;&gt;maze[i][j];</span><br><span class="line">    if(dfs(1,1))cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl;</span><br><span class="line">    else cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>回溯的两种写法：</p>
+<p>递归写法和迭代写法，链接：<a href="https://blog.csdn.net/man_sion/article/details/74993907" target="_blank" rel="noopener">https://blog.csdn.net/man_sion/article/details/74993907</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/03/dfs和回溯模版/" data-id="cjv66qfnt000vmzzu9aljv7rr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-回溯，递归，dp三法leetcode-题目“" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/03/回溯，递归，dp三法leetcode-题目“/" class="article-date">
+  <time datetime="2019-04-03T04:30:53.000Z" itemprop="datePublished">2019-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/03/回溯，递归，dp三法leetcode-题目“/">回溯，递归，dp三法leetcode 题目“ </a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>leetcode 10  regular expression matching 可以减去一字符<br>leetcode wildcard matching 可以匹配一个字符<br>leetcode edit distance<br>回溯三要素：选择，限制条件，结束条件<br>回溯是一种算法思想，它是用递归实现的。回溯的过程类似于穷举法，但回溯有“剪枝”功能，即自我判断过程。例如有求和问题，给定有 7 个元素的组合 [1, 2, 3, 4, 5, 6, 7]，求加和为 7 的子集。累加计算中，选择 1+2+3+4 时，判断得到结果为 10 大于 7，那么后面的 5, 6, 7 就没有必要计算了。这种方法属于搜索过程中的优化，即“剪枝”功能。</p>
+<p>回溯法解决leetcode10注意递归和回溯的区别<br>回溯具有剪枝的功能。当出现结束条件，自动回溯，不必再往不必要的地方搜索。</p>
+<p>我们在路上走着，前面是一个多岔路口，因为我们并不知道应该走哪条路，所以我们需要尝试。尝试的过程就是一个函数。<br>我们选择了一个方向，后来发现又有一个多岔路口，这时候又需要进行一次选择。所以我们需要在上一次尝试结果的基础上，再做一次尝试，即在函数内部再调用一次函数，这就是递归的过程。<br>这样重复了若干次之后，发现这次选择的这条路走不通，这时候我们知道我们上一个路口选错了，所以我们要回到上一个路口重新选择其他路，这就是回溯的思想。</p>
+<p>递归和回溯相关题目：<br>leetcode17 letter Combinations of a Phone Number<br>leetcode22 Generate Parentheses(最为经典)<br>leetcode46 permutations<br>在 Backtracking 标签中，有 30+ 道与递归、回溯相关的例题</p>
+<p>回溯搜索是深度优先搜索（DFS）的一种。对于某一个搜索树来说（搜索树是起记录路径和状态判断的作用），回溯和DFS，其主要的区别是，回溯法在求解过程中不保留完整的树结构，而深度优先搜索则记下完整的搜索树。</p>
+<p><a href="http://www.cnblogs.com/shizhh/p/5302852.html" target="_blank" rel="noopener">http://www.cnblogs.com/shizhh/p/5302852.html</a> 动态规划系列问题汇总</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/03/回溯，递归，dp三法leetcode-题目“/" data-id="cjv66qfpd002pmzzurg7ovryc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-springSecurity-Bcrypt-hash-password" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/02/springSecurity-Bcrypt-hash-password/" class="article-date">
@@ -121,7 +291,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/02/springSecurity-Bcrypt-hash-password/" data-id="cjujaiy0g002rjgzuec1sleop" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/02/springSecurity-Bcrypt-hash-password/" data-id="cjv66qfpr0036mzzuh7ugoprz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
@@ -179,7 +349,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/02/Hibernate/" data-id="cjujaixyr0005jgzu0iw7tjsh" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/02/Hibernate/" data-id="cjv66qfmw0002mzzusvhy205k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hibernate/">hibernate</a></li></ul>
@@ -230,7 +400,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/被amazon开出两次的经验总结/" data-id="cjujaiy08002jjgzue6f2wdyl" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/被amazon开出两次的经验总结/" data-id="cjv66qfpf002smzzuuu2x6spv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/career/">career</a></li></ul>
@@ -270,7 +440,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/leetcode-10-Regular-expression/" data-id="cjujaixzo001gjgzuyqfumhwx" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/leetcode-10-Regular-expression/" data-id="cjv66qfo2001bmzzuyb8pfnzr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -319,7 +489,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/March-30-2019-Study-plan/" data-id="cjujaixz3000ejgzuxoxiy1cs" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/March-30-2019-Study-plan/" data-id="cjv66qfne000dmzzuj99p2q78" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Study-plan/">Study plan</a></li></ul>
@@ -358,245 +528,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/react-factory-and-functional-component/" data-id="cjujaixzw001yjgzuhrsijsd9" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/react-factory-and-functional-component/" data-id="cjv66qfoy0024mzzuq2o4tshq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-factory-pattern" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/29/factory-pattern/" class="article-date">
-  <time datetime="2019-03-29T17:56:22.000Z" itemprop="datePublished">2019-03-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/29/factory-pattern/">factory pattern</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Factory  react example:</span><br></pre></td></tr></table></figure>
-<p>export default class SlideFactory {<br>    static build(data) {<br>        switch (data.source) {<br>            case ‘brand’:<br>                return <brandfeedslide slidedata="{data}/">;<br>            case ‘article’:<br>                return <articlefeedslide slidedata="{data}">;<br>            default:<br>                return undefined;<br>        }<br>    }<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">const  items = [</span><br><span class="line">   &#123;    </span><br><span class="line">          source: ‘brand’,</span><br><span class="line">        title: ‘title’</span><br><span class="line">   &#125;    </span><br><span class="line">]</span><br><span class="line">const renderedItems = items.map((item) =&gt; SlideFactory.build(item));</span><br></pre></td></tr></table></figure></articlefeedslide></brandfeedslide></p>
-<p>the items can have properties for different kinds of slider. </p>
-<p>// A design without factory pattern </p>
-<p>#include <iostream><br>using namespace std; </iostream></p>
-<p>// Library classes<br>class Vehicle {<br>public:<br>    virtual void printVehicle() = 0;<br>};<br>class TwoWheeler : public Vehicle {<br>public:<br>    void printVehicle()  {<br>        cout &lt;&lt; “I am two wheeler” &lt;&lt; endl;<br>    }<br>};<br>class FourWheeler : public Vehicle {<br>    public:<br>    void printVehicle()  {<br>        cout &lt;&lt; “I am four wheeler” &lt;&lt; endl;<br>    }<br>}; </p>
-<p>// Client (or user) class<br>class Client {<br>public:<br>    Client(int type)  { </p>
-<pre><code>    // Client explicitly creates classes according to type 
-    if (type == 1) 
-        pVehicle = new TwoWheeler(); 
-    else if (type == 2) 
-        pVehicle = new FourWheeler(); 
-    else
-        pVehicle = NULL; 
-} 
-
-~Client()   { 
-    if (pVehicle) 
-    { 
-        delete[] pVehicle; 
-        pVehicle = NULL; 
-    } 
-} 
-
-Vehicle* getVehicle() { 
-    return pVehicle; 
-} 
-</code></pre><p>private:<br>    Vehicle *pVehicle;<br>}; </p>
-<p>// Driver program<br>int main() {<br>    Client <em>pClient = new Client(1);<br>    Vehicle </em> pVehicle = pClient-&gt;getVehicle();<br>    pVehicle-&gt;printVehicle();<br>    return 0;<br>    }<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> What is the problems with above design?</span><br><span class="line">As you must have observed in the above example, Client creates objects of either TwoWheeler or FourWheeler based on some input during constructing its object.</span><br><span class="line">Say, library introduces a new class ThreeWheeler to incorporate three wheeler vehicles also. What would happen? Client will end up chaining a new else if in the conditional ladder to create objects of ThreeWheeler. Which in turn will need Client to be recompiled. So, each time a new change is made at the library side, Client would need to make some corresponding changes at its end and recompile the code. Sounds bad? This is a very bad practice of design.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">How to avoid the problem?</span><br><span class="line">The answer is, create a static (or factory) method. Let us see below code.</span><br></pre></td></tr></table></figure></p>
-<p>// C++ program to demonstrate factory method design pattern </p>
-<p>#include <iostream><br>using namespace std; </iostream></p>
-<p>enum VehicleType {<br>    VT_TwoWheeler,    VT_ThreeWheeler,    VT_FourWheeler<br>}; </p>
-<p>// Library classes<br>class Vehicle {<br>public:<br>    virtual void printVehicle() = 0;<br>    static Vehicle* Create(VehicleType type);<br>};<br>class TwoWheeler : public Vehicle {<br>public:<br>    void printVehicle() {<br>        cout &lt;&lt; “I am two wheeler” &lt;&lt; endl;<br>    }<br>};<br>class ThreeWheeler : public Vehicle {<br>public:<br>    void printVehicle() {<br>        cout &lt;&lt; “I am three wheeler” &lt;&lt; endl;<br>    }<br>};<br>class FourWheeler : public Vehicle {<br>    public:<br>    void printVehicle() {<br>        cout &lt;&lt; “I am four wheeler” &lt;&lt; endl;<br>    }<br>}; </p>
-<p>// Factory method to create objects of different types.<br>// Change is required only in this function to create a new object type<br>Vehicle* Vehicle::Create(VehicleType type) {<br>    if (type == VT_TwoWheeler)<br>        return new TwoWheeler();<br>    else if (type == VT_ThreeWheeler)<br>        return new ThreeWheeler();<br>    else if (type == VT_FourWheeler)<br>        return new FourWheeler();<br>    else return NULL;<br>} </p>
-<p>// Client class<br>class Client {<br>public: </p>
-<pre><code>// Client doesn&apos;t explicitly create objects 
-// but passes type to factory method &quot;Create()&quot; 
-Client() 
-{ 
-    VehicleType type = VT_ThreeWheeler; 
-    pVehicle = Vehicle::Create(type); 
-} 
-~Client() { 
-    if (pVehicle) { 
-        delete[] pVehicle; 
-        pVehicle = NULL; 
-    } 
-} 
-Vehicle* getVehicle()  { 
-    return pVehicle; 
-} 
-</code></pre><p>private:<br>    Vehicle *pVehicle;<br>}; </p>
-<p>// Driver program<br>int main() {<br>    Client <em>pClient = new Client();<br>    Vehicle </em> pVehicle = pClient-&gt;getVehicle();<br>    pVehicle-&gt;printVehicle();<br>    return 0;<br>}<br><code>`</code></p>
-<p>In the above example, we have totally decoupled the selection of type for object creation from Client. The library is now responsible to decide which object type to create based on an input. Client just needs to make call to library’s factory Create method and pass the type it wants without worrying about the actual implementation of creation of objects.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/29/factory-pattern/" data-id="cjujaixzj0016jgzuu3bzl1n9" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Design-high-quality-React-component" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/28/Design-high-quality-React-component/" class="article-date">
-  <time datetime="2019-03-28T15:55:48.000Z" itemprop="datePublished">2019-03-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/28/Design-high-quality-React-component/">Design high quality React component</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Design-high-quality-React-component"><a href="#Design-high-quality-React-component" class="headerlink" title="Design high quality React component"></a>Design high quality React component</h1><p>作为一个合格的开发者，不要只满足于编写了可以运行的代码。而要了解代码背后的工作原理；不要只满足于自己的程序能够运行，还要让自己的代码可读而且易于维护。这样才能开发出高质量的软件.</p>
-<h2 id="构建高质量React组件的原则和方法"><a href="#构建高质量React组件的原则和方法" class="headerlink" title="构建高质量React组件的原则和方法"></a>构建高质量React组件的原则和方法</h2><pre><code>### 划分组件边界的原则 ###
-
-### React组件的数据种类 ###
-
-### React组件的生命周期 ###
-</code></pre><p>React组件设计的基础知识，因为React应用都是围绕组件的设计，所以关于组件的设计介绍将贯穿全书.</p>
-<p>我会继续用react，四点理由：第一，“继续”说明我17年就在用react，最熟悉。虽然vue我也熟悉，毕竟放了一年了。angular我确实不太熟悉。第二，react生态现在确实非常好。而且前端生态的下一步进展（全链路，设计开发打通，组件市场，在线ide什么的），目前看来基于react的探索居多，未来会有技术红利。第三，不得不承认jsx真是好用，模板scope和js scope合一，而且可以面向过程任意分解render函数。不得不说，jsx的设计思想我当时花了几个月才真正理解其高明。第四，react有一个3k大小的小兄弟叫preact，这个非常有用。因为我们有时候希望把组件打包成不依赖任何框架的内嵌模块发布，但是把框架打包进去，会很大。这时把组件适配到preact，把preact打包进去就好了。<br>作者：匿名用户<br>链接：<a href="https://www.zhihu.com/question/266823404/answer/409100494" target="_blank" rel="noopener">https://www.zhihu.com/question/266823404/answer/409100494</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/Design-high-quality-React-component/" data-id="cjujaixyl0002jgzuw737im4b" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-props-and-state-new-example" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/28/props-and-state-new-example/" class="article-date">
-  <time datetime="2019-03-28T14:08:40.000Z" itemprop="datePublished">2019-03-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/28/props-and-state-new-example/">props and state new example</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[转载]<a href="https://www.jianshu.com/p/3cb5026edee8" target="_blank" rel="noopener">https://www.jianshu.com/p/3cb5026edee8</a></p>
-<ol>
-<li><p>props传值，直接在组件初始化的时候赋予参数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">    &lt;script src=&quot;https://zhangpeiyue.com/wp-content/uploads/2018/08/react.development.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;https://zhangpeiyue.com/wp-content/uploads/2018/08/react-dom.development.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;https://zhangpeiyue.com/wp-content/uploads/2018/08/babel.min_.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div id=&quot;wrap&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;script type=&quot;text/babel&quot;&gt;</span><br><span class="line">    class MyComponent extends React.Component &#123;</span><br><span class="line">        //此处的构造器是可以省略的</span><br><span class="line">        constructor(props)&#123;</span><br><span class="line">            super(props);</span><br><span class="line">        &#125;</span><br><span class="line">        render() &#123;</span><br><span class="line">            return &lt;div&gt;好神奇！ &#123;this.props.siteName&#125;!&lt;/div&gt;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    var element = &lt;MyComponent siteName=&quot;zhangpeiyue.com&quot;/&gt;;</span><br><span class="line">    ReactDOM.render(</span><br><span class="line">        element,</span><br><span class="line">        document.querySelector(&quot;#wrap&quot;)</span><br><span class="line">    );</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过defaltProps 添加默认的props</p>
-</li>
-</ol>
-<p>defaultProps是一个对象，放添加的值到defaultProps的属性中即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class MyComponent extends React.Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        //此处返回   &lt;div&gt;小张今年18岁了&lt;/div&gt;</span><br><span class="line">        return &lt;div&gt;</span><br><span class="line">            &#123;this.props.userName&#125;今年&#123;this.props.age&#125;岁了！</span><br><span class="line">        &lt;/div&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//为组件添加默认属性 userName与age</span><br><span class="line">MyComponent.defaultProps=&#123;</span><br><span class="line">    userName:&quot;小张&quot;,</span><br><span class="line">    age:18</span><br><span class="line">&#125;</span><br><span class="line">var element = &lt;MyComponent/&gt;;</span><br><span class="line">ReactDOM.render(</span><br><span class="line">    element,</span><br><span class="line">    document.querySelector(&quot;#wrap&quot;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
-<ol start="3">
-<li>可以通过父组件设置state，然后子组件通过props接收父组件的state值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">//父组件</span><br><span class="line">class MyComponent extends React.Component &#123;</span><br><span class="line">    constructor()&#123;</span><br><span class="line">        super();</span><br><span class="line">        //设置sate,添加name与age属性</span><br><span class="line">        this.state=&#123;</span><br><span class="line">            name:&quot;张培跃&quot;,</span><br><span class="line">            age:18</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return &lt;div&gt;</span><br><span class="line">            &lt;Name name=&#123;this.state.name&#125;/&gt;</span><br><span class="line">            &lt;Age age=&#123;this.state.age&#125;/&gt;</span><br><span class="line">        &lt;/div&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//子组件Name</span><br><span class="line">class Name extends React.Component&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        return &lt;div&gt;&#123;this.props.name&#125;&lt;/div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//子组件Age</span><br><span class="line">class Age extends React.Component&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        return &lt;div&gt;&#123;this.props.age&#125;&lt;/div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var element = &lt;MyComponent/&gt;;</span><br><span class="line">ReactDOM.render(</span><br><span class="line">    element,</span><br><span class="line">    document.querySelector(&quot;#wrap&quot;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>4.使用propTypes进行类型检测</p>
-<p>React提供了可以对Props进行验证的功能PropTypes。PropTypes为组件类自身的属性，提供了很多验证器，来验证传入的数据是否有效。当传入的数据无效时，JavaScript控制台会抛出警告。<br>另外需要注意的是，在开发环境下，当你使用了一个无效的值作为prop时，控件台会出现警告;在生产环境下，为了性能考虑会将PropTypes忽略掉！<br>要想使用propTypes,首先要对prop-type.js文件进行引入。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;https://zhangpeiyue.com/wp-content/uploads/2018/08/prop-types.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
-<p>Example<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var name=&quot;老大&quot;</span><br><span class="line">var age=18;</span><br><span class="line">class MyComponent extends React.Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return &lt;div&gt;</span><br><span class="line">            &#123;this.props.name&#125;今年&#123;this.props.age&#125;岁了！</span><br><span class="line">        &lt;/div&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//propTypes是组件类的静态属性</span><br><span class="line">MyComponent.propTypes=&#123;</span><br><span class="line">    //将name设置为string类型</span><br><span class="line">    name:PropTypes.string,</span><br><span class="line">    //将age设置为number类型</span><br><span class="line">    age:PropTypes.number</span><br><span class="line">&#125;;</span><br><span class="line">var element = &lt;MyComponent name=&#123;name&#125; age=&#123;age&#125; /&gt;;</span><br><span class="line">ReactDOM.render(</span><br><span class="line">    element,</span><br><span class="line">    document.querySelector(&quot;#wrap&quot;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
-<p>以上示例当中的name与age不合法时，会弹出类型不符的警告！所以在项目开发中使用PropTypes进行对props的验证还是很有好处的！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">More Validator:</span><br><span class="line">MyComponent.propTypes = &#123;</span><br><span class="line">    // 可以声明 prop 为指定的 JS 基本数据类型，默认情况，这些数据是可选的</span><br><span class="line">   optionalArray: React.PropTypes.array,</span><br><span class="line">    optionalBool: React.PropTypes.bool,</span><br><span class="line">    optionalFunc: React.PropTypes.func,</span><br><span class="line">    optionalNumber: React.PropTypes.number,</span><br><span class="line">    optionalObject: React.PropTypes.object,</span><br><span class="line">    optionalString: React.PropTypes.string,</span><br><span class="line"> </span><br><span class="line">    // 可以被渲染的对象 numbers, strings, elements 或 array</span><br><span class="line">    optionalNode: React.PropTypes.node,</span><br><span class="line"> </span><br><span class="line">    //  React 元素</span><br><span class="line">    optionalElement: React.PropTypes.element,</span><br><span class="line"> </span><br><span class="line">    // 用 JS 的 instanceof 操作符声明 prop 为类的实例。</span><br><span class="line">    optionalMessage: React.PropTypes.instanceOf(Message),</span><br><span class="line"> </span><br><span class="line">    // 用 enum 来限制 prop 只接受指定的值。</span><br><span class="line">    optionalEnum: React.PropTypes.oneOf([&apos;News&apos;, &apos;Photos&apos;]),</span><br><span class="line"> </span><br><span class="line">    // 可以是多个对象类型中的一个</span><br><span class="line">    optionalUnion: React.PropTypes.oneOfType([</span><br><span class="line">      React.PropTypes.string,</span><br><span class="line">      React.PropTypes.number,</span><br><span class="line">      React.PropTypes.instanceOf(Message)</span><br><span class="line">    ]),</span><br><span class="line"> </span><br><span class="line">    // 指定类型组成的数组</span><br><span class="line">    optionalArrayOf: React.PropTypes.arrayOf(React.PropTypes.number),</span><br><span class="line"> </span><br><span class="line">    // 指定类型的属性构成的对象</span><br><span class="line">    optionalObjectOf: React.PropTypes.objectOf(React.PropTypes.number),</span><br><span class="line"> </span><br><span class="line">    // 特定 shape 参数的对象</span><br><span class="line">    optionalObjectWithShape: React.PropTypes.shape(&#123;</span><br><span class="line">      color: React.PropTypes.string,</span><br><span class="line">      fontSize: React.PropTypes.number</span><br><span class="line">    &#125;),</span><br><span class="line"> </span><br><span class="line">    // 任意类型加上 `isRequired` 来使 prop 不可空。</span><br><span class="line">    requiredFunc: React.PropTypes.func.isRequired,</span><br><span class="line"> </span><br><span class="line">    // 不可空的任意类型</span><br><span class="line">    requiredAny: React.PropTypes.any.isRequired,</span><br><span class="line"> </span><br><span class="line">    // 自定义验证器。如果验证失败需要返回一个 Error 对象。不要直接使用 `console.warn` 或抛异常，因为这样 `oneOfType` 会失效。</span><br><span class="line">    customProp: function(props, propName, componentName) &#123;</span><br><span class="line">      if (!/matchme/.test(props[propName])) &#123;</span><br><span class="line">        return new Error(&apos;Validation failed!&apos;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>现在我们来总结下,props与state的区别：</p>
-<p>props是指组件间传递的一种方式，props自然也可以传递state。由于React的数据流是自上而下的，所以是从父组件向子组件进行传递；另外组件内部的this.props属性是只读的不可修改！<br>state是组件内部的状态（数据），不能够直接修改，必须要通过setState来改变值的状态，从而达到更新组件内部数据的作用。</p>
-<p>props和state是经常要结合使用的，父组件的state可以转化为props来为子组件进行传值。在这种情况下，子组件接收的props是只读的，想要改变值，只能通过父组件的state对其进行更改。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/props-and-state-new-example/" data-id="cjujaixzv001wjgzuewljpbn1" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode-924-Minimize-Malware-Spread" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/28/leetcode-924-Minimize-Malware-Spread/" class="article-date">
-  <time datetime="2019-03-28T13:32:41.000Z" itemprop="datePublished">2019-03-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/28/leetcode-924-Minimize-Malware-Spread/">leetcode 924. Minimize Malware Spread</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Union Find and bfs and dfs</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/leetcode-924-Minimize-Malware-Spread/" data-id="cjujaixzp001hjgzuj429vjdj" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
 
     </footer>
   </div>
@@ -609,7 +544,7 @@ Vehicle* getVehicle()  {
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -623,7 +558,7 @@ Vehicle* getVehicle()  {
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
     </div>
   </div>
 
@@ -633,7 +568,7 @@ Vehicle* getVehicle()  {
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Javascript/" style="font-size: 13.33px;">Javascript</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 16.67px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 13.33px;">Design pattern</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 13.33px;">Javascript</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 16.67px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/react/" style="font-size: 13.33px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
@@ -642,7 +577,7 @@ Vehicle* getVehicle()  {
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -655,23 +590,23 @@ Vehicle* getVehicle()  {
       <ul>
         
           <li>
+            <a href="/2019/05/02/singleton-code-demo/">singleton_code_demo</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/17/sass-scss/">sass/scss</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/17/react-component-communication/">react component communication</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/16/react-context-api/">react context api</a>
+          </li>
+        
+          <li>
             <a href="/2019/04/15/transaction-meaning/">transaction meaning</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/12/ngrx-for-flux/">ngrx for flux</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/11/TDD-concept/">TDD concept</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/11/Jest/">Jest</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/10/leetcode380InsertDeleteGetRandom/">leetcode380InsertDeleteGetRandom</a>
           </li>
         
       </ul>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-04-16T04:31:59.034Z</updated>
+  <updated>2019-05-02T05:04:15.821Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,99 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>singleton_code_demo</title>
+    <link href="http://pengw00.github.io/2019/05/02/singleton-code-demo/"/>
+    <id>http://pengw00.github.io/2019/05/02/singleton-code-demo/</id>
+    <published>2019-05-02T04:59:31.000Z</published>
+    <updated>2019-05-02T05:04:15.821Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="SingleTon-basic-logic"><a href="#SingleTon-basic-logic" class="headerlink" title="SingleTon basic logic"></a>SingleTon basic logic</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class SingleTonClass &#123;</span><br><span class="line">private static SingleTonClass obj = null;</span><br><span class="line">private SingleTonClass()&#123;</span><br><span class="line">      /*Private Constructor will prevent </span><br><span class="line">       * the instantiation of this class directly*/</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public static SingleTonClass objectCreationMethod()&#123;</span><br><span class="line">/*This logic will ensure that no more than</span><br><span class="line"> * one object can be created at a time */</span><br><span class="line">if(obj==null)&#123;</span><br><span class="line">    obj= new SingleTonClass();</span><br><span class="line">&#125;</span><br><span class="line">        return obj;</span><br><span class="line">   &#125;</span><br><span class="line">   public void display()&#123;</span><br><span class="line">System.out.println(&quot;Singleton class Example&quot;);</span><br><span class="line">   &#125;</span><br><span class="line">   public static void main(String args[])&#123;</span><br><span class="line">//Object cannot be created directly due to private constructor </span><br><span class="line">        //This way it is forced to create object via our method where</span><br><span class="line">        //we have logic for only one object creation</span><br><span class="line">SingleTonClass myobject= SingleTonClass.objectCreationMethod();</span><br><span class="line">myobject.display();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;SingleTon-basic-logic&quot;&gt;&lt;a href=&quot;#SingleTon-basic-logic&quot; class=&quot;headerlink&quot; title=&quot;SingleTon basic logic&quot;&gt;&lt;/a&gt;SingleTon basic logic&lt;/
+      
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://pengw00.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>sass/scss</title>
+    <link href="http://pengw00.github.io/2019/04/17/sass-scss/"/>
+    <id>http://pengw00.github.io/2019/04/17/sass-scss/</id>
+    <published>2019-04-17T18:36:41.000Z</published>
+    <updated>2019-04-17T19:58:58.039Z</updated>
+    
+    <content type="html"><![CDATA[<p>为什么使用SASS/SCSS？</p><p>易维护，更方便的定制<br>对于一个大型或者稍微有规模的UI来说，如果需要替换下整体风格，或者是某个字体的像素值，比如我们经常会遇到panel，window以及portal共用一个背景色，这个时候按照常规的方式，我们需要一个个定位到元素使用的class，然后逐个替换，SASS提供了变量的方式，你可以把某个样式作为一个变量，然后各个class引用这个变量即可，修改时，我们只需修改对应的变量。<br>对于编程人员的友好<br>对于一个没有前端基础的编程人员，写css样式是一件非常痛苦的事情，他们会感觉到各种约束，为什么我不能定一个变量来避免那些类似“变量”的重复书写？为什么我不能继承上个class的样式定义？。。。SASS/SCSS正是帮编程人员解开了这些疑惑，让css看起来更像是一门编程语言。<br>效率的提升<br>对于一个前端开发人员来说，我不熟悉编程，也不关注css是否具有的一些编程语言特性，但这不是你放弃他的理由，css3的发展，加之主流浏览器的兼容性不一，很多浏览器都有自己的兼容hack，很多时候我们需要针对不同的浏览器写一堆的hack，这种浪费时间的重复劳动就交给SASS处理去吧！</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;为什么使用SASS/SCSS？&lt;/p&gt;
+&lt;p&gt;易维护，更方便的定制&lt;br&gt;对于一个大型或者稍微有规模的UI来说，如果需要替换下整体风格，或者是某个字体的像素值，比如我们经常会遇到panel，window以及portal共用一个背景色，这个时候按照常规的方式，我们需要一个个定
+      
+    
+    </summary>
+    
+    
+      <category term="Front-end" scheme="http://pengw00.github.io/tags/Front-end/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>react component communication</title>
+    <link href="http://pengw00.github.io/2019/04/17/react-component-communication/"/>
+    <id>http://pengw00.github.io/2019/04/17/react-component-communication/</id>
+    <published>2019-04-17T15:02:23.000Z</published>
+    <updated>2019-04-17T15:29:27.493Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://blog.csdn.net/lizhipeng123321/article/details/80018003" target="_blank" rel="noopener">https://blog.csdn.net/lizhipeng123321/article/details/80018003</a></p><p>总结<br>本文总结了 React 中组件的几种通信方式，分别是：</p><p>父组件向子组件通信：使用 props<br>子组件向父组件通信：使用 props 回调<br>跨级组件间通信：使用 context 对象<br>非嵌套组件间通信：使用事件订阅<br>事实上，在组件间进行通信时，这些通信方式都可以使用，区别只在于使用相应的通信方式的复杂程度和个人喜好，选择最合适的那一个。</p><p>比如，通过事件订阅模式通信不止可以应用在非嵌套组件间，还可以用于跨级组件间，非嵌套组件间通信也可以使用 context 等。关键是选择最合适的方式。</p><p>当然，自己实现组件间的通信还是太难以管理了，因此出现了很多状态管理工具，如 flux、redux 等，使用这些工具使得组件间的通信更容易追踪和管理。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/lizhipeng123321/article/details/80018003&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://blog.csdn.net/lizhipeng12
+      
+    
+    </summary>
+    
+    
+      <category term="react" scheme="http://pengw00.github.io/tags/react/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>react context api</title>
+    <link href="http://pengw00.github.io/2019/04/16/react-context-api/"/>
+    <id>http://pengw00.github.io/2019/04/16/react-context-api/</id>
+    <published>2019-04-16T05:25:24.000Z</published>
+    <updated>2019-04-17T15:02:44.831Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="react-contect-api-state-manage"><a href="#react-contect-api-state-manage" class="headerlink" title="react contect api state manage"></a>react contect api state manage</h1><h2 id="When-Should-I-Use-Context"><a href="#When-Should-I-Use-Context" class="headerlink" title="When Should I Use Context?"></a>When Should I Use Context?</h2><p>I would recommend reaching for Context when you find yourself passing props down through three or more levels in your component tree. You might notice that you have renamed your props, making it challenging to determine the data’s origin. You might consider implementing context if a bunch of your components know about irrelevant data.</p><p>Rule of thumb: if you start to feel irritated by how long it takes to determine where data is coming from, introduce Context.</p><p>Do not hesitate to still use the other tools you have available, like prop drilling and redux. While Context can make it easier to pass props around in certain scenarios, it doesn’t give you access to some of the benefits redux offers, and it’s a more complicated abstraction than prop drilling.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;react-contect-api-state-manage&quot;&gt;&lt;a href=&quot;#react-contect-api-state-manage&quot; class=&quot;headerlink&quot; title=&quot;react contect api state manage&quot;&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="react" scheme="http://pengw00.github.io/tags/react/"/>
+    
+  </entry>
   
   <entry>
     <title>transaction meaning</title>
@@ -67,12 +160,21 @@
     <link href="http://pengw00.github.io/2019/04/11/TDD-concept/"/>
     <id>http://pengw00.github.io/2019/04/11/TDD-concept/</id>
     <published>2019-04-12T03:26:17.000Z</published>
-    <updated>2019-04-12T03:26:17.979Z</updated>
+    <updated>2019-04-17T21:01:30.100Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://medium.com/javascript-scene/unit-testing-react-components-aeda9a44aae2" target="_blank" rel="noopener">https://medium.com/javascript-scene/unit-testing-react-components-aeda9a44aae2</a></p><p>Favor pure components for UI code: given same props, always render the same component. If you need state from the app, you can wrap those pure components with a container component which manages state and side-effects.<br>Isolate application logic/business rules in pure reducer functions.<br>Isolate side effects using container components.</p>]]></content>
     
     <summary type="html">
     
+      
+      
+        &lt;p&gt;&lt;a href=&quot;https://medium.com/javascript-scene/unit-testing-react-components-aeda9a44aae2&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://medium.co
+      
+    
     </summary>
     
+    
+      <category term="Design pattern" scheme="http://pengw00.github.io/tags/Design-pattern/"/>
     
   </entry>
   
@@ -367,98 +469,6 @@
     
     
       <category term="Algorithm" scheme="http://pengw00.github.io/tags/Algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Quick Sort&#39; </title>
-    <link href="http://pengw00.github.io/2019/04/03/Quick-Sort/"/>
-    <id>http://pengw00.github.io/2019/04/03/Quick-Sort/</id>
-    <published>2019-04-03T15:43:47.000Z</published>
-    <updated>2019-04-03T15:50:48.701Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public void quickSort(int[] arr, int low, int high)&#123;</span><br><span class="line">if(low&gt;high) return;</span><br><span class="line">int i = low, int j = high, base = arr[low];</span><br><span class="line">while(i &lt; j)&#123;</span><br><span class="line">while(arr[i]&lt;base &amp;&amp; i&lt;j)&#123;i++;&#125;</span><br><span class="line">while(arr[j]&gt;base &amp;&amp; i &lt; j)&#123; j--;&#125;</span><br><span class="line">//after that the order is messy</span><br><span class="line">swap(arr, low, j);</span><br><span class="line">&#125;</span><br><span class="line">swap(arr, base, j);</span><br><span class="line">quickSort(arr, low, j-1);</span><br><span class="line">quickSort(arr, j+1, high);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void swap(int[] arr, int i, int j)&#123;</span><br><span class="line">int temp = arr[i];</span><br><span class="line">arr[i] = arr[j];</span><br><span class="line">arr[j] = tamp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
-      
-    
-    </summary>
-    
-    
-      <category term="algorithm" scheme="http://pengw00.github.io/tags/algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>axios instance</title>
-    <link href="http://pengw00.github.io/2019/04/03/axios-instance/"/>
-    <id>http://pengw00.github.io/2019/04/03/axios-instance/</id>
-    <published>2019-04-03T14:31:17.000Z</published>
-    <updated>2019-04-03T14:32:46.136Z</updated>
-    
-    <content type="html"><![CDATA[<p>Question??<br>axios.create({ baseURL: ajaxUrl,timeout: 30000,withCredentials: true}) 创建实例作用是啥 没有不行吗### 问题描述<br>引入axios,然后在页面中进行请求axios.get(‘url’).then(res=&gt;{}),这里的创建实例充当什么角色</p><p>Answer:<br>默认会导出实例axios，通常你只需使用这个axios就可以了。</p><p>但是有时候你需要创建多个实例，比如你需要访问多个服务地址，而这些服务请求和响应的结构都完全不同，那么你可以通过axios.create创建不同的实例来处理。</p><p>比如axios1是用http状态码确定响应是否正常，而axios2是服务器自己定义的状态码，又或者他们请求头不同，支持的content-type不同，那么我可以单独为axios1和axios2写拦截器。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Question??&lt;br&gt;axios.create({ baseURL: ajaxUrl,timeout: 30000,withCredentials: true}) 创建实例作用是啥 没有不行吗### 问题描述&lt;br&gt;引入axios,然后在页面中进行请求axios.ge
-      
-    
-    </summary>
-    
-    
-      <category term="React" scheme="http://pengw00.github.io/tags/React/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>dfs和回溯模版</title>
-    <link href="http://pengw00.github.io/2019/04/03/dfs%E5%92%8C%E5%9B%9E%E6%BA%AF%E6%A8%A1%E7%89%88/"/>
-    <id>http://pengw00.github.io/2019/04/03/dfs和回溯模版/</id>
-    <published>2019-04-03T05:12:04.000Z</published>
-    <updated>2019-04-04T04:58:36.680Z</updated>
-    
-    <content type="html"><![CDATA[<p>dfs template<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">void f()  </span><br><span class="line">&#123;  </span><br><span class="line">     if(符合边界条件)  </span><br><span class="line">     &#123;  </span><br><span class="line"></span><br><span class="line">        ///////  </span><br><span class="line">        return;  </span><br><span class="line">     &#125;  </span><br><span class="line"></span><br><span class="line">     //某种形式的调用  </span><br><span class="line">     f();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>回溯模版： 限制条件 if，选择 （for。。。）结束条件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">void DFS(int 当前状态)  </span><br><span class="line">&#123;  </span><br><span class="line">      if(当前状态为边界状态)  </span><br><span class="line">      &#123;  </span><br><span class="line">        记录或输出  </span><br><span class="line">        return;  </span><br><span class="line">      &#125;  </span><br><span class="line">      for(i=0;i&lt;n;i++)       //横向遍历解答树所有子节点  </span><br><span class="line">      &#123;  </span><br><span class="line">           //扩展出一个子状态。  </span><br><span class="line">           修改了全局变量  </span><br><span class="line">           if(子状态满足约束条件)  </span><br><span class="line">            &#123;  </span><br><span class="line">              dfs(子状态)  </span><br><span class="line">           &#125;  </span><br><span class="line">            恢复全局变量//回溯部分  </span><br><span class="line">      &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>BFS和DFS相似。BFS显式用队列，DFS隐式用栈，即递归。<br>当然，对于DFS，用递归可能会造成栈溢出，所以也可以更改为显示栈。</p><p>经典例题： 走迷宫<br>*表示可走 </p><p>#表示障碍<br>T表示出口<br>入口是(1,1)，数据保证左上角是入口。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">char maze[100][100];</span><br><span class="line">bool flag[100][100];</span><br><span class="line">int dx[]=&#123;0,0,1,-1&#125;;</span><br><span class="line">int dy[]=&#123;1,-1,0,0&#125;;</span><br><span class="line">int m,n;</span><br><span class="line"></span><br><span class="line">bool dfs(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">    flag[x][y]=1;              //走过的路标记为1</span><br><span class="line">    if(maze[x][y]==&apos;T&apos;)return true;</span><br><span class="line">    for(int i=0;i&lt;4;i++)       //四个方向</span><br><span class="line">    &#123;</span><br><span class="line">        int nx=x+dx[i];</span><br><span class="line">        int ny=y+dy[i];</span><br><span class="line">        if(flag[nx][ny]==0||maze[nx][ny]==&apos;*&apos;||maze[nx][ny]==&apos;T&apos;&amp;&amp;nx&gt;0&amp;&amp;ny&gt;0&amp;&amp;nx&lt;m+1&amp;&amp;ny&lt;n+1)</span><br><span class="line">        &#123;</span><br><span class="line">            return dfs(nx,ny);   </span><br><span class="line">            flag[nx][ny]=0;    //回溯，将标记重新标记为0</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;             //找不到返回false</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    while(cin&gt;&gt;m&gt;&gt;n)&#123;</span><br><span class="line">    memset(maze,0,sizeof(maze));</span><br><span class="line">    memset(flag,0,sizeof(flag));</span><br><span class="line">    for(int i=1;i&lt;=m;i++)</span><br><span class="line">        for(int j=1;j&lt;=n;j++)</span><br><span class="line">            cin&gt;&gt;maze[i][j];</span><br><span class="line">    if(dfs(1,1))cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl;</span><br><span class="line">    else cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>回溯的两种写法：</p><p>递归写法和迭代写法，链接：<a href="https://blog.csdn.net/man_sion/article/details/74993907" target="_blank" rel="noopener">https://blog.csdn.net/man_sion/article/details/74993907</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;dfs template&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/s
-      
-    
-    </summary>
-    
-    
-      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>回溯，递归，dp三法leetcode 题目“ </title>
-    <link href="http://pengw00.github.io/2019/04/03/%E5%9B%9E%E6%BA%AF%EF%BC%8C%E9%80%92%E5%BD%92%EF%BC%8Cdp%E4%B8%89%E6%B3%95leetcode-%E9%A2%98%E7%9B%AE%E2%80%9C/"/>
-    <id>http://pengw00.github.io/2019/04/03/回溯，递归，dp三法leetcode-题目“/</id>
-    <published>2019-04-03T04:30:53.000Z</published>
-    <updated>2019-04-03T04:59:05.205Z</updated>
-    
-    <content type="html"><![CDATA[<p>leetcode 10  regular expression matching 可以减去一字符<br>leetcode wildcard matching 可以匹配一个字符<br>leetcode edit distance<br>回溯三要素：选择，限制条件，结束条件<br>回溯是一种算法思想，它是用递归实现的。回溯的过程类似于穷举法，但回溯有“剪枝”功能，即自我判断过程。例如有求和问题，给定有 7 个元素的组合 [1, 2, 3, 4, 5, 6, 7]，求加和为 7 的子集。累加计算中，选择 1+2+3+4 时，判断得到结果为 10 大于 7，那么后面的 5, 6, 7 就没有必要计算了。这种方法属于搜索过程中的优化，即“剪枝”功能。</p><p>回溯法解决leetcode10注意递归和回溯的区别<br>回溯具有剪枝的功能。当出现结束条件，自动回溯，不必再往不必要的地方搜索。</p><p>我们在路上走着，前面是一个多岔路口，因为我们并不知道应该走哪条路，所以我们需要尝试。尝试的过程就是一个函数。<br>我们选择了一个方向，后来发现又有一个多岔路口，这时候又需要进行一次选择。所以我们需要在上一次尝试结果的基础上，再做一次尝试，即在函数内部再调用一次函数，这就是递归的过程。<br>这样重复了若干次之后，发现这次选择的这条路走不通，这时候我们知道我们上一个路口选错了，所以我们要回到上一个路口重新选择其他路，这就是回溯的思想。</p><p>递归和回溯相关题目：<br>leetcode17 letter Combinations of a Phone Number<br>leetcode22 Generate Parentheses(最为经典)<br>leetcode46 permutations<br>在 Backtracking 标签中，有 30+ 道与递归、回溯相关的例题</p><p>回溯搜索是深度优先搜索（DFS）的一种。对于某一个搜索树来说（搜索树是起记录路径和状态判断的作用），回溯和DFS，其主要的区别是，回溯法在求解过程中不保留完整的树结构，而深度优先搜索则记下完整的搜索树。</p><p><a href="http://www.cnblogs.com/shizhh/p/5302852.html" target="_blank" rel="noopener">http://www.cnblogs.com/shizhh/p/5302852.html</a> 动态规划系列问题汇总</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;leetcode 10  regular expression matching 可以减去一字符&lt;br&gt;leetcode wildcard matching 可以匹配一个字符&lt;br&gt;leetcode edit distance&lt;br&gt;回溯三要素：选择，限制条件，结束条件&lt;b
-      
-    
-    </summary>
-    
-    
-      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
     
   </entry>
   
