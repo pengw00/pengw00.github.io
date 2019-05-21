@@ -65,6 +65,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Jest" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/11/Jest/" class="article-date">
+  <time datetime="2019-04-11T13:56:24.000Z" itemprop="datePublished">2019-04-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/11/Jest/">Jest</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Run:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add --dev react-test-renderer</span><br></pre></td></tr></table></figure></p>
+<p>Setup without Create React App</p>
+<p>If you have an existing application you’ll need to install a few packages to make everything work well together. We are using the babel-jest package and the react babel preset to transform our code inside of the test environment.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add --dev jest babel-jest @babel/preset-env @babel/preset-react react-test-renderer</span><br></pre></td></tr></table></figure>
+<p>Example<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// package.json</span><br><span class="line">  &quot;dependencies&quot;: &#123;</span><br><span class="line">    &quot;react&quot;: &quot;&lt;current-version&gt;&quot;,</span><br><span class="line">    &quot;react-dom&quot;: &quot;&lt;current-version&gt;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;@babel/preset-env&quot;: &quot;&lt;current-version&gt;&quot;,</span><br><span class="line">    &quot;@babel/preset-react&quot;: &quot;&lt;current-version&gt;&quot;,</span><br><span class="line">    &quot;babel-jest&quot;: &quot;&lt;current-version&gt;&quot;,</span><br><span class="line">    &quot;jest&quot;: &quot;&lt;current-version&gt;&quot;,</span><br><span class="line">    &quot;react-test-renderer&quot;: &quot;&lt;current-version&gt;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;jest&quot;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  // babel.config.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">  presets: [&apos;@babel/preset-env&apos;, &apos;@babel/preset-react&apos;],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">// Link.react.js</span><br><span class="line">import React from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">const STATUS = &#123;</span><br><span class="line">  HOVERED: &apos;hovered&apos;,</span><br><span class="line">  NORMAL: &apos;normal&apos;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export default class Link extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line"></span><br><span class="line">    this._onMouseEnter = this._onMouseEnter.bind(this);</span><br><span class="line">    this._onMouseLeave = this._onMouseLeave.bind(this);</span><br><span class="line"></span><br><span class="line">    this.state = &#123;</span><br><span class="line">      class: STATUS.NORMAL,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  _onMouseEnter() &#123;</span><br><span class="line">    this.setState(&#123;class: STATUS.HOVERED&#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  _onMouseLeave() &#123;</span><br><span class="line">    this.setState(&#123;class: STATUS.NORMAL&#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;a</span><br><span class="line">        className=&#123;this.state.class&#125;</span><br><span class="line">        href=&#123;this.props.page || &apos;#&apos;&#125;</span><br><span class="line">        onMouseEnter=&#123;this._onMouseEnter&#125;</span><br><span class="line">        onMouseLeave=&#123;this._onMouseLeave&#125;</span><br><span class="line">      &gt;</span><br><span class="line">        &#123;this.props.children&#125;</span><br><span class="line">      &lt;/a&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>example: </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/11/Jest/" data-id="cjvy4auri0005it24py5e35js" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode380InsertDeleteGetRandom" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/10/leetcode380InsertDeleteGetRandom/" class="article-date">
@@ -94,7 +140,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/10/leetcode380InsertDeleteGetRandom/" data-id="cjvwiy6nc001s0h24b0i6d1je" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/10/leetcode380InsertDeleteGetRandom/" data-id="cjvy4autl002ait24duiap3em" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -134,7 +180,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/09/babel-gulp-ESlint/" data-id="cjvwiy6mp000u0h24sx0jyam6" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/09/babel-gulp-ESlint/" data-id="cjvy4aus7000qit24wyx17kn0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
@@ -172,7 +218,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/06/stack-calculator-problem-recursive-a-little-bit/" data-id="cjvwiy6nn002h0h24mn6bk9y2" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/06/stack-calculator-problem-recursive-a-little-bit/" data-id="cjvy4autw002lit24el67qofm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -210,7 +256,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/06/背包问题“/" data-id="cjvwiy6ns002n0h245988wvmi" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/06/背包问题“/" data-id="cjvy4auu3002uit245v7kb6r6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -251,7 +297,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/06/find-celebrity/" data-id="cjvwiy6n1001b0h244x4psj9s" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/06/find-celebrity/" data-id="cjvy4ausm001git24qk8wh84f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -289,7 +335,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/viewEncasulation/" data-id="cjvwiy6nu002s0h249i37q515" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/viewEncasulation/" data-id="cjvy4auu6002zit24qc5ldf8f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -342,7 +388,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/babel-and-webpack/" data-id="cjvwiy6mo000s0h24f27z8evw" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/babel-and-webpack/" data-id="cjvy4ause0013it24kzarpbdw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -394,7 +440,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/js-null-vs-undefined/" data-id="cjvwiy6n4001c0h242ni4ztlg" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/js-null-vs-undefined/" data-id="cjvy4ause0011it24aq6slis0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -436,55 +482,10 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/didmount-willunmount/" data-id="cjvwiy6mv00120h24ajsncn4r" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/didmount-willunmount/" data-id="cjvy4ausa000wit24ushy6a63" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-topological-sort-template" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/04/topological-sort-template/" class="article-date">
-  <time datetime="2019-04-04T04:46:18.000Z" itemprop="datePublished">2019-04-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/04/topological-sort-template/">topological sort template</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>2.怎么得出拓扑序？</p>
-<p>有两种方法，分别基于BFS和DFS，时间复杂度都是O(|V| + |E|)。<br>Topological Sort: DFS and BFS<br>DFS:<br>据说这是神书《算法导论》中提到的算法：用深度搜索来遍历整个图，采用一个数组来保存每个顶点完成的时间，这样这个数组就存放了按先后顺序访问完成的顶点了。然后我们按照顶点访问的完成时间从大到小排序，得到的就是一个拓扑序了，具体证明如下（来自其他博客）：&amp;……%¥¥……&amp;&amp;</p>
-<p>Coding:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; topologicalSort(int n, vector&lt;pair&lt;int, int&gt; &gt;&amp; edges) &#123;</span><br><span class="line">        vector&lt;int&gt; res;</span><br><span class="line">        stack&lt;int&gt; s;</span><br><span class="line">        int * isVisited = new int[n];</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            isVisited[i] = 0;</span><br><span class="line">        &#125; </span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            if (!isVisited[i]) dfs(edges, s, isVisited, i);</span><br><span class="line">        &#125;</span><br><span class="line">        while (!s.empty()) &#123;</span><br><span class="line">            res.push_back(s.top());</span><br><span class="line">            s.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">    void dfs(vector&lt;pair&lt;int, int&gt; &gt;&amp; edges, stack&lt;int&gt; &amp; s, int * isVisited, int u) &#123;</span><br><span class="line">        isVisited[u] = 1;</span><br><span class="line">        for (int i = 0; i &lt; edges.size(); i++) &#123;</span><br><span class="line">            if (edges[i].first == u &amp;&amp; !isVisited[edges[i].second]) &#123;</span><br><span class="line">                dfs(edges, s, isVisited, edges[i].second);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        s.push(u);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>BFS:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; topologicalSort(int n, vector&lt;pair&lt;int, int&gt; &gt;&amp; edges) &#123;</span><br><span class="line">        vector&lt;int&gt; res;</span><br><span class="line">        vector&lt;vector&lt;int&gt; &gt; newedges(n, vector&lt;int&gt;());</span><br><span class="line">        queue&lt;int&gt; q;</span><br><span class="line">        vector&lt;int&gt; in_degree(n, 0);</span><br><span class="line">        for (int i = 0; i &lt; edges.size(); i++) &#123;</span><br><span class="line">            in_degree[edges[i].second]++;</span><br><span class="line">            newedges[edges[i].first].push_back(edges[i].second);</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            if (in_degree[i] == 0) &#123;</span><br><span class="line">                q.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        while (!q.empty()) &#123;</span><br><span class="line">            int front = q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            res.push_back(front);</span><br><span class="line">            for (int i = 0; i &lt; newedges[front].size(); i++) &#123;</span><br><span class="line">                in_degree[newedges[front][i]]--;</span><br><span class="line">                if (in_degree[newedges[front][i]] == 0) q.push(newedges[front][i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>4.抛开这道题目——有环情况的判断</p>
-<p>可以利用上面的dfs方法，比如isVisited这个数组，我们可以多增一种情况，比如0为未访问，1为已访问，-1为正在访问，当dfs搜索时遇到了一条边终止顶点对应的isVisited元素为-1时，就说明图中有环了（为-1说明我们是从这个顶点开始dfs的，现在又遇到了这个顶点…）。</p>
-<p>另外一种判断图是否有环的方法，借助bfs（dfs也可，但既然用了dfs，直接用上面的方法好了），假如“生成拓扑序”后，还有顶点不在这个“拓扑序”里面，则图就有环了（加双引号是因为不能真正称作“拓扑序”啊）。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/topological-sort-template/" data-id="cjvwiy6nq002l0h24hrmlym2u" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
 
     </footer>
   </div>
@@ -543,6 +544,10 @@ null must be assigned.
       <ul>
         
           <li>
+            <a href="/2019/05/21/edit-distance-modified-version-bus-station-problemq/">edit distance modified version-bus station problem q </a>
+          </li>
+        
+          <li>
             <a href="/2019/05/20/leetcode137Contest/">leetcode137Contest</a>
           </li>
         
@@ -556,10 +561,6 @@ null must be assigned.
         
           <li>
             <a href="/2019/04/17/sass-scss/">sass/scss</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/17/react-component-communication/">react component communication</a>
           </li>
         
       </ul>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-05-20T15:28:24.358Z</updated>
+  <updated>2019-05-21T18:13:47.672Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>edit distance modified version-bus station problem q </title>
+    <link href="http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/"/>
+    <id>http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/</id>
+    <published>2019-05-21T17:55:09.000Z</published>
+    <updated>2019-05-21T18:13:47.672Z</updated>
+    
+    <content type="html"><![CDATA[<p>Edit Distance problem(leetcode)</p><p>problem: one dimension bus station, given a list of passangers: list = [0, 1,2, 4, 6, 7], they are all the passagers in One Dismension. And given a M as well, which means that the max time that the bus can stop, return in what stops for the car that makes the passager can pick up the bus in shortest distance.</p><p>logic: dp similar to min distance to multiple gas station.<br>we need to build stops to make the minimum distance.<br>解法： 求dp[i,j]表示前i个人（inclusive）和 j表示目前的公交站个数。<br>dp[i,j] = min(dp[k,j-1], min distance for people after k with one stop)</p><p>base: only one stop<br>optimal: median position</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Edit Distance problem(leetcode)&lt;/p&gt;
+&lt;p&gt;problem: one dimension bus station, given a list of passangers: list = [0, 1,2, 4, 6, 7], they are
+      
+    
+    </summary>
+    
+    
+      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode137Contest</title>
@@ -448,30 +472,6 @@
     
     
       <category term="React" scheme="http://pengw00.github.io/tags/React/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>topological sort template</title>
-    <link href="http://pengw00.github.io/2019/04/04/topological-sort-template/"/>
-    <id>http://pengw00.github.io/2019/04/04/topological-sort-template/</id>
-    <published>2019-04-04T04:46:18.000Z</published>
-    <updated>2019-04-04T21:15:45.716Z</updated>
-    
-    <content type="html"><![CDATA[<p>2.怎么得出拓扑序？</p><p>有两种方法，分别基于BFS和DFS，时间复杂度都是O(|V| + |E|)。<br>Topological Sort: DFS and BFS<br>DFS:<br>据说这是神书《算法导论》中提到的算法：用深度搜索来遍历整个图，采用一个数组来保存每个顶点完成的时间，这样这个数组就存放了按先后顺序访问完成的顶点了。然后我们按照顶点访问的完成时间从大到小排序，得到的就是一个拓扑序了，具体证明如下（来自其他博客）：&amp;……%¥¥……&amp;&amp;</p><p>Coding:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; topologicalSort(int n, vector&lt;pair&lt;int, int&gt; &gt;&amp; edges) &#123;</span><br><span class="line">        vector&lt;int&gt; res;</span><br><span class="line">        stack&lt;int&gt; s;</span><br><span class="line">        int * isVisited = new int[n];</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            isVisited[i] = 0;</span><br><span class="line">        &#125; </span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            if (!isVisited[i]) dfs(edges, s, isVisited, i);</span><br><span class="line">        &#125;</span><br><span class="line">        while (!s.empty()) &#123;</span><br><span class="line">            res.push_back(s.top());</span><br><span class="line">            s.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">    void dfs(vector&lt;pair&lt;int, int&gt; &gt;&amp; edges, stack&lt;int&gt; &amp; s, int * isVisited, int u) &#123;</span><br><span class="line">        isVisited[u] = 1;</span><br><span class="line">        for (int i = 0; i &lt; edges.size(); i++) &#123;</span><br><span class="line">            if (edges[i].first == u &amp;&amp; !isVisited[edges[i].second]) &#123;</span><br><span class="line">                dfs(edges, s, isVisited, edges[i].second);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        s.push(u);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p><p>BFS:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; topologicalSort(int n, vector&lt;pair&lt;int, int&gt; &gt;&amp; edges) &#123;</span><br><span class="line">        vector&lt;int&gt; res;</span><br><span class="line">        vector&lt;vector&lt;int&gt; &gt; newedges(n, vector&lt;int&gt;());</span><br><span class="line">        queue&lt;int&gt; q;</span><br><span class="line">        vector&lt;int&gt; in_degree(n, 0);</span><br><span class="line">        for (int i = 0; i &lt; edges.size(); i++) &#123;</span><br><span class="line">            in_degree[edges[i].second]++;</span><br><span class="line">            newedges[edges[i].first].push_back(edges[i].second);</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            if (in_degree[i] == 0) &#123;</span><br><span class="line">                q.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        while (!q.empty()) &#123;</span><br><span class="line">            int front = q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            res.push_back(front);</span><br><span class="line">            for (int i = 0; i &lt; newedges[front].size(); i++) &#123;</span><br><span class="line">                in_degree[newedges[front][i]]--;</span><br><span class="line">                if (in_degree[newedges[front][i]] == 0) q.push(newedges[front][i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p><p>4.抛开这道题目——有环情况的判断</p><p>可以利用上面的dfs方法，比如isVisited这个数组，我们可以多增一种情况，比如0为未访问，1为已访问，-1为正在访问，当dfs搜索时遇到了一条边终止顶点对应的isVisited元素为-1时，就说明图中有环了（为-1说明我们是从这个顶点开始dfs的，现在又遇到了这个顶点…）。</p><p>另外一种判断图是否有环的方法，借助bfs（dfs也可，但既然用了dfs，直接用上面的方法好了），假如“生成拓扑序”后，还有顶点不在这个“拓扑序”里面，则图就有环了（加双引号是因为不能真正称作“拓扑序”啊）。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;2.怎么得出拓扑序？&lt;/p&gt;
-&lt;p&gt;有两种方法，分别基于BFS和DFS，时间复杂度都是O(|V| + |E|)。&lt;br&gt;Topological Sort: DFS and BFS&lt;br&gt;DFS:&lt;br&gt;据说这是神书《算法导论》中提到的算法：用深度搜索来遍历整个图，采用一个数
-      
-    
-    </summary>
-    
-    
-      <category term="algorithm" scheme="http://pengw00.github.io/tags/algorithm/"/>
     
   </entry>
   
