@@ -5,19 +5,20 @@
   
 
   
-  <title>Persistence | Pengw00&#39;s Tech Road</title>
+  <title>leetcode465 | Pengw00&#39;s Tech Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Understanding the meaning of persistence is important for evaluating different data store system Given the importance of the data store in most modern applications, making a poorly informed choice cou">
+  <meta name="description" content="Optimal Account Balancing, hardSettling Multiple Debts Efficiently: An Invitation to Computing Science by T. Verhoeff, June 2003. http://www.mathmeth.com/tom/files/settling-debts.pdfThe question can b">
+<meta name="keywords" content="leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Persistence">
-<meta property="og:url" content="http://pengw00.github.io/2018/10/08/Persistence/index.html">
+<meta property="og:title" content="leetcode465">
+<meta property="og:url" content="http://pengw00.github.io/2019/05/25/leetcode465/index.html">
 <meta property="og:site_name" content="Pengw00&#39;s Tech Road">
-<meta property="og:description" content="Understanding the meaning of persistence is important for evaluating different data store system Given the importance of the data store in most modern applications, making a poorly informed choice cou">
+<meta property="og:description" content="Optimal Account Balancing, hardSettling Multiple Debts Efficiently: An Invitation to Computing Science by T. Verhoeff, June 2003. http://www.mathmeth.com/tom/files/settling-debts.pdfThe question can b">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2018-10-09T16:36:44.980Z">
+<meta property="og:updated_time" content="2019-05-25T18:12:55.468Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Persistence">
-<meta name="twitter:description" content="Understanding the meaning of persistence is important for evaluating different data store system Given the importance of the data store in most modern applications, making a poorly informed choice cou">
+<meta name="twitter:title" content="leetcode465">
+<meta name="twitter:description" content="Optimal Account Balancing, hardSettling Multiple Debts Efficiently: An Invitation to Computing Science by T. Verhoeff, June 2003. http://www.mathmeth.com/tom/files/settling-debts.pdfThe question can b">
   
     <link rel="alternate" href="/atom.xml" title="Pengw00&#39;s Tech Road" type="application/atom+xml">
   
@@ -64,10 +65,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Persistence" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-leetcode465" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/10/08/Persistence/" class="article-date">
-  <time datetime="2018-10-08T20:57:08.000Z" itemprop="datePublished">2018-10-08</time>
+    <a href="/2019/05/25/leetcode465/" class="article-date">
+  <time datetime="2019-05-25T18:05:33.000Z" itemprop="datePublished">2019-05-25</time>
 </a>
     
   </div>
@@ -78,7 +79,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Persistence
+      leetcode465
     </h1>
   
 
@@ -86,40 +87,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Understanding the meaning of persistence is important for evaluating different data store system</p>
-<p>Given the importance of the data store in most modern applications, making a poorly informed choice could mean substantial downtime or loss of data.</p>
-<p>Persistence is “the continuance of an effect after its cause is removed”. In the context of storing data in a computer system, this means that the data survives after the process with which it was created has ended. In other words, for a data store to be considered persistent, it must write to non-volatile storage.</p>
-<p>If you need persistence in your data store, then you need to also understand the four main design approaches that a data store can take and how (or if) these designs provide persistence:</p>
-<p>Pure in-memory, no persistence at all, such as memcached or Scalaris<br>In-memory with periodic snapshots, such as Oracle Coherence or Redis<br>Disk-based with update-in-place writes, such as MySQL ISAM or MongoDB<br>Commitlog-based, such as all traditional OLTP databases (Oracle,<br>SQL Server, etc.)</p>
-<p>In-memory approaches can achieve blazing speed, but at the cost of being limited to a relatively small data set. Most workloads have relatively small “hot” (active) subset of their total data; systems that require the whole dataset to fit in memory rather than just the active part are fine for caches but a bad fit for most other applications. Because the data is in memory only, it will not survive process termination. Therefore these types of data stores are not considered persistent.</p>
-<p>The easiest way to add persistence to an in-memory system is with periodic snapshots to disk at a configurable interval. Thus, you can lose up to that interval’s worth of updates.</p>
-<p>Update-in-place and commitlog-based systems store to non-volatile memory immediately, but only commitlog-based persistence provides Durability – the D in ACID – with every write persisted before success is returned to the client.<br>Reference from below link.<br><a href="https://www.datastax.com/dev/blog/what-persistence-and-why-does-it-matter" target="_blank" rel="noopener">https://www.datastax.com/dev/blog/what-persistence-and-why-does-it-matter</a></p>
+        <p>Optimal Account Balancing, hard<br>Settling Multiple Debts Efficiently: An Invitation to Computing Science by T. Verhoeff, June 2003. <a href="http://www.mathmeth.com/tom/files/settling-debts.pdf" target="_blank" rel="noopener">http://www.mathmeth.com/tom/files/settling-debts.pdf</a><br>The question can be transferred to a 3-partition problem, which is NP-Complete.</p>
+<p>recursion + backtracking, get the total transaction and then dfs and backtracing every trans.<br>Core code:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int backtrack(Long[] debts, int pos, int count)&#123;</span><br><span class="line">        while(pos &lt; debts.length &amp;&amp; debts[pos] == 0) pos++;</span><br><span class="line">        if (pos &gt;= debts.length) &#123;</span><br><span class="line">            return count;</span><br><span class="line">        &#125;</span><br><span class="line">        int res = Integer.MAX_VALUE;</span><br><span class="line">        for(int i = pos + 1; i &lt; debts.length; i++)&#123;</span><br><span class="line">            if(debts[pos] * debts[i] &lt; 0)&#123;</span><br><span class="line">              debts[i] += debts[pos];</span><br><span class="line">              res = Math.min(res, helper(debts, pos + 1, count + 1));</span><br><span class="line">              debts[i] = debts[i] - debts[pos];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/10/08/Persistence/" data-id="cjw3u11p70006v4zupxe0jta3" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/25/leetcode465/" data-id="cjw3u11q3001iv4zug4o1bj7r" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2018/11/01/spring-depend-injection-md/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          spring_depend_injection.md
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/10/08/maxcycle-subarray/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/05/21/edit-distance-modified-version-bus-station-problemq/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">maxcycle_subarray</div>
+      <div class="article-nav-title">edit distance modified version-bus station problem q </div>
     </a>
   
 </nav>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-05-21T18:13:47.672Z</updated>
+  <updated>2019-05-25T18:12:55.468Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode465</title>
+    <link href="http://pengw00.github.io/2019/05/25/leetcode465/"/>
+    <id>http://pengw00.github.io/2019/05/25/leetcode465/</id>
+    <published>2019-05-25T18:05:33.000Z</published>
+    <updated>2019-05-25T18:12:55.468Z</updated>
+    
+    <content type="html"><![CDATA[<p>Optimal Account Balancing, hard<br>Settling Multiple Debts Efficiently: An Invitation to Computing Science by T. Verhoeff, June 2003. <a href="http://www.mathmeth.com/tom/files/settling-debts.pdf" target="_blank" rel="noopener">http://www.mathmeth.com/tom/files/settling-debts.pdf</a><br>The question can be transferred to a 3-partition problem, which is NP-Complete.</p><p>recursion + backtracking, get the total transaction and then dfs and backtracing every trans.<br>Core code:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int backtrack(Long[] debts, int pos, int count)&#123;</span><br><span class="line">        while(pos &lt; debts.length &amp;&amp; debts[pos] == 0) pos++;</span><br><span class="line">        if (pos &gt;= debts.length) &#123;</span><br><span class="line">            return count;</span><br><span class="line">        &#125;</span><br><span class="line">        int res = Integer.MAX_VALUE;</span><br><span class="line">        for(int i = pos + 1; i &lt; debts.length; i++)&#123;</span><br><span class="line">            if(debts[pos] * debts[i] &lt; 0)&#123;</span><br><span class="line">              debts[i] += debts[pos];</span><br><span class="line">              res = Math.min(res, helper(debts, pos + 1, count + 1));</span><br><span class="line">              debts[i] = debts[i] - debts[pos];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Optimal Account Balancing, hard&lt;br&gt;Settling Multiple Debts Efficiently: An Invitation to Computing Science by T. Verhoeff, June 2003. &lt;a 
+      
+    
+    </summary>
+    
+    
+      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>edit distance modified version-bus station problem q </title>
@@ -449,29 +472,6 @@
     
     
       <category term="Javascript" scheme="http://pengw00.github.io/tags/Javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>didmount&amp;&amp;willunmount</title>
-    <link href="http://pengw00.github.io/2019/04/04/didmount-willunmount/"/>
-    <id>http://pengw00.github.io/2019/04/04/didmount-willunmount/</id>
-    <published>2019-04-04T14:21:11.000Z</published>
-    <updated>2019-04-04T14:49:13.907Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">export default class A extends React.Component &#123;</span><br><span class="line"></span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">        super(props);</span><br><span class="line">    &#125;</span><br><span class="line">    scroll1（）&#123;&#125;</span><br><span class="line"></span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        window.addEventListener(&apos;scroll&apos;, this.srcoll1.bind(this));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    componentWillUnmount()&#123;</span><br><span class="line">        window.removeEventListener(&apos;scroll&apos;, this.srcoll1);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>when using event handler in render(), need to bind this to the function<br>inside constructor, it will be global. otherwise, everytime inside render() we need to bind this when we use the method everytime, it will be awaste of time.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">export default class A extends React.Component &#123;</span><br><span class="line"></span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">        super(props);</span><br><span class="line">        this.scroll1 = this.scroll1.bind(this)</span><br><span class="line">    &#125;</span><br><span class="line">    scroll1（）&#123;&#125;</span><br><span class="line"></span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        window.addEventListener(&apos;scroll&apos;, this.scroll1);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    componentWillUnmount()&#123;</span><br><span class="line">        window.removeEventListener(&apos;scroll&apos;, this.scroll1);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>bind方法，顾名思义，就是绑定的意思，到底是怎么绑定然后怎么用呢，下面就来说说我对这个方法的理解。</p><p>bind的使用和call，apply的区别：都是将方法的主人绑定，this指向全局object。<br>bind will not be executed imediately while call, aply will execute right away.<br>为什么要创建绑定函数，就是当我们调用某些函数的时候是要在特定环境下才能调用到，所以我们就要把函数放在特定环境下，就是使用bind把函数绑定到特定的所需的环境下。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
-      
-    
-    </summary>
-    
-    
-      <category term="React" scheme="http://pengw00.github.io/tags/React/"/>
     
   </entry>
   
