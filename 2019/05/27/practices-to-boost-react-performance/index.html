@@ -5,18 +5,20 @@
   
 
   
-  <title>Pengw00&#39;s Tech Road</title>
+  <title>practices to boost react performance | Pengw00&#39;s Tech Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Peng Wu&apos;s Tech road!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Pengw00&#39;s Tech Road">
-<meta property="og:url" content="http://pengw00.github.io/index.html">
+  <meta name="description" content="Practices to Boost React Performance 1. React under the hood?React DOM wasn’t created with dynamic UI in mind. When the DOM needs to be updated, it has to go through a Reflow/Layout stage and the DOM">
+<meta name="keywords" content="react">
+<meta property="og:type" content="article">
+<meta property="og:title" content="practices to boost react performance">
+<meta property="og:url" content="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/index.html">
 <meta property="og:site_name" content="Pengw00&#39;s Tech Road">
-<meta property="og:description" content="Peng Wu&apos;s Tech road!">
+<meta property="og:description" content="Practices to Boost React Performance 1. React under the hood?React DOM wasn’t created with dynamic UI in mind. When the DOM needs to be updated, it has to go through a Reflow/Layout stage and the DOM">
 <meta property="og:locale" content="us-EN">
+<meta property="og:updated_time" content="2019-05-27T23:36:18.044Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pengw00&#39;s Tech Road">
-<meta name="twitter:description" content="Peng Wu&apos;s Tech road!">
+<meta name="twitter:title" content="practices to boost react performance">
+<meta name="twitter:description" content="Practices to Boost React Performance 1. React under the hood?React DOM wasn’t created with dynamic UI in mind. When the DOM needs to be updated, it has to go through a Reflow/Layout stage and the DOM">
   
     <link rel="alternate" href="/atom.xml" title="Pengw00&#39;s Tech Road" type="application/atom+xml">
   
@@ -63,9 +65,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-practices-to-boost-react-performance" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-practices-to-boost-react-performance" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/27/practices-to-boost-react-performance/" class="article-date">
   <time datetime="2019-05-27T22:58:06.000Z" itemprop="datePublished">2019-05-27</time>
@@ -78,8 +78,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/27/practices-to-boost-react-performance/">practices to boost react performance</a>
+    <h1 class="article-title" itemprop="name">
+      practices to boost react performance
     </h1>
   
 
@@ -149,411 +149,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-leetcode465" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/05/25/leetcode465/" class="article-date">
-  <time datetime="2019-05-25T18:05:33.000Z" itemprop="datePublished">2019-05-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/25/leetcode465/">leetcode465</a>
-    </h1>
+    <a href="/2019/05/25/leetcode465/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">leetcode465</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Optimal Account Balancing, hard<br>Settling Multiple Debts Efficiently: An Invitation to Computing Science by T. Verhoeff, June 2003. <a href="http://www.mathmeth.com/tom/files/settling-debts.pdf" target="_blank" rel="noopener">http://www.mathmeth.com/tom/files/settling-debts.pdf</a><br>The question can be transferred to a 3-partition problem, which is NP-Complete.</p>
-<p>recursion + backtracking, get the total transaction and then dfs and backtracing every trans.<br>Core code:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int backtrack(Long[] debts, int pos, int count)&#123;</span><br><span class="line">        while(pos &lt; debts.length &amp;&amp; debts[pos] == 0) pos++;</span><br><span class="line">        if (pos &gt;= debts.length) &#123;</span><br><span class="line">            return count;</span><br><span class="line">        &#125;</span><br><span class="line">        int res = Integer.MAX_VALUE;</span><br><span class="line">        for(int i = pos + 1; i &lt; debts.length; i++)&#123;</span><br><span class="line">            if(debts[pos] * debts[i] &lt; 0)&#123;</span><br><span class="line">              debts[i] += debts[pos];</span><br><span class="line">              res = Math.min(res, helper(debts, pos + 1, count + 1));</span><br><span class="line">              debts[i] = debts[i] - debts[pos];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/25/leetcode465/" data-id="cjw70gi770020gwzu4pr0dboq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-edit-distance-modified-version-bus-station-problemq" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/05/21/edit-distance-modified-version-bus-station-problemq/" class="article-date">
-  <time datetime="2019-05-21T17:55:09.000Z" itemprop="datePublished">2019-05-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/21/edit-distance-modified-version-bus-station-problemq/">edit distance modified version-bus station problem q </a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Edit Distance problem(leetcode)</p>
-<p>problem: one dimension bus station, given a list of passangers: list = [0, 1,2, 4, 6, 7], they are all the passagers in One Dismension. And given a M as well, which means that the max time that the bus can stop, return in what stops for the car that makes the passager can pick up the bus in shortest distance.</p>
-<p>logic: dp similar to min distance to multiple gas station.<br>we need to build stops to make the minimum distance.<br>解法： 求dp[i,j]表示前i个人（inclusive）和 j表示目前的公交站个数。<br>dp[i,j] = min(dp[k,j-1], min distance for people after k with one stop)</p>
-<p>base: only one stop<br>optimal: median position</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/" data-id="cjw70gi6q0014gwzukdux1lj6" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode137Contest" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/05/20/leetcode137Contest/" class="article-date">
-  <time datetime="2019-05-20T14:54:00.000Z" itemprop="datePublished">2019-05-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/20/leetcode137Contest/">leetcode137Contest</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>Last Stone Weight3</li>
-<li>Remove All Adjacent Duplicates In String4</li>
-<li>Longest String Chain6</li>
-<li><p>Last Stone Weight II</p>
-</li>
-<li><p>logic： </p>
-</li>
-</ol>
-<p>solution：</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="cjw70gi6y001igwzutou25t12" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode804" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/05/20/leetcode804/" class="article-date">
-  <time datetime="2019-05-20T13:55:50.000Z" itemprop="datePublished">2019-05-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/20/leetcode804/">leetcode804</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Logic:<br>Get the average of the array, then backtrack the subarray with the same average.<br>trick: be careful with sum * number % length; not only sum % length:<br>eg: 10 / 4 =&gt; 5/2, even sum % length !=0 , it still works!<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class solution&#123;</span><br><span class="line">	public boolean splitArraySameAverage(int[] A)&#123;</span><br><span class="line">	int len = A.length;</span><br><span class="line">	if(len==1) return false;</span><br><span class="line">	int s = 0;</span><br><span class="line">	for(int i: A)&#123;</span><br><span class="line">		s += i;</span><br><span class="line">	&#125;</span><br><span class="line">	Arrays.sort(A);</span><br><span class="line">	for(int i = 1; i &lt;= len/2; i++)&#123;</span><br><span class="line">		if((s * i % len == 0) &amp; (backtracking(A, s * i /len, i, 0)) return true;</span><br><span class="line">		return false;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public boolean backtrack(int[] A, int target, int k, int start)&#123;</span><br><span class="line">		if(k==0) return target==0;</span><br><span class="line">		if(A[start] &gt; target/k) return false;</span><br><span class="line">		for(int i = start; i &lt; A.length - k + 1; i++)&#123;</span><br><span class="line">			if(i &gt; start &amp;&amp; A[i]==A[i-1]) continue;</span><br><span class="line">			if(backtrack(A, target - A[i], k -1, i + 1)) return true;</span><br><span class="line">		&#125;</span><br><span class="line">		return false;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="cjw70gi7a0026gwzuskvscxe8" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-singleton-code-demo" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/05/02/singleton-code-demo/" class="article-date">
-  <time datetime="2019-05-02T04:59:31.000Z" itemprop="datePublished">2019-05-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/02/singleton-code-demo/">singleton_code_demo</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="SingleTon-basic-logic"><a href="#SingleTon-basic-logic" class="headerlink" title="SingleTon basic logic"></a>SingleTon basic logic</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class SingleTonClass &#123;</span><br><span class="line">	private static SingleTonClass obj = null;</span><br><span class="line">	private SingleTonClass()&#123;</span><br><span class="line">      /*Private Constructor will prevent </span><br><span class="line">       * the instantiation of this class directly*/</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public static SingleTonClass objectCreationMethod()&#123;</span><br><span class="line">	/*This logic will ensure that no more than</span><br><span class="line">	 * one object can be created at a time */</span><br><span class="line">	if(obj==null)&#123;</span><br><span class="line">	    obj= new SingleTonClass();</span><br><span class="line">	&#125;</span><br><span class="line">        return obj;</span><br><span class="line">   &#125;</span><br><span class="line">   public void display()&#123;</span><br><span class="line">	System.out.println(&quot;Singleton class Example&quot;);</span><br><span class="line">   &#125;</span><br><span class="line">   public static void main(String args[])&#123;</span><br><span class="line">	//Object cannot be created directly due to private constructor </span><br><span class="line">        //This way it is forced to create object via our method where</span><br><span class="line">        //we have logic for only one object creation</span><br><span class="line">	SingleTonClass myobject= SingleTonClass.objectCreationMethod();</span><br><span class="line">	myobject.display();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="cjw70gi7h002fgwzuw28632u2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-sass-scss" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/17/sass-scss/" class="article-date">
-  <time datetime="2019-04-17T18:36:41.000Z" itemprop="datePublished">2019-04-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/17/sass-scss/">sass/scss</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>为什么使用SASS/SCSS？</p>
-<p>易维护，更方便的定制<br>对于一个大型或者稍微有规模的UI来说，如果需要替换下整体风格，或者是某个字体的像素值，比如我们经常会遇到panel，window以及portal共用一个背景色，这个时候按照常规的方式，我们需要一个个定位到元素使用的class，然后逐个替换，SASS提供了变量的方式，你可以把某个样式作为一个变量，然后各个class引用这个变量即可，修改时，我们只需修改对应的变量。<br>对于编程人员的友好<br>对于一个没有前端基础的编程人员，写css样式是一件非常痛苦的事情，他们会感觉到各种约束，为什么我不能定一个变量来避免那些类似“变量”的重复书写？为什么我不能继承上个class的样式定义？。。。SASS/SCSS正是帮编程人员解开了这些疑惑，让css看起来更像是一门编程语言。<br>效率的提升<br>对于一个前端开发人员来说，我不熟悉编程，也不关注css是否具有的一些编程语言特性，但这不是你放弃他的理由，css3的发展，加之主流浏览器的兼容性不一，很多浏览器都有自己的兼容hack，很多时候我们需要针对不同的浏览器写一堆的hack，这种浪费时间的重复劳动就交给SASS处理去吧！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/sass-scss/" data-id="cjw70gi7i002hgwzu3i50rcuw" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Front-end/">Front-end</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-react-component-communication" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/17/react-component-communication/" class="article-date">
-  <time datetime="2019-04-17T15:02:23.000Z" itemprop="datePublished">2019-04-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/17/react-component-communication/">react component communication</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://blog.csdn.net/lizhipeng123321/article/details/80018003" target="_blank" rel="noopener">https://blog.csdn.net/lizhipeng123321/article/details/80018003</a></p>
-<p>总结<br>本文总结了 React 中组件的几种通信方式，分别是：</p>
-<p>父组件向子组件通信：使用 props<br>子组件向父组件通信：使用 props 回调<br>跨级组件间通信：使用 context 对象<br>非嵌套组件间通信：使用事件订阅<br>事实上，在组件间进行通信时，这些通信方式都可以使用，区别只在于使用相应的通信方式的复杂程度和个人喜好，选择最合适的那一个。</p>
-<p>比如，通过事件订阅模式通信不止可以应用在非嵌套组件间，还可以用于跨级组件间，非嵌套组件间通信也可以使用 context 等。关键是选择最合适的方式。</p>
-<p>当然，自己实现组件间的通信还是太难以管理了，因此出现了很多状态管理工具，如 flux、redux 等，使用这些工具使得组件间的通信更容易追踪和管理。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/react-component-communication/" data-id="cjw70gi7c0027gwzuxne0h1aq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-react-context-api" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/16/react-context-api/" class="article-date">
-  <time datetime="2019-04-16T05:25:24.000Z" itemprop="datePublished">2019-04-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/16/react-context-api/">react context api</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="react-contect-api-state-manage"><a href="#react-contect-api-state-manage" class="headerlink" title="react contect api state manage"></a>react contect api state manage</h1><h2 id="When-Should-I-Use-Context"><a href="#When-Should-I-Use-Context" class="headerlink" title="When Should I Use Context?"></a>When Should I Use Context?</h2><p>I would recommend reaching for Context when you find yourself passing props down through three or more levels in your component tree. You might notice that you have renamed your props, making it challenging to determine the data’s origin. You might consider implementing context if a bunch of your components know about irrelevant data.</p>
-<p>Rule of thumb: if you start to feel irritated by how long it takes to determine where data is coming from, introduce Context.</p>
-<p>Do not hesitate to still use the other tools you have available, like prop drilling and redux. While Context can make it easier to pass props around in certain scenarios, it doesn’t give you access to some of the benefits redux offers, and it’s a more complicated abstraction than prop drilling.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/16/react-context-api/" data-id="cjw70gi7e002agwzugu3c8654" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-transaction-meaning" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/15/transaction-meaning/" class="article-date">
-  <time datetime="2019-04-16T02:48:08.000Z" itemprop="datePublished">2019-04-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/15/transaction-meaning/">transaction meaning</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>经典文章：<a href="https://blog.csdn.net/popvip44/article/details/71487425" target="_blank" rel="noopener">https://blog.csdn.net/popvip44/article/details/71487425</a></p>
-<h1 id="Definition-What-does-Transaction-mean"><a href="#Definition-What-does-Transaction-mean" class="headerlink" title="Definition - What does Transaction mean?"></a>Definition - What does Transaction mean?</h1><p>A transaction, in the context of a database, is a logical unit that is independently executed for data retrieval or updates. In relational databases, database transactions must be atomic, consistent, isolated and durable–summarized as the ACID acronym.</p>
-<p>Transactions are completed by COMMIT or ROLLBACK SQL statements.</p>
-<p>which indicate a transaction’s beginning or end.<br>The ACID acronym defines the properties of a database transaction, as follows:</p>
-<ol>
-<li><p>Atomicity: A transaction must be fully complete, saved (committed) or completely undone (rolled back). A sale in a retail store database illustrates a scenario which explains atomicity, e.g., the sale consists of an inventory reduction and a record of incoming cash. Both either happen together or do not happen - it’s all or nothing.</p>
-</li>
-<li><p>Consistency: The transaction must be fully compliant with the state of the database as it was prior to the transaction. In other words, the transaction cannot break the database’s constraints. For example, if a database table’s Phone Number column can only contain numerals, then consistency dictates that any transaction attempting to enter an alphabetical letter may not commit.</p>
-</li>
-</ol>
-<p>Isolation: Transaction data must not be available to other transactions until the original transaction is committed or rolled back.</p>
-<p>Durability: Transaction data changes must be available, even in the event of database failure.</p>
-<p>评论要点：<br>金融类应用非常适用，尤其是要求超高并发的。</p>
-<p>不过实际环境下这类应用又要求安全可靠性，所以一般要配合多种数据存储方式。</p>
-<p>Mongodb碎片、依赖内存，所以如果出现某些特殊意外可能会出现数据遗失；</p>
-<p>关系型数据库虽然具备事务处理，可靠程度高，但性能不占优。<br>1楼：<br>例如一个金融股票系统，用mysql存储历史数据，Mongodb临时存储当天分时数据，加快读写。晚上收盘后再把Mongodb数据整理写入mysql。</p>
-<p>适合：<br>楼2: 某种数据提取十分频繁，你又不想在oracle里面join来join去浪费处理时间，然后你就存在mongodb里面把以前在oracle中要join的几个列存成一个列合并在一个列上然后查的时候直接查一个列出来 说白了就是节约时间：eg :{name:leilei,warehouse:beijing, order:23} ,比如这三个字段以前分散在oracle的好几个表里面你要取得时候要join,现在你发现这个信息用户访问十分频繁你存的时候就存着三个j在mongo里面，这样就不用去oracle里join拿了而且又没有事务又没有锁理论上相对快</p>
-<p>3楼：不过说白了，其实关系型数据库够用了，那些使用nosql的个人以为没必要。获取他们设计的程序有问题或许不会调优数据库 导致性能低下所以要尝尝新玩意吧</p>
-<p>8楼： 适合树型数据，比如无限分类，网易评论盖楼，多级权限  这种用传统关联表做的话要么递归查询，要么要写很多额外的代码， 用mogodb只要拼字符串把键名拼对了就可以了</p>
-<p>15楼： 存日志之类的，比方osc的动态，把各类动态组装好直接存，以后就可以直接读出来解析</p>
-<h2 id="classic-review："><a href="#classic-review：" class="headerlink" title="classic review："></a>classic review：</h2><p>The purpose of a transaction is to make sure that the whole database stays consistent while multiple operations take place. But in contrary to most relational databases, MongoDB isn’t designed to run on a single host. It is designed to be set up as a cluster of multiple shards where each shard is a replica-sets of multiple servers (optionally at different geographical locations).</p>
-<p>A transaction can potentially affect lots of hosts of the database. That means that the transaction would have to be synchronized between all of these hosts. This would mean quite a lot of overhead and would scale very badly when increasing the size of the database by adding more servers.</p>
-<p>MongoDB does not have support for traditional locking or complex transactions with rollback. MongoDB aims to be lightweight, fast, and predictable in its performance. This is similar to the MySQL MyISAM autocommit model. By keeping transaction support extremely simple, MongoDB can provide greater performance especially for partitioned or replicated systems with a number of database server processes.</p>
-<p>CAP定理<br>维基百科，自由的百科全书<br>跳到导航跳到搜索<br>在理论计算机科学中，CAP定理（CAP theorem），又被称作布鲁尔定理（Brewer’s theorem），它指出对于一个分布式计算系统来说，不可能同时满足以下三点：[1][2]</p>
-<p>一致性（Consistency） （等同于所有节点访问同一份最新的数据副本）<br>可用性（Availability）（每次请求都能获取到非错的响应——但是不保证获取的数据为最新数据）<br>分区容错性（Partition tolerance）（以实际效果而言，分区相当于对通信的时限要求。系统如果不能在时限内达成数据一致性，就意味着发生了分区的情况，必须就当前操作在C和A之间做出选择[3]。）</p>
-<p>分布式系统只能满足三项中的两项而不可能满足全部三项[4]。理解CAP理论的最简单方式是想象两个节点分处分区两侧。允许至少一个节点更新状态会导致数据不一致，即丧失了C性质。如果为了保证数据一致性，将分区一侧的节点设置为不可用，那么又丧失了A性质。除非两个节点可以互相通信，才能既保证C又保证A，这又会导致丧失P性质。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/15/transaction-meaning/" data-id="cjw70gi7n002pgwzu2oajcb89" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-  </nav>
 
 </section>
         
