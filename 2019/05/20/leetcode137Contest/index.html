@@ -7,18 +7,18 @@
   
   <title>leetcode137Contest | Pengw00&#39;s Tech Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="####  Last Stone Weight3 Remove All Adjacent Duplicates In String4 Longest String Chain6 Last Stone Weight II####  1. Last Stone Weight3a collection of rocks with each one has positive weight. Each tu">
+  <meta name="description" content="1. Last Stone Weight3 Remove All Adjacent Duplicates In String4 Longest String Chain6 Last Stone Weight II ####  1. Last Stone Weight3a collection of rocks with each one has positive weight. Each turn">
 <meta name="keywords" content="Contest">
 <meta property="og:type" content="article">
 <meta property="og:title" content="leetcode137Contest">
 <meta property="og:url" content="http://pengw00.github.io/2019/05/20/leetcode137Contest/index.html">
 <meta property="og:site_name" content="Pengw00&#39;s Tech Road">
-<meta property="og:description" content="####  Last Stone Weight3 Remove All Adjacent Duplicates In String4 Longest String Chain6 Last Stone Weight II####  1. Last Stone Weight3a collection of rocks with each one has positive weight. Each tu">
+<meta property="og:description" content="1. Last Stone Weight3 Remove All Adjacent Duplicates In String4 Longest String Chain6 Last Stone Weight II ####  1. Last Stone Weight3a collection of rocks with each one has positive weight. Each turn">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2019-05-28T03:19:56.057Z">
+<meta property="og:updated_time" content="2019-05-28T03:23:44.483Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode137Contest">
-<meta name="twitter:description" content="####  Last Stone Weight3 Remove All Adjacent Duplicates In String4 Longest String Chain6 Last Stone Weight II####  1. Last Stone Weight3a collection of rocks with each one has positive weight. Each tu">
+<meta name="twitter:description" content="1. Last Stone Weight3 Remove All Adjacent Duplicates In String4 Longest String Chain6 Last Stone Weight II ####  1. Last Stone Weight3a collection of rocks with each one has positive weight. Each turn">
   
     <link rel="alternate" href="/atom.xml" title="Pengw00&#39;s Tech Road" type="application/atom+xml">
   
@@ -87,14 +87,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>####</p>
-<ol>
-<li>Last Stone Weight3</li>
+        <h4 id="1-Last-Stone-Weight3"><a href="#1-Last-Stone-Weight3" class="headerlink" title="1. Last Stone Weight3"></a>1. Last Stone Weight3</h4><ol start="2">
 <li>Remove All Adjacent Duplicates In String4</li>
 <li>Longest String Chain6</li>
-<li>Last Stone Weight II<br>####</li>
+<li>Last Stone Weight II ####</li>
 </ol>
-<h3 id="1-Last-Stone-Weight3"><a href="#1-Last-Stone-Weight3" class="headerlink" title="1. Last Stone Weight3"></a>1. Last Stone Weight3</h3><p>a collection of rocks with each one has positive weight. Each turn, we choose two heaviest rocks and smash them together.<br>logic：<br>sort them in increase order, and push back the last two elements, and smash and push the remain back to the vector. </p>
+<h3 id="1-Last-Stone-Weight3-1"><a href="#1-Last-Stone-Weight3-1" class="headerlink" title="1. Last Stone Weight3"></a>1. Last Stone Weight3</h3><p>a collection of rocks with each one has positive weight. Each turn, we choose two heaviest rocks and smash them together.<br>logic：<br>sort them in increase order, and push back the last two elements, and smash and push the remain back to the vector. </p>
 <p>solution：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public: </span><br><span class="line">	int lastStoneWeight(vector&lt;int&gt;&amp; a)&#123;</span><br><span class="line">		while(a.size()&gt;1)&#123;</span><br><span class="line">			sort(a.begin(), a.end());</span><br><span class="line">			int n = a.size();</span><br><span class="line">			int x = a[n-1] - a[n-2];</span><br><span class="line">			a.pop_back();</span><br><span class="line">			a.pop_back();</span><br><span class="line">			a.push_back(x);</span><br><span class="line">		&#125;</span><br><span class="line">		return a[0];</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="2-Remove-All-Adjacent-Duplicates-In-String4"><a href="#2-Remove-All-Adjacent-Duplicates-In-String4" class="headerlink" title="2. Remove All Adjacent Duplicates In String4"></a>2. Remove All Adjacent Duplicates In String4</h3><p>Given a String S of lowercase letters, a duplicate removal consists of choosing two adjacent and equal letters, and removing them.<br>Repeatly doing the removement until we no longer can. return the final string. </p>
 <p>example: inputs: “abbaca”<br>         outputs: “ca”<br>Solution Logic: using stack, check the top of the stack, if equal to current element, then pop it out.</p>
@@ -109,7 +107,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="cjw78g9ap001jgzzup24s3jtg" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="cjw78ky8r001girzu13axt0f9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Contest/">Contest</a></li></ul>

@@ -141,7 +141,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="cjw78g9c1003egzzua8jkwiao" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="cjw78kya5003eirzu6f7c438r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -181,7 +181,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/25/leetcode465/" data-id="cjw78g9az0021gzzuh2ixuiwr" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/25/leetcode465/" data-id="cjw78ky8w001qirzuxdxexner" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -223,7 +223,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/" data-id="cjw78g9ah0012gzzuozycxts8" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/" data-id="cjw78ky8l0011irzu3ol9dp5w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -257,14 +257,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>####</p>
-<ol>
-<li>Last Stone Weight3</li>
+        <h4 id="1-Last-Stone-Weight3"><a href="#1-Last-Stone-Weight3" class="headerlink" title="1. Last Stone Weight3"></a>1. Last Stone Weight3</h4><ol start="2">
 <li>Remove All Adjacent Duplicates In String4</li>
 <li>Longest String Chain6</li>
-<li>Last Stone Weight II<br>####</li>
+<li>Last Stone Weight II ####</li>
 </ol>
-<h3 id="1-Last-Stone-Weight3"><a href="#1-Last-Stone-Weight3" class="headerlink" title="1. Last Stone Weight3"></a>1. Last Stone Weight3</h3><p>a collection of rocks with each one has positive weight. Each turn, we choose two heaviest rocks and smash them together.<br>logic：<br>sort them in increase order, and push back the last two elements, and smash and push the remain back to the vector. </p>
+<h3 id="1-Last-Stone-Weight3-1"><a href="#1-Last-Stone-Weight3-1" class="headerlink" title="1. Last Stone Weight3"></a>1. Last Stone Weight3</h3><p>a collection of rocks with each one has positive weight. Each turn, we choose two heaviest rocks and smash them together.<br>logic：<br>sort them in increase order, and push back the last two elements, and smash and push the remain back to the vector. </p>
 <p>solution：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public: </span><br><span class="line">	int lastStoneWeight(vector&lt;int&gt;&amp; a)&#123;</span><br><span class="line">		while(a.size()&gt;1)&#123;</span><br><span class="line">			sort(a.begin(), a.end());</span><br><span class="line">			int n = a.size();</span><br><span class="line">			int x = a[n-1] - a[n-2];</span><br><span class="line">			a.pop_back();</span><br><span class="line">			a.pop_back();</span><br><span class="line">			a.push_back(x);</span><br><span class="line">		&#125;</span><br><span class="line">		return a[0];</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="2-Remove-All-Adjacent-Duplicates-In-String4"><a href="#2-Remove-All-Adjacent-Duplicates-In-String4" class="headerlink" title="2. Remove All Adjacent Duplicates In String4"></a>2. Remove All Adjacent Duplicates In String4</h3><p>Given a String S of lowercase letters, a duplicate removal consists of choosing two adjacent and equal letters, and removing them.<br>Repeatly doing the removement until we no longer can. return the final string. </p>
 <p>example: inputs: “abbaca”<br>         outputs: “ca”<br>Solution Logic: using stack, check the top of the stack, if equal to current element, then pop it out.</p>
@@ -279,7 +277,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="cjw78g9ap001jgzzup24s3jtg" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="cjw78ky8r001girzu13axt0f9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Contest/">Contest</a></li></ul>
@@ -318,7 +316,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="cjw78g9av001wgzzutxqa1vbh" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="cjw78ky940023irzuypacvm1i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li></ul>
@@ -356,7 +354,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="cjw78g9b8002igzzu4qeiqojp" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="cjw78ky9b002girzubbsngfkq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -396,7 +394,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/sass-scss/" data-id="cjw78g9b7002fgzzugwc9h3n9" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/17/sass-scss/" data-id="cjw78ky9a002eirzukuro6hr7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Front-end/">Front-end</a></li></ul>
@@ -439,7 +437,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/react-component-communication/" data-id="cjw78g9b4002bgzzu2xk8f0km" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/17/react-component-communication/" data-id="cjw78ky980029irzu9n3zrqx3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -480,7 +478,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/16/react-context-api/" data-id="cjw78g9b5002dgzzuzfsibnnz" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/16/react-context-api/" data-id="cjw78ky99002cirzud1p11zr7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -544,7 +542,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/15/transaction-meaning/" data-id="cjw78g9bi002xgzzu60qn8rgd" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/15/transaction-meaning/" data-id="cjw78ky9f002nirzugpobscew" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li></ul>
