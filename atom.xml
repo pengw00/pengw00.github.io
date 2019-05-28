@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-05-28T07:31:08.472Z</updated>
+  <updated>2019-05-28T17:44:53.886Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RabbitMQforMicroServicesCommunication</title>
+    <link href="http://pengw00.github.io/2019/05/28/RabbitMQforMicroServicesCommunication/"/>
+    <id>http://pengw00.github.io/2019/05/28/RabbitMQforMicroServicesCommunication/</id>
+    <published>2019-05-28T17:32:58.000Z</published>
+    <updated>2019-05-28T17:44:53.886Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Using-RabbitMQ-for-MicroSerices-Communication"><a href="#Using-RabbitMQ-for-MicroSerices-Communication" class="headerlink" title="Using RabbitMQ for MicroSerices Communication"></a>Using RabbitMQ for MicroSerices Communication</h2><p>Decomposing your monolith app into multiple, totally independently deployable and scalable services.</p><p>The smaller apps are more modular with well-defined boundaries, can be written using different languages/frameworks, fail in isolation so that the entire app doesn’t go down (no SPOF).<br>Take a Cinema ticketing example:<br><img src="https://github.com/pengw00/pengw00.github.io/raw/master/image/microservices_architect.png" alt="image"></p><h3 id="microservices-based-architecture"><a href="#microservices-based-architecture" class="headerlink" title="microservices-based architecture"></a>microservices-based architecture</h3>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Using-RabbitMQ-for-MicroSerices-Communication&quot;&gt;&lt;a href=&quot;#Using-RabbitMQ-for-MicroSerices-Communication&quot; class=&quot;headerlink&quot; title=&quot;Us
+      
+    
+    </summary>
+    
+    
+      <category term="microservice" scheme="http://pengw00.github.io/tags/microservice/"/>
+    
+  </entry>
   
   <entry>
     <title>rabbitMQForMicroServices</title>
@@ -458,20 +481,6 @@
     
     
       <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>viewEncasulation</title>
-    <link href="http://pengw00.github.io/2019/04/04/viewEncasulation/"/>
-    <id>http://pengw00.github.io/2019/04/04/viewEncasulation/</id>
-    <published>2019-04-04T23:13:16.000Z</published>
-    <updated>2019-04-04T23:13:16.379Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
     
   </entry>
   
