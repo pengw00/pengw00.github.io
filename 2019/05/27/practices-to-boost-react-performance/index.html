@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="David w00&#39;s Tech Road">
 <meta property="og:description" content="Practices to Boost React Performance 1. React under the hood?React DOM wasn’t created with dynamic UI in mind. When the DOM needs to be updated, it has to go through a Reflow/Layout stage and the DOM">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2019-05-27T23:36:18.044Z">
+<meta property="og:updated_time" content="2019-05-28T03:52:26.896Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="practices to boost react performance">
 <meta name="twitter:description" content="Practices to Boost React Performance 1. React under the hood?React DOM wasn’t created with dynamic UI in mind. When the DOM needs to be updated, it has to go through a Reflow/Layout stage and the DOM">
@@ -102,8 +102,7 @@
 <p>Make sure that you’ve exported the JS with source-maps or that you’re in development mode.<br>Temporarily disable all React extensions, like React DevTools, because they can impact the results.<br>Set up the profiling tool. Open the Chrome developer tools and go to the performance tab. You can slow down the JavaScript execution so that the performance issues become more apparent.<br>Now, navigate to the page that you would like to profile and then press the red button that says “Record.” If you would like to create a performance trace of the initial render, you should choose the start profiling and reload button. Now, perform the desired action and stop the recording.<br>Chrome will return visualization of the performance data in vertical bands. Zoom in onto the User Timing band to see each component’s performance.<br>You can select individual components and the bottom up tab will give you insights into activities that take up most of the time.</p>
 <p>a library, known as why-did-you-update, that is an excellent tool for component analysis. It gives you a visualization of the props before and after and notifies you about components that shouldn’t have been rerendered.To install the tool, run<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save why-did-you-update</span><br></pre></td></tr></table></figure></p>
 <p>Add this code into your index.js file.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">if (process.env.NODE_ENV !== &apos;production&apos;) &#123;</span><br><span class="line">  const &#123;whyDidYouUpdate&#125; = require(&apos;why-did-you-update&apos;);</span><br><span class="line">  whyDidYouUpdate(React);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###2. Prevent Unnecessary Rendering###</p>
-<p>React re-renders a component when its props or state gets updated:default behaviors.</p>
+<h3 id="2-Prevent-Unnecessary-Rendering"><a href="#2-Prevent-Unnecessary-Rendering" class="headerlink" title="2. Prevent Unnecessary Rendering"></a>2. Prevent Unnecessary Rendering</h3><p>React re-renders a component when its props or state gets updated:default behaviors.</p>
 <p>A. shouldComponentUpdate(). This lifecycle hook doesn’t get invoked during the initial render, but only on subsequent re-renders. shouldComponentUpdate() is triggered when the props have changed and it returns true by default.</p>
 <p>If you’re sure that your component doesn’t need to re-render regardless of whether the props have updated or not, you can return false to skip the rendering process.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class ListItem extends Component &#123;</span><br><span class="line">    shouldComponentUpdate(nextProps, nextState) &#123;</span><br><span class="line">     return false</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    render() &#123;</span><br><span class="line">    // Let the new props flow, I am not rendering again.</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -141,7 +140,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="cjw797f4d003gwszupti8agd6" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="cjw79lxz6003d22zurh5ir5er" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>

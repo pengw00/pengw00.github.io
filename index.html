@@ -102,8 +102,7 @@
 <p>Make sure that you’ve exported the JS with source-maps or that you’re in development mode.<br>Temporarily disable all React extensions, like React DevTools, because they can impact the results.<br>Set up the profiling tool. Open the Chrome developer tools and go to the performance tab. You can slow down the JavaScript execution so that the performance issues become more apparent.<br>Now, navigate to the page that you would like to profile and then press the red button that says “Record.” If you would like to create a performance trace of the initial render, you should choose the start profiling and reload button. Now, perform the desired action and stop the recording.<br>Chrome will return visualization of the performance data in vertical bands. Zoom in onto the User Timing band to see each component’s performance.<br>You can select individual components and the bottom up tab will give you insights into activities that take up most of the time.</p>
 <p>a library, known as why-did-you-update, that is an excellent tool for component analysis. It gives you a visualization of the props before and after and notifies you about components that shouldn’t have been rerendered.To install the tool, run<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save why-did-you-update</span><br></pre></td></tr></table></figure></p>
 <p>Add this code into your index.js file.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">if (process.env.NODE_ENV !== &apos;production&apos;) &#123;</span><br><span class="line">  const &#123;whyDidYouUpdate&#125; = require(&apos;why-did-you-update&apos;);</span><br><span class="line">  whyDidYouUpdate(React);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###2. Prevent Unnecessary Rendering###</p>
-<p>React re-renders a component when its props or state gets updated:default behaviors.</p>
+<h3 id="2-Prevent-Unnecessary-Rendering"><a href="#2-Prevent-Unnecessary-Rendering" class="headerlink" title="2. Prevent Unnecessary Rendering"></a>2. Prevent Unnecessary Rendering</h3><p>React re-renders a component when its props or state gets updated:default behaviors.</p>
 <p>A. shouldComponentUpdate(). This lifecycle hook doesn’t get invoked during the initial render, but only on subsequent re-renders. shouldComponentUpdate() is triggered when the props have changed and it returns true by default.</p>
 <p>If you’re sure that your component doesn’t need to re-render regardless of whether the props have updated or not, you can return false to skip the rendering process.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class ListItem extends Component &#123;</span><br><span class="line">    shouldComponentUpdate(nextProps, nextState) &#123;</span><br><span class="line">     return false</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    render() &#123;</span><br><span class="line">    // Let the new props flow, I am not rendering again.</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -141,7 +140,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="cjw797f4d003gwszupti8agd6" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="cjw79lxz6003d22zurh5ir5er" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -181,7 +180,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/25/leetcode465/" data-id="cjw797f3e001swszu77ocugkx" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/25/leetcode465/" data-id="cjw79lxxz001w22zud06m3g4p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -223,7 +222,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/" data-id="cjw797f2z000zwszuwbhc1w98" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/" data-id="cjw79lxxj001322zunm0xtyuk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -278,7 +277,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="cjw797f3c001owszu8ecke0rg" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="cjw79lxxw001p22zuibmfea0s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Contest/">Contest</a></li></ul>
@@ -317,7 +316,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="cjw797f3g001xwszu04e07mb6" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="cjw79lxy2002122zu6gvfpnr7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li></ul>
@@ -355,7 +354,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="cjw797f3q002gwszu6we5rgjf" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="cjw79lxyc002j22zuszo230p4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -395,7 +394,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/sass-scss/" data-id="cjw797f3p002dwszuq0nni0w5" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/17/sass-scss/" data-id="cjw79lxya002h22zu3pintmip" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Front-end/">Front-end</a></li></ul>
@@ -438,7 +437,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/react-component-communication/" data-id="cjw797f3l0026wszu4kmr5mir" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/17/react-component-communication/" data-id="cjw79lxy8002c22zuwo75axwm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -479,7 +478,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/16/react-context-api/" data-id="cjw797f3o002bwszuwyqogwv2" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/16/react-context-api/" data-id="cjw79lxy9002e22zubj36q9m3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -543,7 +542,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/15/transaction-meaning/" data-id="cjw797f3w002rwszuraktp0u3" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/15/transaction-meaning/" data-id="cjw79lxyl002z22zu6icmmayb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li></ul>
