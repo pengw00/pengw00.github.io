@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-05-28T03:52:26.896Z</updated>
+  <updated>2019-05-28T07:31:08.472Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>rabbitMQForMicroServices</title>
+    <link href="http://pengw00.github.io/2019/05/28/rabbitMQForMicroServices/"/>
+    <id>http://pengw00.github.io/2019/05/28/rabbitMQForMicroServices/</id>
+    <published>2019-05-28T07:27:07.000Z</published>
+    <updated>2019-05-28T07:31:08.472Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Backend-Decouple-Stratergy"><a href="#Backend-Decouple-Stratergy" class="headerlink" title="Backend Decouple Stratergy"></a>Backend Decouple Stratergy</h2><ol><li>A message queue provide an asynchronous communications protocol - You have the option to send a message from one service to another without having to know if another service is able to handle it immediately or not. Messages can wait until the responsible service is ready. A service publishing a message does not need know anything about the inner workings of the services that will process that message. This way of handling messages decouple the producer from the consumer.</li></ol><p>A message queue will keep the processes in your application separated and independent of each other; this way of handling messages could create a system that is easy to maintain and easy to scale.</p><p>Source<br><a href="https://stackoverflow.com/questions/45208766/microservices-why-use-rabbitmq" target="_blank" rel="noopener">https://stackoverflow.com/questions/45208766/microservices-why-use-rabbitmq</a></p><p><a href="https://www.cloudamqp.com/blog/2017-09-25-breaking-down-a-monolithic-system-into-microservices.html" target="_blank" rel="noopener">https://www.cloudamqp.com/blog/2017-09-25-breaking-down-a-monolithic-system-into-microservices.html</a><br>Here is a story explaining how Parkster (a digital parking service) are breaking down their system into multiple microservices by using RabbitMQ.</p><p>a story about the usage of RabbitMQ in an event-based microservices architecture to support 100 million users a month.<br><a href="https://www.cloudamqp.com/blog/2019-01-18-softonic-userstory-rabbitmq-eventbased-communication.html" target="_blank" rel="noopener">https://www.cloudamqp.com/blog/2019-01-18-softonic-userstory-rabbitmq-eventbased-communication.html</a></p><p>And finally a link to Kontena, about why they chose RabbitMQ for their microservice architecture: “Because we needed a stable, manageable and highly-available solution for messaging.”.<br><a href="https://ghost.kontena.io/event-driven-microservices-with-rabbitmq-and-ruby/" target="_blank" rel="noopener">https://ghost.kontena.io/event-driven-microservices-with-rabbitmq-and-ruby/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Backend-Decouple-Stratergy&quot;&gt;&lt;a href=&quot;#Backend-Decouple-Stratergy&quot; class=&quot;headerlink&quot; title=&quot;Backend Decouple Stratergy&quot;&gt;&lt;/a&gt;Backend 
+      
+    
+    </summary>
+    
+    
+      <category term="MicroService" scheme="http://pengw00.github.io/tags/MicroService/"/>
+    
+  </entry>
   
   <entry>
     <title>practices to boost react performance</title>
@@ -449,30 +472,6 @@
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>babel and webpack</title>
-    <link href="http://pengw00.github.io/2019/04/04/babel-and-webpack/"/>
-    <id>http://pengw00.github.io/2019/04/04/babel-and-webpack/</id>
-    <published>2019-04-04T18:23:42.000Z</published>
-    <updated>2019-04-04T18:36:30.366Z</updated>
-    
-    <content type="html"><![CDATA[<p>#Babel and webpack</p><h2 id="Babel-is-Javacsript-compiler"><a href="#Babel-is-Javacsript-compiler" class="headerlink" title="Babel is Javacsript compiler."></a>Babel is Javacsript compiler.</h2><p>webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging ##</p><p>In this unit, you modify the existing application and use some new ECMAScript 6 features. You then set up a build environment using Babel and Webpack.</p><p>Step 1: using new ECMAScript 6 Features</p><p>in app.js with arrow functions and let %!#$!#</p><p>Step 2: Setup Babel and Webpack<br>install webpack and babel<br>in folder create webpack.config.js:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">var path = require(&apos;path&apos;);</span><br><span class="line"> var webpack = require(&apos;webpack&apos;);</span><br><span class="line"> module.exports = &#123;</span><br><span class="line">     entry: &apos;./js/app.js&apos;,</span><br><span class="line">     output: &#123;</span><br><span class="line">         path: path.resolve(__dirname, &apos;build&apos;),</span><br><span class="line">         filename: &apos;app.bundle.js&apos;</span><br><span class="line">     &#125;,</span><br><span class="line">     module: &#123;</span><br><span class="line">         loaders: [</span><br><span class="line">             &#123;</span><br><span class="line">                 test: /\.js$/,</span><br><span class="line">                 loader: &apos;babel-loader&apos;,</span><br><span class="line">                 query: &#123;</span><br><span class="line">                     presets: [&apos;es2015&apos;]</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">         ]</span><br><span class="line">     &#125;,</span><br><span class="line">     stats: &#123;</span><br><span class="line">         colors: true</span><br><span class="line">     &#125;,</span><br><span class="line">     devtool: &apos;source-map&apos;</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure></p><p> Step 4: </p><p> package.json in your favorite code editor. In the scripts section, add a script named webpack that builds your application using Webpack and Babel. The scripts section should now look like this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;webpack&quot;: &quot;webpack&quot;,</span><br><span class="line">    &quot;start&quot;: &quot;http-server&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p><ol start="5"><li>Create build folder to the compile version of the application<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The build process will fail if you don’t create the build directory</span><br></pre></td></tr></table></figure></li></ol><p>Step next:  Build and Run</p><ol><li>npm run webpack</li></ol><p>open index.html modified the <script> tag to load the build/app.bundle.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;build/app.bundle.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p></script></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;#Babel and webpack&lt;/p&gt;
-&lt;h2 id=&quot;Babel-is-Javacsript-compiler&quot;&gt;&lt;a href=&quot;#Babel-is-Javacsript-compiler&quot; class=&quot;headerlink&quot; title=&quot;Babel is J
-      
-    
-    </summary>
-    
-    
-      <category term="Javascript" scheme="http://pengw00.github.io/tags/Javascript/"/>
     
   </entry>
   

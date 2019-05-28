@@ -5,18 +5,20 @@
   
 
   
-  <title>Archives: 2019/4 | David w00&#39;s Tech Road</title>
+  <title>rabbitMQForMicroServices | David w00&#39;s Tech Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="David W00&apos;s Tech road!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="David w00&#39;s Tech Road">
-<meta property="og:url" content="http://pengw00.github.io/archives/2019/04/index.html">
+  <meta name="description" content="Backend Decouple Stratergy A message queue provide an asynchronous communications protocol - You have the option to send a message from one service to another without having to know if another service">
+<meta name="keywords" content="MicroService">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rabbitMQForMicroServices">
+<meta property="og:url" content="http://pengw00.github.io/2019/05/28/rabbitMQForMicroServices/index.html">
 <meta property="og:site_name" content="David w00&#39;s Tech Road">
-<meta property="og:description" content="David W00&apos;s Tech road!">
+<meta property="og:description" content="Backend Decouple Stratergy A message queue provide an asynchronous communications protocol - You have the option to send a message from one service to another without having to know if another service">
 <meta property="og:locale" content="us-EN">
+<meta property="og:updated_time" content="2019-05-28T07:31:08.472Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="David w00&#39;s Tech Road">
-<meta name="twitter:description" content="David W00&apos;s Tech road!">
+<meta name="twitter:title" content="rabbitMQForMicroServices">
+<meta name="twitter:description" content="Backend Decouple Stratergy A message queue provide an asynchronous communications protocol - You have the option to send a message from one service to another without having to know if another service">
   
     <link rel="alternate" href="/atom.xml" title="David w00&#39;s Tech Road" type="application/atom+xml">
   
@@ -63,216 +65,61 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/04/17/sass-scss/" class="archive-article-date">
-  <time datetime="2019-04-17T18:36:41.000Z" itemprop="datePublished">Apr 17</time>
+        <section id="main"><article id="post-rabbitMQForMicroServices" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/28/rabbitMQForMicroServices/" class="article-date">
+  <time datetime="2019-05-28T07:27:07.000Z" itemprop="datePublished">2019-05-28</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/17/sass-scss/">sass/scss</a>
+    <h1 class="article-title" itemprop="name">
+      rabbitMQForMicroServices
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/04/17/react-component-communication/" class="archive-article-date">
-  <time datetime="2019-04-17T15:02:23.000Z" itemprop="datePublished">Apr 17</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/17/react-component-communication/">react component communication</a>
-    </h1>
-  
+        <h2 id="Backend-Decouple-Stratergy"><a href="#Backend-Decouple-Stratergy" class="headerlink" title="Backend Decouple Stratergy"></a>Backend Decouple Stratergy</h2><ol>
+<li>A message queue provide an asynchronous communications protocol - You have the option to send a message from one service to another without having to know if another service is able to handle it immediately or not. Messages can wait until the responsible service is ready. A service publishing a message does not need know anything about the inner workings of the services that will process that message. This way of handling messages decouple the producer from the consumer.</li>
+</ol>
+<p>A message queue will keep the processes in your application separated and independent of each other; this way of handling messages could create a system that is easy to maintain and easy to scale.</p>
+<p>Source<br><a href="https://stackoverflow.com/questions/45208766/microservices-why-use-rabbitmq" target="_blank" rel="noopener">https://stackoverflow.com/questions/45208766/microservices-why-use-rabbitmq</a></p>
+<p><a href="https://www.cloudamqp.com/blog/2017-09-25-breaking-down-a-monolithic-system-into-microservices.html" target="_blank" rel="noopener">https://www.cloudamqp.com/blog/2017-09-25-breaking-down-a-monolithic-system-into-microservices.html</a><br>Here is a story explaining how Parkster (a digital parking service) are breaking down their system into multiple microservices by using RabbitMQ.</p>
+<p>a story about the usage of RabbitMQ in an event-based microservices architecture to support 100 million users a month.<br><a href="https://www.cloudamqp.com/blog/2019-01-18-softonic-userstory-rabbitmq-eventbased-communication.html" target="_blank" rel="noopener">https://www.cloudamqp.com/blog/2019-01-18-softonic-userstory-rabbitmq-eventbased-communication.html</a></p>
+<p>And finally a link to Kontena, about why they chose RabbitMQ for their microservice architecture: “Because we needed a stable, manageable and highly-available solution for messaging.”.<br><a href="https://ghost.kontena.io/event-driven-microservices-with-rabbitmq-and-ruby/" target="_blank" rel="noopener">https://ghost.kontena.io/event-driven-microservices-with-rabbitmq-and-ruby/</a></p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/04/16/react-context-api/" class="archive-article-date">
-  <time datetime="2019-04-16T05:25:24.000Z" itemprop="datePublished">Apr 16</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/16/react-context-api/">react context api</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/04/15/transaction-meaning/" class="archive-article-date">
-  <time datetime="2019-04-16T02:48:08.000Z" itemprop="datePublished">Apr 15</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/05/28/rabbitMQForMicroServices/" data-id="cjw7hf6ad0029knzur87k3q43" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/15/transaction-meaning/">transaction meaning</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/04/12/ngrx-for-flux/" class="archive-article-date">
-  <time datetime="2019-04-12T05:22:31.000Z" itemprop="datePublished">Apr 12</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/12/ngrx-for-flux/">ngrx for flux</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MicroService/">MicroService</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/05/27/practices-to-boost-react-performance/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">practices to boost react performance</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/04/11/TDD-concept/" class="archive-article-date">
-  <time datetime="2019-04-12T03:26:17.000Z" itemprop="datePublished">Apr 11</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/11/TDD-concept/">TDD concept</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/04/11/Jest/" class="archive-article-date">
-  <time datetime="2019-04-11T13:56:24.000Z" itemprop="datePublished">Apr 11</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/11/Jest/">Jest</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/04/10/leetcode380InsertDeleteGetRandom/" class="archive-article-date">
-  <time datetime="2019-04-10T16:16:16.000Z" itemprop="datePublished">Apr 10</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/10/leetcode380InsertDeleteGetRandom/">leetcode380InsertDeleteGetRandom</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/04/09/babel-gulp-ESlint/" class="archive-article-date">
-  <time datetime="2019-04-10T01:12:05.000Z" itemprop="datePublished">Apr 9</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/09/babel-gulp-ESlint/">babel+gulp+ESlint</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/04/06/stack-calculator-problem-recursive-a-little-bit/" class="archive-article-date">
-  <time datetime="2019-04-06T06:57:25.000Z" itemprop="datePublished">Apr 6</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/06/stack-calculator-problem-recursive-a-little-bit/">stack&amp;calculator problem(recursive a little bit)</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2019/04/page/2/">2</a><a class="page-number" href="/archives/2019/04/page/3/">3</a><a class="extend next" rel="next" href="/archives/2019/04/page/2/">Next &raquo;</a>
-  </nav>
 
 </section>
         
