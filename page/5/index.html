@@ -129,7 +129,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/get-and-post-differ-s/" data-id="cjw70gi6t0019gwzum54fsmzt" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/28/get-and-post-differ-s/" data-id="cjw75w10a001b0ozuzgx2jjcf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
@@ -191,7 +191,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/27/React-Props-and-State/" data-id="cjw70gi6b000jgwzuvp6akmxx" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/27/React-Props-and-State/" data-id="cjw75w0zr000g0ozul5i08iop" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -281,7 +281,7 @@ public String getProduct_name() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/12/23/JavaBeans/" data-id="cjw70gi5l0002gwzuz28qo917" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/12/23/JavaBeans/" data-id="cjw75w0z100010ozu27l205xp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
@@ -329,7 +329,7 @@ public String getProduct_name() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/12/23/JavaSpringApp/" data-id="cjw70gi62000dgwzu3vha6gg7" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/12/23/JavaSpringApp/" data-id="cjw75w0zc00060ozu0bpc67lv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li></ul>
@@ -370,7 +370,7 @@ public String getProduct_name() {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/11/07/StdinStdout/" data-id="cjw70gi6e000mgwzud16aqznh" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/11/07/StdinStdout/" data-id="cjw75w0zx000p0ozu7lsi0bwv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hackrrank/">hackrrank</a></li></ul>
@@ -495,7 +495,7 @@ txt[i] and pat[j] match, do i++ and j++
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/11/03/KMP-algorithm/" data-id="cjw70gi5t0009gwzuybv051ub" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/11/03/KMP-algorithm/" data-id="cjw75w0zq000e0ozupujpceg4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -521,7 +521,7 @@ txt[i] and pat[j] match, do i++ and j++
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/01/spring-depend-injection-md/">spring_depend_injection.md</a>
+      <a class="article-title" href="/2018/11/01/spring-depend-injection-md/">spring_depend_injection</a>
     </h1>
   
 
@@ -530,26 +530,18 @@ txt[i] and pat[j] match, do i++ and j++
     <div class="article-entry" itemprop="articleBody">
       
         <p>Two Types of Dependency injection types</p>
-<ol>
-<li>the setter injection<br>The setter injection is used to inject the dependencies through setter methods. In the following example, the instance of DataService uses the setter injection:<br>  public class BusinessServiceImpl {<pre><code>private DataService dataService;
-@Autowired
-public void setDataService(DataService dataService) {
-  this.dataService = dataService;
-}
-</code></pre> }<br>Actually, in order to use the setter injection, you do not even need to declare a setter method. If you specify @Autowired on the variable, Spring automatically uses the setter injection. So, the following code is all that you need for the setter injection for DataService:<br> public class BusinessServiceImpl {<pre><code>@Autowired
-private DataService dataService;
-</code></pre> }</li>
-<li>the constructor injection</li>
-</ol>
-<p>The constructor injection, on the other hand, uses a constructor to inject dependencies. The following code shows how to use a constructor for injecting in DataService:<br>    public class BusinessServiceImpl {<br>        private DataService dataService;<br>        @Autowired<br>        public BusinessServiceImpl(DataService dataService) {<br>        super();<br>           this.dataService = dataService;<br>        }<br>    }<br>When you run the code with the preceding implementation of BusinessServiceImpl, you<br>will see this statement in the log, asserting that autowiring took place using the constructor:<br>       Autowiring by type from bean name ‘businessServiceImpl’ via<br>       constructor to bean named ‘dataServiceImpl’</p>
-
+<h3 id="1-the-setter-injection"><a href="#1-the-setter-injection" class="headerlink" title="1. the setter injection"></a>1. the setter injection</h3><p>The setter injection is used to inject the dependencies through setter methods. In the following example, the instance of DataService uses the setter injection:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> public class BusinessServiceImpl &#123;</span><br><span class="line">         private DataService dataService;</span><br><span class="line">         @Autowired</span><br><span class="line">         public void setDataService(DataService dataService) &#123;</span><br><span class="line">           this.dataService = dataService;</span><br><span class="line">         &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Actually, in order to use the setter injection, you do not even need to declare a setter method. If you specify @Autowired on the variable, Spring automatically uses the setter injection. So, the following code is all that you need for the setter injection for DataService:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class BusinessServiceImpl &#123;</span><br><span class="line">        @Autowired</span><br><span class="line">        private DataService dataService;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-the-constructor-injection"><a href="#2-the-constructor-injection" class="headerlink" title="2. the constructor injection"></a>2. the constructor injection</h3><p>The constructor injection, on the other hand, uses a constructor to inject dependencies. The following code shows how to use a constructor for injecting in DataService:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   public class BusinessServiceImpl &#123;</span><br><span class="line">       private DataService dataService;</span><br><span class="line">       @Autowired</span><br><span class="line">       public BusinessServiceImpl(DataService dataService) &#123;</span><br><span class="line">	super();</span><br><span class="line">          this.dataService = dataService;</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>When you run the code with the preceding implementation of BusinessServiceImpl, you will see this statement in the log, asserting that autowiring took place using the constructor:<br>       Autowiring by type from bean name ‘businessServiceImpl’ via<br>       constructor to bean named ‘dataServiceImpl’</p>
+<h2 id="From"><a href="#From" class="headerlink" title="From "></a>From <master-spring></master-spring></h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/11/01/spring-depend-injection-md/" data-id="cjw70gi7k002jgwzuyjxhdes3" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/11/01/spring-depend-injection-md/" data-id="cjw75w10u002f0ozuugf5l5vx" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
 
     </footer>
   </div>
@@ -592,7 +584,7 @@ private DataService dataService;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/10/08/Persistence/" data-id="cjw70gi5u000bgwzuhetrji59" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/10/08/Persistence/" data-id="cjw75w0zf000a0ozuhxdfghoe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -628,7 +620,7 @@ private DataService dataService;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/10/08/maxcycle-subarray/" data-id="cjw70gi76001xgwzu2ml7b9do" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/10/08/maxcycle-subarray/" data-id="cjw75w10n00200ozuyr6x3hi7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -665,7 +657,7 @@ private DataService dataService;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="cjw70gi75001vgwzu2fn4p2hy" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="cjw75w10h001o0ozuukjvwbh7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -693,7 +685,7 @@ private DataService dataService;
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/From-Mastering-spring/">From <mastering spring></mastering></a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
     </div>
   </div>
 
@@ -703,7 +695,7 @@ private DataService dataService;
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/From-Mastering-spring/" style="font-size: 10px;">From <mastering spring></mastering></a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
