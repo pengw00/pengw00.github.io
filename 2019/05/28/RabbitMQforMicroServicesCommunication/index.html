@@ -16,7 +16,8 @@
 <meta property="og:description" content="Using RabbitMQ for MicroSerices CommunicationDecomposing your monolith app into multiple, totally independently deployable and scalable services. The smaller apps are more modular with well-defined bo">
 <meta property="og:locale" content="us-EN">
 <meta property="og:image" content="https://github.com/pengw00/pengw00.github.io/raw/master/image/microservices_architect.png">
-<meta property="og:updated_time" content="2019-05-28T17:44:53.886Z">
+<meta property="og:image" content="https://github.com/pengw00/pengw00.github.io/raw/master/image/rabbitMQ.png">
+<meta property="og:updated_time" content="2019-05-29T14:13:52.623Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RabbitMQforMicroServicesCommunication">
 <meta name="twitter:description" content="Using RabbitMQ for MicroSerices CommunicationDecomposing your monolith app into multiple, totally independently deployable and scalable services. The smaller apps are more modular with well-defined bo">
@@ -91,11 +92,38 @@
       
         <h2 id="Using-RabbitMQ-for-MicroSerices-Communication"><a href="#Using-RabbitMQ-for-MicroSerices-Communication" class="headerlink" title="Using RabbitMQ for MicroSerices Communication"></a>Using RabbitMQ for MicroSerices Communication</h2><p>Decomposing your monolith app into multiple, totally independently deployable and scalable services.</p>
 <p>The smaller apps are more modular with well-defined boundaries, can be written using different languages/frameworks, fail in isolation so that the entire app doesn’t go down (no SPOF).<br>Take a Cinema ticketing example:<br><img src="https://github.com/pengw00/pengw00.github.io/raw/master/image/microservices_architect.png" alt="image"></p>
-<h3 id="microservices-based-architecture"><a href="#microservices-based-architecture" class="headerlink" title="microservices-based architecture"></a>microservices-based architecture</h3>
+<h3 id="microservices-based-architecture"><a href="#microservices-based-architecture" class="headerlink" title="microservices-based architecture"></a>microservices-based architecture</h3><p>bad practce to have clients to communicate with each of the service instance separately. </p>
+<h4 id="Each-service-has-its-own-storage"><a href="#Each-service-has-its-own-storage" class="headerlink" title="Each service has its own storage"></a>Each service has its own storage</h4><p>Enables decoupling<br>Some queries will then need to join data that is owned by multiple services. To avoid this major performance hit, data may be replicated and sharded. This principle is not just tolerated in microservices, but encouraged.</p>
+<h4 id="a-single-request-should-ideally-only-invoke-one-service-to-fetch-the-response"><a href="#a-single-request-should-ideally-only-invoke-one-service-to-fetch-the-response" class="headerlink" title="a single request should, ideally, only invoke one service to fetch the response"></a>a single request should, ideally, only invoke one service to fetch the response</h4><p>not always possible,  mechanisms like gRPC, Thrift or even simple HTTP (as in our example) are commonly employed when necessary. As you may have guessed, this implies that data will have to be replicated across our services. Say, the GET /catalog/&lt;<cityid>&gt; endpoint is also supposed to return the premieres at each cinema in the city at that time. With our new strategy, the premieres will have to be stored in the database for the Cinema Catalog service as well. Hence, point iii).</cityid></p>
+<h4 id="REST-calls-made-to-our-API-gateway"><a href="#REST-calls-made-to-our-API-gateway" class="headerlink" title="REST calls made to our API gateway"></a>REST calls made to our API gateway</h4><p>request ==&gt; gateway ===&gt; complies result || response to clients</p>
+<p>Communication among services like this on one client request to the app should not happen. Otherwise we’ll be sacrificing performance, on account of another HTTP round-trip, for the newly introduced modularity.</p>
+<h3 id="Communicating-Asynchronously-Between-The-Services"><a href="#Communicating-Asynchronously-Between-The-Services" class="headerlink" title="Communicating Asynchronously Between The Services"></a>Communicating Asynchronously Between The Services</h3><p>the premieres change as a result of some CRUD operation on the Movies service. To keep the data in sync, that update event will have to be emitted and applied to the Cinema Catalog service as well</p>
+<h5 id="Try-to-picture-our-microservices-as-a-cluster-of-state-machines-where-updates-in-states-may-have-to-be-communicated-across-the-cluster-to-achieve-eventual-consistency"><a href="#Try-to-picture-our-microservices-as-a-cluster-of-state-machines-where-updates-in-states-may-have-to-be-communicated-across-the-cluster-to-achieve-eventual-consistency" class="headerlink" title="Try to picture our microservices as a cluster of state machines where updates in states may have to be communicated across the cluster to achieve eventual consistency."></a>Try to picture our microservices as a cluster of state machines where updates in states may have to be communicated across the cluster to achieve eventual consistency.</h5><p>Of course, we should never expect our end-users to have to wait longer for requests to finish and sacrifice their time for modularity to our benefit. Thereby, all of this communication has to be non-blocking. ### And that’s where RabbitMQ comes in. ###</p>
+<p>RabbitMQ: implements the AMQP messaging protocol.  first, you install a RabbitMQ server instance (broker) on a system. Then a publisher/producer program connects to this server and sends out a message. RabbitMQ queues that message and siphons it off to a single or multiple subscriber/consumer programs that are out there listening on the RabbitMQ server.</p>
+<p>microservices are way more complex and we won’t be covering critical topics like fault tolerance because of the intricacy of distributed systems, the full role of the API gateway, Service Discovery, data consistency patterns like Sagas, preventing service failure cascading using Circuit Breakers, health checks and architectural patterns like CQRS. Not to mention how to decide whether microservices will work for you or not.</p>
+<h2 id="How-RabbitMQ-Works"><a href="#How-RabbitMQ-Works" class="headerlink" title="How RabbitMQ Works"></a>How RabbitMQ Works</h2><p>Massages published to an exchange inside the RabbitMQ broker, then exchange copies of that message to queues on basis f certain developer-defined rules called binding. This journey called Routing. </p>
+<p>the direction is non-blocking message transmissions. Not exactly. There are four different types of exchanges and each, along with the bindings, defines a routing algorithm. “Routing algorithm” means, essentially, how the messages are distributed among the queues. Going into the details about each type might be an overkill here, so I’ll just expand on the one we’ll be using: the topic exchange.</p>
+<p>For an exchange to push a message onto a queue, that queue must be bound to the exchange. We can create multiple exchanges with unique names, explicitly. However, when you deploy RabbitMQ it comes with a default, nameless exchange. The exact way a binding key works, again, depends on the type of the exchange. Here’s how it works with a topic exchange:</p>
+<ol>
+<li><p>A queue is bound to an exchange using a string pattern (the binding key)<br>The published message is delivered to the exchange along with a routing key.</p>
+</li>
+<li><p>The exchange checks which queues match the routing key based on the binding key pattern defined before.</p>
+</li>
+</ol>
+<p><img src="https://github.com/pengw00/pengw00.github.io/raw/master/image/rabbitMQ.png" alt="image"><br><a href="https://www.rabbitmq.com/tutorials/tutorial-five-python.html" target="_blank" rel="noopener">source:</a></p>
+<p>Any message with a routing key ”quick.orange.rabbit” will be delivered to both queues. However, messages with ”lazy.brown.fox” will only reach Q2. Those with a routing key not matching any pattern will be lost.</p>
+<p>For some perspective, let’s just skim over two other exchange types:</p>
+<ul>
+<li>Fanout exchange: Messages sent to this kind of exchange will be sent to ALL the queues bound to it. The routing key, if provided, will be completely ignored. This can be used, for example, for broadcasting global configuration updates across a distributed system.</li>
+<li>Direct exchange (simplest): Sends the message to the queue whose binding key is exactly equal to the given routing key. If there are multiple consumers listening on the queue, then the messages will be load-balanced among them, hence, it is commonly used to distribute tasks between multiple workers in a round robin manner.</li>
+</ul>
+<p>//still need to follow up docker tutorial! and Circle.ci</p>
+<p><a href="https://codeburst.io/using-rabbitmq-for-microservices-communication-on-docker-a43840401819" target="_blank" rel="noopener">https://codeburst.io/using-rabbitmq-for-microservices-communication-on-docker-a43840401819</a></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/28/RabbitMQforMicroServicesCommunication/" data-id="cjw83civh000efx24r87e53q4" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/28/RabbitMQforMicroServicesCommunication/" data-id="cjw9b9a82000edz24vzu6lv3g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/microservice/">microservice</a></li></ul>
