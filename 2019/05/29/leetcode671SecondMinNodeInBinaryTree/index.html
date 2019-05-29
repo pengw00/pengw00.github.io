@@ -5,20 +5,20 @@
   
 
   
-  <title>回溯，递归，dp三法leetcode 题目“  | David w00&#39;s Tech Road</title>
+  <title>leetcode671SecondMinNodeInBinaryTree | David w00&#39;s Tech Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="leetcode 10  regular expression matching 可以减去一字符leetcode wildcard matching 可以匹配一个字符leetcode edit distance回溯三要素：选择，限制条件，结束条件回溯是一种算法思想，它是用递归实现的。回溯的过程类似于穷举法，但回溯有“剪枝”功能，即自我判断过程。例如有求和问题，给定有 7 个元素的组合 [1, 2,">
+  <meta name="description" content="Leetcode671. Second Minimum Node In a Binary Tree//implementing in sort of bussiness logic in control component in//flexibly used in front end or backend!!! Analysis:  using dfs or bfs, search the val">
 <meta name="keywords" content="leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="回溯，递归，dp三法leetcode 题目“ ">
-<meta property="og:url" content="http://pengw00.github.io/2019/04/03/回溯，递归，dp三法leetcode-题目“/index.html">
+<meta property="og:title" content="leetcode671SecondMinNodeInBinaryTree">
+<meta property="og:url" content="http://pengw00.github.io/2019/05/29/leetcode671SecondMinNodeInBinaryTree/index.html">
 <meta property="og:site_name" content="David w00&#39;s Tech Road">
-<meta property="og:description" content="leetcode 10  regular expression matching 可以减去一字符leetcode wildcard matching 可以匹配一个字符leetcode edit distance回溯三要素：选择，限制条件，结束条件回溯是一种算法思想，它是用递归实现的。回溯的过程类似于穷举法，但回溯有“剪枝”功能，即自我判断过程。例如有求和问题，给定有 7 个元素的组合 [1, 2,">
+<meta property="og:description" content="Leetcode671. Second Minimum Node In a Binary Tree//implementing in sort of bussiness logic in control component in//flexibly used in front end or backend!!! Analysis:  using dfs or bfs, search the val">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2019-04-03T04:59:05.205Z">
+<meta property="og:updated_time" content="2019-05-29T18:33:39.358Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="回溯，递归，dp三法leetcode 题目“ ">
-<meta name="twitter:description" content="leetcode 10  regular expression matching 可以减去一字符leetcode wildcard matching 可以匹配一个字符leetcode edit distance回溯三要素：选择，限制条件，结束条件回溯是一种算法思想，它是用递归实现的。回溯的过程类似于穷举法，但回溯有“剪枝”功能，即自我判断过程。例如有求和问题，给定有 7 个元素的组合 [1, 2,">
+<meta name="twitter:title" content="leetcode671SecondMinNodeInBinaryTree">
+<meta name="twitter:description" content="Leetcode671. Second Minimum Node In a Binary Tree//implementing in sort of bussiness logic in control component in//flexibly used in front end or backend!!! Analysis:  using dfs or bfs, search the val">
   
     <link rel="alternate" href="/atom.xml" title="David w00&#39;s Tech Road" type="application/atom+xml">
   
@@ -65,10 +65,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-回溯，递归，dp三法leetcode-题目“" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-leetcode671SecondMinNodeInBinaryTree" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/04/03/回溯，递归，dp三法leetcode-题目“/" class="article-date">
-  <time datetime="2019-04-03T04:30:53.000Z" itemprop="datePublished">2019-04-03</time>
+    <a href="/2019/05/29/leetcode671SecondMinNodeInBinaryTree/" class="article-date">
+  <time datetime="2019-05-29T17:18:00.000Z" itemprop="datePublished">2019-05-29</time>
 </a>
     
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      回溯，递归，dp三法leetcode 题目“ 
+      leetcode671SecondMinNodeInBinaryTree
     </h1>
   
 
@@ -87,17 +87,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>leetcode 10  regular expression matching 可以减去一字符<br>leetcode wildcard matching 可以匹配一个字符<br>leetcode edit distance<br>回溯三要素：选择，限制条件，结束条件<br>回溯是一种算法思想，它是用递归实现的。回溯的过程类似于穷举法，但回溯有“剪枝”功能，即自我判断过程。例如有求和问题，给定有 7 个元素的组合 [1, 2, 3, 4, 5, 6, 7]，求加和为 7 的子集。累加计算中，选择 1+2+3+4 时，判断得到结果为 10 大于 7，那么后面的 5, 6, 7 就没有必要计算了。这种方法属于搜索过程中的优化，即“剪枝”功能。</p>
-<p>回溯法解决leetcode10注意递归和回溯的区别<br>回溯具有剪枝的功能。当出现结束条件，自动回溯，不必再往不必要的地方搜索。</p>
-<p>我们在路上走着，前面是一个多岔路口，因为我们并不知道应该走哪条路，所以我们需要尝试。尝试的过程就是一个函数。<br>我们选择了一个方向，后来发现又有一个多岔路口，这时候又需要进行一次选择。所以我们需要在上一次尝试结果的基础上，再做一次尝试，即在函数内部再调用一次函数，这就是递归的过程。<br>这样重复了若干次之后，发现这次选择的这条路走不通，这时候我们知道我们上一个路口选错了，所以我们要回到上一个路口重新选择其他路，这就是回溯的思想。</p>
-<p>递归和回溯相关题目：<br>leetcode17 letter Combinations of a Phone Number<br>leetcode22 Generate Parentheses(最为经典)<br>leetcode46 permutations<br>在 Backtracking 标签中，有 30+ 道与递归、回溯相关的例题</p>
-<p>回溯搜索是深度优先搜索（DFS）的一种。对于某一个搜索树来说（搜索树是起记录路径和状态判断的作用），回溯和DFS，其主要的区别是，回溯法在求解过程中不保留完整的树结构，而深度优先搜索则记下完整的搜索树。</p>
-<p><a href="http://www.cnblogs.com/shizhh/p/5302852.html" target="_blank" rel="noopener">http://www.cnblogs.com/shizhh/p/5302852.html</a> 动态规划系列问题汇总</p>
+        <h3 id="Leetcode671-Second-Minimum-Node-In-a-Binary-Tree"><a href="#Leetcode671-Second-Minimum-Node-In-a-Binary-Tree" class="headerlink" title="Leetcode671. Second Minimum Node In a Binary Tree"></a>Leetcode671. Second Minimum Node In a Binary Tree</h3><p>//implementing in sort of bussiness logic in control component in<br>//flexibly used in front end or backend!!!</p>
+<p>Analysis:</p>
+<ol>
+<li>using dfs or bfs, search the val in range (min1, ans), update ans = val if val in (min1, ans); </li>
+<li>using dfs with divide and conque, dfs to get left and right of the subtree,  and only recursion on the condition of root.val == root.left.val or root.val == root.right.val;</li>
+</ol>
+<ul>
+<li>solution one<h4 id="dfs"><a href="#dfs" class="headerlink" title="dfs"></a>dfs</h4></li>
+</ul>
+<figure class="highlight plain"><figcaption><span>solution&#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">	int min1;</span><br><span class="line">	long ans = Long.MAX_VALUE;</span><br><span class="line">	public int findSecondMinimumValue(TreeNode root)&#123;</span><br><span class="line">		if(root==null) return -1;</span><br><span class="line">		dfs(root);</span><br><span class="line">		return ans ==Long.MAX_VALUE?-1:(int)ans;</span><br><span class="line">	&#125;</span><br><span class="line">	//once root.val &gt; min1, we never drill deeply</span><br><span class="line">	//only root.val == min1, we dfs left and right</span><br><span class="line">	private void dfs(TreeNode root)&#123;</span><br><span class="line">		if(root!=null)&#123;</span><br><span class="line">			if(root.val&gt;min1 &amp;&amp; root.val &lt; ans)&#123;</span><br><span class="line">				ans = root.val;</span><br><span class="line">			&#125;else if(root.val == min1)&#123;</span><br><span class="line">				dfs(root.left);</span><br><span class="line">				dfs(root.right);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="bfs"><a href="#bfs" class="headerlink" title="bfs"></a>bfs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class solution&#123;</span><br><span class="line">	public int findSecondMinimumValue(TreeNode root)&#123;</span><br><span class="line">		if(root==null) return -1;</span><br><span class="line">		int rootval = root.val;</span><br><span class="line">		long ans = Long.MAX_VALUE;</span><br><span class="line">		Queue&lt;Integer&gt; queue = new LinkedList&lt;&gt;();</span><br><span class="line">		queue.add(root);</span><br><span class="line">		while(!queue.isEmpty())&#123;</span><br><span class="line">			TreeNode tmp = queue.poll();</span><br><span class="line">			if(tmp.left != rootval &amp;&amp; head.val &lt; ans)&#123;</span><br><span class="line">				ans = head.val;</span><br><span class="line">			&#125;</span><br><span class="line">			if(tmp.left != null)&#123;</span><br><span class="line">				queue.add(tmp.left);</span><br><span class="line">				queue.add(tmp.right);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return ans == Long.MAX_VALUE ? -1: ans;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>solution two <h3 id="divide-and-conquer-with-dfs"><a href="#divide-and-conquer-with-dfs" class="headerlink" title="divide and conquer with dfs"></a>divide and conquer with dfs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//only left.val == root.val or right.val == root.val will be dfs</span><br><span class="line">//be familiar to implement condition returnning in order.</span><br><span class="line">class solution&#123;</span><br><span class="line">	public int findSecondMinimumValue(TreeNode root)&#123;</span><br><span class="line">		if(root==null) return -1;</span><br><span class="line">		if(root.left==null &amp;&amp; root.right==null) return -1;</span><br><span class="line">		int left = root.left.val;</span><br><span class="line">		int right = root.right.val;</span><br><span class="line">		if(root.left.val == root.val)&#123;</span><br><span class="line">			left = findSecondMinimumValue(root.left);</span><br><span class="line">			&#125;</span><br><span class="line">		if(root.right.val == root.val)&#123;</span><br><span class="line">			right = findSecondMinimumValue(root.right);</span><br><span class="line">		&#125;</span><br><span class="line">		if(left!=-1 &amp;&amp; right != -1)&#123;</span><br><span class="line">			return Math.min(left, rigth);</span><br><span class="line">		&#125;</span><br><span class="line">		if(left != -1)&#123;</span><br><span class="line">			return left;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">		return right;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/回溯，递归，dp三法leetcode-题目“/" data-id="cjw9kjagl00372b24g8fq4p4y" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/29/leetcode671SecondMinNodeInBinaryTree/" data-id="cjw9kjafu001s2b24n3r6spat" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -108,19 +117,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/04/03/dfs和回溯模版/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          dfs和回溯模版
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/04/02/springSecurity-Bcrypt-hash-password/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/05/29/leetcodeContest138/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">springSecurity Bcrypt hash password</div>
+      <div class="article-nav-title">leetcodeContest138</div>
     </a>
   
 </nav>

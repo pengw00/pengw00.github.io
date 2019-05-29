@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-05-29T14:13:52.623Z</updated>
+  <updated>2019-05-29T18:33:39.358Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode671SecondMinNodeInBinaryTree</title>
+    <link href="http://pengw00.github.io/2019/05/29/leetcode671SecondMinNodeInBinaryTree/"/>
+    <id>http://pengw00.github.io/2019/05/29/leetcode671SecondMinNodeInBinaryTree/</id>
+    <published>2019-05-29T17:18:00.000Z</published>
+    <updated>2019-05-29T18:33:39.358Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Leetcode671-Second-Minimum-Node-In-a-Binary-Tree"><a href="#Leetcode671-Second-Minimum-Node-In-a-Binary-Tree" class="headerlink" title="Leetcode671. Second Minimum Node In a Binary Tree"></a>Leetcode671. Second Minimum Node In a Binary Tree</h3><p>//implementing in sort of bussiness logic in control component in<br>//flexibly used in front end or backend!!!</p><p>Analysis:</p><ol><li>using dfs or bfs, search the val in range (min1, ans), update ans = val if val in (min1, ans); </li><li>using dfs with divide and conque, dfs to get left and right of the subtree,  and only recursion on the condition of root.val == root.left.val or root.val == root.right.val;</li></ol><ul><li>solution one<h4 id="dfs"><a href="#dfs" class="headerlink" title="dfs"></a>dfs</h4></li></ul><figure class="highlight plain"><figcaption><span>solution&#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">int min1;</span><br><span class="line">long ans = Long.MAX_VALUE;</span><br><span class="line">public int findSecondMinimumValue(TreeNode root)&#123;</span><br><span class="line">if(root==null) return -1;</span><br><span class="line">dfs(root);</span><br><span class="line">return ans ==Long.MAX_VALUE?-1:(int)ans;</span><br><span class="line">&#125;</span><br><span class="line">//once root.val &gt; min1, we never drill deeply</span><br><span class="line">//only root.val == min1, we dfs left and right</span><br><span class="line">private void dfs(TreeNode root)&#123;</span><br><span class="line">if(root!=null)&#123;</span><br><span class="line">if(root.val&gt;min1 &amp;&amp; root.val &lt; ans)&#123;</span><br><span class="line">ans = root.val;</span><br><span class="line">&#125;else if(root.val == min1)&#123;</span><br><span class="line">dfs(root.left);</span><br><span class="line">dfs(root.right);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="bfs"><a href="#bfs" class="headerlink" title="bfs"></a>bfs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class solution&#123;</span><br><span class="line">public int findSecondMinimumValue(TreeNode root)&#123;</span><br><span class="line">if(root==null) return -1;</span><br><span class="line">int rootval = root.val;</span><br><span class="line">long ans = Long.MAX_VALUE;</span><br><span class="line">Queue&lt;Integer&gt; queue = new LinkedList&lt;&gt;();</span><br><span class="line">queue.add(root);</span><br><span class="line">while(!queue.isEmpty())&#123;</span><br><span class="line">TreeNode tmp = queue.poll();</span><br><span class="line">if(tmp.left != rootval &amp;&amp; head.val &lt; ans)&#123;</span><br><span class="line">ans = head.val;</span><br><span class="line">&#125;</span><br><span class="line">if(tmp.left != null)&#123;</span><br><span class="line">queue.add(tmp.left);</span><br><span class="line">queue.add(tmp.right);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">return ans == Long.MAX_VALUE ? -1: ans;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>solution two <h3 id="divide-and-conquer-with-dfs"><a href="#divide-and-conquer-with-dfs" class="headerlink" title="divide and conquer with dfs"></a>divide and conquer with dfs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//only left.val == root.val or right.val == root.val will be dfs</span><br><span class="line">//be familiar to implement condition returnning in order.</span><br><span class="line">class solution&#123;</span><br><span class="line">public int findSecondMinimumValue(TreeNode root)&#123;</span><br><span class="line">if(root==null) return -1;</span><br><span class="line">if(root.left==null &amp;&amp; root.right==null) return -1;</span><br><span class="line">int left = root.left.val;</span><br><span class="line">int right = root.right.val;</span><br><span class="line">if(root.left.val == root.val)&#123;</span><br><span class="line">left = findSecondMinimumValue(root.left);</span><br><span class="line">&#125;</span><br><span class="line">if(root.right.val == root.val)&#123;</span><br><span class="line">right = findSecondMinimumValue(root.right);</span><br><span class="line">&#125;</span><br><span class="line">if(left!=-1 &amp;&amp; right != -1)&#123;</span><br><span class="line">return Math.min(left, rigth);</span><br><span class="line">&#125;</span><br><span class="line">if(left != -1)&#123;</span><br><span class="line">return left;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">return right;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Leetcode671-Second-Minimum-Node-In-a-Binary-Tree&quot;&gt;&lt;a href=&quot;#Leetcode671-Second-Minimum-Node-In-a-Binary-Tree&quot; class=&quot;headerlink&quot; tit
+      
+    
+    </summary>
+    
+    
+      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leetcodeContest138</title>
+    <link href="http://pengw00.github.io/2019/05/29/leetcodeContest138/"/>
+    <id>http://pengw00.github.io/2019/05/29/leetcodeContest138/</id>
+    <published>2019-05-29T17:14:29.000Z</published>
+    <updated>2019-05-29T18:33:51.469Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>Height Checker</li><li>Grumpy BookStore owner</li><li>Previous Permutation with One Step</li><li><p>Distant Barcodes</p></li><li><p>Height Checker</p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;Height Checker&lt;/li&gt;
+&lt;li&gt;Grumpy BookStore owner&lt;/li&gt;
+&lt;li&gt;Previous Permutation with One Step&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Distant Barcodes&lt;/p&gt;
+&lt;/li&gt;
+&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="contest" scheme="http://pengw00.github.io/tags/contest/"/>
+    
+  </entry>
   
   <entry>
     <title>RabbitMQforMicroServicesCommunication</title>
@@ -429,52 +481,6 @@
       
       
         &lt;h1 id=&quot;stack-amp-calculator-problem&quot;&gt;&lt;a href=&quot;#stack-amp-calculator-problem&quot; class=&quot;headerlink&quot; title=&quot;stack&amp;amp;calculator problem&quot;&gt;&lt;/a&gt;st
-      
-    
-    </summary>
-    
-    
-      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>背包问题 </title>
-    <link href="http://pengw00.github.io/2019/04/06/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E2%80%9C/"/>
-    <id>http://pengw00.github.io/2019/04/06/背包问题“/</id>
-    <published>2019-04-06T06:22:15.000Z</published>
-    <updated>2019-04-06T06:23:11.634Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="背包问题及dp"><a href="#背包问题及dp" class="headerlink" title="背包问题及dp"></a>背包问题及dp</h1>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;背包问题及dp&quot;&gt;&lt;a href=&quot;#背包问题及dp&quot; class=&quot;headerlink&quot; title=&quot;背包问题及dp&quot;&gt;&lt;/a&gt;背包问题及dp&lt;/h1&gt;
-      
-    
-    </summary>
-    
-    
-      <category term="algorithm" scheme="http://pengw00.github.io/tags/algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>find celebrity</title>
-    <link href="http://pengw00.github.io/2019/04/06/find-celebrity/"/>
-    <id>http://pengw00.github.io/2019/04/06/find-celebrity/</id>
-    <published>2019-04-06T04:42:24.000Z</published>
-    <updated>2019-04-06T04:48:52.976Z</updated>
-    
-    <content type="html"><![CDATA[<p>这道题类似于997 find the town judge。<br>但可以采用graph的方法，topological的bfs方法，计算每个点的入度和出度，找出那个入读为n-1的就是解。<br>另一个种方法是find celebrity的方法，先定义i=0；遍历找出一个candidate， 再遍历判断是否这个candidate满足谁都认识他和他不认识任何人两个条件，如果可以100%确定就是他。<br>废话不说：coding：<br>方法1: </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int findJudge(int N, vector&lt;vector&lt;int&gt;&gt;&amp; trust) &#123;</span><br><span class="line">  vector&lt;vector&lt;int&gt;&gt; knows(N + 1, vector&lt;int&gt;(N + 1));</span><br><span class="line">  for (auto &amp;t : trust) knows[t[0]][t[1]] = 1;</span><br><span class="line">  return findCelebrity(N, knows);</span><br><span class="line">&#125;</span><br><span class="line">int findCelebrity(int n, vector&lt;vector&lt;int&gt;&gt;&amp; knows, int i = 1) &#123;</span><br><span class="line">  for (auto j = i + 1; j &lt;= n; ++j) if (knows[i][j]) i = j;</span><br><span class="line">  for (auto j = 1; j &lt; i; ++j) if (knows[i][j]) return -1;</span><br><span class="line">  for (auto j = 1; j &lt;= n; ++j) if (i != j &amp;&amp; !knows[j][i]) return -1;</span><br><span class="line">  return i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>方法二：<br>directed graph：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int findJudge(int N, vector&lt;vector&lt;int&gt;&gt;&amp; trust) &#123;</span><br><span class="line">        vector&lt;int&gt; count(N + 1, 0);</span><br><span class="line">        for (auto&amp; t : trust)</span><br><span class="line">            count[t[0]]--, count[t[1]]++;</span><br><span class="line">        for (int i = 1; i &lt;= N; ++i) &#123;</span><br><span class="line">            if (count[i] == N - 1) return i;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;这道题类似于997 find the town judge。&lt;br&gt;但可以采用graph的方法，topological的bfs方法，计算每个点的入度和出度，找出那个入读为n-1的就是解。&lt;br&gt;另一个种方法是find celebrity的方法，先定义i=0；遍历找出一个ca
       
     
     </summary>

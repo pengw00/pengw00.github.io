@@ -65,6 +65,93 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-spring-depend-injection-md" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/01/spring-depend-injection-md/" class="article-date">
+  <time datetime="2018-11-01T16:23:34.000Z" itemprop="datePublished">2018-11-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/01/spring-depend-injection-md/">spring_depend_injection</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Two Types of Dependency injection types</p>
+<h3 id="1-the-setter-injection"><a href="#1-the-setter-injection" class="headerlink" title="1. the setter injection"></a>1. the setter injection</h3><p>The setter injection is used to inject the dependencies through setter methods. In the following example, the instance of DataService uses the setter injection:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> public class BusinessServiceImpl &#123;</span><br><span class="line">         private DataService dataService;</span><br><span class="line">         @Autowired</span><br><span class="line">         public void setDataService(DataService dataService) &#123;</span><br><span class="line">           this.dataService = dataService;</span><br><span class="line">         &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Actually, in order to use the setter injection, you do not even need to declare a setter method. If you specify @Autowired on the variable, Spring automatically uses the setter injection. So, the following code is all that you need for the setter injection for DataService:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class BusinessServiceImpl &#123;</span><br><span class="line">        @Autowired</span><br><span class="line">        private DataService dataService;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-the-constructor-injection"><a href="#2-the-constructor-injection" class="headerlink" title="2. the constructor injection"></a>2. the constructor injection</h3><p>The constructor injection, on the other hand, uses a constructor to inject dependencies. The following code shows how to use a constructor for injecting in DataService:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   public class BusinessServiceImpl &#123;</span><br><span class="line">       private DataService dataService;</span><br><span class="line">       @Autowired</span><br><span class="line">       public BusinessServiceImpl(DataService dataService) &#123;</span><br><span class="line">	super();</span><br><span class="line">          this.dataService = dataService;</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>When you run the code with the preceding implementation of BusinessServiceImpl, you will see this statement in the log, asserting that autowiring took place using the constructor:<br>       Autowiring by type from bean name ‘businessServiceImpl’ via<br>       constructor to bean named ‘dataServiceImpl’</p>
+<h2 id="From"><a href="#From" class="headerlink" title="From "></a>From <master-spring></master-spring></h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2018/11/01/spring-depend-injection-md/" data-id="cjw9kjage002s2b24uu8gybtl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Persistence" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/08/Persistence/" class="article-date">
+  <time datetime="2018-10-08T20:57:08.000Z" itemprop="datePublished">2018-10-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/08/Persistence/">Persistence</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Understanding the meaning of persistence is important for evaluating different data store system</p>
+<p>Given the importance of the data store in most modern applications, making a poorly informed choice could mean substantial downtime or loss of data.</p>
+<p>Persistence is “the continuance of an effect after its cause is removed”. In the context of storing data in a computer system, this means that the data survives after the process with which it was created has ended. In other words, for a data store to be considered persistent, it must write to non-volatile storage.</p>
+<p>If you need persistence in your data store, then you need to also understand the four main design approaches that a data store can take and how (or if) these designs provide persistence:</p>
+<p>Pure in-memory, no persistence at all, such as memcached or Scalaris<br>In-memory with periodic snapshots, such as Oracle Coherence or Redis<br>Disk-based with update-in-place writes, such as MySQL ISAM or MongoDB<br>Commitlog-based, such as all traditional OLTP databases (Oracle,<br>SQL Server, etc.)</p>
+<p>In-memory approaches can achieve blazing speed, but at the cost of being limited to a relatively small data set. Most workloads have relatively small “hot” (active) subset of their total data; systems that require the whole dataset to fit in memory rather than just the active part are fine for caches but a bad fit for most other applications. Because the data is in memory only, it will not survive process termination. Therefore these types of data stores are not considered persistent.</p>
+<p>The easiest way to add persistence to an in-memory system is with periodic snapshots to disk at a configurable interval. Thus, you can lose up to that interval’s worth of updates.</p>
+<p>Update-in-place and commitlog-based systems store to non-volatile memory immediately, but only commitlog-based persistence provides Durability – the D in ACID – with every write persisted before success is returned to the client.<br>Reference from below link.<br><a href="https://www.datastax.com/dev/blog/what-persistence-and-why-does-it-matter" target="_blank" rel="noopener">https://www.datastax.com/dev/blog/what-persistence-and-why-does-it-matter</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2018/10/08/Persistence/" data-id="cjw9kjaet00072b24es4yj2pu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-maxcycle-subarray" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/10/08/maxcycle-subarray/" class="article-date">
@@ -91,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/10/08/maxcycle-subarray/" data-id="cjw9b9a9b001ydz244t1p0zu9" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/10/08/maxcycle-subarray/" data-id="cjw9kjag000242b24cvbzne5u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -128,7 +215,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="cjw9b9a95001ndz24k35ia5q0" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="cjw9kjafs001p2b24d0ryyohq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -178,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="cjw9b9a92001idz24v247ksms" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="cjw9kjafo001h2b24q31xzx0c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -215,7 +302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/" data-id="cjw9b9a7h0002dz24hrakkrx4" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/" data-id="cjw9kjaea00002b24jjz87m56" class="article-share-link">Share</a>
       
       
     </footer>
@@ -242,7 +329,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/18/dailylearning/" data-id="cjw9b9a8f000xdz24fhwhc5wf" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/18/dailylearning/" data-id="cjw9kjafb000z2b24bkxxm5k3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -283,7 +370,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/14/Daily-Friday/" data-id="cjw9b9a780000dz24bvta38hl" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/14/Daily-Friday/" data-id="cjw9kjaek00012b243y6fibb6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -320,7 +407,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/" data-id="cjw9b9a93001jdz24c0ny3cid" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/" data-id="cjw9kjafq001l2b24yke66tj1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -363,52 +450,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/13/leetcode474/" data-id="cjw9b9a98001rdz247638eegw" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/13/hello-world/" class="article-date">
-  <time datetime="2018-09-13T16:23:36.826Z" itemprop="datePublished">2018-09-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/13/hello-world/">Welcome to Pengw00&#39;s Blog!</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/13/hello-world/" data-id="cjw9b9a8w001adz24jag27dm1" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/13/leetcode474/" data-id="cjw9kjafz00222b24d6zn1p5i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -422,7 +464,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
+    <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -436,7 +478,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
     </div>
   </div>
 
@@ -446,7 +488,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
@@ -468,6 +510,14 @@
       <ul>
         
           <li>
+            <a href="/2019/05/29/leetcode671SecondMinNodeInBinaryTree/">leetcode671SecondMinNodeInBinaryTree</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/29/leetcodeContest138/">leetcodeContest138</a>
+          </li>
+        
+          <li>
             <a href="/2019/05/28/RabbitMQforMicroServicesCommunication/">RabbitMQforMicroServicesCommunication</a>
           </li>
         
@@ -477,14 +527,6 @@
         
           <li>
             <a href="/2019/05/27/practices-to-boost-react-performance/">practices to boost react performance</a>
-          </li>
-        
-          <li>
-            <a href="/2019/05/25/leetcode465/">leetcode465</a>
-          </li>
-        
-          <li>
-            <a href="/2019/05/21/edit-distance-modified-version-bus-station-problemq/">edit distance modified version-bus station problem q </a>
           </li>
         
       </ul>
