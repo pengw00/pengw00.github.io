@@ -5,20 +5,20 @@
   
 
   
-  <title>leetcode 924. Minimize Malware Spread | David w00&#39;s Tech Road</title>
+  <title>systemDesignInterview | David w00&#39;s Tech Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Union Find and bfs and dfs">
-<meta name="keywords" content="leetcode">
+  <meta name="description" content="My question:   Design Pastebin, a website where you can store and share text online for a set period of time.  Note: Bit.ly is a similar service, with the distinction that Pastebin requires storing th">
+<meta name="keywords" content="SystemDesign">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode 924. Minimize Malware Spread">
-<meta property="og:url" content="http://pengw00.github.io/2019/03/28/leetcode-924-Minimize-Malware-Spread/index.html">
+<meta property="og:title" content="systemDesignInterview">
+<meta property="og:url" content="http://pengw00.github.io/2019/05/30/systemDesignInterview/index.html">
 <meta property="og:site_name" content="David w00&#39;s Tech Road">
-<meta property="og:description" content="Union Find and bfs and dfs">
+<meta property="og:description" content="My question:   Design Pastebin, a website where you can store and share text online for a set period of time.  Note: Bit.ly is a similar service, with the distinction that Pastebin requires storing th">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2019-03-28T13:33:37.024Z">
+<meta property="og:updated_time" content="2019-05-30T04:30:47.313Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode 924. Minimize Malware Spread">
-<meta name="twitter:description" content="Union Find and bfs and dfs">
+<meta name="twitter:title" content="systemDesignInterview">
+<meta name="twitter:description" content="My question:   Design Pastebin, a website where you can store and share text online for a set period of time.  Note: Bit.ly is a similar service, with the distinction that Pastebin requires storing th">
   
     <link rel="alternate" href="/atom.xml" title="David w00&#39;s Tech Road" type="application/atom+xml">
   
@@ -65,10 +65,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-leetcode-924-Minimize-Malware-Spread" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-systemDesignInterview" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/03/28/leetcode-924-Minimize-Malware-Spread/" class="article-date">
-  <time datetime="2019-03-28T13:32:41.000Z" itemprop="datePublished">2019-03-28</time>
+    <a href="/2019/05/30/systemDesignInterview/" class="article-date">
+  <time datetime="2019-05-30T04:17:56.000Z" itemprop="datePublished">2019-05-30</time>
 </a>
     
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      leetcode 924. Minimize Malware Spread
+      systemDesignInterview
     </h1>
   
 
@@ -87,15 +87,55 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Union Find and bfs and dfs</p>
+        <p>My question: </p>
+<ol>
+<li>Design Pastebin, a website where you can store and share text online for a set period of time.</li>
+</ol>
+<p>Note: Bit.ly is a similar service, with the distinction that Pastebin requires storing the paste contents instead of the original unshortened URL.</p>
+<ul>
+<li>note: Use it to share thoughts and resources, such as:</li>
+</ul>
+<ul>
+<li>Features scope</li>
+<li>API design</li>
+<li>Pseudo code for specific components</li>
+<li>Data model/schema</li>
+<li>Back-of-the-envelope calculations</li>
+<li>Reference links</li>
+<li>Link to whiteboard or diagram such as <a href="https://sketchboard.me/new" target="_blank" rel="noopener">https://sketchboard.me/new</a></li>
+</ul>
+<ul>
+<li>hints: interview structure</li>
+<li>Establish the feature scope and constraints</li>
+<li>Describe high-level architecture</li>
+<li>Drill Down: design and scale core components</li>
+<li>Scaling the design</li>
+<li>Tradeoffs and future improvements</li>
+</ul>
+<h3 id="Note-and-Solution"><a href="#Note-and-Solution" class="headerlink" title="Note and Solution"></a>Note and Solution</h3><p>text -&gt; pastebin  no expire time</p>
+<p>build a restful api with post method store text in the dabase</p>
+<p>api and then when hit api return text in brower. </p>
+<p>txt file, service parse the text file, get string, and store in the backend. </p>
+<p>txt -&gt; api -&gt; user want the text, url get list of text or one recent text</p>
+<p>front end -&gt; save txt file -&gt; backend -&gt; id-&gt; bit.ly service -&gt; url for text </p>
+<ol>
+<li>user table<br> user id</li>
+</ol>
+<p>2 text table<br>    text id<br>    text content<br>    date </p>
+<p>solution1: url for txt -&gt; backend -&gt; response with txt file</p>
+<ul>
+<li>solution2: optimized high level design<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">client -&gt;(LB) server -&gt; readApi-&gt; cache  duplicate</span><br><span class="line">          server    readApi                  DB</span><br><span class="line">                                             DB</span><br><span class="line">                                             ...</span><br><span class="line">                                             ...</span><br><span class="line">          server       -&gt; writeApi-&gt;  (master and slave DB) </span><br><span class="line">nosql</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Pasterbin use case<br>Review this <a href="https://github.com/donnemartin/system-design-primer/tree/master/solutions/system_design/pastebin#design-pastebincom-or-bitly" target="_blank" rel="noopener">article</a> to learn about the use cases, high level design, core components and scale of a system like Pastebin.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/leetcode-924-Minimize-Malware-Spread/" data-id="cjwa5uzl4001nnnzuipbj7vzl" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/30/systemDesignInterview/" data-id="cjwa5uzlt002vnnzu8hibouwc" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li></ul>
 
     </footer>
   </div>
@@ -103,19 +143,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/03/28/props-and-state-new-example/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          props and state new example
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/03/28/props-and-constructor-super-sweetie/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/05/29/leetcode671SecondMinNodeInBinaryTree/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">props and constructor &amp;&amp; super sweetie</div>
+      <div class="article-nav-title">leetcode671SecondMinNodeInBinaryTree</div>
     </a>
   
 </nav>

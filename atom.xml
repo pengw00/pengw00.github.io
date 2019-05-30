@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-05-29T18:33:39.358Z</updated>
+  <updated>2019-05-30T04:30:47.313Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>systemDesignInterview</title>
+    <link href="http://pengw00.github.io/2019/05/30/systemDesignInterview/"/>
+    <id>http://pengw00.github.io/2019/05/30/systemDesignInterview/</id>
+    <published>2019-05-30T04:17:56.000Z</published>
+    <updated>2019-05-30T04:30:47.313Z</updated>
+    
+    <content type="html"><![CDATA[<p>My question: </p><ol><li>Design Pastebin, a website where you can store and share text online for a set period of time.</li></ol><p>Note: Bit.ly is a similar service, with the distinction that Pastebin requires storing the paste contents instead of the original unshortened URL.</p><ul><li>note: Use it to share thoughts and resources, such as:</li></ul><ul><li>Features scope</li><li>API design</li><li>Pseudo code for specific components</li><li>Data model/schema</li><li>Back-of-the-envelope calculations</li><li>Reference links</li><li>Link to whiteboard or diagram such as <a href="https://sketchboard.me/new" target="_blank" rel="noopener">https://sketchboard.me/new</a></li></ul><ul><li>hints: interview structure</li><li>Establish the feature scope and constraints</li><li>Describe high-level architecture</li><li>Drill Down: design and scale core components</li><li>Scaling the design</li><li>Tradeoffs and future improvements</li></ul><h3 id="Note-and-Solution"><a href="#Note-and-Solution" class="headerlink" title="Note and Solution"></a>Note and Solution</h3><p>text -&gt; pastebin  no expire time</p><p>build a restful api with post method store text in the dabase</p><p>api and then when hit api return text in brower. </p><p>txt file, service parse the text file, get string, and store in the backend. </p><p>txt -&gt; api -&gt; user want the text, url get list of text or one recent text</p><p>front end -&gt; save txt file -&gt; backend -&gt; id-&gt; bit.ly service -&gt; url for text </p><ol><li>user table<br> user id</li></ol><p>2 text table<br>    text id<br>    text content<br>    date </p><p>solution1: url for txt -&gt; backend -&gt; response with txt file</p><ul><li>solution2: optimized high level design<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">client -&gt;(LB) server -&gt; readApi-&gt; cache  duplicate</span><br><span class="line">          server    readApi                  DB</span><br><span class="line">                                             DB</span><br><span class="line">                                             ...</span><br><span class="line">                                             ...</span><br><span class="line">          server       -&gt; writeApi-&gt;  (master and slave DB) </span><br><span class="line">nosql</span><br></pre></td></tr></table></figure></li></ul><p>Pasterbin use case<br>Review this <a href="https://github.com/donnemartin/system-design-primer/tree/master/solutions/system_design/pastebin#design-pastebincom-or-bitly" target="_blank" rel="noopener">article</a> to learn about the use cases, high level design, core components and scale of a system like Pastebin.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;My question: &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Design Pastebin, a website where you can store and share text online for a set period of time.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;N
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="http://pengw00.github.io/tags/SystemDesign/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode671SecondMinNodeInBinaryTree</title>
@@ -467,29 +494,6 @@
     
     
       <category term="JS" scheme="http://pengw00.github.io/tags/JS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>stack&amp;calculator problem(recursive a little bit)</title>
-    <link href="http://pengw00.github.io/2019/04/06/stack-calculator-problem-recursive-a-little-bit/"/>
-    <id>http://pengw00.github.io/2019/04/06/stack-calculator-problem-recursive-a-little-bit/</id>
-    <published>2019-04-06T06:57:25.000Z</published>
-    <updated>2019-04-06T06:58:21.070Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="stack-amp-calculator-problem"><a href="#stack-amp-calculator-problem" class="headerlink" title="stack&amp;calculator problem"></a>stack&amp;calculator problem</h1>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;stack-amp-calculator-problem&quot;&gt;&lt;a href=&quot;#stack-amp-calculator-problem&quot; class=&quot;headerlink&quot; title=&quot;stack&amp;amp;calculator problem&quot;&gt;&lt;/a&gt;st
-      
-    
-    </summary>
-    
-    
-      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
     
   </entry>
   
