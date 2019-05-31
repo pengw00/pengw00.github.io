@@ -65,6 +65,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode137Contest" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/20/leetcode137Contest/" class="article-date">
+  <time datetime="2019-05-20T14:54:00.000Z" itemprop="datePublished">2019-05-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/20/leetcode137Contest/">leetcode137Contest</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>Last Stone Weight3</li>
+<li>Remove All Adjacent Duplicates In String4</li>
+<li>Longest String Chain6</li>
+<li>Last Stone Weight II</li>
+</ol>
+<h3 id="1-Last-Stone-Weight3"><a href="#1-Last-Stone-Weight3" class="headerlink" title="1. Last Stone Weight3"></a>1. Last Stone Weight3</h3><p>a collection of rocks with each one has positive weight. Each turn, we choose two heaviest rocks and smash them together.<br>logic：<br>sort them in increase order, and push back the last two elements, and smash and push the remain back to the vector. </p>
+<p>solution：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public: </span><br><span class="line">	int lastStoneWeight(vector&lt;int&gt;&amp; a)&#123;</span><br><span class="line">		while(a.size()&gt;1)&#123;</span><br><span class="line">			sort(a.begin(), a.end());</span><br><span class="line">			int n = a.size();</span><br><span class="line">			int x = a[n-1] - a[n-2];</span><br><span class="line">			a.pop_back();</span><br><span class="line">			a.pop_back();</span><br><span class="line">			a.push_back(x);</span><br><span class="line">		&#125;</span><br><span class="line">		return a[0];</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-Remove-All-Adjacent-Duplicates-In-String4"><a href="#2-Remove-All-Adjacent-Duplicates-In-String4" class="headerlink" title="2. Remove All Adjacent Duplicates In String4"></a>2. Remove All Adjacent Duplicates In String4</h3><p>Given a String S of lowercase letters, a duplicate removal consists of choosing two adjacent and equal letters, and removing them.<br>Repeatly doing the removement until we no longer can. return the final string. </p>
+<p>example: inputs: “abbaca”<br>         outputs: “ca”<br>Solution Logic: using stack, check the top of the stack, if equal to current element, then pop it out.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public:</span><br><span class="line">	string removeDuplicates(string S)&#123;</span><br><span class="line">		vector&lt;char&gt; a;</span><br><span class="line">		for(auto&amp; c: S)&#123;</span><br><span class="line">			if(a.size() &amp;&amp; a.back()==c)&#123;</span><br><span class="line">				a.pop_back();</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				a.push_back(c);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		string ret;</span><br><span class="line">		for(auto&amp; it: a) ret += it;</span><br><span class="line">		return ret;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-Longest-String-Chain6"><a href="#3-Longest-String-Chain6" class="headerlink" title="3. Longest String Chain6"></a>3. Longest String Chain6</h3><p>Given a list of words, each word consists of English lowercase letters.<br>Let’s say word1 is a predecessor of word2 if and only if we can add exactly one letter anywhere in word1 to make it equal to word2.  For example, “abc” is a predecessor of “abac”.<br>Return the longest possible length of a word chain with words chosen from the given list of words.<br>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: [&quot;a&quot;,&quot;b&quot;,&quot;ba&quot;,&quot;bca&quot;,&quot;bda&quot;,&quot;bdca&quot;]</span><br><span class="line">Output: 4</span><br><span class="line">Explanation: one of the longest word chain is &quot;a&quot;,&quot;ba&quot;,&quot;bda&quot;,&quot;bdca&quot;.</span><br></pre></td></tr></table></figure></p>
+<p>Solution:<br>Per inolving in state transfer: Dynamic programming is needed.<br>sort the word based on the length; then loop through all the possible string by missing one letter. if one string got seen before, we update the longest chain for current string.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class solution&#123;</span><br><span class="line">	//static attached to class</span><br><span class="line">	static bool compare(const string &amp;s1, const string &amp;s2)&#123;</span><br><span class="line">		return s1.length() &lt; s2.length();</span><br><span class="line">	&#125;</span><br><span class="line">public:</span><br><span class="line">	int longestStrChain(vector&lt;string&gt;&amp; words)&#123;</span><br><span class="line">		sort(words.begin(), words.end(), compare);</span><br><span class="line">		unordered_map&lt;string,int&gt; dp;</span><br><span class="line">		for(string w: words)&#123;</span><br><span class="line">			int max_idx = 0;</span><br><span class="line">			for(int i = 0; i &lt; w.length(); i++)&#123;</span><br><span class="line">				string word = w.substr(0, i) + w.substr(i+1);</span><br><span class="line">				max_idx = max(max_idx, dp[word]+1);</span><br><span class="line">			&#125;</span><br><span class="line">			dp[w] = max_index;</span><br><span class="line">		&#125;</span><br><span class="line">		int result = 0;</span><br><span class="line">		for(auto m: dp)&#123;</span><br><span class="line">			result  = max(result, m.second);</span><br><span class="line">		&#125;</span><br><span class="line">		return result;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-Last-Stone-Weight-II"><a href="#4-Last-Stone-Weight-II" class="headerlink" title="4. Last Stone Weight II"></a>4. Last Stone Weight II</h3><p>Follow up of the first one:  not the biggest two stones anymore, but the smash strategy become:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Each turn, we choose any two rocks and smash them together.  </span><br><span class="line">Suppose the stones have weights x and y with x &lt;= y.  The result of this smash is:</span><br><span class="line"></span><br><span class="line">If x == y, both stones are totally destroyed;</span><br><span class="line">If x != y, the stone of weight x is totally destroyed, and the stone of weight y has new weight y-x.</span><br></pre></td></tr></table></figure></p>
+<p>So, there are a lot of choices! ===&gt; Knapsacks problem!</p>
+<p>###Tips: Think in the way of real scenarios, and how you get it done first.<br>Then connect the logic with data structure and algorithm. </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="cjwcey3g70020s124ntiif1cv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Contest/">Contest</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode804" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/20/leetcode804/" class="article-date">
@@ -92,7 +147,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="cjwcaf3e00024tw2412eqydpk" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="cjwcey3g90024s124fsctuoaj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li></ul>
@@ -130,7 +185,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="cjwcaf3ee002stw24sp0x1fy1" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="cjwcey3h20032s12404hs9ng4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -170,7 +225,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/sass-scss/" data-id="cjwcaf3ed002ptw244j5xwwa1" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/17/sass-scss/" data-id="cjwcey3gx002us1245i1lgpbh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Front-end/">Front-end</a></li></ul>
@@ -213,7 +268,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/react-component-communication/" data-id="cjwcaf3e8002jtw24gmcny4wt" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/17/react-component-communication/" data-id="cjwcey3gs002ns1248xe9be6f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -254,7 +309,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/16/react-context-api/" data-id="cjwcaf3ea002mtw24z8p6h6xw" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/16/react-context-api/" data-id="cjwcey3gv002ts124wiyslbhh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -318,7 +373,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/15/transaction-meaning/" data-id="cjwcaf3el0036tw24pxh0vl2d" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/15/transaction-meaning/" data-id="cjwcey3hf003ks124u0z6uetb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li></ul>
@@ -412,7 +467,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/12/ngrx-for-flux/" data-id="cjwcaf3f7003qtw2484c5fudq" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/12/ngrx-for-flux/" data-id="cjwcey3gu002qs124z5wmniip" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/">angular</a></li></ul>
@@ -452,7 +507,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/11/TDD-concept/" data-id="cjwcaf3d9000mtw24iq67r1eb" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/11/TDD-concept/" data-id="cjwcey3ff000ms124s6nyixaa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li></ul>
@@ -498,51 +553,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/11/Jest/" data-id="cjwcaf3cy0009tw24ftzlkql8" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/11/Jest/" data-id="cjwcey3f9000fs124tj8tprao" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode380InsertDeleteGetRandom" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/10/leetcode380InsertDeleteGetRandom/" class="article-date">
-  <time datetime="2019-04-10T16:16:16.000Z" itemprop="datePublished">2019-04-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/10/leetcode380InsertDeleteGetRandom/">leetcode380InsertDeleteGetRandom</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Leetcode 380 insert delete getRandom O(1)</p>
-<p>Folowup: duplicated number is allowed.<br><code>`</code><br>public class RandomizedSet{<br>    ArrayList<integer> nums;</integer></p>
-<p>}</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/10/leetcode380InsertDeleteGetRandom/" data-id="cjwcaf3dx001ztw24tmdxjn5s" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
 
     </footer>
   </div>
@@ -601,6 +615,10 @@
       <ul>
         
           <li>
+            <a href="/2019/05/31/ACM-ICPC-Road-Map/">ACM/ICPC Road Map</a>
+          </li>
+        
+          <li>
             <a href="/2019/05/31/stepsToBuildSpringbootRESTAPI/">stepsToBuildSpringbootRESTAPI</a>
           </li>
         
@@ -614,10 +632,6 @@
         
           <li>
             <a href="/2019/05/29/leetcodeContest138/">leetcodeContest138</a>
-          </li>
-        
-          <li>
-            <a href="/2019/05/28/RabbitMQforMicroServicesCommunication/">RabbitMQforMicroServicesCommunication</a>
           </li>
         
       </ul>
