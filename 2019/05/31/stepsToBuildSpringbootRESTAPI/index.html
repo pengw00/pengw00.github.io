@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>stepsToBuildSpringbootRESTAPI | David w00&#39;s Tech Road</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Using http://start.spring.io to initialize: web, jpa, mysql, devtools for basic dependency  Configure application.properties file 123456789101112## Spring DATASOURCE (DataSourceAutoConfiguration &amp;amp">
+<meta name="keywords" content="Springboot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="stepsToBuildSpringbootRESTAPI">
+<meta property="og:url" content="http://pengw00.github.io/2019/05/31/stepsToBuildSpringbootRESTAPI/index.html">
+<meta property="og:site_name" content="David w00&#39;s Tech Road">
+<meta property="og:description" content="Using http://start.spring.io to initialize: web, jpa, mysql, devtools for basic dependency  Configure application.properties file 123456789101112## Spring DATASOURCE (DataSourceAutoConfiguration &amp;amp">
+<meta property="og:locale" content="us-EN">
+<meta property="og:updated_time" content="2019-05-31T16:12:24.705Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="stepsToBuildSpringbootRESTAPI">
+<meta name="twitter:description" content="Using http://start.spring.io to initialize: web, jpa, mysql, devtools for basic dependency  Configure application.properties file 123456789101112## Spring DATASOURCE (DataSourceAutoConfiguration &amp;amp">
+  
+    <link rel="alternate" href="/atom.xml" title="David w00&#39;s Tech Road" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">David w00&#39;s Tech Road</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pengw00.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-stepsToBuildSpringbootRESTAPI" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/31/stepsToBuildSpringbootRESTAPI/" class="article-date">
+  <time datetime="2019-05-31T14:47:31.000Z" itemprop="datePublished">2019-05-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      stepsToBuildSpringbootRESTAPI
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>Using <a href="http://start.spring.io" target="_blank" rel="noopener">http://start.spring.io</a> to initialize: web, jpa, mysql, devtools for basic dependency</p>
+</li>
+<li><p>Configure application.properties file</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">## Spring DATASOURCE (DataSourceAutoConfiguration &amp; DataSourceProperties)</span><br><span class="line">spring.datasource.url = jdbc:mysql://localhost:3306/notes_app?useSSL=false</span><br><span class="line">spring.datasource.username = root</span><br><span class="line">spring.datasource.password = root</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Hibernate Properties</span><br><span class="line"># The SQL dialect makes Hibernate generate better SQL for the chosen database</span><br><span class="line">spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDialect</span><br><span class="line"></span><br><span class="line"># Hibernate ddl auto (create, create-drop, validate, update)</span><br><span class="line">spring.jpa.hibernate.ddl-auto = update</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>The last two properties are for hibernate. Spring Boot uses Hibernate as the default JPA implementation.</p>
+<p>The property spring.jpa.hibernate.ddl-auto is used for database initialization. I’ve used the value “update” for this property.</p>
+<p>It does two things -</p>
+<ul>
+<li><p>When you define a domain model, a table will automatically be created in the database and the fields of the domain model will be mapped to the corresponding columns in the table.</p>
+</li>
+<li><p>Any change to the domain model will also trigger an update to the table. For example, If you change the name or type of a field, or add another field to the model, then all these changes will be reflected in the mapped table as well.</p>
+</li>
+</ul>
+<p>Using update for spring.jpa.hibernate.ddl-auto property is fine for development. But, For production, You should keep the value of this property to “validate”, and use a database migration tool like Flyway for managing changes in the database schema.</p>
+<ul>
+<li>Set up data model mapping to table</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">package com.example.easynotes.model;</span><br><span class="line"></span><br><span class="line">import com.fasterxml.jackson.annotation.JsonIgnoreProperties;</span><br><span class="line">import org.springframework.data.annotation.CreatedDate;</span><br><span class="line">import org.springframework.data.annotation.LastModifiedDate;</span><br><span class="line">import org.springframework.data.jpa.domain.support.AuditingEntityListener;</span><br><span class="line">import javax.persistence.*;</span><br><span class="line">import javax.validation.constraints.NotBlank;</span><br><span class="line">import java.util.Date;</span><br><span class="line"></span><br><span class="line">@Entity</span><br><span class="line">@Table(name = &quot;notes&quot;)</span><br><span class="line">@EntityListeners(AuditingEntityListener.class)</span><br><span class="line">@JsonIgnoreProperties(value = &#123;&quot;createdAt&quot;, &quot;updatedAt&quot;&#125;, </span><br><span class="line">        allowGetters = true)</span><br><span class="line">public class Note implements Serializable &#123;</span><br><span class="line">    @Id</span><br><span class="line">    @GeneratedValue(strategy = GenerationType.IDENTITY)</span><br><span class="line">    private Long id;</span><br><span class="line"></span><br><span class="line">    @NotBlank</span><br><span class="line">    private String title;</span><br><span class="line"></span><br><span class="line">    @NotBlank</span><br><span class="line">    private String content;</span><br><span class="line"></span><br><span class="line">    @Column(nullable = false, updatable = false)</span><br><span class="line">    @Temporal(TemporalType.TIMESTAMP)</span><br><span class="line">    @CreatedDate</span><br><span class="line">    private Date createdAt;</span><br><span class="line"></span><br><span class="line">    @Column(nullable = false)</span><br><span class="line">    @Temporal(TemporalType.TIMESTAMP)</span><br><span class="line">    @LastModifiedDate</span><br><span class="line">    private Date updatedAt;</span><br><span class="line"></span><br><span class="line">    // Getters and Setters ... (Omitted for brevity)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>annotated createdAt and updatedAt fields with @CreatedDate and @LastModifiedDate annotations respectively.</p>
+<p>what we want is that these fields should automatically get populated whenever we create or update an entity.</p>
+<p>To achieve this, we need to do two things -</p>
+<ol>
+<li><p>Add Spring Data JPA’s AuditingEntityListener to the domain model.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@EntityListeners(AuditingEntityListener.class)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Enable JPA Auditing in the main application.</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">package com.example.easynotes;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line">import org.springframework.data.jpa.repository.config.EnableJpaAuditing;</span><br><span class="line"></span><br><span class="line">@SpringBootApplication</span><br><span class="line">@EnableJpaAuditing</span><br><span class="line">public class EasyNotesApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(EasyNotesApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Creating-NoteRepository-to-access-data-from-the-database"><a href="#Creating-NoteRepository-to-access-data-from-the-database" class="headerlink" title="Creating NoteRepository to access data from the database"></a>Creating NoteRepository to access data from the database</h3><ol>
+<li>Spring Data JPA with paRepository interface with methods for CRUD operations, First, Create a new package called repository inside the base package com.example.easynotes. Then, create an interface called NoteRepository and extend it from JpaRepository.<br>This is different from nodejs or golang. but why we need this interface. apparently it give us the method, which manipulate the java object in a collection. in mongodb, it is the schema!</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package com.example.easynotes.repository;</span><br><span class="line"></span><br><span class="line">import com.example.easynotes.model.Note;</span><br><span class="line">import org.springframework.data.jpa.repository.JpaRepository;</span><br><span class="line"></span><br><span class="line">@Repository</span><br><span class="line">public interface NoteRepository extends JpaRepository&lt;Note, Long&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Spring Data JPA has a bunch of other interesting features like Query methods (dynamically creating queries based on method names), Criteria API, Specifications, QueryDsl etc.<br>strongly recommend to checkout the Spring Data JPA’s documentation to learn more.</p>
+<h3 id="Creating-Custom-Business-Exception"><a href="#Creating-Custom-Business-Exception" class="headerlink" title="Creating Custom Business Exception"></a>Creating Custom Business Exception</h3><p>The APIs will throw a ResourceNotFoundException whenever a Note with a given id is not found in the database.</p>
+<p>Following is the definition of ResourceNotFoundException. (I’ve created a package named exception inside com.example.easynotes to store this exception class) -</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">package com.example.easynotes.exception;</span><br><span class="line"></span><br><span class="line">import org.springframework.http.HttpStatus;</span><br><span class="line">import org.springframework.web.bind.annotation.ResponseStatus;</span><br><span class="line"></span><br><span class="line">@ResponseStatus(value = HttpStatus.NOT_FOUND)</span><br><span class="line">public class ResourceNotFoundException extends RuntimeException &#123;</span><br><span class="line">    private String resourceName;</span><br><span class="line">    private String fieldName;</span><br><span class="line">    private Object fieldValue;</span><br><span class="line"></span><br><span class="line">    public ResourceNotFoundException( String resourceName, String fieldName, Object fieldValue) &#123;</span><br><span class="line">        super(String.format(&quot;%s not found with %s : &apos;%s&apos;&quot;, resourceName, fieldName, fieldValue));</span><br><span class="line">        this.resourceName = resourceName;</span><br><span class="line">        this.fieldName = fieldName;</span><br><span class="line">        this.fieldValue = fieldValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getResourceName() &#123;</span><br><span class="line">        return resourceName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getFieldName() &#123;</span><br><span class="line">        return fieldName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Object getFieldValue() &#123;</span><br><span class="line">        return fieldValue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Notice the use of @ResponseStatus annotation in the above exception class. This will cause Spring boot to respond with the specified HTTP status code whenever this exception is thrown from your controller.</p>
+<h3 id="Creating-NoteController"><a href="#Creating-NoteController" class="headerlink" title="Creating NoteController"></a>Creating NoteController</h3><p>This is final step as router will wrap inside and mapping with the controller.<br>which is almost the same as nodejs rest api or golang api. but using anotation.  </p>
+<p>First, create a new package controller inside com.example.easynotes. Then, create a new class NoteController.java with the following contents.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package com.example.easynotes.controller;</span><br><span class="line"></span><br><span class="line">import com.example.easynotes.exception.ResourceNotFoundException;</span><br><span class="line">import com.example.easynotes.model.Note;</span><br><span class="line">import com.example.easynotes.repository.NoteRepository;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.http.ResponseEntity;</span><br><span class="line">import org.springframework.web.bind.annotation.*;</span><br><span class="line">import javax.validation.Valid;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">@RestController</span><br><span class="line">@RequestMapping(&quot;/api&quot;)</span><br><span class="line">public class NoteController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    NoteRepository noteRepository;</span><br><span class="line"></span><br><span class="line">    // Get All Notes</span><br><span class="line"></span><br><span class="line">    // Create a new Note</span><br><span class="line"></span><br><span class="line">    // Get a Single Note</span><br><span class="line"></span><br><span class="line">    // Update a Note</span><br><span class="line"></span><br><span class="line">    // Delete a Note</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>@RestController annotation is a combination of Spring’s @Controller and @ResponseBody annotations.</p>
+<p>The @Controller annotation is used to define a controller and the @ResponseBody annotation is used to indicate that the return value of a method should be used as the response body of the request.</p>
+<p>@RequestMapping(“/api”) declares that the url for all the apis in this controller will start with /api.</p>
+<p>Let’s now look at the implementation of all the apis one by one.</p>
+<h4 id="1-Get-All-Notes-GET-api-notes"><a href="#1-Get-All-Notes-GET-api-notes" class="headerlink" title="1. Get All Notes (GET /api/notes)"></a>1. Get All Notes (GET /api/notes)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Get All Notes</span><br><span class="line">@GetMapping(&quot;/notes&quot;)</span><br><span class="line">public List&lt;Note&gt; getAllNotes() &#123;</span><br><span class="line">    return noteRepository.findAll();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The above method is pretty straightforward. It calls JpaRepository’s findAll() method to retrieve all the notes from the database and returns the entire list.</p>
+<p>Also, The @GetMapping(“/notes”) annotation is a short form of @RequestMapping(value=”/notes”, method=RequestMethod.GET).</p>
+<h4 id="2-Create-a-new-Note-POST-api-notes"><a href="#2-Create-a-new-Note-POST-api-notes" class="headerlink" title="2. Create a new Note (POST /api/notes)"></a>2. Create a new Note (POST /api/notes)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@PostMapping(&quot;/notes&quot;)</span><br><span class="line">public Note createNote(@Valid @RequestBody Note note)&#123;</span><br><span class="line">	return nodeRepository.save(note);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The @RequestBody annotation is used to bind the request body with a method parameter.<br>The @Valid annotation makes sure that the request body is valid. Remember, we had marked Note’s title and content with @NotBlank annotation in the Note model?<br>so if the req body does not have a title or content, then spring will return a 400 badrequest error to client. </p>
+<h4 id="3-get-a-single-Note-get-api-note-id"><a href="#3-get-a-single-Note-get-api-note-id" class="headerlink" title="3. get a single Note(get/api/note/{id})"></a>3. get a single Note(get/api/note/{id})</h4><p>@GetMapping(“/notes/{id}”)<br>public Note getNoteById(@PathVarible(value = “id”) Long nodeId){<br>    return noteRespository.findById(noteId).<br>        orElseThrow(() -&gt; new ResourceNotFoundException(“Note”, “id”, noteId));<br>} </p>
+<p>The @PathVariable annotation, as the name suggests, is used to bind a path variable with a method parameter.</p>
+<p>we are throwing a ResourceNotFoundException whenever a Note with the given id is not found in the above method. </p>
+<p>This will cause Spring Boot to return a 404 Not Found error to the client (Remember, we had added a @ResponseStatus(value = HttpStatus.NOT_FOUND) annotation to the ResourceNotFoundException class).</p>
+<h3 id="4-Update-a-item-PUT-api-notes-id"><a href="#4-Update-a-item-PUT-api-notes-id" class="headerlink" title="4. Update a item(PUT /api/notes/{id})"></a>4. Update a item(PUT /api/notes/{id})</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// Update a Note</span><br><span class="line">@PutMapping(&quot;/notes/&#123;id&#125;&quot;)</span><br><span class="line">public Note updateNote(@PathVariable(value = &quot;id&quot;) Long noteId,</span><br><span class="line">                                        @Valid @RequestBody Note noteDetails) &#123;</span><br><span class="line"></span><br><span class="line">    Note note = noteRepository.findById(noteId)</span><br><span class="line">            .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Note&quot;, &quot;id&quot;, noteId));</span><br><span class="line"></span><br><span class="line">    note.setTitle(noteDetails.getTitle());</span><br><span class="line">    note.setContent(noteDetails.getContent());</span><br><span class="line"></span><br><span class="line">    Note updatedNote = noteRepository.save(note);</span><br><span class="line">    return updatedNote;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-Delete-a-Note-DELETE-api-notes-noteId"><a href="#5-Delete-a-Note-DELETE-api-notes-noteId" class="headerlink" title="5. Delete a Note (DELETE /api/notes/{noteId})"></a>5. Delete a Note (DELETE /api/notes/{noteId})</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@DeleteMapping(&quot;notes/&#123;id&#125;&quot;)</span><br><span class="line">public Repository&lt;?&gt; deleteNote(@PathVariable(value = &quot;id&quot;) Long noteId)&#123;</span><br><span class="line">	Note note noteRepository.findById(noteId)</span><br><span class="line">		.orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Note&quot;, &quot;id&quot;, noteId));</span><br><span class="line">	noteRepository.delete(note);</span><br><span class="line"></span><br><span class="line">	return ResponseEntity.ok().build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Running-the-app"><a href="#Running-the-app" class="headerlink" title="Running the app"></a>Running the app</h3><p>Command:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mvn spring-boot:run</span><br></pre></td></tr></table></figure></p>
+<p>Test the api with postman, which is same with golang as well as nodejs and python. </p>
+<p>Still, having query about tranction! what if the sql operation involve in transaction<br>and need to rollback! that will be next….</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/05/31/stepsToBuildSpringbootRESTAPI/" data-id="cjwcad1ra003vsl24cy3zkef4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Springboot/">Springboot</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/05/30/systemDesignInterview/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">systemDesignInterview</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/SystemDesign/" style="font-size: 10px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/31/stepsToBuildSpringbootRESTAPI/">stepsToBuildSpringbootRESTAPI</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/30/systemDesignInterview/">systemDesignInterview</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/29/leetcode671SecondMinNodeInBinaryTree/">leetcode671SecondMinNodeInBinaryTree</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/29/leetcodeContest138/">leetcodeContest138</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/28/RabbitMQforMicroServicesCommunication/">RabbitMQforMicroServicesCommunication</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 David w00<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

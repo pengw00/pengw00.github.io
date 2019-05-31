@@ -5,20 +5,18 @@
   
 
   
-  <title>spring_depend_injection | David w00&#39;s Tech Road</title>
+  <title>Tag: Springboot | David w00&#39;s Tech Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Two Types of Dependency injection types 1. the setter injectionThe setter injection is used to inject the dependencies through setter methods. In the following example, the instance of DataService use">
-<meta name="keywords" content="Spring">
-<meta property="og:type" content="article">
-<meta property="og:title" content="spring_depend_injection">
-<meta property="og:url" content="http://pengw00.github.io/2018/11/01/spring-depend-injection-md/index.html">
+  <meta name="description" content="David W00&apos;s Tech road!">
+<meta property="og:type" content="website">
+<meta property="og:title" content="David w00&#39;s Tech Road">
+<meta property="og:url" content="http://pengw00.github.io/tags/Springboot/index.html">
 <meta property="og:site_name" content="David w00&#39;s Tech Road">
-<meta property="og:description" content="Two Types of Dependency injection types 1. the setter injectionThe setter injection is used to inject the dependencies through setter methods. In the following example, the instance of DataService use">
+<meta property="og:description" content="David W00&apos;s Tech road!">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2019-05-28T02:08:17.576Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spring_depend_injection">
-<meta name="twitter:description" content="Two Types of Dependency injection types 1. the setter injectionThe setter injection is used to inject the dependencies through setter methods. In the following example, the instance of DataService use">
+<meta name="twitter:title" content="David w00&#39;s Tech Road">
+<meta name="twitter:description" content="David W00&apos;s Tech road!">
   
     <link rel="alternate" href="/atom.xml" title="David w00&#39;s Tech Road" type="application/atom+xml">
   
@@ -65,67 +63,40 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-spring-depend-injection-md" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/11/01/spring-depend-injection-md/" class="article-date">
-  <time datetime="2018-11-01T16:23:34.000Z" itemprop="datePublished">2018-11-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      spring_depend_injection
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2019/05/31/stepsToBuildSpringbootRESTAPI/" class="archive-article-date">
+  <time datetime="2019-05-31T14:47:31.000Z" itemprop="datePublished">May 31</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/05/31/stepsToBuildSpringbootRESTAPI/">stepsToBuildSpringbootRESTAPI</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Two Types of Dependency injection types</p>
-<h3 id="1-the-setter-injection"><a href="#1-the-setter-injection" class="headerlink" title="1. the setter injection"></a>1. the setter injection</h3><p>The setter injection is used to inject the dependencies through setter methods. In the following example, the instance of DataService uses the setter injection:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> public class BusinessServiceImpl &#123;</span><br><span class="line">         private DataService dataService;</span><br><span class="line">         @Autowired</span><br><span class="line">         public void setDataService(DataService dataService) &#123;</span><br><span class="line">           this.dataService = dataService;</span><br><span class="line">         &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Actually, in order to use the setter injection, you do not even need to declare a setter method. If you specify @Autowired on the variable, Spring automatically uses the setter injection. So, the following code is all that you need for the setter injection for DataService:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class BusinessServiceImpl &#123;</span><br><span class="line">        @Autowired</span><br><span class="line">        private DataService dataService;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-the-constructor-injection"><a href="#2-the-constructor-injection" class="headerlink" title="2. the constructor injection"></a>2. the constructor injection</h3><p>The constructor injection, on the other hand, uses a constructor to inject dependencies. The following code shows how to use a constructor for injecting in DataService:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   public class BusinessServiceImpl &#123;</span><br><span class="line">       private DataService dataService;</span><br><span class="line">       @Autowired</span><br><span class="line">       public BusinessServiceImpl(DataService dataService) &#123;</span><br><span class="line">	super();</span><br><span class="line">          this.dataService = dataService;</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>When you run the code with the preceding implementation of BusinessServiceImpl, you will see this statement in the log, asserting that autowiring took place using the constructor:<br>       Autowiring by type from bean name ‘businessServiceImpl’ via<br>       constructor to bean named ‘dataServiceImpl’</p>
-<h2 id="From"><a href="#From" class="headerlink" title="From "></a>From <master-spring></master-spring></h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/11/01/spring-depend-injection-md/" data-id="cjwcad1qh002zsl24oixrpzy2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2018/11/03/KMP-algorithm/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          KMP_algorithm
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2018/10/08/Persistence/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Persistence</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
+
 
 </section>
         
