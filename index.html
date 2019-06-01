@@ -90,13 +90,20 @@
         <p>*Check whether a word in a board</p>
 <ul>
 <li>Solution1: backtracking || dfs</li>
-<li>Solution2: Trie<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class solution&#123;</span><br><span class="line">	Set&lt;String&gt; res = new HashSet&lt;&gt;();</span><br><span class="line">	public List&lt;String&gt; findWords(char[][] board, String[] words)&#123;</span><br><span class="line">		if(!res.contains(word) &amp;&amp; exist(board, word))&#123;</span><br><span class="line">			res.add(word);</span><br><span class="line">		&#125;</span><br><span class="line">		return new ArrayList&lt;&gt;(res);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private boolean exist(char[][] board, String word)&#123;</span><br><span class="line">		int m = board.length;</span><br><span class="line">		int n = board[0].length;</span><br><span class="line">		boolean[][] visisted = new boolean[m][n];</span><br><span class="line">		for(int i = 0; i &lt; m; i++)&#123;</span><br><span class="line">			for(int j = 0; j &lt; n; j++)&#123;</span><br><span class="line">				if(dfs(board, i, j, word, 0, visited)) return true;</span><br><span class="line">		&#125;</span><br><span class="line">		return false;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	private boolean dfs(char[][] board, int i, int j, String word, int index, boolean[][] visited)&#123;</span><br><span class="line">		if(index == word.length())&#123; return true;</span><br><span class="line">		boolean ret = false;</span><br><span class="line">		if(dfs(board, i+1, j, word, index+1, visited) || dfs(board, i-1, j, index +1, visited) ||</span><br><span class="line">		dfs(board, i, j+1, word, index+1, visited) || dfs(board, i, j-1, index + 1, visited) || </span><br><span class="line">		dfs(board, i, j-1, word, index+1, visited)) ret = true;</span><br><span class="line">		visited[i][j] = false;</span><br><span class="line">		&#125;</span><br><span class="line">		return ret;</span><br><span class="line">	&#125;</span><br><span class="line">	private boolean inboard(char[][] board, int i, int j)&#123;</span><br><span class="line">		return i &gt;= 0 &amp;&amp; i &lt; board.length &amp;&amp; j &gt;= 0 &amp;&amp; j &lt;board[0].length;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>Solution2: Trie<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class solution1&#123;</span><br><span class="line">	Set&lt;String&gt; res = new HashSet&lt;&gt;();</span><br><span class="line">	public List&lt;String&gt; findWords(char[][] board, String[] words)&#123;</span><br><span class="line">		if(!res.contains(word) &amp;&amp; exist(board, word))&#123;</span><br><span class="line">			res.add(word);</span><br><span class="line">		&#125;</span><br><span class="line">		return new ArrayList&lt;&gt;(res);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private boolean exist(char[][] board, String word)&#123;</span><br><span class="line">		int m = board.length;</span><br><span class="line">		int n = board[0].length;</span><br><span class="line">		boolean[][] visisted = new boolean[m][n];</span><br><span class="line">		for(int i = 0; i &lt; m; i++)&#123;</span><br><span class="line">			for(int j = 0; j &lt; n; j++)&#123;</span><br><span class="line">				if(dfs(board, i, j, word, 0, visited)) return true;</span><br><span class="line">		&#125;</span><br><span class="line">		return false;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	private boolean dfs(char[][] board, int i, int j, String word, int index, boolean[][] visited)&#123;</span><br><span class="line">		if(index == word.length())&#123; return true;</span><br><span class="line">		boolean ret = false;</span><br><span class="line">		if(dfs(board, i+1, j, word, index+1, visited) || dfs(board, i-1, j, index +1, visited) ||</span><br><span class="line">		dfs(board, i, j+1, word, index+1, visited) || dfs(board, i, j-1, index + 1, visited) || </span><br><span class="line">		dfs(board, i, j-1, word, index+1, visited)) ret = true;</span><br><span class="line">		visited[i][j] = false;</span><br><span class="line">		&#125;</span><br><span class="line">		return ret;</span><br><span class="line">	&#125;</span><br><span class="line">	private boolean inboard(char[][] board, int i, int j)&#123;</span><br><span class="line">		return i &gt;= 0 &amp;&amp; i &lt; board.length &amp;&amp; j &gt;= 0 &amp;&amp; j &lt;board[0].length;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
+<p>Solution2: trie + dfs + backtracking</p>
+<ul>
+<li>Trie implementation<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">	class TrieNode &#123;</span><br><span class="line">		public TrieNode[] children = new TrieNode[26];</span><br><span class="line">		public String item = &quot;&quot;;</span><br><span class="line">		public TrieNode()&#123;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	class Trie()&#123;</span><br><span class="line">		private TrieNode root;</span><br><span class="line">		public Trie()&#123;</span><br><span class="line">			root = new TrieNode();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		//insert method -&gt; like data preprocess</span><br><span class="line">		public void insert(String word)&#123;</span><br><span class="line">			TrieNode node = root;</span><br><span class="line">			for(char c: word.toCharArray())&#123;</span><br><span class="line">				if(node.children[c-&apos;a&apos;]==null)&#123;</span><br><span class="line">					node.children[c-&apos;a&apos;] = new TrieNode();</span><br><span class="line">				&#125;</span><br><span class="line">				node = node.children[c-&apos;a&apos;];</span><br><span class="line">			&#125;</span><br><span class="line">			node.item = word; // the last node with the word</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		public boolean search(String word)&#123;</span><br><span class="line">			TrieNode node = root;</span><br><span class="line">			for(char c: word.toCharArray())&#123;</span><br><span class="line">				if(node.children[c-&apos;a&apos;]==null) return false;</span><br><span class="line">				node = node.children[c-&apos;a&apos;];</span><br><span class="line">			&#125;</span><br><span class="line">			//at the end, check the item == word</span><br><span class="line">			return node.item.equals(word);</span><br><span class="line">		&#125;</span><br><span class="line">		//check whether there is any word in the trie which start with the given prefix</span><br><span class="line">		public boolean startsWith(String prefix)&#123;</span><br><span class="line">			TrieNode node =root;</span><br><span class="line">			for(char c: prefix.toCharArray())&#123;</span><br><span class="line">				if(node.children[c-&apos;a&apos;]==null) return false;</span><br><span class="line">				node = node.children[c-&apos;a&apos;];</span><br><span class="line">			&#125;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="solution-II"><a href="#solution-II" class="headerlink" title="solution II"></a>solution II</h3><p>using trie, the time complexity got decreased while the space will be cratically increased!<br>so, when the words is big, the memory space limited will be hit!<br>Trie can be used in small dataset with a high performance!<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class solutionII&#123;</span><br><span class="line">	Set&lt;String&gt; res = new HashSet&lt;String&gt;();</span><br><span class="line">	public List&lt;String&gt; findwords(char[][] board, String[] words)&#123;</span><br><span class="line">		Trie trie = new Trie();</span><br><span class="line">		for(String word: words)&#123;</span><br><span class="line">			trie.insert(word);</span><br><span class="line">		&#125;</span><br><span class="line">		int m = board.length;</span><br><span class="line">		int n = board[0].length;</span><br><span class="line">		boolean[][] visited = new boolean[m][n];</span><br><span class="line">		for(int i = 0; i &lt; m; i++)&#123;</span><br><span class="line">			for(int j = 0; j &lt; n; j++)&#123;</span><br><span class="line">				dfs(board, visited, &quot;&quot;, i, j, trie);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return new ArrayList&lt;String&gt;(res);</span><br><span class="line">	&#125;</span><br><span class="line">	private void dfs(char[][] board, boolean[][] visited, String str, int x, int y, Trie trie)&#123;</span><br><span class="line">		if (x &lt; 0 || x &gt;= board.length || y &lt; 0 || y &gt;= board[0].length) return;</span><br><span class="line">        if (visited[x][y]) return;</span><br><span class="line"></span><br><span class="line">        str += board[x][y];</span><br><span class="line">        if(!trie.startsWith(str)) return;</span><br><span class="line">        if(trie.search(str))&#123;</span><br><span class="line">        	res.add(str);</span><br><span class="line">        &#125;</span><br><span class="line">        //still backtrack</span><br><span class="line">        visited[x][y] = true;</span><br><span class="line">        dfs(board, visited, str, x - 1, y, trie);</span><br><span class="line">        dfs(board, visited, str, x + 1, y, trie);</span><br><span class="line">        dfs(board, visited, str, x, y - 1, trie);</span><br><span class="line">        dfs(board, visited, str, x, y + 1, trie);</span><br><span class="line">        visited[x][y] = false;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/leetcode-201-Word-Search-II/" data-id="cjwdrmzot001qkyzupsb3s63t" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/leetcode-201-Word-Search-II/" data-id="cjwdszohp001lyozuqj2mchyb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -137,7 +144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/" data-id="cjwdrmzox001xkyzucta14wso" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/" data-id="cjwdszohx001xyozuyijwn5c3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -208,7 +215,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/31/ACM-ICPC-Road-Map/" data-id="cjwdrmznb0000kyzuiqaw1v52" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/31/ACM-ICPC-Road-Map/" data-id="cjwdszogh0000yozuuiiltdgf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -308,7 +315,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/31/stepsToBuildSpringbootRESTAPI/" data-id="cjwdrmzql0040kyzubkcwp3qr" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/31/stepsToBuildSpringbootRESTAPI/" data-id="cjwdszojg0040yozu4xtmiwbx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Springboot/">Springboot</a></li></ul>
@@ -387,7 +394,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/30/systemDesignInterview/" data-id="cjwdrmzpl0033kyzutm58p05o" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/30/systemDesignInterview/" data-id="cjwdszoik0034yozuc0x6t4r9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li></ul>
@@ -440,7 +447,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/29/leetcode671SecondMinNodeInBinaryTree/" data-id="cjwdrmzp4002bkyzuphekwzud" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/29/leetcode671SecondMinNodeInBinaryTree/" data-id="cjwdszoi6002fyozuutcy5ru6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -506,7 +513,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/29/leetcodeContest138/" data-id="cjwdrmzp5002dkyzuquz8tof4" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/29/leetcodeContest138/" data-id="cjwdszoi8002hyozujf4sz0t0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/contest/">contest</a></li></ul>
@@ -573,7 +580,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/28/RabbitMQforMicroServicesCommunication/" data-id="cjwdrmzob000rkyzuql0oh6il" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/28/RabbitMQforMicroServicesCommunication/" data-id="cjwdszoha000oyozuavf2vty4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/microservice/">microservice</a></li></ul>
@@ -619,7 +626,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/28/rabbitMQForMicroServices/" data-id="cjwdrmzpe002rkyzutaf8yx59" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/28/rabbitMQForMicroServices/" data-id="cjwdszoib002nyozudqih3tlr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MicroService/">MicroService</a></li></ul>
@@ -706,7 +713,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="cjwdrmzqe003wkyzucfp34juz" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="cjwdszoj8003vyozuh51h7lej" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
