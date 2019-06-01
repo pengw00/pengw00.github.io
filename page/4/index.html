@@ -65,6 +65,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-didmount-willunmount" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/04/didmount-willunmount/" class="article-date">
+  <time datetime="2019-04-04T14:21:11.000Z" itemprop="datePublished">2019-04-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/04/didmount-willunmount/">didmount&amp;&amp;willunmount</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">export default class A extends React.Component &#123;</span><br><span class="line"></span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">        super(props);</span><br><span class="line">    &#125;</span><br><span class="line">    scroll1（）&#123;&#125;</span><br><span class="line"></span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        window.addEventListener(&apos;scroll&apos;, this.srcoll1.bind(this));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    componentWillUnmount()&#123;</span><br><span class="line">        window.removeEventListener(&apos;scroll&apos;, this.srcoll1);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>when using event handler in render(), need to bind this to the function<br>inside constructor, it will be global. otherwise, everytime inside render() we need to bind this when we use the method everytime, it will be awaste of time.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">export default class A extends React.Component &#123;</span><br><span class="line"></span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">        super(props);</span><br><span class="line">        this.scroll1 = this.scroll1.bind(this)</span><br><span class="line">    &#125;</span><br><span class="line">    scroll1（）&#123;&#125;</span><br><span class="line"></span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        window.addEventListener(&apos;scroll&apos;, this.scroll1);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    componentWillUnmount()&#123;</span><br><span class="line">        window.removeEventListener(&apos;scroll&apos;, this.scroll1);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>bind方法，顾名思义，就是绑定的意思，到底是怎么绑定然后怎么用呢，下面就来说说我对这个方法的理解。</p>
+<p>bind的使用和call，apply的区别：都是将方法的主人绑定，this指向全局object。<br>bind will not be executed imediately while call, aply will execute right away.<br>为什么要创建绑定函数，就是当我们调用某些函数的时候是要在特定环境下才能调用到，所以我们就要把函数放在特定环境下，就是使用bind把函数绑定到特定的所需的环境下。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/04/didmount-willunmount/" data-id="cjwdrmzog0014kyzugtw59fhi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-topological-sort-template" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/04/topological-sort-template/" class="article-date">
@@ -98,7 +140,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/topological-sort-template/" data-id="cjwdhvnww00371nzu9cxa2pb4" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/topological-sort-template/" data-id="cjwdrmzpo0038kyzu1eebwbwt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -146,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/路径选择的dp问题之三角形最小路径和/" data-id="cjwdhvnx5003l1nzunhszqeqo" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/路径选择的dp问题之三角形最小路径和/" data-id="cjwdrmzpx003mkyzu8i8wdkx9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -185,7 +227,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/topK-and-quickSort-and-QuickSelect/" data-id="cjwdhvnwv00341nzunht3nxz3" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/topK-and-quickSort-and-QuickSelect/" data-id="cjwdrmzpm0035kyzulkphoj0e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
@@ -223,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/Quick-Sort/" data-id="cjwdhvnvh000m1nzuk3mlox5u" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/Quick-Sort/" data-id="cjwdrmzo7000jkyzuwkesp5lz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -265,7 +307,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/axios-instance/" data-id="cjwdhvnvl000t1nzubgnsdf38" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/axios-instance/" data-id="cjwdrmzod000vkyzulk5ffy4w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -311,7 +353,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/dfs和回溯模版/" data-id="cjwdhvnvr00161nzu2xes5ext" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/dfs和回溯模版/" data-id="cjwdrmzoh0016kyzupase62qd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -355,7 +397,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/回溯，递归，dp三法leetcode-题目“/" data-id="cjwdhvnx2003h1nzu0b1x4qxj" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/回溯，递归，dp三法leetcode-题目“/" data-id="cjwdrmzpr003dkyzuok7w7vqy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -423,7 +465,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/02/springSecurity-Bcrypt-hash-password/" data-id="cjwdhvnxk003v1nzub4ohpnqx" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/02/springSecurity-Bcrypt-hash-password/" data-id="cjwdrmzqh003ykyzufufggikf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
@@ -481,61 +523,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/02/Hibernate/" data-id="cjwdhvnv300081nzumxx2w3xv" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/02/Hibernate/" data-id="cjwdrmznv0008kyzuzd46tvwy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hibernate/">hibernate</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-被amazon开出两次的经验总结" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/30/被amazon开出两次的经验总结/" class="article-date">
-  <time datetime="2019-03-30T19:04:14.000Z" itemprop="datePublished">2019-03-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/30/被amazon开出两次的经验总结/">被amazon开出两次的经验总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1.政治斗争： fight all days, impossible to work</p>
-<ol start="2">
-<li>status: hardworking, burn the middnight oil</li>
-</ol>
-<p>收获： 学会了亚马逊的生存法则<br>为什么离开： 需要pip， ？？<br>进去三个月被dev， 第二次因为组里launch新的项目，没有和其他组员抢活，被安排做operating&amp;&amp; bug之类的活，导致没有大项目来support 年度review</p>
-<ol start="2">
-<li>把项目技术挖深了，确保工作安全。<br>和老板沟通，确定目前最重要的活是什么，focus在老板最关心的活上。确定掌握核心资源的是谁，积极主动去合作，拿可见度最高的活儿。</li>
-<li>学会说不，组里同事塞给你，一般是知道是坑，学会优雅避开，比如我觉得xxx优先级比较高，我先focus on做完x，别的组找你帮忙，尽量给点帮助，别花太多时间，如果需要花很多时间，赵老板，老板会帮你退掉。<br>4.留证据<br>每周把做过的事给老板总结，要feedback，可以提高自己，也可以留证据，别人要开你的话，你都有wittern证据。</li>
-<li><p>别的组问问题，不要给书面承诺，比如我会帮你debug之类，第一对方可能得寸进尺。第二，等别人要你帮忙的时候你可能没时间了真，问别人组的问题，尽量要书面email node， 或者可以开个简会马上把meeting note发出来，没人能赖账。 </p>
-</li>
-<li><p>后来加一点，能不去tech debt重的组就就尽量不去，天天修东西，没时间学习，没时间做项目。比如某语音助手的内核组。</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/被amazon开出两次的经验总结/" data-id="cjwdhvnx4003j1nzu0hg68co2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/career/">career</a></li></ul>
 
     </footer>
   </div>
@@ -594,6 +585,10 @@
       <ul>
         
           <li>
+            <a href="/2019/06/01/leetcode-201-Word-Search-II/">leetcode.201 Word Search II</a>
+          </li>
+        
+          <li>
             <a href="/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/">leetcode1033.Move Stones Until Consecutive</a>
           </li>
         
@@ -607,10 +602,6 @@
         
           <li>
             <a href="/2019/05/30/systemDesignInterview/">systemDesignInterview</a>
-          </li>
-        
-          <li>
-            <a href="/2019/05/29/leetcode671SecondMinNodeInBinaryTree/">leetcode671SecondMinNodeInBinaryTree</a>
           </li>
         
       </ul>

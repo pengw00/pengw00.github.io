@@ -65,6 +65,49 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode-201-Word-Search-II" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/01/leetcode-201-Word-Search-II/" class="article-date">
+  <time datetime="2019-06-01T16:16:45.000Z" itemprop="datePublished">2019-06-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/01/leetcode-201-Word-Search-II/">leetcode.201 Word Search II</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>*Check whether a word in a board</p>
+<ul>
+<li>Solution1: backtracking || dfs</li>
+<li>Solution2: Trie<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class solution&#123;</span><br><span class="line">	Set&lt;String&gt; res = new HashSet&lt;&gt;();</span><br><span class="line">	public List&lt;String&gt; findWords(char[][] board, String[] words)&#123;</span><br><span class="line">		if(!res.contains(word) &amp;&amp; exist(board, word))&#123;</span><br><span class="line">			res.add(word);</span><br><span class="line">		&#125;</span><br><span class="line">		return new ArrayList&lt;&gt;(res);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private boolean exist(char[][] board, String word)&#123;</span><br><span class="line">		int m = board.length;</span><br><span class="line">		int n = board[0].length;</span><br><span class="line">		boolean[][] visisted = new boolean[m][n];</span><br><span class="line">		for(int i = 0; i &lt; m; i++)&#123;</span><br><span class="line">			for(int j = 0; j &lt; n; j++)&#123;</span><br><span class="line">				if(dfs(board, i, j, word, 0, visited)) return true;</span><br><span class="line">		&#125;</span><br><span class="line">		return false;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	private boolean dfs(char[][] board, int i, int j, String word, int index, boolean[][] visited)&#123;</span><br><span class="line">		if(index == word.length())&#123; return true;</span><br><span class="line">		boolean ret = false;</span><br><span class="line">		if(dfs(board, i+1, j, word, index+1, visited) || dfs(board, i-1, j, index +1, visited) ||</span><br><span class="line">		dfs(board, i, j+1, word, index+1, visited) || dfs(board, i, j-1, index + 1, visited) || </span><br><span class="line">		dfs(board, i, j-1, word, index+1, visited)) ret = true;</span><br><span class="line">		visited[i][j] = false;</span><br><span class="line">		&#125;</span><br><span class="line">		return ret;</span><br><span class="line">	&#125;</span><br><span class="line">	private boolean inboard(char[][] board, int i, int j)&#123;</span><br><span class="line">		return i &gt;= 0 &amp;&amp; i &lt; board.length &amp;&amp; j &gt;= 0 &amp;&amp; j &lt;board[0].length;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/06/01/leetcode-201-Word-Search-II/" data-id="cjwdrmzot001qkyzupsb3s63t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode1033-Move-Stones-Until-Consecutive" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/" class="article-date">
@@ -94,7 +137,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/" data-id="cjwdhvnw1001n1nzudcmo01z4" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/" data-id="cjwdrmzox001xkyzucta14wso" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -165,7 +208,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/31/ACM-ICPC-Road-Map/" data-id="cjwdhvnuq00001nzugya2wro0" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/31/ACM-ICPC-Road-Map/" data-id="cjwdrmznb0000kyzuiqaw1v52" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -265,7 +308,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/31/stepsToBuildSpringbootRESTAPI/" data-id="cjwdhvnxn003x1nzuhf6skg0a" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/31/stepsToBuildSpringbootRESTAPI/" data-id="cjwdrmzql0040kyzubkcwp3qr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Springboot/">Springboot</a></li></ul>
@@ -344,7 +387,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/30/systemDesignInterview/" data-id="cjwdhvnwu00321nzuclypyvd5" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/30/systemDesignInterview/" data-id="cjwdrmzpl0033kyzutm58p05o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li></ul>
@@ -397,7 +440,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/29/leetcode671SecondMinNodeInBinaryTree/" data-id="cjwdhvnwh002d1nzu8ppvuuac" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/29/leetcode671SecondMinNodeInBinaryTree/" data-id="cjwdrmzp4002bkyzuphekwzud" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -463,7 +506,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/29/leetcodeContest138/" data-id="cjwdhvnwi002g1nzuk5hth5py" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/29/leetcodeContest138/" data-id="cjwdrmzp5002dkyzuquz8tof4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/contest/">contest</a></li></ul>
@@ -530,7 +573,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/28/RabbitMQforMicroServicesCommunication/" data-id="cjwdhvnvk000r1nzuk29h8n5a" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/28/RabbitMQforMicroServicesCommunication/" data-id="cjwdrmzob000rkyzuql0oh6il" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/microservice/">microservice</a></li></ul>
@@ -576,7 +619,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/28/rabbitMQForMicroServices/" data-id="cjwdhvnwo002q1nzui21opj9h" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/28/rabbitMQForMicroServices/" data-id="cjwdrmzpe002rkyzutaf8yx59" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MicroService/">MicroService</a></li></ul>
@@ -663,50 +706,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="cjwdhvnxi003u1nzunfajhwmn" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="cjwdrmzqe003wkyzucfp34juz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode465" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/05/25/leetcode465/" class="article-date">
-  <time datetime="2019-05-25T18:05:33.000Z" itemprop="datePublished">2019-05-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/25/leetcode465/">leetcode465</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Optimal Account Balancing, hard<br>Settling Multiple Debts Efficiently: An Invitation to Computing Science by T. Verhoeff, June 2003. <a href="http://www.mathmeth.com/tom/files/settling-debts.pdf" target="_blank" rel="noopener">http://www.mathmeth.com/tom/files/settling-debts.pdf</a><br>The question can be transferred to a 3-partition problem, which is NP-Complete.</p>
-<p>recursion + backtracking, get the total transaction and then dfs and backtracing every trans.<br>Core code:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int backtrack(Long[] debts, int pos, int count)&#123;</span><br><span class="line">        while(pos &lt; debts.length &amp;&amp; debts[pos] == 0) pos++;</span><br><span class="line">        if (pos &gt;= debts.length) &#123;</span><br><span class="line">            return count;</span><br><span class="line">        &#125;</span><br><span class="line">        int res = Integer.MAX_VALUE;</span><br><span class="line">        for(int i = pos + 1; i &lt; debts.length; i++)&#123;</span><br><span class="line">            if(debts[pos] * debts[i] &lt; 0)&#123;</span><br><span class="line">              debts[i] += debts[pos];</span><br><span class="line">              res = Math.min(res, helper(debts, pos + 1, count + 1));</span><br><span class="line">              debts[i] = debts[i] - debts[pos];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/25/leetcode465/" data-id="cjwdhvnwb00211nzuhs1c0hbe" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
 
     </footer>
   </div>
@@ -765,6 +768,10 @@
       <ul>
         
           <li>
+            <a href="/2019/06/01/leetcode-201-Word-Search-II/">leetcode.201 Word Search II</a>
+          </li>
+        
+          <li>
             <a href="/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/">leetcode1033.Move Stones Until Consecutive</a>
           </li>
         
@@ -778,10 +785,6 @@
         
           <li>
             <a href="/2019/05/30/systemDesignInterview/">systemDesignInterview</a>
-          </li>
-        
-          <li>
-            <a href="/2019/05/29/leetcode671SecondMinNodeInBinaryTree/">leetcode671SecondMinNodeInBinaryTree</a>
           </li>
         
       </ul>
