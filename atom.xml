@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-06-01T03:36:49.782Z</updated>
+  <updated>2019-06-01T12:30:34.407Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode1033.Move Stones Until Consecutive</title>
+    <link href="http://pengw00.github.io/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/"/>
+    <id>http://pengw00.github.io/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/</id>
+    <published>2019-06-01T12:23:59.000Z</published>
+    <updated>2019-06-01T12:30:34.407Z</updated>
+    
+    <content type="html"><![CDATA[<p>Catogory: Brainteaser</p><p>-Edge case 1: all three stones are next to each other (z - x == 2). Return {0, 0}.<br>-Edge case 2: two stones are next to each other, or there is only one space in between. Minimum moves is 1.</p><p>-Otherwise; minimum moves are 2, maximum - z - x - 2.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; numMovesStones(int a, int b, int c) &#123;</span><br><span class="line">  vector&lt;int&gt; s = &#123; a, b, c &#125;;</span><br><span class="line">  sort(begin(s), end(s));</span><br><span class="line">  if (s[2] - s[0] == 2) return &#123; 0, 0 &#125;;</span><br><span class="line">  return &#123; min(s[1] - s[0], s[2] - s[1]) &lt;= 2 ? 1 : 2, s[2] - s[0] - 2 &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Catogory: Brainteaser&lt;/p&gt;
+&lt;p&gt;-Edge case 1: all three stones are next to each other (z - x == 2). Return {0, 0}.&lt;br&gt;-Edge case 2: two ston
+      
+    
+    </summary>
+    
+    
+      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>ACM/ICPC Road Map</title>
@@ -471,29 +495,6 @@
     
     
       <category term="Design pattern" scheme="http://pengw00.github.io/tags/Design-pattern/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Jest</title>
-    <link href="http://pengw00.github.io/2019/04/11/Jest/"/>
-    <id>http://pengw00.github.io/2019/04/11/Jest/</id>
-    <published>2019-04-11T13:56:24.000Z</published>
-    <updated>2019-04-12T03:14:41.571Z</updated>
-    
-    <content type="html"><![CDATA[<p>Run:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add --dev react-test-renderer</span><br></pre></td></tr></table></figure></p><p>Setup without Create React App</p><p>If you have an existing application you’ll need to install a few packages to make everything work well together. We are using the babel-jest package and the react babel preset to transform our code inside of the test environment.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add --dev jest babel-jest @babel/preset-env @babel/preset-react react-test-renderer</span><br></pre></td></tr></table></figure><p>Example<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// package.json</span><br><span class="line">  &quot;dependencies&quot;: &#123;</span><br><span class="line">    &quot;react&quot;: &quot;&lt;current-version&gt;&quot;,</span><br><span class="line">    &quot;react-dom&quot;: &quot;&lt;current-version&gt;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;@babel/preset-env&quot;: &quot;&lt;current-version&gt;&quot;,</span><br><span class="line">    &quot;@babel/preset-react&quot;: &quot;&lt;current-version&gt;&quot;,</span><br><span class="line">    &quot;babel-jest&quot;: &quot;&lt;current-version&gt;&quot;,</span><br><span class="line">    &quot;jest&quot;: &quot;&lt;current-version&gt;&quot;,</span><br><span class="line">    &quot;react-test-renderer&quot;: &quot;&lt;current-version&gt;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;jest&quot;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  // babel.config.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">  presets: [&apos;@babel/preset-env&apos;, &apos;@babel/preset-react&apos;],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">// Link.react.js</span><br><span class="line">import React from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">const STATUS = &#123;</span><br><span class="line">  HOVERED: &apos;hovered&apos;,</span><br><span class="line">  NORMAL: &apos;normal&apos;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export default class Link extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line"></span><br><span class="line">    this._onMouseEnter = this._onMouseEnter.bind(this);</span><br><span class="line">    this._onMouseLeave = this._onMouseLeave.bind(this);</span><br><span class="line"></span><br><span class="line">    this.state = &#123;</span><br><span class="line">      class: STATUS.NORMAL,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  _onMouseEnter() &#123;</span><br><span class="line">    this.setState(&#123;class: STATUS.HOVERED&#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  _onMouseLeave() &#123;</span><br><span class="line">    this.setState(&#123;class: STATUS.NORMAL&#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;a</span><br><span class="line">        className=&#123;this.state.class&#125;</span><br><span class="line">        href=&#123;this.props.page || &apos;#&apos;&#125;</span><br><span class="line">        onMouseEnter=&#123;this._onMouseEnter&#125;</span><br><span class="line">        onMouseLeave=&#123;this._onMouseLeave&#125;</span><br><span class="line">      &gt;</span><br><span class="line">        &#123;this.props.children&#125;</span><br><span class="line">      &lt;/a&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>example: </p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Run:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pr
-      
-    
-    </summary>
-    
-    
-      <category term="React" scheme="http://pengw00.github.io/tags/React/"/>
     
   </entry>
   
