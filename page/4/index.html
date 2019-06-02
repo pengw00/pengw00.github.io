@@ -65,6 +65,113 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-babel-and-webpack" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/04/babel-and-webpack/" class="article-date">
+  <time datetime="2019-04-04T18:23:42.000Z" itemprop="datePublished">2019-04-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/04/babel-and-webpack/">babel and webpack</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#Babel and webpack</p>
+<h2 id="Babel-is-Javacsript-compiler"><a href="#Babel-is-Javacsript-compiler" class="headerlink" title="Babel is Javacsript compiler."></a>Babel is Javacsript compiler.</h2><p>webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging ##</p>
+<p>In this unit, you modify the existing application and use some new ECMAScript 6 features. You then set up a build environment using Babel and Webpack.</p>
+<p>Step 1: using new ECMAScript 6 Features</p>
+<p>in app.js with arrow functions and let %!#$!#</p>
+<p>Step 2: Setup Babel and Webpack<br>install webpack and babel<br>in folder create webpack.config.js:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">var path = require(&apos;path&apos;);</span><br><span class="line"> var webpack = require(&apos;webpack&apos;);</span><br><span class="line"> module.exports = &#123;</span><br><span class="line">     entry: &apos;./js/app.js&apos;,</span><br><span class="line">     output: &#123;</span><br><span class="line">         path: path.resolve(__dirname, &apos;build&apos;),</span><br><span class="line">         filename: &apos;app.bundle.js&apos;</span><br><span class="line">     &#125;,</span><br><span class="line">     module: &#123;</span><br><span class="line">         loaders: [</span><br><span class="line">             &#123;</span><br><span class="line">                 test: /\.js$/,</span><br><span class="line">                 loader: &apos;babel-loader&apos;,</span><br><span class="line">                 query: &#123;</span><br><span class="line">                     presets: [&apos;es2015&apos;]</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">         ]</span><br><span class="line">     &#125;,</span><br><span class="line">     stats: &#123;</span><br><span class="line">         colors: true</span><br><span class="line">     &#125;,</span><br><span class="line">     devtool: &apos;source-map&apos;</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure></p>
+<p> Step 4: </p>
+<p> package.json in your favorite code editor. In the scripts section, add a script named webpack that builds your application using Webpack and Babel. The scripts section should now look like this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;webpack&quot;: &quot;webpack&quot;,</span><br><span class="line">    &quot;start&quot;: &quot;http-server&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<ol start="5">
+<li>Create build folder to the compile version of the application<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The build process will fail if you don’t create the build directory</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>Step next:  Build and Run</p>
+<ol>
+<li>npm run webpack</li>
+</ol>
+<p>open index.html modified the <script> tag to load the build/app.bundle.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;build/app.bundle.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+</script></p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/04/babel-and-webpack/" data-id="cjweez7mx0012ibzudxtbnwvr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-js-null-vs-undefined" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/04/js-null-vs-undefined/" class="article-date">
+  <time datetime="2019-04-04T15:19:28.000Z" itemprop="datePublished">2019-04-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/04/js-null-vs-undefined/">js null vs undefined</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="null-vs-undefined"><a href="#null-vs-undefined" class="headerlink" title="null vs undefined"></a>null vs undefined</h1><p>What is null?<br>There are two features of null you should understand:</p>
+<pre><code>null is an empty or non-existent value.
+null must be assigned.
+</code></pre><p>ex:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let a = null;</span><br><span class="line">console.log(a);</span><br><span class="line">// null</span><br></pre></td></tr></table></figure></p>
+<p>Undefined most typically means a variable has been declared, but not defined. For example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let b;</span><br><span class="line">console.log(b);</span><br><span class="line">// undefined</span><br><span class="line"></span><br><span class="line">let c = undefined;</span><br><span class="line">console.log(c);</span><br><span class="line">// undefined</span><br></pre></td></tr></table></figure></p>
+<p>Finally, when looking up non-existent properties in an object, you will receive undefined:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var d = &#123;&#125;;</span><br><span class="line">console.log(d.fake);</span><br><span class="line">// undefined</span><br></pre></td></tr></table></figure></p>
+<p>Here’s a full list for six falsy values:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">false</span><br><span class="line">0 (zero)</span><br><span class="line">“” (empty string)</span><br><span class="line">null</span><br><span class="line">undefined</span><br><span class="line">NaN (Not A Number)</span><br></pre></td></tr></table></figure></p>
+<p>Interestingly enough, when using typeof to test null, it returns object:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let a = null;</span><br><span class="line">let b;</span><br><span class="line">console.log(typeof a);</span><br><span class="line">// object</span><br><span class="line">console.log(typeof b);</span><br><span class="line">// undefined</span><br></pre></td></tr></table></figure></p>
+<p>Null !== undefined<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">null !== undefined</span><br></pre></td></tr></table></figure></p>
+<p>But, and this may surprise you, null loosely equals undefined.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">null == undefined</span><br></pre></td></tr></table></figure></p>
+<p>a great example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let logHi = (str = &apos;hi&apos;) =&gt; &#123;</span><br><span class="line">  console.log(str);</span><br></pre></td></tr></table></figure></p>
+<p>This function requires one parameter and sets the default of that parameter to hi if it isn’t supplied. Here’s what that looks like:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">logHi();</span><br><span class="line">// hi</span><br><span class="line">logHi(&apos;bye&apos;);</span><br><span class="line">// bye</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>With default parameters, undefined will use the default while null does not.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">logHi(undefined);</span><br><span class="line">// hi</span><br><span class="line">logHi(null);</span><br><span class="line">// null</span><br></pre></td></tr></table></figure></p>
+<p>Summary<br>null is an assigned value. It means nothing.<br>undefined typically means a variable has been declared but not defined yet.<br>null and undefined are falsy values.<br>null and undefined are both primitives. However an error shows that typeof null = object.<br>null !== undefined but null == undefined.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/04/js-null-vs-undefined/" data-id="cjweez7nf001zibzu4eot5bzn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-didmount-willunmount" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/04/didmount-willunmount/" class="article-date">
@@ -95,7 +202,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/didmount-willunmount/" data-id="cjwdszohi0016yozuo1gaaok4" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/didmount-willunmount/" data-id="cjweez7n2001bibzu4if76f0f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -140,7 +247,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/topological-sort-template/" data-id="cjwdszoil0037yozu1b0xc5cx" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/topological-sort-template/" data-id="cjweez7p10039ibzu56zjydr8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -188,7 +295,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/路径选择的dp问题之三角形最小路径和/" data-id="cjwdszoiv003nyozu8zekpsss" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/路径选择的dp问题之三角形最小路径和/" data-id="cjweez7p9003oibzusl9s9xo0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -227,7 +334,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/topK-and-quickSort-and-QuickSelect/" data-id="cjwdszoin0039yozubny3qogx" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/topK-and-quickSort-and-QuickSelect/" data-id="cjweez7oy0037ibzudz0tvkll" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
@@ -265,7 +372,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/Quick-Sort/" data-id="cjwdszoh6000jyozuv6lafns6" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/Quick-Sort/" data-id="cjweez7ms000ribzu4fb4off2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -307,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/axios-instance/" data-id="cjwdszohd000vyozu7zr3g9x1" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/axios-instance/" data-id="cjweez7mu000vibzucs6b7gob" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -353,7 +460,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/dfs和回溯模版/" data-id="cjwdszohg0012yozuc224shgz" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/dfs和回溯模版/" data-id="cjweez7n00018ibzulqma1fyl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -397,136 +504,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/回溯，递归，dp三法leetcode-题目“/" data-id="cjwdszoir003jyozu1eggrekj" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/回溯，递归，dp三法leetcode-题目“/" data-id="cjweez7p5003gibzuh92vg69k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-springSecurity-Bcrypt-hash-password" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/02/springSecurity-Bcrypt-hash-password/" class="article-date">
-  <time datetime="2019-04-02T04:12:46.000Z" itemprop="datePublished">2019-04-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/02/springSecurity-Bcrypt-hash-password/">springSecurity Bcrypt hash password</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>SpringSecurity之加密篇—BCryptpassword类</p>
-<ol>
-<li>要点概括<br>BCryptpassword类是SpringSecurity的加密工具，封装了对密码混淆加密的方法，主要是采用盐（salt）对原始密码进行混淆。<br>本篇介绍的是利用BCryptpassword随机生成盐（salt），使用该盐值对原始密码进行混淆加密。<br>这种加密方式有两个特点：（1）将随机生成的盐（salt）存到混淆后的代码中；（2）对于相同的明文每一次加密，加密之后的密文都是不一样的；因为盐值（salt）不同。这样的好处就是更增加了密码的安全性。</li>
-</ol>
-<p>SpringSecurity中的BCryptPassword采用Hash处理，其过程是不可逆的。</p>
-<p>BCryptPassword的加密过程：<br>（1）加密(encode)：用户注册时，使用SHA256+盐（salt）把用户输入的密码进行hash混淆处理，得到密码的hash值，然后将其存入数据库中。<br>（2）密码校验(matches)：用户登录时，密码匹配阶段并没有进行密码解密（因为密码经过Hash处理，是不可逆的），而是使用相同的算法结合盐值salt把用户输入的密码进行hash处理，得到密码的hash值，然后将其与从数据库中查询到的密码hash值进行比较。如果两者相同，说明用户输入的密码正确，这里的盐值（salt）是从数据库中查询到的密码hash值中解析出来的。</p>
-<ol start="2">
-<li>核心代码分析<br>//1. BCryptPasswordEncoder类，生成盐salt并混淆rawpassword的代码；<br>//涉及到两个问题，生成salt盐gensalt()，混淆密码hashpw()<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public String encode(CharSequence rawPassword) &#123;</span><br><span class="line">    String salt;</span><br><span class="line">    if (this.strength &gt; 0) &#123;</span><br><span class="line">        if (this.random != null) &#123;</span><br><span class="line">            salt = BCrypt.gensalt(this.strength, this.random);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            salt = BCrypt.gensalt(this.strength);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        salt = BCrypt.gensalt();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return BCrypt.hashpw(rawPassword.toString(), salt);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>2.1 生成盐（salt）：<br>:包名：org.springframework.security.crypto.bcrypt；类名：BCrypt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//生成salt盐gensalt() </span><br><span class="line">   public static String gensalt(int log_rounds, SecureRandom random) &#123;</span><br><span class="line">       if (log_rounds &gt;= 4 &amp;&amp; log_rounds &lt;= 31) &#123;</span><br><span class="line">           StringBuilder rs = new StringBuilder();</span><br><span class="line">           byte[] rnd = new byte[16];</span><br><span class="line">           random.nextBytes(rnd);</span><br><span class="line">           rs.append(&quot;$2a$&quot;);</span><br><span class="line">           if (log_rounds &lt; 10) &#123;</span><br><span class="line">               rs.append(&quot;0&quot;);</span><br><span class="line">           &#125;</span><br><span class="line">           </span><br><span class="line">           rs.append(log_rounds);</span><br><span class="line">           rs.append(&quot;$&quot;);</span><br><span class="line">           encode_base64(rnd, rnd.length, rs);</span><br><span class="line">           return rs.toString();</span><br><span class="line">       &#125; else &#123;</span><br><span class="line">           throw new IllegalArgumentException(&quot;Bad number of rounds&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
-<p>2.2 混淆方法：<br>包名：org.springframework.security.crypto.bcrypt；类名：BCrypt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">//混淆密码hashpw()</span><br><span class="line">public static String hashpw(String password, String salt) throws IllegalArgumentException &#123;</span><br><span class="line">        char minor = 0;</span><br><span class="line">        int off = false;</span><br><span class="line">        StringBuilder rs = new StringBuilder();</span><br><span class="line">        if (salt == null) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;salt cannot be null&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            int saltLength = salt.length();</span><br><span class="line">            if (saltLength &lt; 28) &#123;</span><br><span class="line">                throw new IllegalArgumentException(&quot;Invalid salt&quot;);</span><br><span class="line">            &#125; else if (salt.charAt(0) == &apos;$&apos; &amp;&amp; salt.charAt(1) == &apos;2&apos;) &#123;</span><br><span class="line">                byte off;</span><br><span class="line">                if (salt.charAt(2) == &apos;$&apos;) &#123;</span><br><span class="line">                    off = 3;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    minor = salt.charAt(2);</span><br><span class="line">                    if (minor != &apos;a&apos; || salt.charAt(3) != &apos;$&apos;) &#123;</span><br><span class="line">                        throw new IllegalArgumentException(&quot;Invalid salt revision&quot;);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    off = 4;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (saltLength - off &lt; 25) &#123;</span><br><span class="line">                    throw new IllegalArgumentException(&quot;Invalid salt&quot;);</span><br><span class="line">                &#125; else if (salt.charAt(off + 2) &gt; &apos;$&apos;) &#123;</span><br><span class="line">                    throw new IllegalArgumentException(&quot;Missing salt rounds&quot;);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    int rounds = Integer.parseInt(salt.substring(off, off + 2));</span><br><span class="line">                    String real_salt = salt.substring(off + 3, off + 25);</span><br><span class="line"></span><br><span class="line">                    byte[] passwordb;</span><br><span class="line">                    try &#123;</span><br><span class="line">                        passwordb = (password + (minor &gt;= &apos;a&apos; ? &quot;\u0000&quot; : &quot;&quot;)).getBytes(&quot;UTF-8&quot;);</span><br><span class="line">                    &#125; catch (UnsupportedEncodingException var13) &#123;</span><br><span class="line">                        throw new AssertionError(&quot;UTF-8 is not supported&quot;);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    byte[] saltb = decode_base64(real_salt, 16);</span><br><span class="line">                    BCrypt B = new BCrypt();</span><br><span class="line">                    byte[] hashed = B.crypt_raw(passwordb, saltb, rounds);</span><br><span class="line">                    rs.append(&quot;$2&quot;);</span><br><span class="line">                    if (minor &gt;= &apos;a&apos;) &#123;</span><br><span class="line">                        rs.append(minor);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    rs.append(&quot;$&quot;);</span><br><span class="line">                    if (rounds &lt; 10) &#123;</span><br><span class="line">                        rs.append(&quot;0&quot;);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    rs.append(rounds);</span><br><span class="line">                    rs.append(&quot;$&quot;);</span><br><span class="line">                    encode_base64(saltb, saltb.length, rs);</span><br><span class="line">                    encode_base64(hashed, bf_crypt_ciphertext.length * 4 - 1, rs);</span><br><span class="line">                    return rs.toString();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                throw new IllegalArgumentException(&quot;Invalid salt version&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>2.3 密码的校验<br>提供的密码与加密之后的密码的校验，使用是BCryptpassword的matches()接口；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public boolean matches(CharSequence rawPassword, String encodedPassword) &#123;</span><br><span class="line">    if (encodedPassword != null &amp;&amp; encodedPassword.length() != 0) &#123;</span><br><span class="line">        if (!this.BCRYPT_PATTERN.matcher(encodedPassword).matches()) &#123;</span><br><span class="line">            this.logger.warn(&quot;Encoded password does not look like BCrypt&quot;);</span><br><span class="line">            return false;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return BCrypt.checkpw(rawPassword.toString(), encodedPassword);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        this.logger.warn(&quot;Empty encoded password&quot;);</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<pre><code>/**
- * 密码比较入口，同样是调用了hashpw()方法: 使用的是hashpw()方法，有两个参数：原始明文与数据库中获取的密文。
- * hashpw()方法是从密文中解析出藏在其中的盐salt值，用此值混淆明文，与密文做比较。
- */
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">   public static boolean checkpw(String plaintext, String hashed) &#123;</span><br><span class="line">       return equalsNoEarlyReturn(hashed, hashpw(plaintext, hashed)); </span><br><span class="line">   &#125;</span><br><span class="line">//这个方法就是比较是否相同而已，无他。</span><br><span class="line">   static boolean equalsNoEarlyReturn(String a, String b) &#123;</span><br><span class="line">       char[] caa = a.toCharArray();</span><br><span class="line">       char[] cab = b.toCharArray();</span><br><span class="line">       if (caa.length != cab.length) &#123;</span><br><span class="line">           return false;</span><br><span class="line">       &#125; else &#123;</span><br><span class="line">           byte ret = 0;</span><br><span class="line"></span><br><span class="line">           for(int i = 0; i &lt; caa.length; ++i) &#123;</span><br><span class="line">               ret = (byte)(ret | caa[i] ^ cab[i]);</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           return ret == 0;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li><p>总结<br>以上是SpringSecurity的BCryptPassword加密方式，上面是介绍其SHA256+随机salt生成密文的基本点。应该还有其他的一些用法，容当后研究。</p>
-</li>
-<li><p>其它<br>Springboot框架整合SpringSecurity组件，使用需要使用该加密方式，有一点需要注意，就是在springSecurity的配置文件中注入PasswordEncode的bean</p>
-<p> //SpringSecurityConfigutarion配置类中加入<br> @Bean<br> public PasswordEncoder passwordEncoder() {</p>
-<pre><code>return new BCryptPasswordEncoder();
-</code></pre><p> }<br>代码示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">       String password = &quot;leo_epam&quot;;</span><br><span class="line">        System.out.println(password + &quot;: encrypt&quot;);</span><br><span class="line">        int i = 0;</span><br><span class="line">        while(i &lt; 10)&#123;</span><br><span class="line">            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();</span><br><span class="line">            String hashedPassword = passwordEncoder.encode(password);</span><br><span class="line">            System.out.println(&quot;encryptPassword:&quot; + hashedPassword);</span><br><span class="line">            System.out.println(&quot;match result:&quot; + passwordEncoder.matches(password,hashedPassword));</span><br><span class="line">            i ++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>代码输出：</p>
-<p>leo_epam: encrypt<br>encryptPassword:$2a$10$/WIa4YbBMGQX7dBbYwRKx.AmQ3sJ8Ta5wYHh8a7jPlYDbNgMSD/hC<br>match result:true<br>encryptPassword:$2a$10$VryRC1lFaTEqUbOUyvu18ulSSGH5hK7JPzAG17ehtkL8aV6fot1ru<br>match result:true<br>encryptPassword:$2a$10$0SVRXbfgsqMvpmNDeeqNl.eFPvQ0ojdazk5.x8YDZxIOOP1D4xXge<br>match result:true<br>encryptPassword:$2a$10$yWdI4q6DXDZhknTxiT/9ROdhcAARAEY5q4L2YI5uQ3C52Q7Lt/IAa<br>match result:true<br>encryptPassword:$2a$10$8yy0.NdQSD2Cig5yIri2eu1XmDRpZSPjsmxDyRg9CZ5afwp/36H2S<br>match result:true<br>encryptPassword:$2a$10$QTJpm3jYUCjAoHPVI/uon.FDusm.9tPSc.mk6m.l/kx8aKbIzov3i<br>match result:true<br>encryptPassword:$2a$10$CkoGrZqDE86LM1yiX89cpuNDAMdDqemEKMSS3/jquFsxocizgBbX2<br>match result:true<br>encryptPassword:$2a$10$6M0N6cQp6kKeXgRl8ftqyOlikAV9YwfMS93xlqTXbd/tmDjFDv3iG<br>match result:true<br>encryptPassword:$2a$10$LboMUNAF7vOmucxJI3G/w.cliDRxH1exOmsfy2IlPCUpZU8N7XoO.<br>match result:true<br>encryptPassword:$2a$10$ezB0okY.JHv1gt4Y3chiu.5e5R9.vXqd7kNaYH14Vigm9wZ02D8Pe<br>match result:true<br>以上代码就是BCryptPassword的代码简单效果示例，相同的明文，每次生成的密文都是不同的，但是和明文做密码校验都是通过的。<br>还有一个就是密码字段的长度，如果打算采用bcrypt加密存储，字段长度不得低于60.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/02/springSecurity-Bcrypt-hash-password/" data-id="cjwdszoje003yyozu44wxqql8" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Hibernate" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/02/Hibernate/" class="article-date">
-  <time datetime="2019-04-02T04:00:27.000Z" itemprop="datePublished">2019-04-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/02/Hibernate/">Hibernate</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>Hibernate的工作原理是什么？为什么要用hibernate？</li>
-</ol>
-<p>（1）Hibernate可以理解为一个中间件。它负责把java程序的SQL语句接收过来并发送到数据库，而数据库返回的信息由Hibernate接收后直接生成一个对象传给java.</p>
-<p>在Hibernate中有两个特有的文件，一个是以.hbm.xml结尾的映射文件，一个是以.cfg.xml结尾的配置文件。.cfg.xml文件的作用是连接数据库，文件内部其实就是一个由user,password，url,driver组成的链接库的基本信息。.hbm.xml文件是对数据库中表的映射文件。</p>
-<p>（2）Hibernate工作原理</p>
-<p>①读取并解析hibernate.cfg.xml配置文件；</p>
-<p>②由hibernate.cfg.xml中的<mapping resource="com/xx/user.hbm.xml">读取并解析映射信息；</mapping></p>
-<p>③.通过SessionFactory sf = config.buildSessionFactory();创建SessionFactory</p>
-<p>④Session session = sf.openSession();//打开Sesssion</p>
-<p>⑤Transaction tx = session.beginTransaction();//创建并启动事务Transation</p>
-<p>⑥persistent operate操作数据，持久化操作</p>
-<p>⑦tx.commit();//提交事务</p>
-<p>⑧关闭Session</p>
-<p>⑨关闭SesstionFactory</p>
-<p>3）使用Hibernate的原因如下：</p>
-<p>① 对JDBC访问数据库的代码做了封装，大大简化了数据访问层繁琐的重复性代码。</p>
-<p>②HIbernate是基于JDBC的主流持久化框架，是一个优秀的对象关系映射实现，它在很大程度上简化了DAO层的编码工作；</p>
-<p>③Hibernate使用java反射机制，而不是字节码增强程序来实现透明性；</p>
-<h2 id="④Hibernate性能非常好，因为它是一个轻量级框架，映射的灵活性很出色，它支持各种关系数据库，从一对一到多对多的各种复杂关系。"><a href="#④Hibernate性能非常好，因为它是一个轻量级框架，映射的灵活性很出色，它支持各种关系数据库，从一对一到多对多的各种复杂关系。" class="headerlink" title="④Hibernate性能非常好，因为它是一个轻量级框架，映射的灵活性很出色，它支持各种关系数据库，从一对一到多对多的各种复杂关系。"></a>④Hibernate性能非常好，因为它是一个轻量级框架，映射的灵活性很出色，它支持各种关系数据库，从一对一到多对多的各种复杂关系。</h2><p>为什么要持久化？ 持久化技术封装了数据访问细节，为大部分业务逻辑提供面向对象的API。 ● 通过持久化技术可以减少访问数据库数据次数，增加应用程序执行速度； ● 代码重用性高，能够完成大部分数据库操作； ● 松散耦合，使持久化不依赖于底层数据库和上层业务逻辑实现，更换数据库时只需修改配置文件而不用修改代码。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/02/Hibernate/" data-id="cjwdszogr0005yozu2a4yliwf" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hibernate/">hibernate</a></li></ul>
 
     </footer>
   </div>
@@ -553,7 +534,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
     </div>
   </div>
 
@@ -563,7 +544,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/SystemDesign/" style="font-size: 10px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/SystemDesign/" style="font-size: 10px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
@@ -585,6 +566,14 @@
       <ul>
         
           <li>
+            <a href="/2019/06/01/Leetcode-Contest-139/">Leetcode Contest 139</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/01/Responsive-Web-Design-I/">Responsive Web Design I</a>
+          </li>
+        
+          <li>
             <a href="/2019/06/01/leetcode-201-Word-Search-II/">leetcode.201 Word Search II</a>
           </li>
         
@@ -594,14 +583,6 @@
         
           <li>
             <a href="/2019/05/31/ACM-ICPC-Road-Map/">ACM/ICPC Road Map</a>
-          </li>
-        
-          <li>
-            <a href="/2019/05/31/stepsToBuildSpringbootRESTAPI/">stepsToBuildSpringbootRESTAPI</a>
-          </li>
-        
-          <li>
-            <a href="/2019/05/30/systemDesignInterview/">systemDesignInterview</a>
           </li>
         
       </ul>
