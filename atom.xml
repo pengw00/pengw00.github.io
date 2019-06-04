@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-06-04T18:58:04.631Z</updated>
+  <updated>2019-06-04T21:38:39.536Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode.485&amp;487&amp;1004 Max Consecutive One</title>
+    <link href="http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/"/>
+    <id>http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/</id>
+    <published>2019-06-04T20:31:11.000Z</published>
+    <updated>2019-06-04T21:38:39.536Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="Max-Consecutive-One-serials"><a href="#Max-Consecutive-One-serials" class="headerlink" title="Max Consecutive One serials"></a>Max Consecutive One serials</h4><p>Find the longest consective subarray<br><em>Time: O(n)</em>Space: O(1) max and cur_max</p><p>*Leetcode.485 findMaxConsecutiveOnes</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public int findMaxConsecutiveOnes(int[] nums)&#123;</span><br><span class="line">int max, cur_max;</span><br><span class="line">for(int i = 0; i &lt; nums.length; i++)&#123;</span><br><span class="line">max = Math.max(max, cur_max= nums[i]==0?0:cur_max+1);</span><br><span class="line">&#125;</span><br><span class="line">return max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="Leetcode-487-findMaxConsecutiveOnesII"><a href="#Leetcode-487-findMaxConsecutiveOnesII" class="headerlink" title="Leetcode.487 findMaxConsecutiveOnesII"></a>Leetcode.487 findMaxConsecutiveOnesII</h4><ul><li>condition: if you can flip at most one 0.</li><li>Follow up: What if the input numbers come in one by one as an infinite stream? In other words, you can’t store all numbers coming from the stream as it’s too large to hold in memory. Could you solve it efficiently?</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public int findMaxConsecutiveOnesII()&#123;</span><br><span class="line">int max = 0, zero = 0;</span><br><span class="line">for(int l = 0, h = 0; h &lt; nums.length; h++)&#123;</span><br><span class="line">if(nums[h] == 0) zero++;</span><br><span class="line">while(zero &gt; 1)&#123;</span><br><span class="line">if(nums[l++]==0)&#123;</span><br><span class="line">zero--;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">max = Math.max(max, h-l+1);</span><br><span class="line">&#125;</span><br><span class="line">return max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="Leetcode-1004-findMaxConsecutiveOnesIII"><a href="#Leetcode-1004-findMaxConsecutiveOnesIII" class="headerlink" title="Leetcode.1004 findMaxConsecutiveOnesIII"></a>Leetcode.1004 findMaxConsecutiveOnesIII</h4><ul><li>condition: if you can flip at most k times.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public int findMaxConsecutiveOnes(int[] nums) &#123;</span><br><span class="line">        int max = 0, zero = 0, k = 1; // flip at most k zero</span><br><span class="line">        for (int l = 0, h = 0; h &lt; nums.length; h++) &#123;</span><br><span class="line">            if (nums[h] == 0)                                           </span><br><span class="line">                zero++;</span><br><span class="line">            while (zero &gt; k)</span><br><span class="line">                if (nums[l++] == 0)</span><br><span class="line">                    zero--;                                     </span><br><span class="line">            max = Math.max(max, h - l + 1);</span><br><span class="line">        &#125;                                                               </span><br><span class="line">        return max;             </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;Max-Consecutive-One-serials&quot;&gt;&lt;a href=&quot;#Max-Consecutive-One-serials&quot; class=&quot;headerlink&quot; title=&quot;Max Consecutive One serials&quot;&gt;&lt;/a&gt;Max C
+      
+    
+    </summary>
+    
+    
+      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode.272 Closest Binary Search</title>
@@ -484,30 +507,6 @@
     
     
       <category term="Java" scheme="http://pengw00.github.io/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>sass/scss</title>
-    <link href="http://pengw00.github.io/2019/04/17/sass-scss/"/>
-    <id>http://pengw00.github.io/2019/04/17/sass-scss/</id>
-    <published>2019-04-17T18:36:41.000Z</published>
-    <updated>2019-04-17T19:58:58.039Z</updated>
-    
-    <content type="html"><![CDATA[<p>为什么使用SASS/SCSS？</p><p>易维护，更方便的定制<br>对于一个大型或者稍微有规模的UI来说，如果需要替换下整体风格，或者是某个字体的像素值，比如我们经常会遇到panel，window以及portal共用一个背景色，这个时候按照常规的方式，我们需要一个个定位到元素使用的class，然后逐个替换，SASS提供了变量的方式，你可以把某个样式作为一个变量，然后各个class引用这个变量即可，修改时，我们只需修改对应的变量。<br>对于编程人员的友好<br>对于一个没有前端基础的编程人员，写css样式是一件非常痛苦的事情，他们会感觉到各种约束，为什么我不能定一个变量来避免那些类似“变量”的重复书写？为什么我不能继承上个class的样式定义？。。。SASS/SCSS正是帮编程人员解开了这些疑惑，让css看起来更像是一门编程语言。<br>效率的提升<br>对于一个前端开发人员来说，我不熟悉编程，也不关注css是否具有的一些编程语言特性，但这不是你放弃他的理由，css3的发展，加之主流浏览器的兼容性不一，很多浏览器都有自己的兼容hack，很多时候我们需要针对不同的浏览器写一堆的hack，这种浪费时间的重复劳动就交给SASS处理去吧！</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;为什么使用SASS/SCSS？&lt;/p&gt;
-&lt;p&gt;易维护，更方便的定制&lt;br&gt;对于一个大型或者稍微有规模的UI来说，如果需要替换下整体风格，或者是某个字体的像素值，比如我们经常会遇到panel，window以及portal共用一个背景色，这个时候按照常规的方式，我们需要一个个定
-      
-    
-    </summary>
-    
-    
-      <category term="Front-end" scheme="http://pengw00.github.io/tags/Front-end/"/>
     
   </entry>
   

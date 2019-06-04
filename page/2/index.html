@@ -65,6 +65,59 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode671SecondMinNodeInBinaryTree" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/29/leetcode671SecondMinNodeInBinaryTree/" class="article-date">
+  <time datetime="2019-05-29T17:18:00.000Z" itemprop="datePublished">2019-05-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/29/leetcode671SecondMinNodeInBinaryTree/">leetcode671SecondMinNodeInBinaryTree</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Leetcode671-Second-Minimum-Node-In-a-Binary-Tree"><a href="#Leetcode671-Second-Minimum-Node-In-a-Binary-Tree" class="headerlink" title="Leetcode671. Second Minimum Node In a Binary Tree"></a>Leetcode671. Second Minimum Node In a Binary Tree</h3><p>//implementing in sort of bussiness logic in control component in<br>//flexibly used in front end or backend!!!</p>
+<p>Analysis:</p>
+<ol>
+<li>using dfs or bfs, search the val in range (min1, ans), update ans = val if val in (min1, ans); </li>
+<li>using dfs with divide and conque, dfs to get left and right of the subtree,  and only recursion on the condition of root.val == root.left.val or root.val == root.right.val;</li>
+</ol>
+<ul>
+<li>solution one<h4 id="dfs"><a href="#dfs" class="headerlink" title="dfs"></a>dfs</h4></li>
+</ul>
+<figure class="highlight plain"><figcaption><span>solution&#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">	int min1;</span><br><span class="line">	long ans = Long.MAX_VALUE;</span><br><span class="line">	public int findSecondMinimumValue(TreeNode root)&#123;</span><br><span class="line">		if(root==null) return -1;</span><br><span class="line">		dfs(root);</span><br><span class="line">		return ans ==Long.MAX_VALUE?-1:(int)ans;</span><br><span class="line">	&#125;</span><br><span class="line">	//once root.val &gt; min1, we never drill deeply</span><br><span class="line">	//only root.val == min1, we dfs left and right</span><br><span class="line">	private void dfs(TreeNode root)&#123;</span><br><span class="line">		if(root!=null)&#123;</span><br><span class="line">			if(root.val&gt;min1 &amp;&amp; root.val &lt; ans)&#123;</span><br><span class="line">				ans = root.val;</span><br><span class="line">			&#125;else if(root.val == min1)&#123;</span><br><span class="line">				dfs(root.left);</span><br><span class="line">				dfs(root.right);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="bfs"><a href="#bfs" class="headerlink" title="bfs"></a>bfs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class solution&#123;</span><br><span class="line">	public int findSecondMinimumValue(TreeNode root)&#123;</span><br><span class="line">		if(root==null) return -1;</span><br><span class="line">		int rootval = root.val;</span><br><span class="line">		long ans = Long.MAX_VALUE;</span><br><span class="line">		Queue&lt;Integer&gt; queue = new LinkedList&lt;&gt;();</span><br><span class="line">		queue.add(root);</span><br><span class="line">		while(!queue.isEmpty())&#123;</span><br><span class="line">			TreeNode tmp = queue.poll();</span><br><span class="line">			if(tmp.left != rootval &amp;&amp; head.val &lt; ans)&#123;</span><br><span class="line">				ans = head.val;</span><br><span class="line">			&#125;</span><br><span class="line">			if(tmp.left != null)&#123;</span><br><span class="line">				queue.add(tmp.left);</span><br><span class="line">				queue.add(tmp.right);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return ans == Long.MAX_VALUE ? -1: ans;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>solution two <h3 id="divide-and-conquer-with-dfs"><a href="#divide-and-conquer-with-dfs" class="headerlink" title="divide and conquer with dfs"></a>divide and conquer with dfs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//only left.val == root.val or right.val == root.val will be dfs</span><br><span class="line">//be familiar to implement condition returnning in order.</span><br><span class="line">class solution&#123;</span><br><span class="line">	public int findSecondMinimumValue(TreeNode root)&#123;</span><br><span class="line">		if(root==null) return -1;</span><br><span class="line">		if(root.left==null &amp;&amp; root.right==null) return -1;</span><br><span class="line">		int left = root.left.val;</span><br><span class="line">		int right = root.right.val;</span><br><span class="line">		if(root.left.val == root.val)&#123;</span><br><span class="line">			left = findSecondMinimumValue(root.left);</span><br><span class="line">			&#125;</span><br><span class="line">		if(root.right.val == root.val)&#123;</span><br><span class="line">			right = findSecondMinimumValue(root.right);</span><br><span class="line">		&#125;</span><br><span class="line">		if(left!=-1 &amp;&amp; right != -1)&#123;</span><br><span class="line">			return Math.min(left, rigth);</span><br><span class="line">		&#125;</span><br><span class="line">		if(left != -1)&#123;</span><br><span class="line">			return left;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">		return right;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/05/29/leetcode671SecondMinNodeInBinaryTree/" data-id="cjwibs0yt002lym24drb062ww" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcodeContest138" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/29/leetcodeContest138/" class="article-date">
@@ -119,7 +172,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/29/leetcodeContest138/" data-id="cjwi61itm002mkw24ybs1ppxr" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/29/leetcodeContest138/" data-id="cjwibs0yv002oym24y77n92fa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/contest/">contest</a></li></ul>
@@ -186,7 +239,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/28/RabbitMQforMicroServicesCommunication/" data-id="cjwi61isn000tkw24u0vsduwn" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/28/RabbitMQforMicroServicesCommunication/" data-id="cjwibs0xn000pym24j8ifo4z6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/microservice/">microservice</a></li></ul>
@@ -232,7 +285,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/28/rabbitMQForMicroServices/" data-id="cjwi61itt002vkw24c0oghtpt" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/28/rabbitMQForMicroServices/" data-id="cjwibs0yz002wym2449qjdlxk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MicroService/">MicroService</a></li></ul>
@@ -319,7 +372,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="cjwi61iv00044kw2412e8xw8d" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="cjwibs1090047ym2409ng4w8q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -359,7 +412,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/25/leetcode465/" data-id="cjwi61itb0028kw24i6z7cag5" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/25/leetcode465/" data-id="cjwibs0yq002hym240snl3pf9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -401,7 +454,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/" data-id="cjwi61isw001dkw24cb51mp95" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/" data-id="cjwibs0y1001eym24srzy31p5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -456,7 +509,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="cjwi61itd002ckw24uj91z2pb" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="cjwibs0yk0028ym24cacgnsay" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Contest/">Contest</a></li></ul>
@@ -495,7 +548,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="cjwi61ito002okw24jq3l86t6" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="cjwibs0yu002mym24y7pryhp2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li></ul>
@@ -533,50 +586,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="cjwi61iu00033kw24omldsb4g" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="cjwibs0z50037ym248rl6gp2q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-sass-scss" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/17/sass-scss/" class="article-date">
-  <time datetime="2019-04-17T18:36:41.000Z" itemprop="datePublished">2019-04-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/17/sass-scss/">sass/scss</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>为什么使用SASS/SCSS？</p>
-<p>易维护，更方便的定制<br>对于一个大型或者稍微有规模的UI来说，如果需要替换下整体风格，或者是某个字体的像素值，比如我们经常会遇到panel，window以及portal共用一个背景色，这个时候按照常规的方式，我们需要一个个定位到元素使用的class，然后逐个替换，SASS提供了变量的方式，你可以把某个样式作为一个变量，然后各个class引用这个变量即可，修改时，我们只需修改对应的变量。<br>对于编程人员的友好<br>对于一个没有前端基础的编程人员，写css样式是一件非常痛苦的事情，他们会感觉到各种约束，为什么我不能定一个变量来避免那些类似“变量”的重复书写？为什么我不能继承上个class的样式定义？。。。SASS/SCSS正是帮编程人员解开了这些疑惑，让css看起来更像是一门编程语言。<br>效率的提升<br>对于一个前端开发人员来说，我不熟悉编程，也不关注css是否具有的一些编程语言特性，但这不是你放弃他的理由，css3的发展，加之主流浏览器的兼容性不一，很多浏览器都有自己的兼容hack，很多时候我们需要针对不同的浏览器写一堆的hack，这种浪费时间的重复劳动就交给SASS处理去吧！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/sass-scss/" data-id="cjwi61iu20036kw24vet64ygy" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Front-end/">Front-end</a></li></ul>
 
     </footer>
   </div>
@@ -589,7 +602,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -635,6 +648,10 @@
       <ul>
         
           <li>
+            <a href="/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/">Leetcode.485&amp;487&amp;1004 Max Consecutive One</a>
+          </li>
+        
+          <li>
             <a href="/2019/06/04/leetcode-272-Closest-Binary-Search/">leetcode.272 Closest Binary Search</a>
           </li>
         
@@ -648,10 +665,6 @@
         
           <li>
             <a href="/2019/06/01/Responsive-Web-Design-I/">Responsive Web Design I</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/01/leetcode-201-Word-Search-II/">leetcode.201 Word Search II</a>
           </li>
         
       </ul>

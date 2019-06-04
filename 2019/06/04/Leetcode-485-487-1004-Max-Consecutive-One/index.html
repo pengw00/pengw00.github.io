@@ -5,20 +5,20 @@
   
 
   
-  <title>react component communication | David w00&#39;s Tech Road</title>
+  <title>Leetcode.485&amp;487&amp;1004 Max Consecutive One | David w00&#39;s Tech Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="https://blog.csdn.net/lizhipeng123321/article/details/80018003 总结本文总结了 React 中组件的几种通信方式，分别是： 父组件向子组件通信：使用 props子组件向父组件通信：使用 props 回调跨级组件间通信：使用 context 对象非嵌套组件间通信：使用事件订阅事实上，在组件间进行通信时，这些通信方式都可以使用，区别只在于使">
-<meta name="keywords" content="react">
+  <meta name="description" content="Max Consecutive One serialsFind the longest consective subarrayTime: O(n) Space: O(1) max and cur_max *Leetcode.485 findMaxConsecutiveOnes 1234567public int findMaxConsecutiveOnes(int[] nums)&amp;#123;	in">
+<meta name="keywords" content="leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="react component communication">
-<meta property="og:url" content="http://pengw00.github.io/2019/04/17/react-component-communication/index.html">
+<meta property="og:title" content="Leetcode.485&amp;487&amp;1004 Max Consecutive One">
+<meta property="og:url" content="http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/index.html">
 <meta property="og:site_name" content="David w00&#39;s Tech Road">
-<meta property="og:description" content="https://blog.csdn.net/lizhipeng123321/article/details/80018003 总结本文总结了 React 中组件的几种通信方式，分别是： 父组件向子组件通信：使用 props子组件向父组件通信：使用 props 回调跨级组件间通信：使用 context 对象非嵌套组件间通信：使用事件订阅事实上，在组件间进行通信时，这些通信方式都可以使用，区别只在于使">
+<meta property="og:description" content="Max Consecutive One serialsFind the longest consective subarrayTime: O(n) Space: O(1) max and cur_max *Leetcode.485 findMaxConsecutiveOnes 1234567public int findMaxConsecutiveOnes(int[] nums)&amp;#123;	in">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2019-04-17T15:29:27.493Z">
+<meta property="og:updated_time" content="2019-06-04T21:38:39.536Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="react component communication">
-<meta name="twitter:description" content="https://blog.csdn.net/lizhipeng123321/article/details/80018003 总结本文总结了 React 中组件的几种通信方式，分别是： 父组件向子组件通信：使用 props子组件向父组件通信：使用 props 回调跨级组件间通信：使用 context 对象非嵌套组件间通信：使用事件订阅事实上，在组件间进行通信时，这些通信方式都可以使用，区别只在于使">
+<meta name="twitter:title" content="Leetcode.485&amp;487&amp;1004 Max Consecutive One">
+<meta name="twitter:description" content="Max Consecutive One serialsFind the longest consective subarrayTime: O(n) Space: O(1) max and cur_max *Leetcode.485 findMaxConsecutiveOnes 1234567public int findMaxConsecutiveOnes(int[] nums)&amp;#123;	in">
   
     <link rel="alternate" href="/atom.xml" title="David w00&#39;s Tech Road" type="application/atom+xml">
   
@@ -65,10 +65,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-react-component-communication" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Leetcode-485-487-1004-Max-Consecutive-One" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/04/17/react-component-communication/" class="article-date">
-  <time datetime="2019-04-17T15:02:23.000Z" itemprop="datePublished">2019-04-17</time>
+    <a href="/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" class="article-date">
+  <time datetime="2019-06-04T20:31:11.000Z" itemprop="datePublished">2019-06-04</time>
 </a>
     
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      react component communication
+      Leetcode.485&amp;487&amp;1004 Max Consecutive One
     </h1>
   
 
@@ -87,19 +87,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="https://blog.csdn.net/lizhipeng123321/article/details/80018003" target="_blank" rel="noopener">https://blog.csdn.net/lizhipeng123321/article/details/80018003</a></p>
-<p>总结<br>本文总结了 React 中组件的几种通信方式，分别是：</p>
-<p>父组件向子组件通信：使用 props<br>子组件向父组件通信：使用 props 回调<br>跨级组件间通信：使用 context 对象<br>非嵌套组件间通信：使用事件订阅<br>事实上，在组件间进行通信时，这些通信方式都可以使用，区别只在于使用相应的通信方式的复杂程度和个人喜好，选择最合适的那一个。</p>
-<p>比如，通过事件订阅模式通信不止可以应用在非嵌套组件间，还可以用于跨级组件间，非嵌套组件间通信也可以使用 context 等。关键是选择最合适的方式。</p>
-<p>当然，自己实现组件间的通信还是太难以管理了，因此出现了很多状态管理工具，如 flux、redux 等，使用这些工具使得组件间的通信更容易追踪和管理。</p>
+        <h4 id="Max-Consecutive-One-serials"><a href="#Max-Consecutive-One-serials" class="headerlink" title="Max Consecutive One serials"></a>Max Consecutive One serials</h4><p>Find the longest consective subarray<br><em>Time: O(n)
+</em>Space: O(1) max and cur_max</p>
+<p>*Leetcode.485 findMaxConsecutiveOnes</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public int findMaxConsecutiveOnes(int[] nums)&#123;</span><br><span class="line">	int max, cur_max;</span><br><span class="line">	for(int i = 0; i &lt; nums.length; i++)&#123;</span><br><span class="line">		max = Math.max(max, cur_max= nums[i]==0?0:cur_max+1);</span><br><span class="line">	&#125;</span><br><span class="line">	return max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Leetcode-487-findMaxConsecutiveOnesII"><a href="#Leetcode-487-findMaxConsecutiveOnesII" class="headerlink" title="Leetcode.487 findMaxConsecutiveOnesII"></a>Leetcode.487 findMaxConsecutiveOnesII</h4><ul>
+<li>condition: if you can flip at most one 0.</li>
+<li>Follow up: What if the input numbers come in one by one as an infinite stream? In other words, you can’t store all numbers coming from the stream as it’s too large to hold in memory. Could you solve it efficiently?</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public int findMaxConsecutiveOnesII()&#123;</span><br><span class="line">	int max = 0, zero = 0;</span><br><span class="line">	for(int l = 0, h = 0; h &lt; nums.length; h++)&#123;</span><br><span class="line">		if(nums[h] == 0) zero++;</span><br><span class="line">		while(zero &gt; 1)&#123;</span><br><span class="line">			if(nums[l++]==0)&#123;</span><br><span class="line">				zero--;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		max = Math.max(max, h-l+1);</span><br><span class="line">	&#125;</span><br><span class="line">	return max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Leetcode-1004-findMaxConsecutiveOnesIII"><a href="#Leetcode-1004-findMaxConsecutiveOnesIII" class="headerlink" title="Leetcode.1004 findMaxConsecutiveOnesIII"></a>Leetcode.1004 findMaxConsecutiveOnesIII</h4><ul>
+<li>condition: if you can flip at most k times.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public int findMaxConsecutiveOnes(int[] nums) &#123;</span><br><span class="line">        int max = 0, zero = 0, k = 1; // flip at most k zero</span><br><span class="line">        for (int l = 0, h = 0; h &lt; nums.length; h++) &#123;</span><br><span class="line">            if (nums[h] == 0)                                           </span><br><span class="line">                zero++;</span><br><span class="line">            while (zero &gt; k)</span><br><span class="line">                if (nums[l++] == 0)</span><br><span class="line">                    zero--;                                     </span><br><span class="line">            max = Math.max(max, h - l + 1);</span><br><span class="line">        &#125;                                                               </span><br><span class="line">        return max;             </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/react-component-communication/" data-id="cjwibs0z10030ym24nezhock0" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" data-id="cjwibs0xg000cym24foqedf4q" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
 
     </footer>
   </div>
@@ -107,19 +115,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/04/17/sass-scss/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          sass/scss
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/04/16/react-context-api/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/06/04/leetcode-272-Closest-Binary-Search/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">react context api</div>
+      <div class="article-nav-title">leetcode.272 Closest Binary Search</div>
     </a>
   
 </nav>
