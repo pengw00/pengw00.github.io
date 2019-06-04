@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-06-02T03:57:07.914Z</updated>
+  <updated>2019-06-04T18:55:51.812Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode.272 Closest Binary Search</title>
+    <link href="http://pengw00.github.io/2019/06/04/leetcode-272-Closest-Binary-Search/"/>
+    <id>http://pengw00.github.io/2019/06/04/leetcode-272-Closest-Binary-Search/</id>
+    <published>2019-06-04T18:38:40.000Z</published>
+    <updated>2019-06-04T18:55:51.812Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="dfs-amp-amp-stack-merge-sort-mothodology-for-the-optimal-solution"><a href="#dfs-amp-amp-stack-merge-sort-mothodology-for-the-optimal-solution" class="headerlink" title="dfs &amp;&amp; stack + merge sort mothodology for the optimal solution"></a>dfs &amp;&amp; stack + merge sort mothodology for the optimal solution</h1><ul><li>Analysis<br>Implement two stack, one store the value less than target in increase order by inorder dfs.</li></ul><p>like the root = [4, 2, 5, 1, 3], target = 3.3 =&gt; stack1: 1, 2, 3(top); stack2: 4, 5(top)</p><p>so the inorder basically has two version: </p><ul><li>right part, which get larger value. skip small value</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">private void inorder1(TreeNode root, double target, Stack&lt;Integer&gt; stack)&#123;</span><br><span class="line">if(root==null) return;</span><br><span class="line">//dfs traversal the right path</span><br><span class="line">inorder1(root.right, target, stack);</span><br><span class="line">// if the root value less then target, no need to go deeper since it is bst</span><br><span class="line">if(root.val &lt;= target) return;</span><br><span class="line">stack.push(root.val);</span><br><span class="line">inorder1(root.left, target, stack);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>left part, get the small part, skip the bigger one.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private void inorder2(TreeNode root, double target, Stack&lt;Integer&gt; stack)&#123;</span><br><span class="line">if(root==null) return;</span><br><span class="line">//dfs traversal the right path</span><br><span class="line">inorder1(root.left, target, stack);</span><br><span class="line">// if the root value less then target, no need to go deeper since it is bst</span><br><span class="line">if(root.val &gt; target) return;</span><br><span class="line">stack.push(root.val);</span><br><span class="line">inorder1(root.right, target, stack);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* Combine those two parts together since just the differ just focus on traversal order</span><br></pre></td></tr></table></figure></li></ul><p>private void inorder(TreeNode root, double target, boolean reverse, Stack<integer> stack){<br>        if(root == null) return;<br>        inorder(reverse ? root.right:root.left, target, reverse, stack);<br>        if((reverse &amp;&amp; root.val&lt;=target) || (!reverse &amp;&amp; root.val &gt; target)) return;<br>        stack.push(root.val);<br>        inorder(reverse ? root.left : root.right, target, reverse, stack);<br>    }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* Final solution:</span><br></pre></td></tr></table></figure></integer></p><p>class Solution {<br>    public List<integer> closestKValues(TreeNode root, double target, int k) {<br>        List<integer> res = new ArrayList&lt;&gt;();<br>        Stack<integer> s1 = new Stack&lt;&gt;();<br>        Stack<integer> s2 = new Stack&lt;&gt;();</integer></integer></integer></integer></p><pre><code>    inorder1(root, target, s1);    inorder2(root,target, s2);    // inorder(root, target, false, s1);    // inorder(root, target, true, s2);    while(k-- &gt; 0){        if(s1.isEmpty()) res.add(s2.pop());        else if(s2.isEmpty()) res.add(s1.pop());        else if(Math.abs(s1.peek() - target) &lt; Math.abs(s2.peek() - target)) res.add(s1.pop());        else res.add(s2.pop());    }    return res;}private void inorder(TreeNode root, double target, boolean reverse, Stack&lt;Integer&gt; stack){    if(root == null) return;    inorder(reverse ? root.right:root.left, target, reverse, stack);    if((reverse &amp;&amp; root.val&lt;=target) || (!reverse &amp;&amp; root.val &gt; target)) return;    stack.push(root.val);    inorder(reverse ? root.left : root.right, target, reverse, stack);}private void inorder1(TreeNode root, double target, Stack&lt;Integer&gt; stack){    if(root==null) return;    inorder1(root.right, target, stack);    if(root.val&lt;=target) return;    stack.push(root.val);    inorder1(root.left, target, stack);}private void inorder2(TreeNode root, double target, Stack&lt;Integer&gt; stack){    if(root==null) return;    inorder2(root.left, target, stack);    if(root.val&gt;target) return;    stack.push(root.val);    inorder2(root.right, target, stack);}</code></pre><p>}<br><code>`</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;dfs-amp-amp-stack-merge-sort-mothodology-for-the-optimal-solution&quot;&gt;&lt;a href=&quot;#dfs-amp-amp-stack-merge-sort-mothodology-for-the-optima
+      
+    
+    </summary>
+    
+    
+      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ActiveMQ Help Decouple System</title>
+    <link href="http://pengw00.github.io/2019/06/04/ActiveMQ-Help-Decouple-System/"/>
+    <id>http://pengw00.github.io/2019/06/04/ActiveMQ-Help-Decouple-System/</id>
+    <published>2019-06-04T17:34:47.000Z</published>
+    <updated>2019-06-04T17:37:33.756Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>应用1：异步处理才能应用解耦<br>用户注册后发送邮件/短信<br>传统:50+50+50<br>MQ异步处理：50+5</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;应用1：异步处理才能应用解耦&lt;br&gt;用户注册后发送邮件/短信&lt;br&gt;传统:50+50+50&lt;br&gt;MQ异步处理：50+5&lt;/li&gt;
+&lt;/ol&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="ActiveMQ" scheme="http://pengw00.github.io/tags/ActiveMQ/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode Contest 139</title>
@@ -459,52 +508,6 @@
     
     
       <category term="Front-end" scheme="http://pengw00.github.io/tags/Front-end/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>react component communication</title>
-    <link href="http://pengw00.github.io/2019/04/17/react-component-communication/"/>
-    <id>http://pengw00.github.io/2019/04/17/react-component-communication/</id>
-    <published>2019-04-17T15:02:23.000Z</published>
-    <updated>2019-04-17T15:29:27.493Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://blog.csdn.net/lizhipeng123321/article/details/80018003" target="_blank" rel="noopener">https://blog.csdn.net/lizhipeng123321/article/details/80018003</a></p><p>总结<br>本文总结了 React 中组件的几种通信方式，分别是：</p><p>父组件向子组件通信：使用 props<br>子组件向父组件通信：使用 props 回调<br>跨级组件间通信：使用 context 对象<br>非嵌套组件间通信：使用事件订阅<br>事实上，在组件间进行通信时，这些通信方式都可以使用，区别只在于使用相应的通信方式的复杂程度和个人喜好，选择最合适的那一个。</p><p>比如，通过事件订阅模式通信不止可以应用在非嵌套组件间，还可以用于跨级组件间，非嵌套组件间通信也可以使用 context 等。关键是选择最合适的方式。</p><p>当然，自己实现组件间的通信还是太难以管理了，因此出现了很多状态管理工具，如 flux、redux 等，使用这些工具使得组件间的通信更容易追踪和管理。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/lizhipeng123321/article/details/80018003&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://blog.csdn.net/lizhipeng12
-      
-    
-    </summary>
-    
-    
-      <category term="react" scheme="http://pengw00.github.io/tags/react/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>react context api</title>
-    <link href="http://pengw00.github.io/2019/04/16/react-context-api/"/>
-    <id>http://pengw00.github.io/2019/04/16/react-context-api/</id>
-    <published>2019-04-16T05:25:24.000Z</published>
-    <updated>2019-04-17T15:02:44.831Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="react-contect-api-state-manage"><a href="#react-contect-api-state-manage" class="headerlink" title="react contect api state manage"></a>react contect api state manage</h1><h2 id="When-Should-I-Use-Context"><a href="#When-Should-I-Use-Context" class="headerlink" title="When Should I Use Context?"></a>When Should I Use Context?</h2><p>I would recommend reaching for Context when you find yourself passing props down through three or more levels in your component tree. You might notice that you have renamed your props, making it challenging to determine the data’s origin. You might consider implementing context if a bunch of your components know about irrelevant data.</p><p>Rule of thumb: if you start to feel irritated by how long it takes to determine where data is coming from, introduce Context.</p><p>Do not hesitate to still use the other tools you have available, like prop drilling and redux. While Context can make it easier to pass props around in certain scenarios, it doesn’t give you access to some of the benefits redux offers, and it’s a more complicated abstraction than prop drilling.</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;react-contect-api-state-manage&quot;&gt;&lt;a href=&quot;#react-contect-api-state-manage&quot; class=&quot;headerlink&quot; title=&quot;react contect api state manage&quot;&gt;
-      
-    
-    </summary>
-    
-    
-      <category term="react" scheme="http://pengw00.github.io/tags/react/"/>
     
   </entry>
   

@@ -65,6 +65,86 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Persistence" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/08/Persistence/" class="article-date">
+  <time datetime="2018-10-08T20:57:08.000Z" itemprop="datePublished">2018-10-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/08/Persistence/">Persistence</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Understanding the meaning of persistence is important for evaluating different data store system</p>
+<p>Given the importance of the data store in most modern applications, making a poorly informed choice could mean substantial downtime or loss of data.</p>
+<p>Persistence is “the continuance of an effect after its cause is removed”. In the context of storing data in a computer system, this means that the data survives after the process with which it was created has ended. In other words, for a data store to be considered persistent, it must write to non-volatile storage.</p>
+<p>If you need persistence in your data store, then you need to also understand the four main design approaches that a data store can take and how (or if) these designs provide persistence:</p>
+<p>Pure in-memory, no persistence at all, such as memcached or Scalaris<br>In-memory with periodic snapshots, such as Oracle Coherence or Redis<br>Disk-based with update-in-place writes, such as MySQL ISAM or MongoDB<br>Commitlog-based, such as all traditional OLTP databases (Oracle,<br>SQL Server, etc.)</p>
+<p>In-memory approaches can achieve blazing speed, but at the cost of being limited to a relatively small data set. Most workloads have relatively small “hot” (active) subset of their total data; systems that require the whole dataset to fit in memory rather than just the active part are fine for caches but a bad fit for most other applications. Because the data is in memory only, it will not survive process termination. Therefore these types of data stores are not considered persistent.</p>
+<p>The easiest way to add persistence to an in-memory system is with periodic snapshots to disk at a configurable interval. Thus, you can lose up to that interval’s worth of updates.</p>
+<p>Update-in-place and commitlog-based systems store to non-volatile memory immediately, but only commitlog-based persistence provides Durability – the D in ACID – with every write persisted before success is returned to the client.<br>Reference from below link.<br><a href="https://www.datastax.com/dev/blog/what-persistence-and-why-does-it-matter" target="_blank" rel="noopener">https://www.datastax.com/dev/blog/what-persistence-and-why-does-it-matter</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2018/10/08/Persistence/" data-id="cjwi5ysu8000ejg245ix6r03l" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-maxcycle-subarray" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/08/maxcycle-subarray/" class="article-date">
+  <time datetime="2018-10-08T18:56:17.000Z" itemprop="datePublished">2018-10-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/08/maxcycle-subarray/">maxcycle_subarray</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2018/10/08/maxcycle-subarray/" data-id="cjwi5ysvh002jjg24c7yv6vy2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode260-singlenumberIII" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/09/20/leetcode260-singlenumberIII/" class="article-date">
@@ -92,7 +172,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="cjweez7nj0025ibzuf88onkm0" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="cjwi5ysv90025jg24ltjvjoka" class="article-share-link">Share</a>
       
       
     </footer>
@@ -142,7 +222,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="cjweez7na001qibzu469gqipu" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="cjwi5ysv0001rjg2458fv9341" class="article-share-link">Share</a>
       
       
     </footer>
@@ -179,7 +259,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/" data-id="cjweez7mi000bibzutai6sn21" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/" data-id="cjwi5ystx0003jg24fac83uvq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -206,7 +286,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/18/dailylearning/" data-id="cjweez7mz0017ibzuc2dyjwcf" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/18/dailylearning/" data-id="cjwi5ysuk0013jg24px7xb6ev" class="article-share-link">Share</a>
       
       
     </footer>
@@ -247,7 +327,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/14/Daily-Friday/" data-id="cjweez7m20001ibzu01bv1w9k" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/14/Daily-Friday/" data-id="cjwi5ystt0001jg24cpo4rsgl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -284,7 +364,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/" data-id="cjweez7nh0023ibzumuodlhcz" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/" data-id="cjwi5ysv4001xjg24usbd9bub" class="article-share-link">Share</a>
       
       
     </footer>
@@ -327,7 +407,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/13/leetcode474/" data-id="cjweez7nm0029ibzuyjny5byz" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/13/leetcode474/" data-id="cjwi5ysva0027jg24w2gvkz66" class="article-share-link">Share</a>
       
       
     </footer>
@@ -372,7 +452,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/13/hello-world/" data-id="cjweez7n6001gibzurwl0gxwh" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/13/hello-world/" data-id="cjwi5ysuv001gjg24h5q9vf3f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -400,7 +480,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
     </div>
   </div>
 
@@ -410,7 +490,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/SystemDesign/" style="font-size: 10px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/SystemDesign/" style="font-size: 10px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
@@ -432,6 +512,14 @@
       <ul>
         
           <li>
+            <a href="/2019/06/04/leetcode-272-Closest-Binary-Search/">leetcode.272 Closest Binary Search</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/04/ActiveMQ-Help-Decouple-System/">ActiveMQ Help Decouple System</a>
+          </li>
+        
+          <li>
             <a href="/2019/06/01/Leetcode-Contest-139/">Leetcode Contest 139</a>
           </li>
         
@@ -441,14 +529,6 @@
         
           <li>
             <a href="/2019/06/01/leetcode-201-Word-Search-II/">leetcode.201 Word Search II</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/">leetcode1033.Move Stones Until Consecutive</a>
-          </li>
-        
-          <li>
-            <a href="/2019/05/31/ACM-ICPC-Road-Map/">ACM/ICPC Road Map</a>
           </li>
         
       </ul>
