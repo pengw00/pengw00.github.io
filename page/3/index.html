@@ -65,6 +65,138 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode137Contest" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/20/leetcode137Contest/" class="article-date">
+  <time datetime="2019-05-20T14:54:00.000Z" itemprop="datePublished">2019-05-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/20/leetcode137Contest/">leetcode137Contest</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>Last Stone Weight3</li>
+<li>Remove All Adjacent Duplicates In String4</li>
+<li>Longest String Chain6</li>
+<li>Last Stone Weight II</li>
+</ol>
+<h3 id="1-Last-Stone-Weight3"><a href="#1-Last-Stone-Weight3" class="headerlink" title="1. Last Stone Weight3"></a>1. Last Stone Weight3</h3><p>a collection of rocks with each one has positive weight. Each turn, we choose two heaviest rocks and smash them together.<br>logic：<br>sort them in increase order, and push back the last two elements, and smash and push the remain back to the vector. </p>
+<p>solution：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public: </span><br><span class="line">	int lastStoneWeight(vector&lt;int&gt;&amp; a)&#123;</span><br><span class="line">		while(a.size()&gt;1)&#123;</span><br><span class="line">			sort(a.begin(), a.end());</span><br><span class="line">			int n = a.size();</span><br><span class="line">			int x = a[n-1] - a[n-2];</span><br><span class="line">			a.pop_back();</span><br><span class="line">			a.pop_back();</span><br><span class="line">			a.push_back(x);</span><br><span class="line">		&#125;</span><br><span class="line">		return a[0];</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-Remove-All-Adjacent-Duplicates-In-String4"><a href="#2-Remove-All-Adjacent-Duplicates-In-String4" class="headerlink" title="2. Remove All Adjacent Duplicates In String4"></a>2. Remove All Adjacent Duplicates In String4</h3><p>Given a String S of lowercase letters, a duplicate removal consists of choosing two adjacent and equal letters, and removing them.<br>Repeatly doing the removement until we no longer can. return the final string. </p>
+<p>example: inputs: “abbaca”<br>         outputs: “ca”<br>Solution Logic: using stack, check the top of the stack, if equal to current element, then pop it out.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public:</span><br><span class="line">	string removeDuplicates(string S)&#123;</span><br><span class="line">		vector&lt;char&gt; a;</span><br><span class="line">		for(auto&amp; c: S)&#123;</span><br><span class="line">			if(a.size() &amp;&amp; a.back()==c)&#123;</span><br><span class="line">				a.pop_back();</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				a.push_back(c);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		string ret;</span><br><span class="line">		for(auto&amp; it: a) ret += it;</span><br><span class="line">		return ret;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-Longest-String-Chain6"><a href="#3-Longest-String-Chain6" class="headerlink" title="3. Longest String Chain6"></a>3. Longest String Chain6</h3><p>Given a list of words, each word consists of English lowercase letters.<br>Let’s say word1 is a predecessor of word2 if and only if we can add exactly one letter anywhere in word1 to make it equal to word2.  For example, “abc” is a predecessor of “abac”.<br>Return the longest possible length of a word chain with words chosen from the given list of words.<br>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: [&quot;a&quot;,&quot;b&quot;,&quot;ba&quot;,&quot;bca&quot;,&quot;bda&quot;,&quot;bdca&quot;]</span><br><span class="line">Output: 4</span><br><span class="line">Explanation: one of the longest word chain is &quot;a&quot;,&quot;ba&quot;,&quot;bda&quot;,&quot;bdca&quot;.</span><br></pre></td></tr></table></figure></p>
+<p>Solution:<br>Per inolving in state transfer: Dynamic programming is needed.<br>sort the word based on the length; then loop through all the possible string by missing one letter. if one string got seen before, we update the longest chain for current string.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class solution&#123;</span><br><span class="line">	//static attached to class</span><br><span class="line">	static bool compare(const string &amp;s1, const string &amp;s2)&#123;</span><br><span class="line">		return s1.length() &lt; s2.length();</span><br><span class="line">	&#125;</span><br><span class="line">public:</span><br><span class="line">	int longestStrChain(vector&lt;string&gt;&amp; words)&#123;</span><br><span class="line">		sort(words.begin(), words.end(), compare);</span><br><span class="line">		unordered_map&lt;string,int&gt; dp;</span><br><span class="line">		for(string w: words)&#123;</span><br><span class="line">			int max_idx = 0;</span><br><span class="line">			for(int i = 0; i &lt; w.length(); i++)&#123;</span><br><span class="line">				string word = w.substr(0, i) + w.substr(i+1);</span><br><span class="line">				max_idx = max(max_idx, dp[word]+1);</span><br><span class="line">			&#125;</span><br><span class="line">			dp[w] = max_index;</span><br><span class="line">		&#125;</span><br><span class="line">		int result = 0;</span><br><span class="line">		for(auto m: dp)&#123;</span><br><span class="line">			result  = max(result, m.second);</span><br><span class="line">		&#125;</span><br><span class="line">		return result;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-Last-Stone-Weight-II"><a href="#4-Last-Stone-Weight-II" class="headerlink" title="4. Last Stone Weight II"></a>4. Last Stone Weight II</h3><p>Follow up of the first one:  not the biggest two stones anymore, but the smash strategy become:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Each turn, we choose any two rocks and smash them together.  </span><br><span class="line">Suppose the stones have weights x and y with x &lt;= y.  The result of this smash is:</span><br><span class="line"></span><br><span class="line">If x == y, both stones are totally destroyed;</span><br><span class="line">If x != y, the stone of weight x is totally destroyed, and the stone of weight y has new weight y-x.</span><br></pre></td></tr></table></figure></p>
+<p>So, there are a lot of choices! ===&gt; Knapsacks problem!</p>
+<p>###Tips: Think in the way of real scenarios, and how you get it done first.<br>Then connect the logic with data structure and algorithm. </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="cjwjlytyk002l3s24k4v0gr2u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Contest/">Contest</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-leetcode804" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/20/leetcode804/" class="article-date">
+  <time datetime="2019-05-20T13:55:50.000Z" itemprop="datePublished">2019-05-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/20/leetcode804/">leetcode804</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Logic:<br>Get the average of the array, then backtrack the subarray with the same average.<br>trick: be careful with sum * number % length; not only sum % length:<br>eg: 10 / 4 =&gt; 5/2, even sum % length !=0 , it still works!<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class solution&#123;</span><br><span class="line">	public boolean splitArraySameAverage(int[] A)&#123;</span><br><span class="line">	int len = A.length;</span><br><span class="line">	if(len==1) return false;</span><br><span class="line">	int s = 0;</span><br><span class="line">	for(int i: A)&#123;</span><br><span class="line">		s += i;</span><br><span class="line">	&#125;</span><br><span class="line">	Arrays.sort(A);</span><br><span class="line">	for(int i = 1; i &lt;= len/2; i++)&#123;</span><br><span class="line">		if((s * i % len == 0) &amp; (backtracking(A, s * i /len, i, 0)) return true;</span><br><span class="line">		return false;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public boolean backtrack(int[] A, int target, int k, int start)&#123;</span><br><span class="line">		if(k==0) return target==0;</span><br><span class="line">		if(A[start] &gt; target/k) return false;</span><br><span class="line">		for(int i = start; i &lt; A.length - k + 1; i++)&#123;</span><br><span class="line">			if(i &gt; start &amp;&amp; A[i]==A[i-1]) continue;</span><br><span class="line">			if(backtrack(A, target - A[i], k -1, i + 1)) return true;</span><br><span class="line">		&#125;</span><br><span class="line">		return false;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="cjwjlytyo002s3s241bnfagxz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-singleton-code-demo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/02/singleton-code-demo/" class="article-date">
+  <time datetime="2019-05-02T04:59:31.000Z" itemprop="datePublished">2019-05-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/02/singleton-code-demo/">singleton_code_demo</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SingleTon-basic-logic"><a href="#SingleTon-basic-logic" class="headerlink" title="SingleTon basic logic"></a>SingleTon basic logic</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class SingleTonClass &#123;</span><br><span class="line">	private static SingleTonClass obj = null;</span><br><span class="line">	private SingleTonClass()&#123;</span><br><span class="line">      /*Private Constructor will prevent </span><br><span class="line">       * the instantiation of this class directly*/</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public static SingleTonClass objectCreationMethod()&#123;</span><br><span class="line">	/*This logic will ensure that no more than</span><br><span class="line">	 * one object can be created at a time */</span><br><span class="line">	if(obj==null)&#123;</span><br><span class="line">	    obj= new SingleTonClass();</span><br><span class="line">	&#125;</span><br><span class="line">        return obj;</span><br><span class="line">   &#125;</span><br><span class="line">   public void display()&#123;</span><br><span class="line">	System.out.println(&quot;Singleton class Example&quot;);</span><br><span class="line">   &#125;</span><br><span class="line">   public static void main(String args[])&#123;</span><br><span class="line">	//Object cannot be created directly due to private constructor </span><br><span class="line">        //This way it is forced to create object via our method where</span><br><span class="line">        //we have logic for only one object creation</span><br><span class="line">	SingleTonClass myobject= SingleTonClass.objectCreationMethod();</span><br><span class="line">	myobject.display();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="cjwjlytza003i3s24d9pv1zq1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-sass-scss" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/17/sass-scss/" class="article-date">
@@ -93,7 +225,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/sass-scss/" data-id="cjwibs0z70039ym2498ntlumz" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/17/sass-scss/" data-id="cjwjlytz8003e3s24vgaqo2x5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Front-end/">Front-end</a></li></ul>
@@ -136,7 +268,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/react-component-communication/" data-id="cjwibs0z10030ym24nezhock0" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/17/react-component-communication/" data-id="cjwjlytz200383s24sxox7xf4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -177,7 +309,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/16/react-context-api/" data-id="cjwibs0z30032ym24mgi4e24d" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/16/react-context-api/" data-id="cjwjlytz7003c3s240nxsb3nc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -241,7 +373,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/15/transaction-meaning/" data-id="cjwibs0zg003nym24owsos45c" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/15/transaction-meaning/" data-id="cjwjlytzk00403s24ytp4w0h7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li></ul>
@@ -335,7 +467,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/12/ngrx-for-flux/" data-id="cjwibs1080046ym2475cs6cxt" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/12/ngrx-for-flux/" data-id="cjwjlyu07004d3s24dfqdea0a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/">angular</a></li></ul>
@@ -375,7 +507,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/11/TDD-concept/" data-id="cjwibs0xr000xym2444k5srp5" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/11/TDD-concept/" data-id="cjwjlytxp00113s24cmcted0g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li></ul>
@@ -421,129 +553,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/11/Jest/" data-id="cjwibs0xh000eym24vqamkn4o" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/11/Jest/" data-id="cjwjlytxf000h3s24uzb6ywce" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode380InsertDeleteGetRandom" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/10/leetcode380InsertDeleteGetRandom/" class="article-date">
-  <time datetime="2019-04-10T16:16:16.000Z" itemprop="datePublished">2019-04-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/10/leetcode380InsertDeleteGetRandom/">leetcode380InsertDeleteGetRandom</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Leetcode 380 insert delete getRandom O(1)</p>
-<p>Folowup: duplicated number is allowed.<br><code>`</code><br>public class RandomizedSet{<br>    ArrayList<integer> nums;</integer></p>
-<p>}</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/10/leetcode380InsertDeleteGetRandom/" data-id="cjwibs0yl002aym24lfzgsuvu" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-babel-gulp-ESlint" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/09/babel-gulp-ESlint/" class="article-date">
-  <time datetime="2019-04-10T01:12:05.000Z" itemprop="datePublished">2019-04-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/09/babel-gulp-ESlint/">babel+gulp+ESlint</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Use Babel in Build tools<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --save-dev gulp </span><br><span class="line">$ npm install --save-dev gulp-babel</span><br></pre></td></tr></table></figure></p>
-<p>Following gulp code demonstrates how to compile all JS files in a src/js directory into ES5 JS files and output to a dist/js directory.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var gulp = require(&quot;gulp&quot;);</span><br><span class="line">var babel = require(&quot;gulp-babel&quot;);</span><br><span class="line"></span><br><span class="line">gulp.task(&quot;default&quot;, function () &#123;</span><br><span class="line">    return gulp.src(&quot;src/js/*.js&quot;)</span><br><span class="line">        .pipe(babel())</span><br><span class="line">        .pipe(gulp.dest(&quot;dist/js&quot;));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/09/babel-gulp-ESlint/" data-id="cjwibs0xu0013ym2453xz4pn6" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-stack-calculator-problem-recursive-a-little-bit" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/06/stack-calculator-problem-recursive-a-little-bit/" class="article-date">
-  <time datetime="2019-04-06T06:57:25.000Z" itemprop="datePublished">2019-04-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/06/stack-calculator-problem-recursive-a-little-bit/">stack&amp;calculator problem(recursive a little bit)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="stack-amp-calculator-problem"><a href="#stack-amp-calculator-problem" class="headerlink" title="stack&amp;calculator problem"></a>stack&amp;calculator problem</h1>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/06/stack-calculator-problem-recursive-a-little-bit/" data-id="cjwibs0z9003bym24ajpwlgpr" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
 
     </footer>
   </div>
@@ -570,7 +583,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
     </div>
   </div>
 
@@ -580,7 +593,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/SystemDesign/" style="font-size: 10px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
@@ -602,23 +615,23 @@
       <ul>
         
           <li>
+            <a href="/2019/06/05/Design-a-transportation-payment-method/">Design a transportation payment method</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/05/Ways-to-center-CSS-element/">Ways to center CSS element</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/05/Redux-starter-kit-usage/">Redux-starter-kit usage</a>
+          </li>
+        
+          <li>
             <a href="/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/">Leetcode.485&amp;487&amp;1004 Max Consecutive One</a>
           </li>
         
           <li>
             <a href="/2019/06/04/leetcode-272-Closest-Binary-Search/">leetcode.272 Closest Binary Search</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/04/ActiveMQ-Help-Decouple-System/">ActiveMQ Help Decouple System</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/01/Leetcode-Contest-139/">Leetcode Contest 139</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/01/Responsive-Web-Design-I/">Responsive Web Design I</a>
           </li>
         
       </ul>

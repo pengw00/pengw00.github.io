@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Redux-starter-kit usage | David w00&#39;s Tech Road</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Why? Use redux-starter-kit to general boilerplate code for redux to faster the development for react app. setup store is anoying1234567891011121314151617181920212223import &amp;#123; applyMiddleware, comp">
+<meta name="keywords" content="Redux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redux-starter-kit usage">
+<meta property="og:url" content="http://pengw00.github.io/2019/06/05/Redux-starter-kit-usage/index.html">
+<meta property="og:site_name" content="David w00&#39;s Tech Road">
+<meta property="og:description" content="Why? Use redux-starter-kit to general boilerplate code for redux to faster the development for react app. setup store is anoying1234567891011121314151617181920212223import &amp;#123; applyMiddleware, comp">
+<meta property="og:locale" content="us-EN">
+<meta property="og:updated_time" content="2019-06-05T14:41:28.950Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redux-starter-kit usage">
+<meta name="twitter:description" content="Why? Use redux-starter-kit to general boilerplate code for redux to faster the development for react app. setup store is anoying1234567891011121314151617181920212223import &amp;#123; applyMiddleware, comp">
+  
+    <link rel="alternate" href="/atom.xml" title="David w00&#39;s Tech Road" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">David w00&#39;s Tech Road</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pengw00.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Redux-starter-kit-usage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/05/Redux-starter-kit-usage/" class="article-date">
+  <time datetime="2019-06-05T13:02:13.000Z" itemprop="datePublished">2019-06-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Redux-starter-kit usage
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Why"><a href="#Why" class="headerlink" title="Why?"></a>Why?</h3><ul>
+<li>Use redux-starter-kit to general boilerplate code for redux to faster the development for react app. <h5 id="setup-store-is-anoying"><a href="#setup-store-is-anoying" class="headerlink" title="setup store is anoying"></a>setup store is anoying</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import &#123; applyMiddleware, compose, createStore &#125; from &apos;redux&apos;;</span><br><span class="line">import &#123; composeWithDevTools &#125; from &apos;redux-devtools-extension&apos;;</span><br><span class="line">import thunkMiddleware from &apos;redux-thunk&apos;</span><br><span class="line"></span><br><span class="line">import monitorReducersEnhancer from &apos;./enhancers/monitorReducers&apos;;</span><br><span class="line">import loggerMiddleware from &apos;./middleware/logger&apos;;</span><br><span class="line">import rootReducer from &apos;./reducers&apos;</span><br><span class="line"></span><br><span class="line">export default function configureStore(preloadedState) &#123;</span><br><span class="line">  const middlewares = [loggerMiddleware, thunkMiddleware];</span><br><span class="line">  const middlewareEnhancer = applyMiddleware(...middlewares);</span><br><span class="line"></span><br><span class="line">  const enhancers = [middlewareEnhancer, monitorReducersEnhancer];</span><br><span class="line">  const composedEnhancers = composeWithDevTools(...enhancers);</span><br><span class="line"></span><br><span class="line">  const store = createStore(rootReducer, preloadedState, composedEnhancers);</span><br><span class="line"></span><br><span class="line">  if (process.env.NODE_ENV !== &apos;production&apos; &amp;&amp; module.hot) &#123;</span><br><span class="line">    module.hot.accept(&apos;./reducers&apos;, () =&gt; store.replaceReducer(rootReducer));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return store;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li>typically you will first create the const action type and action creaters in two different file2.<br>For example: you have a container component that has a button that when clicked, dispatches an action thru a bound action creator. To see how Redux handles this action (e.g. state changes via reducer and side effect via middleware), you would typically do the following steps:</li>
+</ol>
+<p>Go to the file where the action creator was defined and see what action type constant is being used.<br>Go to the reducer file where the action type constant you found in the previous step is being used and see how the action is being handled via the switch statement in your reducer.<br>If you have a middleware like redux-saga, you would go to the saga file and also look for the the action-type constant and see how the action is being handled. Also in this file, you would normally see both the action type constant and action creator being imported.</p>
+<h5 id="two-seperate-files-for-action-type-and-creaters"><a href="#two-seperate-files-for-action-type-and-creaters" class="headerlink" title="two seperate files for action type and creaters"></a>two seperate files for action type and creaters</h5><p>the first steps const and creaters is anoying, right?</p>
+<p>What if you could skip step one and just use your action creator to handle an action in your reducers and middleware? What if you could reduce the amount of files that are being imported/used and just have one file that represents an action?</p>
+<h5 id="Problem-Touching-4-files-to-implement-a-simple-state"><a href="#Problem-Touching-4-files-to-implement-a-simple-state" class="headerlink" title="Problem Touching 4 files to implement a simple state"></a>Problem Touching 4 files to implement a simple state</h5><p>Have you added a state in your component using redux and you end up touching constants.js, actions.js, reducer.js and container-component.js? What more if you have a middleware for side-effect like saga?</p>
+<p>This process can be tedious for implementing things that are so simple. Also, having too many files just make your code fragmented that it ends up difficult to reason about.</p>
+<p>What if you could increase cohesion by bundling these pieces together into an isolated, self-contained module?</p>
+<h3 id="What"><a href="#What" class="headerlink" title="What?"></a>What?</h3><p>Addressing Problems above with Redux Starter Kit<br>Redux Starter Kit is a library created by the same team who maintains Redux, and it offers a set of tools to make using Redux easier. Now, let’s see how this library can solve the 3 problems we mentioned above.</p>
+<h3 id="How"><a href="#How" class="headerlink" title="How?"></a>How?</h3><ul>
+<li>configureStore<br>Redux Starter Kit has a configureStore function that abstract a lot of boilerplate code (like we had on Problem #1) and adds some defaults to make setting up a Redux store a breeze</li>
+</ul>
+<p>Setup store will be like:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import &#123; configureStore &#125; from &apos;redux-starter-kit&apos;;</span><br><span class="line">import rootReducer from &apos;./reducers&apos;;</span><br><span class="line"></span><br><span class="line">const store = configureStore(&#123; reducer: rootReducer &#125;); </span><br><span class="line"></span><br><span class="line">export default store;</span><br></pre></td></tr></table></figure></p>
+<p>configureStore also allows you to pass some options so you could customize your store:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import &#123; configureStore, getDefaultMiddleware &#125; from &apos;redux-starter-kit&apos;;</span><br><span class="line">import monitorReducersEnhancer from &apos;./enhancers/monitorReducers&apos;; </span><br><span class="line">import loggerMiddleware from &apos;./middleware/logger&apos;;</span><br><span class="line">import rootReducer from &apos;./reducers&apos;;</span><br><span class="line"></span><br><span class="line">const store = configureStore(&#123; </span><br><span class="line">   reducer: rootReducer, </span><br><span class="line">   middleware: [loggerMiddleware, …getDefaultMiddleware()],</span><br><span class="line">   preloadedState, </span><br><span class="line">   enhancers: [monitorReducersEnhancer],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>createAction</li>
+</ul>
+<p>This library has a createAction function that combines action type and action creator declarations into one, so you don’t have to create 2 separate files (constant.js and some-action.js).</p>
+<p>This function returns an action creator that exposes a .type property so you can use it in your reducer and middleware to handle dispatched action. Here is an example of have you would create an action creator using createAction and how you can use the .type property in a reducer and saga:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">// todo-actions.js</span><br><span class="line">import &#123; createAction &#125; from &apos;redux-starter-kit&apos;;</span><br><span class="line"></span><br><span class="line">// Create an action creator</span><br><span class="line">export const addTodo = createAction(&apos;TODO/ADD_TODO&apos;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// todo-reducers.js</span><br><span class="line">import &#123; addTodo &#125; from &apos;./todo-actions&apos;;</span><br><span class="line"></span><br><span class="line">export function todosReducer(state = [], action) &#123;</span><br><span class="line">  switch(action.type) &#123;</span><br><span class="line">    // Use the action creator&apos;s type property to handle action</span><br><span class="line">    case addTodo.type: </span><br><span class="line">      return state.concat(action.payload);   </span><br><span class="line">    default: </span><br><span class="line">      return state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// todo-sagas.js</span><br><span class="line">import &#123; addTodo &#125; from &apos;./todo-actions&apos;;</span><br><span class="line"></span><br><span class="line">function* addTodoSaga(&#123; payload &#125;) &#123;</span><br><span class="line">  // Some side effects</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Use the action creator&apos;s type property to handle action</span><br><span class="line">export default takeLatest(addTodo.type, addTodoSaga);</span><br><span class="line">By getting rid of the constant file for your action type, we reduce the amount of mappings we have to make between your React component and your Redux files when debugging. Plus, less files to import!</span><br><span class="line"></span><br><span class="line">* Solution to Problem #3 — createSlice</span><br><span class="line"></span><br><span class="line">Redux Starter Kit has a createSlice that allows you to put together pieces in Redux that are logically related to each other into a module.</span><br><span class="line"></span><br><span class="line">Think of it as putting together pieces that works on a slice of state in the Redux state tree.</span><br><span class="line"></span><br><span class="line">Example:</span><br></pre></td></tr></table></figure>
+<p>import { createSlice } from ‘redux-starter-kit’;</p>
+<p>const todoSlice = createSlice({<br>  slice: ‘todos’,<br>  initialState: [],<br>  reducers: {<br>    addTodo(state, action) =&gt; [ …state, action.payload],<br>    removeTodo(state, action) =&gt; state.filter(todo =&gt; todo !== action.payload),<br>  },<br>});</p>
+<p>// Extract the action creators object and the reducer<br>export const { actions, reducer } = todoSlice;</p>
+<p>// Export the reducer, either as a default or named export<br>export default reducer;<br><code>`</code></p>
+<p>Isn’t that better than creating 4 files for just a single state?</p>
+<p>To know more about the concept behind createSlice, take a look at the “Redux Ducks” pattern.<br><a href="https://github.com/erikras/ducks-modular-redux" target="_blank" rel="noopener">https://github.com/erikras/ducks-modular-redux</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/06/05/Redux-starter-kit-usage/" data-id="cjwjlytxo000z3s24azt9989r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redux/">Redux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/05/Ways-to-center-CSS-element/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Ways to center CSS element
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Leetcode.485&amp;487&amp;1004 Max Consecutive One</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/05/Design-a-transportation-payment-method/">Design a transportation payment method</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/05/Ways-to-center-CSS-element/">Ways to center CSS element</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/05/Redux-starter-kit-usage/">Redux-starter-kit usage</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/">Leetcode.485&amp;487&amp;1004 Max Consecutive One</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/04/leetcode-272-Closest-Binary-Search/">leetcode.272 Closest Binary Search</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 David w00<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
