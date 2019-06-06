@@ -65,6 +65,71 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Leetcode-333-Largest-BST-Subtree" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/06/Leetcode-333-Largest-BST-Subtree/" class="article-date">
+  <time datetime="2019-06-06T15:22:40.000Z" itemprop="datePublished">2019-06-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/06/Leetcode-333-Largest-BST-Subtree/">Leetcode.333 Largest BST Subtree</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>Given a binary tree, find the largest subtree which is a Binary Search Tree (BST), where largest means subtree with largest number of nodes in it.</li>
+</ul>
+<p><strong> Note: </strong><br>A subtree must include all of its descendants.</p>
+<p><strong> Test Case </strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Input: [10,5,15,1,8,null,7]</span><br><span class="line"></span><br><span class="line">   10 </span><br><span class="line">   / \ </span><br><span class="line">  5  15 </span><br><span class="line"> / \   \ </span><br><span class="line">1   8   7</span><br><span class="line"></span><br><span class="line">Output: 3</span><br><span class="line">Explanation: The Largest BST Subtree in this case is the highlighted one.</span><br><span class="line">             The return value is the subtree&apos;s size, which is 3.</span><br></pre></td></tr></table></figure></p>
+<p><strong>Follow up:</strong><br>Can you figure out ways to solve it with O(n) time complexity?</p>
+<p><strong> logic </strong> </p>
+<ul>
+<li><ol>
+<li>dfs, get the information from bottom(top down), should return the max value in the left node and the min value in the right node.</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>a inner class is useful for the data</li>
+</ol>
+</li>
+<li><p>inner class:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Res&#123;</span><br><span class="line">        int size;</span><br><span class="line">        int lower;</span><br><span class="line">        int upper;</span><br><span class="line">        Res(int size, int lower, int upper)&#123;</span><br><span class="line">            this.size = size;</span><br><span class="line">            this.lower = lower;</span><br><span class="line">            this.upper = upper;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>main method:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public int largestBSTSubtree(TreeNode root) &#123;</span><br><span class="line">        if(root==null) return 0;</span><br><span class="line">        dfs(root);</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>dfs treversal</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private Res dfs(TreeNode root)&#123;</span><br><span class="line">    //fullfill the tree rule but the size = 0</span><br><span class="line">    if(root==null) &#123;return new Res(0, Integer.MAX_VALUE, Integer.MIN_VALUE);&#125;</span><br><span class="line">    Res left = dfs(root.left);</span><br><span class="line">    Res right = dfs(root.right);</span><br><span class="line">    //not fullfill the tree rule and size = -1 and the lower and upper is 0;</span><br><span class="line">    if(left.size==-1 || right.size == -1 || root.val &lt;= left.upper || root.val &gt;= right.lower)</span><br><span class="line">        return new Res(-1, 0, 0);</span><br><span class="line">    int size = left.size + 1 + right.size;</span><br><span class="line">    max = Math.max(size, max);</span><br><span class="line">    return new Res(size, Math.min(left.lower, root.val), Math.max(right.upper, root.val));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>the other way is to use parent as para in the dfs instead of use max and min value.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/06/06/Leetcode-333-Largest-BST-Subtree/" data-id="cjwktnf86000d5c24gx3sc7pd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Design-a-transportation-payment-method" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/05/Design-a-transportation-payment-method/" class="article-date">
@@ -104,7 +169,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Design-a-transportation-payment-method/" data-id="cjwjzo60x0008aizumsweq0va" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/05/Design-a-transportation-payment-method/" data-id="cjwktnf7x00035c24q97ojb7b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li></ul>
@@ -188,12 +253,12 @@
 <p>Justify-content works in the same way, but in the horizontal direction for our example.</p>
 <p>This method goes well because again, it’s both responsive and doesn’t require any margin calculations.</p>
 <p>A tutorial about <a href="https://flexboxfroggy.com/" target="_blank" rel="noopener">flexbox</a></p>
-<p><img src="https://www.freecodecamp.org/news/how-to-center-things-with-style-in-css-dc87b7542689/" alt="source"></p>
+<p><a href="https://www.freecodecamp.org/news/how-to-center-things-with-style-in-css-dc87b7542689/" target="_blank" rel="noopener">source link</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Ways-to-center-CSS-element/" data-id="cjwjzo61r0019aizuqqhqd639" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/05/Ways-to-center-CSS-element/" data-id="cjwktnf8p001a5c24mswyerz3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
@@ -262,7 +327,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Redux-starter-kit-usage/" data-id="cjwjzo61c000raizux7qkjawo" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/05/Redux-starter-kit-usage/" data-id="cjwktnf8j000z5c24fzs4izjz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redux/">Redux</a></li></ul>
@@ -313,7 +378,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" data-id="cjwjzo614000faizuqt44kbhv" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" data-id="cjwktnf8c000m5c24xvz19mc1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -372,7 +437,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/leetcode-272-Closest-Binary-Search/" data-id="cjwjzo6270022aizukpjhdvup" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/leetcode-272-Closest-Binary-Search/" data-id="cjwktnf99002b5c24td13ks0m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -413,7 +478,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/ActiveMQ-Help-Decouple-System/" data-id="cjwjzo60k0000aizuik1rrw3y" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/ActiveMQ-Help-Decouple-System/" data-id="cjwktnf7j00005c240nv84v4u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li></ul>
@@ -457,7 +522,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/Leetcode-Contest-139/" data-id="cjwjzo619000laizu1xvvntvc" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/Leetcode-Contest-139/" data-id="cjwktnf8d000o5c245pd4e8q5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -500,7 +565,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/Responsive-Web-Design-I/" data-id="cjwjzo61i000zaizu1qpovfft" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/Responsive-Web-Design-I/" data-id="cjwktnf8n00165c24z9nq7efk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li></ul>
@@ -550,48 +615,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/leetcode-201-Word-Search-II/" data-id="cjwjzo62d002eaizue107n80v" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode1033-Move-Stones-Until-Consecutive" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/" class="article-date">
-  <time datetime="2019-06-01T12:23:59.000Z" itemprop="datePublished">2019-06-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/">leetcode1033.Move Stones Until Consecutive</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Catogory: Brainteaser</p>
-<p>-Edge case 1: all three stones are next to each other (z - x == 2). Return {0, 0}.<br>-Edge case 2: two stones are next to each other, or there is only one space in between. Minimum moves is 1.</p>
-<p>-Otherwise; minimum moves are 2, maximum - z - x - 2.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; numMovesStones(int a, int b, int c) &#123;</span><br><span class="line">  vector&lt;int&gt; s = &#123; a, b, c &#125;;</span><br><span class="line">  sort(begin(s), end(s));</span><br><span class="line">  if (s[2] - s[0] == 2) return &#123; 0, 0 &#125;;</span><br><span class="line">  return &#123; min(s[1] - s[0], s[2] - s[1]) &lt;= 2 ? 1 : 2, s[2] - s[0] - 2 &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/" data-id="cjwjzo62j002paizuhfp5da9w" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/leetcode-201-Word-Search-II/" data-id="cjwktnf9800295c241gqei2zt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -653,6 +677,10 @@
       <ul>
         
           <li>
+            <a href="/2019/06/06/Leetcode-333-Largest-BST-Subtree/">Leetcode.333 Largest BST Subtree</a>
+          </li>
+        
+          <li>
             <a href="/2019/06/05/Design-a-transportation-payment-method/">Design a transportation payment method</a>
           </li>
         
@@ -666,10 +694,6 @@
         
           <li>
             <a href="/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/">Leetcode.485&amp;487&amp;1004 Max Consecutive One</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/04/leetcode-272-Closest-Binary-Search/">leetcode.272 Closest Binary Search</a>
           </li>
         
       </ul>
