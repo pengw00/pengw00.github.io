@@ -104,7 +104,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Design-a-transportation-payment-method/" data-id="cjwjq6xk100047q24evd3uims" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/05/Design-a-transportation-payment-method/" data-id="cjwjzb2ou00056gzuycrkzjkg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li></ul>
@@ -169,11 +169,30 @@
 </ul>
 <p>so the code like this, set both the left and top edge to 50%; and shift negative -50% for both sides.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.red-square &#123;</span><br><span class="line">  background-color: #FF4136;</span><br><span class="line">  width: 300px;</span><br><span class="line">  height: 300px;</span><br><span class="line">  position: absolute;</span><br><span class="line">  left: 50%;</span><br><span class="line">  top: 50%;</span><br><span class="line">  transform: translate(-50%, -50%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>By setting the top property to 50% as well, I’m telling the browser to line up the top edge of our red square with the middle of the page vertically. But like in the previous example, we don’t want the edges to be lined up with the center, we want the center of our square to fit right on top of the center of our page.</p>
+<p>There are many cool things you can do with transform, such as translating, rotating, and scaling animations, but for this example, we’ll be using translate.</p>
+<p>We give the transform property “transform: translate(-50%, -50%)” and voila!</p>
+<p>Our red square is centered both horizontally and vertically!</p>
+<p>I love this method, because regardless of what the width or the height of our element is, it will always be in the center of the page.</p>
+<p>This method is used frequently in responsive design and doesn’t require margins to be defined, like in the absolute positioning method.</p>
+<h4 id="Flexbox-Method"><a href="#Flexbox-Method" class="headerlink" title="Flexbox Method"></a>Flexbox Method</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">html,</span><br><span class="line">body &#123;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.purple-square-container &#123;</span><br><span class="line">  height: 100%;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  justify-content: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.purple-square &#123;</span><br><span class="line">  background-color: #B10DC9;</span><br><span class="line">  width: 300px;</span><br><span class="line">  height: 300px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The four steps to centering horizontally and vertically with Flexbox are the following:</p>
+<ul>
+<li>HTML, body, and parent container need to have a height of 100%</li>
+<li>Set display to flex on parent container</li>
+<li>Set align-items to center on parent container</li>
+<li>Set justify-content to center on parent container</li>
+</ul>
+<p>Setting display to flex on the parent defines it as a flex container.</p>
+<p>By setting align-items to center, we’re saying that the children or flex items are to be centered vertically within the parent.</p>
+<p>Justify-content works in the same way, but in the horizontal direction for our example.</p>
+<p>This method goes well because again, it’s both responsive and doesn’t require any margin calculations.</p>
+<p>A tutorial about flexbox: <a href="https://flexboxfroggy.com/" target="_blank" rel="noopener">https://flexboxfroggy.com/</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Ways-to-center-CSS-element/" data-id="cjwjq6xki00117q24z20d7omh" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/05/Ways-to-center-CSS-element/" data-id="cjwjzb2pg00146gzuw5rnth6p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
@@ -242,7 +261,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Redux-starter-kit-usage/" data-id="cjwjq6xkn001b7q247k3ecgzh" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/05/Redux-starter-kit-usage/" data-id="cjwjzb2pe000z6gzu0f6xlrt3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redux/">Redux</a></li></ul>
@@ -293,7 +312,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" data-id="cjwjq6xke000r7q24ulsnplo8" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" data-id="cjwjzb2p3000h6gzuv0kk5zsu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -352,7 +371,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/leetcode-272-Closest-Binary-Search/" data-id="cjwjq6xl5002a7q24i01ez4m5" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/leetcode-272-Closest-Binary-Search/" data-id="cjwjzb2q200296gzuxl70w90o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -393,7 +412,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/ActiveMQ-Help-Decouple-System/" data-id="cjwjq6xju00017q2435oyhcge" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/ActiveMQ-Help-Decouple-System/" data-id="cjwjzb2ok00016gzuruaz76wf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li></ul>
@@ -437,7 +456,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/Leetcode-Contest-139/" data-id="cjwjq6xl100207q24c5upvwb3" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/Leetcode-Contest-139/" data-id="cjwjzb2p8000m6gzu0ttpf2b3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -480,7 +499,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/Responsive-Web-Design-I/" data-id="cjwjq6xl200227q24aelw6wvj" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/Responsive-Web-Design-I/" data-id="cjwjzb2pk001b6gzuiece485d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li></ul>
@@ -530,7 +549,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/leetcode-201-Word-Search-II/" data-id="cjwjq6xmc002z7q246tgsc9py" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/leetcode-201-Word-Search-II/" data-id="cjwjzb2q000266gzuptuca3x6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -571,7 +590,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/" data-id="cjwjq6xmj003a7q244489r7hc" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/" data-id="cjwjzb2q6002g6gzusxxgvc69" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
