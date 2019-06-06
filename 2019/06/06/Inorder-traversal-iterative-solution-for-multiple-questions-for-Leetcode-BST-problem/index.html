@@ -5,18 +5,20 @@
   
 
   
-  <title>Tag: hackrrank | David w00&#39;s Tech Road</title>
+  <title>Inorder traversal iterative solution for multiple questions for Leetcode BST problem | David w00&#39;s Tech Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="David W00&apos;s Tech road!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="David w00&#39;s Tech Road">
-<meta property="og:url" content="http://pengw00.github.io/tags/hackrrank/index.html">
+  <meta name="description" content="for tree inorder traversal, we have many different coding solution: recursion and iterative with stack mainly.   Iterative stack for basic inorder traversalleetcode 94. Binary Tree Inorder Traversal">
+<meta name="keywords" content="leetcode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Inorder traversal iterative solution for multiple questions for Leetcode BST problem">
+<meta property="og:url" content="http://pengw00.github.io/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/index.html">
 <meta property="og:site_name" content="David w00&#39;s Tech Road">
-<meta property="og:description" content="David W00&apos;s Tech road!">
+<meta property="og:description" content="for tree inorder traversal, we have many different coding solution: recursion and iterative with stack mainly.   Iterative stack for basic inorder traversalleetcode 94. Binary Tree Inorder Traversal">
 <meta property="og:locale" content="us-EN">
+<meta property="og:updated_time" content="2019-06-06T17:38:02.412Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="David w00&#39;s Tech Road">
-<meta name="twitter:description" content="David W00&apos;s Tech road!">
+<meta name="twitter:title" content="Inorder traversal iterative solution for multiple questions for Leetcode BST problem">
+<meta name="twitter:description" content="for tree inorder traversal, we have many different coding solution: recursion and iterative with stack mainly.   Iterative stack for basic inorder traversalleetcode 94. Binary Tree Inorder Traversal">
   
     <link rel="alternate" href="/atom.xml" title="David w00&#39;s Tech Road" type="application/atom+xml">
   
@@ -63,40 +65,63 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/11/07/StdinStdout/" class="archive-article-date">
-  <time datetime="2018-11-07T16:00:51.000Z" itemprop="datePublished">Nov 7</time>
+        <section id="main"><article id="post-Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/" class="article-date">
+  <time datetime="2019-06-06T17:18:20.000Z" itemprop="datePublished">2019-06-06</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/07/StdinStdout/">StdinStdout</a>
+    <h1 class="article-title" itemprop="name">
+      Inorder traversal iterative solution for multiple questions for Leetcode BST problem
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>for tree inorder traversal, we have many different coding solution: recursion and iterative with stack mainly. </li>
+</ul>
+<h4 id="Iterative-stack-for-basic-inorder-traversal"><a href="#Iterative-stack-for-basic-inorder-traversal" class="headerlink" title="Iterative stack for basic inorder traversal"></a>Iterative stack for basic inorder traversal</h4><p>leetcode 94. Binary Tree Inorder Traversal</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public List&lt;Integer&gt; inorderTraversal(TreeNode root)&#123;</span><br><span class="line">	List&lt;Integer&gt; res = new ArrayList&lt;&gt;();</span><br><span class="line">	if(root == null) return res;</span><br><span class="line">	Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">	while(root != null || !stack.empty())&#123;</span><br><span class="line">		while(root != null)&#123;</span><br><span class="line">			stack.push(root);</span><br><span class="line">			root = root.left;</span><br><span class="line">		&#125;</span><br><span class="line">		root = stack.pop();</span><br><span class="line">		res.add(root.val);</span><br><span class="line">		root = root.right;</span><br><span class="line">	&#125;</span><br><span class="line">	return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Use this basic structure to find the kth smallest node<h6 id="Leetcode-230-Kth-Smallest-Element-in-a-BST"><a href="#Leetcode-230-Kth-Smallest-Element-in-a-BST" class="headerlink" title="Leetcode 230. Kth Smallest Element in a BST"></a>Leetcode 230. Kth Smallest Element in a BST</h6></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public int KthSmallest(TreeNode root, int k)&#123;</span><br><span class="line">	Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">	while(root != null || !stack.isEmpty())&#123;</span><br><span class="line">		//go all the way down to the left bottom if root is valid</span><br><span class="line">		while(root != null)&#123;</span><br><span class="line">			stack.push(root);</span><br><span class="line">			root = root.left;</span><br><span class="line">		&#125;</span><br><span class="line">		//pop the top and get the value and then go the left</span><br><span class="line">		root = stack.pop();</span><br><span class="line">		if(--k == 0) break;</span><br><span class="line">		root = root.right;</span><br><span class="line">	&#125;</span><br><span class="line">	return root.val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Leetcode-98-Validate-Binary-Search-Tree"><a href="#Leetcode-98-Validate-Binary-Search-Tree" class="headerlink" title="Leetcode 98. Validate Binary Search Tree"></a>Leetcode 98. Validate Binary Search Tree</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public boolean isValidBST(TreeNode root)&#123;</span><br><span class="line">	if(root == null) return true;</span><br><span class="line">	Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">	TreeNode pre = null;</span><br><span class="line">	while(root != null || !stack.empty())&#123;</span><br><span class="line">		while(root != null)&#123;</span><br><span class="line">			stack.push(root);</span><br><span class="line">			root = root.left;</span><br><span class="line">		&#125;</span><br><span class="line">		root = stack.pop();</span><br><span class="line">		if(pre != null &amp;&amp; root.val &lt;= pre.val) return false;</span><br><span class="line">		pre = root;</span><br><span class="line">		root =root.right;</span><br><span class="line">	&#125;</span><br><span class="line">	return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/" data-id="cjwky2bgi0009wf24owjeasxd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/06/Leetcode-333-Largest-BST-Subtree/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Leetcode.333 Largest BST Subtree</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         

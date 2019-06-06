@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="David w00&#39;s Tech Road">
 <meta property="og:description" content="Given a binary tree, find the largest subtree which is a Binary Search Tree (BST), where largest means subtree with largest number of nodes in it.   Note: A subtree must include all of its descendant">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2019-06-06T15:34:30.005Z">
+<meta property="og:updated_time" content="2019-06-06T16:34:38.011Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode.333 Largest BST Subtree">
 <meta name="twitter:description" content="Given a binary tree, find the largest subtree which is a Binary Search Tree (BST), where largest means subtree with largest number of nodes in it.   Note: A subtree must include all of its descendant">
@@ -91,7 +91,7 @@
 <li>Given a binary tree, find the largest subtree which is a Binary Search Tree (BST), where largest means subtree with largest number of nodes in it.</li>
 </ul>
 <p><strong> Note: </strong><br>A subtree must include all of its descendants.</p>
-<p><strong> Test Case </strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Input: [10,5,15,1,8,null,7]</span><br><span class="line"></span><br><span class="line">   10 </span><br><span class="line">   / \ </span><br><span class="line">  5  15 </span><br><span class="line"> / \   \ </span><br><span class="line">1   8   7</span><br><span class="line"></span><br><span class="line">Output: 3</span><br><span class="line">Explanation: The Largest BST Subtree in this case is the highlighted one.</span><br><span class="line">             The return value is the subtree&apos;s size, which is 3.</span><br></pre></td></tr></table></figure></p>
+<h4 id="Similar-to-Leetcode-98"><a href="#Similar-to-Leetcode-98" class="headerlink" title="Similar to Leetcode.98"></a>Similar to Leetcode.98</h4><p><strong> Test Case </strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Input: [10,5,15,1,8,null,7]</span><br><span class="line"></span><br><span class="line">   10 </span><br><span class="line">   / \ </span><br><span class="line">  5  15 </span><br><span class="line"> / \   \ </span><br><span class="line">1   8   7</span><br><span class="line"></span><br><span class="line">Output: 3</span><br><span class="line">Explanation: The Largest BST Subtree in this case is the highlighted one.</span><br><span class="line">             The return value is the subtree&apos;s size, which is 3.</span><br></pre></td></tr></table></figure></p>
 <p><strong>Follow up:</strong><br>Can you figure out ways to solve it with O(n) time complexity?</p>
 <p><strong> logic </strong> </p>
 <ul>
@@ -114,11 +114,13 @@
 </li>
 </ul>
 <p>the other way is to use parent as para in the dfs instead of use max and min value.</p>
+<h3 id="Leetcode-98-Validate-the-BST-tree"><a href="#Leetcode-98-Validate-the-BST-tree" class="headerlink" title="Leetcode.98 Validate the BST tree"></a>Leetcode.98 Validate the BST tree</h3><p>DFS search</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Solution&#123;</span><br><span class="line">    public boolean isValidBST(root, long minVal, long maxVal)&#123;</span><br><span class="line">        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);</span><br><span class="line">    &#125;</span><br><span class="line">    private boolean isValidBST(TreeNode root, long minVal, long maxVal)&#123;</span><br><span class="line">        if(root==null) return true;</span><br><span class="line">        if(root.val &gt;= maxVal || root.val &lt;= minVal) return false;</span><br><span class="line">        return isValidBST(root.left, minVal, root.val) &amp;&amp; isValidBST(root.right, root.val, maxVal);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/06/Leetcode-333-Largest-BST-Subtree/" data-id="cjwktnf86000d5c24gx3sc7pd" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/06/Leetcode-333-Largest-BST-Subtree/" data-id="cjwky2bgm000fwf24u6i4ex0e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -128,6 +130,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Inorder traversal iterative solution for multiple questions for Leetcode BST problem
+        
+      </div>
+    </a>
   
   
     <a href="/2019/06/05/Design-a-transportation-payment-method/" id="article-nav-older" class="article-nav-link-wrap">
@@ -183,6 +194,10 @@
       <ul>
         
           <li>
+            <a href="/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/">Inorder traversal iterative solution for multiple questions for Leetcode BST problem</a>
+          </li>
+        
+          <li>
             <a href="/2019/06/06/Leetcode-333-Largest-BST-Subtree/">Leetcode.333 Largest BST Subtree</a>
           </li>
         
@@ -196,10 +211,6 @@
         
           <li>
             <a href="/2019/06/05/Redux-starter-kit-usage/">Redux-starter-kit usage</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/">Leetcode.485&amp;487&amp;1004 Max Consecutive One</a>
           </li>
         
       </ul>

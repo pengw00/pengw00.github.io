@@ -65,6 +65,46 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode465" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/25/leetcode465/" class="article-date">
+  <time datetime="2019-05-25T18:05:33.000Z" itemprop="datePublished">2019-05-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/25/leetcode465/">leetcode465</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Optimal Account Balancing, hard<br>Settling Multiple Debts Efficiently: An Invitation to Computing Science by T. Verhoeff, June 2003. <a href="http://www.mathmeth.com/tom/files/settling-debts.pdf" target="_blank" rel="noopener">http://www.mathmeth.com/tom/files/settling-debts.pdf</a><br>The question can be transferred to a 3-partition problem, which is NP-Complete.</p>
+<p>recursion + backtracking, get the total transaction and then dfs and backtracing every trans.<br>Core code:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int backtrack(Long[] debts, int pos, int count)&#123;</span><br><span class="line">        while(pos &lt; debts.length &amp;&amp; debts[pos] == 0) pos++;</span><br><span class="line">        if (pos &gt;= debts.length) &#123;</span><br><span class="line">            return count;</span><br><span class="line">        &#125;</span><br><span class="line">        int res = Integer.MAX_VALUE;</span><br><span class="line">        for(int i = pos + 1; i &lt; debts.length; i++)&#123;</span><br><span class="line">            if(debts[pos] * debts[i] &lt; 0)&#123;</span><br><span class="line">              debts[i] += debts[pos];</span><br><span class="line">              res = Math.min(res, helper(debts, pos + 1, count + 1));</span><br><span class="line">              debts[i] = debts[i] - debts[pos];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/05/25/leetcode465/" data-id="cjwky2bi2002xwf248uq40yhz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-edit-distance-modified-version-bus-station-problemq" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/21/edit-distance-modified-version-bus-station-problemq/" class="article-date">
@@ -95,7 +135,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/" data-id="cjwktnf8x001p5c246lvfwe6f" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/" data-id="cjwky2bhf001uwf249me078ww" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -150,7 +190,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="cjwktnf9f002n5c24n8j46wwv" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="cjwky2bhx002nwf244rsnfmmy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Contest/">Contest</a></li></ul>
@@ -189,7 +229,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="cjwktnf9k002x5c24t467nv60" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="cjwky2bi80036wf248gtvz2j0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li></ul>
@@ -227,7 +267,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="cjwktnfa0003l5c24jqb92fvz" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="cjwky2bim003mwf24rglhi46o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -267,7 +307,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/sass-scss/" data-id="cjwktnf9z003i5c24p1byado7" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/17/sass-scss/" data-id="cjwky2bik003lwf249l830i9j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Front-end/">Front-end</a></li></ul>
@@ -310,7 +350,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/react-component-communication/" data-id="cjwktnf9v003d5c24d9ephdgq" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/17/react-component-communication/" data-id="cjwky2bid003ewf2419wknp6e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -351,7 +391,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/16/react-context-api/" data-id="cjwktnf9x003g5c24m7m568gm" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/16/react-context-api/" data-id="cjwky2bih003jwf248twt4a3m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -415,7 +455,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/15/transaction-meaning/" data-id="cjwktnfa8003z5c24ahv3eceb" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/15/transaction-meaning/" data-id="cjwky2biy0043wf24xj7leoat" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li></ul>
@@ -509,50 +549,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/12/ngrx-for-flux/" data-id="cjwktnfaw004j5c2461teyv8i" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/12/ngrx-for-flux/" data-id="cjwky2bjh004kwf24ia24ysvg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/">angular</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-TDD-concept" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/11/TDD-concept/" class="article-date">
-  <time datetime="2019-04-12T03:26:17.000Z" itemprop="datePublished">2019-04-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/11/TDD-concept/">TDD concept</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://medium.com/javascript-scene/unit-testing-react-components-aeda9a44aae2" target="_blank" rel="noopener">https://medium.com/javascript-scene/unit-testing-react-components-aeda9a44aae2</a></p>
-<p>Favor pure components for UI code: given same props, always render the same component. If you need state from the app, you can wrap those pure components with a container component which manages state and side-effects.<br>Isolate application logic/business rules in pure reducer functions.<br>Isolate side effects using container components.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/11/TDD-concept/" data-id="cjwktnf8k00145c2441oqgp0m" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li></ul>
 
     </footer>
   </div>
@@ -611,6 +611,10 @@
       <ul>
         
           <li>
+            <a href="/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/">Inorder traversal iterative solution for multiple questions for Leetcode BST problem</a>
+          </li>
+        
+          <li>
             <a href="/2019/06/06/Leetcode-333-Largest-BST-Subtree/">Leetcode.333 Largest BST Subtree</a>
           </li>
         
@@ -624,10 +628,6 @@
         
           <li>
             <a href="/2019/06/05/Redux-starter-kit-usage/">Redux-starter-kit usage</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/">Leetcode.485&amp;487&amp;1004 Max Consecutive One</a>
           </li>
         
       </ul>
