@@ -65,10 +65,189 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcodeContest138" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/29/leetcodeContest138/" class="article-date">
+  <time datetime="2019-05-29T18:14:29.000Z" itemprop="datePublished">2019-05-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/29/leetcodeContest138/">leetcodeContest138</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><ol>
+<li>Height Checker – easy</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>Grumpy BookStore owner –medium</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>Previous Permutation with One Step –medium</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>Distant Barcodes –medium</li>
+</ol>
+</li>
+</ul>
+<h4 id="1-Height-Checker"><a href="#1-Height-Checker" class="headerlink" title="1. Height Checker"></a>1. Height Checker</h4><ul>
+<li>solution<ul>
+<li>sort and check differ</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int heightChecker(vector&lt;int&gt;&amp; heights) &#123;</span><br><span class="line">       vector&lt;int&gt; tmp;</span><br><span class="line">       for(auto it: heights)&#123;</span><br><span class="line">           tmp.push_back(it);</span><br><span class="line">       &#125;</span><br><span class="line">       sort(heights.begin(), heights.end());</span><br><span class="line">       int res = 0;</span><br><span class="line">       for(int i = 0; i &lt; heights.size(); ++i)&#123;</span><br><span class="line">           if(heights[i]!=tmp[i])&#123;</span><br><span class="line">               cout&lt;&lt;heights[i] &lt;&lt;endl;</span><br><span class="line">               res++;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       return res;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-Grumpy-Bookstore-owner"><a href="#2-Grumpy-Bookstore-owner" class="headerlink" title="2. Grumpy Bookstore owner"></a>2. Grumpy Bookstore owner</h4><p>solution: sliding window<br> when ungrumpy, all is set setisfied, otherwise we sliding window to count the max setSatisfied.<br> code style similar to TwoSum, which is on-fly process!<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">maxSatisfied(vector&lt;int&gt;&amp; cs, vector&lt;int&gt; grumpy)&#123;</span><br><span class="line">	auto satisfied = 0, totalAddSatisfied = 0, addSatisfied = 0;</span><br><span class="line">	for(auto i = 0; i &lt; cs.size(); i++)&#123;</span><br><span class="line">		satisfied += grumpy[i] ? 0 : cs[i];</span><br><span class="line">		addSatisfied += grumpy[i]? cs[i] : 0;</span><br><span class="line">		if(i&gt;=X) addSatisfied -= grumpy[i-X]?cs[i-X]:0;</span><br><span class="line">		totalAddSatisfied = max(addSatisfied, totalAddSatisfied);</span><br><span class="line">	&#125;</span><br><span class="line">	return satisfied + totalAddSatisfied;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>My realtime solution during test, in which I pick out all the grumpy[i]==1 into a vector, and<br>process to max addSum. So the space complexity become bigger!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public:</span><br><span class="line">    int maxSatisfied(vector&lt;int&gt;&amp; customers, vector&lt;int&gt;&amp; grumpy, int X) &#123;</span><br><span class="line">        vector&lt;pair&lt;int,int&gt;&gt; mp;</span><br><span class="line">        int res=0;</span><br><span class="line">        for(int i = 0; i &lt; grumpy.size(); i++)&#123;</span><br><span class="line">            if(grumpy[i]==1)&#123;</span><br><span class="line">                mp.push_back(make_pair(i,customers[i]));</span><br><span class="line">            &#125;</span><br><span class="line">            res += grumpy[i]?0:customers[i];</span><br><span class="line">        &#125;</span><br><span class="line">        int tmp_res = res;</span><br><span class="line">        for(int i = 0; i &lt; mp.size(); ++i)&#123; </span><br><span class="line">            int j = i;</span><br><span class="line">            int tmp = tmp_res;</span><br><span class="line">            cout&lt;&lt;tmp&lt;&lt;endl;</span><br><span class="line">            while(j&lt;mp.size()&amp;&amp;mp[j].first-mp[i].first+1&lt;=X)&#123;</span><br><span class="line">                tmp += mp[j].second;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            res = max(res, tmp);</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="3-Previous-Permutation-with-One-Step"><a href="#3-Previous-Permutation-with-One-Step" class="headerlink" title="3. Previous Permutation with One Step"></a>3. Previous Permutation with One Step</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/05/29/leetcodeContest138/" data-id="cjwsqb2s4003aky24bwoc3zs5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/contest/">contest</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-RabbitMQforMicroServicesCommunication" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/28/RabbitMQforMicroServicesCommunication/" class="article-date">
+  <time datetime="2019-05-28T18:32:58.000Z" itemprop="datePublished">2019-05-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/28/RabbitMQforMicroServicesCommunication/">RabbitMQforMicroServicesCommunication</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Using-RabbitMQ-for-MicroSerices-Communication"><a href="#Using-RabbitMQ-for-MicroSerices-Communication" class="headerlink" title="Using RabbitMQ for MicroSerices Communication"></a>Using RabbitMQ for MicroSerices Communication</h2><p>Decomposing your monolith app into multiple, totally independently deployable and scalable services.</p>
+<p>The smaller apps are more modular with well-defined boundaries, can be written using different languages/frameworks, fail in isolation so that the entire app doesn’t go down (no SPOF).<br>Take a Cinema ticketing example:<br><img src="https://github.com/pengw00/pengw00.github.io/raw/master/image/microservices_architect.png" alt="image"></p>
+<h3 id="microservices-based-architecture"><a href="#microservices-based-architecture" class="headerlink" title="microservices-based architecture"></a>microservices-based architecture</h3><p>bad practce to have clients to communicate with each of the service instance separately. </p>
+<h4 id="Each-service-has-its-own-storage"><a href="#Each-service-has-its-own-storage" class="headerlink" title="Each service has its own storage"></a>Each service has its own storage</h4><p>Enables decoupling<br>Some queries will then need to join data that is owned by multiple services. To avoid this major performance hit, data may be replicated and sharded. This principle is not just tolerated in microservices, but encouraged.</p>
+<h4 id="a-single-request-should-ideally-only-invoke-one-service-to-fetch-the-response"><a href="#a-single-request-should-ideally-only-invoke-one-service-to-fetch-the-response" class="headerlink" title="a single request should, ideally, only invoke one service to fetch the response"></a>a single request should, ideally, only invoke one service to fetch the response</h4><p>not always possible,  mechanisms like gRPC, Thrift or even simple HTTP (as in our example) are commonly employed when necessary. As you may have guessed, this implies that data will have to be replicated across our services. Say, the GET /catalog/&lt;<cityid>&gt; endpoint is also supposed to return the premieres at each cinema in the city at that time. With our new strategy, the premieres will have to be stored in the database for the Cinema Catalog service as well. Hence, point iii).</cityid></p>
+<h4 id="REST-calls-made-to-our-API-gateway"><a href="#REST-calls-made-to-our-API-gateway" class="headerlink" title="REST calls made to our API gateway"></a>REST calls made to our API gateway</h4><p>request ==&gt; gateway ===&gt; complies result || response to clients</p>
+<p>Communication among services like this on one client request to the app should not happen. Otherwise we’ll be sacrificing performance, on account of another HTTP round-trip, for the newly introduced modularity.</p>
+<h3 id="Communicating-Asynchronously-Between-The-Services"><a href="#Communicating-Asynchronously-Between-The-Services" class="headerlink" title="Communicating Asynchronously Between The Services"></a>Communicating Asynchronously Between The Services</h3><p>the premieres change as a result of some CRUD operation on the Movies service. To keep the data in sync, that update event will have to be emitted and applied to the Cinema Catalog service as well</p>
+<h5 id="Try-to-picture-our-microservices-as-a-cluster-of-state-machines-where-updates-in-states-may-have-to-be-communicated-across-the-cluster-to-achieve-eventual-consistency"><a href="#Try-to-picture-our-microservices-as-a-cluster-of-state-machines-where-updates-in-states-may-have-to-be-communicated-across-the-cluster-to-achieve-eventual-consistency" class="headerlink" title="Try to picture our microservices as a cluster of state machines where updates in states may have to be communicated across the cluster to achieve eventual consistency."></a>Try to picture our microservices as a cluster of state machines where updates in states may have to be communicated across the cluster to achieve eventual consistency.</h5><p>Of course, we should never expect our end-users to have to wait longer for requests to finish and sacrifice their time for modularity to our benefit. Thereby, all of this communication has to be non-blocking. ### And that’s where RabbitMQ comes in. ###</p>
+<p>RabbitMQ: implements the AMQP messaging protocol.  first, you install a RabbitMQ server instance (broker) on a system. Then a publisher/producer program connects to this server and sends out a message. RabbitMQ queues that message and siphons it off to a single or multiple subscriber/consumer programs that are out there listening on the RabbitMQ server.</p>
+<p>microservices are way more complex and we won’t be covering critical topics like fault tolerance because of the intricacy of distributed systems, the full role of the API gateway, Service Discovery, data consistency patterns like Sagas, preventing service failure cascading using Circuit Breakers, health checks and architectural patterns like CQRS. Not to mention how to decide whether microservices will work for you or not.</p>
+<h2 id="How-RabbitMQ-Works"><a href="#How-RabbitMQ-Works" class="headerlink" title="How RabbitMQ Works"></a>How RabbitMQ Works</h2><p>Massages published to an exchange inside the RabbitMQ broker, then exchange copies of that message to queues on basis f certain developer-defined rules called binding. This journey called Routing. </p>
+<p>the direction is non-blocking message transmissions. Not exactly. There are four different types of exchanges and each, along with the bindings, defines a routing algorithm. “Routing algorithm” means, essentially, how the messages are distributed among the queues. Going into the details about each type might be an overkill here, so I’ll just expand on the one we’ll be using: the topic exchange.</p>
+<p>For an exchange to push a message onto a queue, that queue must be bound to the exchange. We can create multiple exchanges with unique names, explicitly. However, when you deploy RabbitMQ it comes with a default, nameless exchange. The exact way a binding key works, again, depends on the type of the exchange. Here’s how it works with a topic exchange:</p>
+<ol>
+<li><p>A queue is bound to an exchange using a string pattern (the binding key)<br>The published message is delivered to the exchange along with a routing key.</p>
+</li>
+<li><p>The exchange checks which queues match the routing key based on the binding key pattern defined before.</p>
+</li>
+</ol>
+<p><img src="https://github.com/pengw00/pengw00.github.io/raw/master/image/rabbitMQ.png" alt="image"><br><a href="https://www.rabbitmq.com/tutorials/tutorial-five-python.html" target="_blank" rel="noopener">source:</a></p>
+<p>Any message with a routing key ”quick.orange.rabbit” will be delivered to both queues. However, messages with ”lazy.brown.fox” will only reach Q2. Those with a routing key not matching any pattern will be lost.</p>
+<p>For some perspective, let’s just skim over two other exchange types:</p>
+<ul>
+<li>Fanout exchange: Messages sent to this kind of exchange will be sent to ALL the queues bound to it. The routing key, if provided, will be completely ignored. This can be used, for example, for broadcasting global configuration updates across a distributed system.</li>
+<li>Direct exchange (simplest): Sends the message to the queue whose binding key is exactly equal to the given routing key. If there are multiple consumers listening on the queue, then the messages will be load-balanced among them, hence, it is commonly used to distribute tasks between multiple workers in a round robin manner.</li>
+</ul>
+<p>//still need to follow up docker tutorial! and Circle.ci</p>
+<p><a href="https://codeburst.io/using-rabbitmq-for-microservices-communication-on-docker-a43840401819" target="_blank" rel="noopener">https://codeburst.io/using-rabbitmq-for-microservices-communication-on-docker-a43840401819</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/05/28/RabbitMQforMicroServicesCommunication/" data-id="cjwsqb2r4001pky2489emhcyg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/microservice/">microservice</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-rabbitMQForMicroServices" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/28/rabbitMQForMicroServices/" class="article-date">
+  <time datetime="2019-05-28T08:27:07.000Z" itemprop="datePublished">2019-05-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/28/rabbitMQForMicroServices/">rabbitMQForMicroServices</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Backend-Decouple-Stratergy"><a href="#Backend-Decouple-Stratergy" class="headerlink" title="Backend Decouple Stratergy"></a>Backend Decouple Stratergy</h2><ol>
+<li>A message queue provide an asynchronous communications protocol - You have the option to send a message from one service to another without having to know if another service is able to handle it immediately or not. Messages can wait until the responsible service is ready. A service publishing a message does not need know anything about the inner workings of the services that will process that message. This way of handling messages decouple the producer from the consumer.</li>
+</ol>
+<p>A message queue will keep the processes in your application separated and independent of each other; this way of handling messages could create a system that is easy to maintain and easy to scale.</p>
+<p>Source<br><a href="https://stackoverflow.com/questions/45208766/microservices-why-use-rabbitmq" target="_blank" rel="noopener">https://stackoverflow.com/questions/45208766/microservices-why-use-rabbitmq</a></p>
+<p><a href="https://www.cloudamqp.com/blog/2017-09-25-breaking-down-a-monolithic-system-into-microservices.html" target="_blank" rel="noopener">https://www.cloudamqp.com/blog/2017-09-25-breaking-down-a-monolithic-system-into-microservices.html</a><br>Here is a story explaining how Parkster (a digital parking service) are breaking down their system into multiple microservices by using RabbitMQ.</p>
+<p>a story about the usage of RabbitMQ in an event-based microservices architecture to support 100 million users a month.<br><a href="https://www.cloudamqp.com/blog/2019-01-18-softonic-userstory-rabbitmq-eventbased-communication.html" target="_blank" rel="noopener">https://www.cloudamqp.com/blog/2019-01-18-softonic-userstory-rabbitmq-eventbased-communication.html</a></p>
+<p>And finally a link to Kontena, about why they chose RabbitMQ for their microservice architecture: “Because we needed a stable, manageable and highly-available solution for messaging.”.<br><a href="https://ghost.kontena.io/event-driven-microservices-with-rabbitmq-and-ruby/" target="_blank" rel="noopener">https://ghost.kontena.io/event-driven-microservices-with-rabbitmq-and-ruby/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/05/28/rabbitMQForMicroServices/" data-id="cjwsqb2sb003oky24cp16z9nn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MicroService/">MicroService</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-practices-to-boost-react-performance" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/27/practices-to-boost-react-performance/" class="article-date">
-  <time datetime="2019-05-27T22:58:06.000Z" itemprop="datePublished">2019-05-27</time>
+  <time datetime="2019-05-27T23:58:06.000Z" itemprop="datePublished">2019-05-27</time>
 </a>
     
   </div>
@@ -140,7 +319,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="cjwobdphh004onizui05fhbxq" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="cjwsqb2t2004rky24zwlfd6qo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -155,7 +334,7 @@
     <article id="post-leetcode465" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/25/leetcode465/" class="article-date">
-  <time datetime="2019-05-25T18:05:33.000Z" itemprop="datePublished">2019-05-25</time>
+  <time datetime="2019-05-25T19:05:33.000Z" itemprop="datePublished">2019-05-25</time>
 </a>
     
   </div>
@@ -180,7 +359,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/25/leetcode465/" data-id="cjwobdpgd002ynizu25p5lp3f" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/25/leetcode465/" data-id="cjwsqb2s6003dky24eyntrhkl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -195,7 +374,7 @@
     <article id="post-edit-distance-modified-version-bus-station-problemq" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/21/edit-distance-modified-version-bus-station-problemq/" class="article-date">
-  <time datetime="2019-05-21T17:55:09.000Z" itemprop="datePublished">2019-05-21</time>
+  <time datetime="2019-05-21T18:55:09.000Z" itemprop="datePublished">2019-05-21</time>
 </a>
     
   </div>
@@ -222,7 +401,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/" data-id="cjwobdpfq001tnizufu1jgmeg" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/" data-id="cjwsqb2ro002mky240hie7ach" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -237,7 +416,7 @@
     <article id="post-leetcode137Contest" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/20/leetcode137Contest/" class="article-date">
-  <time datetime="2019-05-20T14:54:00.000Z" itemprop="datePublished">2019-05-20</time>
+  <time datetime="2019-05-20T15:54:00.000Z" itemprop="datePublished">2019-05-20</time>
 </a>
     
   </div>
@@ -277,7 +456,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="cjwobdpg7002pnizu05lqkhpi" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="cjwsqb2s30037ky24kb45378a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Contest/">Contest</a></li></ul>
@@ -292,7 +471,7 @@
     <article id="post-leetcode804" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/20/leetcode804/" class="article-date">
-  <time datetime="2019-05-20T13:55:50.000Z" itemprop="datePublished">2019-05-20</time>
+  <time datetime="2019-05-20T14:55:50.000Z" itemprop="datePublished">2019-05-20</time>
 </a>
     
   </div>
@@ -316,7 +495,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="cjwobdpgg0036nizu5zx7y6vk" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="cjwsqb2s5003cky24zxjq6i35" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li></ul>
@@ -331,7 +510,7 @@
     <article id="post-singleton-code-demo" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/02/singleton-code-demo/" class="article-date">
-  <time datetime="2019-05-02T04:59:31.000Z" itemprop="datePublished">2019-05-02</time>
+  <time datetime="2019-05-02T05:59:31.000Z" itemprop="datePublished">2019-05-02</time>
 </a>
     
   </div>
@@ -354,7 +533,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="cjwobdpgu003pnizu40q1x1lj" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="cjwsqb2sg003vky24k6caodjq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -369,7 +548,7 @@
     <article id="post-sass-scss" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/17/sass-scss/" class="article-date">
-  <time datetime="2019-04-17T18:36:41.000Z" itemprop="datePublished">2019-04-17</time>
+  <time datetime="2019-04-17T19:36:41.000Z" itemprop="datePublished">2019-04-17</time>
 </a>
     
   </div>
@@ -394,158 +573,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/sass-scss/" data-id="cjwobdpgq003knizu9i3vemu8" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/17/sass-scss/" data-id="cjwsqb2se003tky24redrk6sb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Front-end/">Front-end</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-react-component-communication" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/17/react-component-communication/" class="article-date">
-  <time datetime="2019-04-17T15:02:23.000Z" itemprop="datePublished">2019-04-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/17/react-component-communication/">react component communication</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://blog.csdn.net/lizhipeng123321/article/details/80018003" target="_blank" rel="noopener">https://blog.csdn.net/lizhipeng123321/article/details/80018003</a></p>
-<p>总结<br>本文总结了 React 中组件的几种通信方式，分别是：</p>
-<p>父组件向子组件通信：使用 props<br>子组件向父组件通信：使用 props 回调<br>跨级组件间通信：使用 context 对象<br>非嵌套组件间通信：使用事件订阅<br>事实上，在组件间进行通信时，这些通信方式都可以使用，区别只在于使用相应的通信方式的复杂程度和个人喜好，选择最合适的那一个。</p>
-<p>比如，通过事件订阅模式通信不止可以应用在非嵌套组件间，还可以用于跨级组件间，非嵌套组件间通信也可以使用 context 等。关键是选择最合适的方式。</p>
-<p>当然，自己实现组件间的通信还是太难以管理了，因此出现了很多状态管理工具，如 flux、redux 等，使用这些工具使得组件间的通信更容易追踪和管理。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/react-component-communication/" data-id="cjwobdpgo003inizuav19jpj3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-react-context-api" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/16/react-context-api/" class="article-date">
-  <time datetime="2019-04-16T05:25:24.000Z" itemprop="datePublished">2019-04-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/16/react-context-api/">react context api</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="react-contect-api-state-manage"><a href="#react-contect-api-state-manage" class="headerlink" title="react contect api state manage"></a>react contect api state manage</h1><h2 id="When-Should-I-Use-Context"><a href="#When-Should-I-Use-Context" class="headerlink" title="When Should I Use Context?"></a>When Should I Use Context?</h2><p>I would recommend reaching for Context when you find yourself passing props down through three or more levels in your component tree. You might notice that you have renamed your props, making it challenging to determine the data’s origin. You might consider implementing context if a bunch of your components know about irrelevant data.</p>
-<p>Rule of thumb: if you start to feel irritated by how long it takes to determine where data is coming from, introduce Context.</p>
-<p>Do not hesitate to still use the other tools you have available, like prop drilling and redux. While Context can make it easier to pass props around in certain scenarios, it doesn’t give you access to some of the benefits redux offers, and it’s a more complicated abstraction than prop drilling.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/16/react-context-api/" data-id="cjwobdpgs003mnizumht1akft" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-transaction-meaning" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/15/transaction-meaning/" class="article-date">
-  <time datetime="2019-04-16T02:48:08.000Z" itemprop="datePublished">2019-04-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/15/transaction-meaning/">transaction meaning</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>经典文章：<a href="https://blog.csdn.net/popvip44/article/details/71487425" target="_blank" rel="noopener">https://blog.csdn.net/popvip44/article/details/71487425</a></p>
-<h1 id="Definition-What-does-Transaction-mean"><a href="#Definition-What-does-Transaction-mean" class="headerlink" title="Definition - What does Transaction mean?"></a>Definition - What does Transaction mean?</h1><p>A transaction, in the context of a database, is a logical unit that is independently executed for data retrieval or updates. In relational databases, database transactions must be atomic, consistent, isolated and durable–summarized as the ACID acronym.</p>
-<p>Transactions are completed by COMMIT or ROLLBACK SQL statements.</p>
-<p>which indicate a transaction’s beginning or end.<br>The ACID acronym defines the properties of a database transaction, as follows:</p>
-<ol>
-<li><p>Atomicity: A transaction must be fully complete, saved (committed) or completely undone (rolled back). A sale in a retail store database illustrates a scenario which explains atomicity, e.g., the sale consists of an inventory reduction and a record of incoming cash. Both either happen together or do not happen - it’s all or nothing.</p>
-</li>
-<li><p>Consistency: The transaction must be fully compliant with the state of the database as it was prior to the transaction. In other words, the transaction cannot break the database’s constraints. For example, if a database table’s Phone Number column can only contain numerals, then consistency dictates that any transaction attempting to enter an alphabetical letter may not commit.</p>
-</li>
-</ol>
-<p>Isolation: Transaction data must not be available to other transactions until the original transaction is committed or rolled back.</p>
-<p>Durability: Transaction data changes must be available, even in the event of database failure.</p>
-<p>评论要点：<br>金融类应用非常适用，尤其是要求超高并发的。</p>
-<p>不过实际环境下这类应用又要求安全可靠性，所以一般要配合多种数据存储方式。</p>
-<p>Mongodb碎片、依赖内存，所以如果出现某些特殊意外可能会出现数据遗失；</p>
-<p>关系型数据库虽然具备事务处理，可靠程度高，但性能不占优。<br>1楼：<br>例如一个金融股票系统，用mysql存储历史数据，Mongodb临时存储当天分时数据，加快读写。晚上收盘后再把Mongodb数据整理写入mysql。</p>
-<p>适合：<br>楼2: 某种数据提取十分频繁，你又不想在oracle里面join来join去浪费处理时间，然后你就存在mongodb里面把以前在oracle中要join的几个列存成一个列合并在一个列上然后查的时候直接查一个列出来 说白了就是节约时间：eg :{name:leilei,warehouse:beijing, order:23} ,比如这三个字段以前分散在oracle的好几个表里面你要取得时候要join,现在你发现这个信息用户访问十分频繁你存的时候就存着三个j在mongo里面，这样就不用去oracle里join拿了而且又没有事务又没有锁理论上相对快</p>
-<p>3楼：不过说白了，其实关系型数据库够用了，那些使用nosql的个人以为没必要。获取他们设计的程序有问题或许不会调优数据库 导致性能低下所以要尝尝新玩意吧</p>
-<p>8楼： 适合树型数据，比如无限分类，网易评论盖楼，多级权限  这种用传统关联表做的话要么递归查询，要么要写很多额外的代码， 用mogodb只要拼字符串把键名拼对了就可以了</p>
-<p>15楼： 存日志之类的，比方osc的动态，把各类动态组装好直接存，以后就可以直接读出来解析</p>
-<h2 id="classic-review："><a href="#classic-review：" class="headerlink" title="classic review："></a>classic review：</h2><p>The purpose of a transaction is to make sure that the whole database stays consistent while multiple operations take place. But in contrary to most relational databases, MongoDB isn’t designed to run on a single host. It is designed to be set up as a cluster of multiple shards where each shard is a replica-sets of multiple servers (optionally at different geographical locations).</p>
-<p>A transaction can potentially affect lots of hosts of the database. That means that the transaction would have to be synchronized between all of these hosts. This would mean quite a lot of overhead and would scale very badly when increasing the size of the database by adding more servers.</p>
-<p>MongoDB does not have support for traditional locking or complex transactions with rollback. MongoDB aims to be lightweight, fast, and predictable in its performance. This is similar to the MySQL MyISAM autocommit model. By keeping transaction support extremely simple, MongoDB can provide greater performance especially for partitioned or replicated systems with a number of database server processes.</p>
-<p>CAP定理<br>维基百科，自由的百科全书<br>跳到导航跳到搜索<br>在理论计算机科学中，CAP定理（CAP theorem），又被称作布鲁尔定理（Brewer’s theorem），它指出对于一个分布式计算系统来说，不可能同时满足以下三点：[1][2]</p>
-<p>一致性（Consistency） （等同于所有节点访问同一份最新的数据副本）<br>可用性（Availability）（每次请求都能获取到非错的响应——但是不保证获取的数据为最新数据）<br>分区容错性（Partition tolerance）（以实际效果而言，分区相当于对通信的时限要求。系统如果不能在时限内达成数据一致性，就意味着发生了分区的情况，必须就当前操作在C和A之间做出选择[3]。）</p>
-<p>分布式系统只能满足三项中的两项而不可能满足全部三项[4]。理解CAP理论的最简单方式是想象两个节点分处分区两侧。允许至少一个节点更新状态会导致数据不一致，即丧失了C性质。如果为了保证数据一致性，将分区一侧的节点设置为不可用，那么又丧失了A性质。除非两个节点可以互相通信，才能既保证C又保证A，这又会导致丧失P性质。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/15/transaction-meaning/" data-id="cjwobdph20046nizu1qbhj8r7" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li></ul>
 
     </footer>
   </div>
@@ -572,7 +603,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
     </div>
   </div>
 
@@ -582,7 +613,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
@@ -604,23 +635,23 @@
       <ul>
         
           <li>
+            <a href="/2019/06/11/Dry-Don-t-Repeat-Yourself/">Dry:Don&#39;t Repeat Yourself</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/09/Leetcode-987-Vertical-Order-Traversal-of-a-Binary-Tree/">Leetcode 987. Vertical Order Traversal of a Binary Tree</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/09/Leetcode-146-LRU-cache/">Leetcode 146. LRU cache</a>
+          </li>
+        
+          <li>
             <a href="/2019/06/08/Leetcode-967-Numbers-With-Same-Consecutive-Differences/">Leetcode 967. Numbers With Same Consecutive Differences</a>
           </li>
         
           <li>
             <a href="/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/">Inorder traversal iterative solution for multiple questions for Leetcode BST problem</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/06/Leetcode-333-Largest-BST-Subtree/">Leetcode.333 Largest BST Subtree</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/05/Design-a-transportation-payment-method/">Design a transportation payment method</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/05/Ways-to-center-CSS-element/">Ways to center CSS element</a>
           </li>
         
       </ul>

@@ -65,10 +65,142 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-find-celebrity" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/06/find-celebrity/" class="article-date">
+  <time datetime="2019-04-06T05:42:24.000Z" itemprop="datePublished">2019-04-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/06/find-celebrity/">find celebrity</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这道题类似于997 find the town judge。<br>但可以采用graph的方法，topological的bfs方法，计算每个点的入度和出度，找出那个入读为n-1的就是解。<br>另一个种方法是find celebrity的方法，先定义i=0；遍历找出一个candidate， 再遍历判断是否这个candidate满足谁都认识他和他不认识任何人两个条件，如果可以100%确定就是他。<br>废话不说：coding：<br>方法1: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int findJudge(int N, vector&lt;vector&lt;int&gt;&gt;&amp; trust) &#123;</span><br><span class="line">  vector&lt;vector&lt;int&gt;&gt; knows(N + 1, vector&lt;int&gt;(N + 1));</span><br><span class="line">  for (auto &amp;t : trust) knows[t[0]][t[1]] = 1;</span><br><span class="line">  return findCelebrity(N, knows);</span><br><span class="line">&#125;</span><br><span class="line">int findCelebrity(int n, vector&lt;vector&lt;int&gt;&gt;&amp; knows, int i = 1) &#123;</span><br><span class="line">  for (auto j = i + 1; j &lt;= n; ++j) if (knows[i][j]) i = j;</span><br><span class="line">  for (auto j = 1; j &lt; i; ++j) if (knows[i][j]) return -1;</span><br><span class="line">  for (auto j = 1; j &lt;= n; ++j) if (i != j &amp;&amp; !knows[j][i]) return -1;</span><br><span class="line">  return i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>方法二：<br>directed graph：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int findJudge(int N, vector&lt;vector&lt;int&gt;&gt;&amp; trust) &#123;</span><br><span class="line">        vector&lt;int&gt; count(N + 1, 0);</span><br><span class="line">        for (auto&amp; t : trust)</span><br><span class="line">            count[t[0]]--, count[t[1]]++;</span><br><span class="line">        for (int i = 1; i &lt;= N; ++i) &#123;</span><br><span class="line">            if (count[i] == N - 1) return i;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/06/find-celebrity/" data-id="cjwsqb2rj002dky24s6purhig" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-viewEncasulation" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/04/viewEncasulation/" class="article-date">
+  <time datetime="2019-04-05T00:13:16.000Z" itemprop="datePublished">2019-04-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/04/viewEncasulation/">viewEncasulation</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/04/viewEncasulation/" data-id="cjwsqb2sr004eky24lbi1qsnc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-babel-and-webpack" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/04/babel-and-webpack/" class="article-date">
+  <time datetime="2019-04-04T19:23:42.000Z" itemprop="datePublished">2019-04-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/04/babel-and-webpack/">babel and webpack</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#Babel and webpack</p>
+<h2 id="Babel-is-Javacsript-compiler"><a href="#Babel-is-Javacsript-compiler" class="headerlink" title="Babel is Javacsript compiler."></a>Babel is Javacsript compiler.</h2><p>webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging ##</p>
+<p>In this unit, you modify the existing application and use some new ECMAScript 6 features. You then set up a build environment using Babel and Webpack.</p>
+<p>Step 1: using new ECMAScript 6 Features</p>
+<p>in app.js with arrow functions and let %!#$!#</p>
+<p>Step 2: Setup Babel and Webpack<br>install webpack and babel<br>in folder create webpack.config.js:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">var path = require(&apos;path&apos;);</span><br><span class="line"> var webpack = require(&apos;webpack&apos;);</span><br><span class="line"> module.exports = &#123;</span><br><span class="line">     entry: &apos;./js/app.js&apos;,</span><br><span class="line">     output: &#123;</span><br><span class="line">         path: path.resolve(__dirname, &apos;build&apos;),</span><br><span class="line">         filename: &apos;app.bundle.js&apos;</span><br><span class="line">     &#125;,</span><br><span class="line">     module: &#123;</span><br><span class="line">         loaders: [</span><br><span class="line">             &#123;</span><br><span class="line">                 test: /\.js$/,</span><br><span class="line">                 loader: &apos;babel-loader&apos;,</span><br><span class="line">                 query: &#123;</span><br><span class="line">                     presets: [&apos;es2015&apos;]</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">         ]</span><br><span class="line">     &#125;,</span><br><span class="line">     stats: &#123;</span><br><span class="line">         colors: true</span><br><span class="line">     &#125;,</span><br><span class="line">     devtool: &apos;source-map&apos;</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure></p>
+<p> Step 4: </p>
+<p> package.json in your favorite code editor. In the scripts section, add a script named webpack that builds your application using Webpack and Babel. The scripts section should now look like this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;webpack&quot;: &quot;webpack&quot;,</span><br><span class="line">    &quot;start&quot;: &quot;http-server&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<ol start="5">
+<li>Create build folder to the compile version of the application<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The build process will fail if you don’t create the build directory</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>Step next:  Build and Run</p>
+<ol>
+<li>npm run webpack</li>
+</ol>
+<p>open index.html modified the <script> tag to load the build/app.bundle.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;build/app.bundle.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+</script></p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/04/babel-and-webpack/" data-id="cjwsqb2r9001vky24m8fu6h9k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-js-null-vs-undefined" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/04/js-null-vs-undefined/" class="article-date">
-  <time datetime="2019-04-04T15:19:28.000Z" itemprop="datePublished">2019-04-04</time>
+  <time datetime="2019-04-04T16:19:28.000Z" itemprop="datePublished">2019-04-04</time>
 </a>
     
   </div>
@@ -105,7 +237,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/js-null-vs-undefined/" data-id="cjwobdpfx0027nizu8b4h27no" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/js-null-vs-undefined/" data-id="cjwsqb2rl002eky248otnri6y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -120,7 +252,7 @@ null must be assigned.
     <article id="post-didmount-willunmount" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/04/didmount-willunmount/" class="article-date">
-  <time datetime="2019-04-04T14:21:11.000Z" itemprop="datePublished">2019-04-04</time>
+  <time datetime="2019-04-04T15:21:11.000Z" itemprop="datePublished">2019-04-04</time>
 </a>
     
   </div>
@@ -147,7 +279,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/didmount-willunmount/" data-id="cjwobdpfp001qnizutp1r65gk" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/didmount-willunmount/" data-id="cjwsqb2rd0021ky245opxdleu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -162,7 +294,7 @@ null must be assigned.
     <article id="post-topological-sort-template" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/04/topological-sort-template/" class="article-date">
-  <time datetime="2019-04-04T04:46:18.000Z" itemprop="datePublished">2019-04-04</time>
+  <time datetime="2019-04-04T05:46:18.000Z" itemprop="datePublished">2019-04-04</time>
 </a>
     
   </div>
@@ -192,7 +324,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/topological-sort-template/" data-id="cjwobdpgy003ynizu29u4q3sg" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/topological-sort-template/" data-id="cjwsqb2sn0044ky243vv62e5v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -207,7 +339,7 @@ null must be assigned.
     <article id="post-路径选择的dp问题之三角形最小路径和" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/03/路径选择的dp问题之三角形最小路径和/" class="article-date">
-  <time datetime="2019-04-04T03:16:36.000Z" itemprop="datePublished">2019-04-03</time>
+  <time datetime="2019-04-04T04:16:36.000Z" itemprop="datePublished">2019-04-03</time>
 </a>
     
   </div>
@@ -240,7 +372,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/路径选择的dp问题之三角形最小路径和/" data-id="cjwobdph7004fnizuzje7k60f" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/路径选择的dp问题之三角形最小路径和/" data-id="cjwsqb2sw004lky24xh3e9yz6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -255,7 +387,7 @@ null must be assigned.
     <article id="post-topK-and-quickSort-and-QuickSelect" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/03/topK-and-quickSort-and-QuickSelect/" class="article-date">
-  <time datetime="2019-04-03T17:36:40.000Z" itemprop="datePublished">2019-04-03</time>
+  <time datetime="2019-04-03T18:36:40.000Z" itemprop="datePublished">2019-04-03</time>
 </a>
     
   </div>
@@ -279,7 +411,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/topK-and-quickSort-and-QuickSelect/" data-id="cjwobdph00043nizuych7glob" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/topK-and-quickSort-and-QuickSelect/" data-id="cjwsqb2sk0042ky2460qlaizu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
@@ -294,7 +426,7 @@ null must be assigned.
     <article id="post-Quick-Sort" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/03/Quick-Sort/" class="article-date">
-  <time datetime="2019-04-03T15:43:47.000Z" itemprop="datePublished">2019-04-03</time>
+  <time datetime="2019-04-03T16:43:47.000Z" itemprop="datePublished">2019-04-03</time>
 </a>
     
   </div>
@@ -317,7 +449,7 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/Quick-Sort/" data-id="cjwobdpf6000tnizuas5f41xv" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/Quick-Sort/" data-id="cjwsqb2q90019ky24ufw7orx2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -332,7 +464,7 @@ null must be assigned.
     <article id="post-axios-instance" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/03/axios-instance/" class="article-date">
-  <time datetime="2019-04-03T14:31:17.000Z" itemprop="datePublished">2019-04-03</time>
+  <time datetime="2019-04-03T15:31:17.000Z" itemprop="datePublished">2019-04-03</time>
 </a>
     
   </div>
@@ -359,168 +491,10 @@ null must be assigned.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/axios-instance/" data-id="cjwobdpfi001fnizu6tbb3brf" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/axios-instance/" data-id="cjwsqb2r5001qky24jjacdrk9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-dfs和回溯模版" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/03/dfs和回溯模版/" class="article-date">
-  <time datetime="2019-04-03T05:12:04.000Z" itemprop="datePublished">2019-04-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/03/dfs和回溯模版/">dfs和回溯模版</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>dfs template<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">void f()  </span><br><span class="line">&#123;  </span><br><span class="line">     if(符合边界条件)  </span><br><span class="line">     &#123;  </span><br><span class="line"></span><br><span class="line">        ///////  </span><br><span class="line">        return;  </span><br><span class="line">     &#125;  </span><br><span class="line"></span><br><span class="line">     //某种形式的调用  </span><br><span class="line">     f();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>回溯模版： 限制条件 if，选择 （for。。。）结束条件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">void DFS(int 当前状态)  </span><br><span class="line">&#123;  </span><br><span class="line">      if(当前状态为边界状态)  </span><br><span class="line">      &#123;  </span><br><span class="line">        记录或输出  </span><br><span class="line">        return;  </span><br><span class="line">      &#125;  </span><br><span class="line">      for(i=0;i&lt;n;i++)       //横向遍历解答树所有子节点  </span><br><span class="line">      &#123;  </span><br><span class="line">           //扩展出一个子状态。  </span><br><span class="line">           修改了全局变量  </span><br><span class="line">           if(子状态满足约束条件)  </span><br><span class="line">            &#123;  </span><br><span class="line">              dfs(子状态)  </span><br><span class="line">           &#125;  </span><br><span class="line">            恢复全局变量//回溯部分  </span><br><span class="line">      &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>BFS和DFS相似。BFS显式用队列，DFS隐式用栈，即递归。<br>当然，对于DFS，用递归可能会造成栈溢出，所以也可以更改为显示栈。</p>
-<p>经典例题： 走迷宫<br>*表示可走 </p>
-<p>#表示障碍<br>T表示出口<br>入口是(1,1)，数据保证左上角是入口。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">char maze[100][100];</span><br><span class="line">bool flag[100][100];</span><br><span class="line">int dx[]=&#123;0,0,1,-1&#125;;</span><br><span class="line">int dy[]=&#123;1,-1,0,0&#125;;</span><br><span class="line">int m,n;</span><br><span class="line"></span><br><span class="line">bool dfs(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">    flag[x][y]=1;              //走过的路标记为1</span><br><span class="line">    if(maze[x][y]==&apos;T&apos;)return true;</span><br><span class="line">    for(int i=0;i&lt;4;i++)       //四个方向</span><br><span class="line">    &#123;</span><br><span class="line">        int nx=x+dx[i];</span><br><span class="line">        int ny=y+dy[i];</span><br><span class="line">        if(flag[nx][ny]==0||maze[nx][ny]==&apos;*&apos;||maze[nx][ny]==&apos;T&apos;&amp;&amp;nx&gt;0&amp;&amp;ny&gt;0&amp;&amp;nx&lt;m+1&amp;&amp;ny&lt;n+1)</span><br><span class="line">        &#123;</span><br><span class="line">            return dfs(nx,ny);   </span><br><span class="line">            flag[nx][ny]=0;    //回溯，将标记重新标记为0</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;             //找不到返回false</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    while(cin&gt;&gt;m&gt;&gt;n)&#123;</span><br><span class="line">    memset(maze,0,sizeof(maze));</span><br><span class="line">    memset(flag,0,sizeof(flag));</span><br><span class="line">    for(int i=1;i&lt;=m;i++)</span><br><span class="line">        for(int j=1;j&lt;=n;j++)</span><br><span class="line">            cin&gt;&gt;maze[i][j];</span><br><span class="line">    if(dfs(1,1))cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl;</span><br><span class="line">    else cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>回溯的两种写法：</p>
-<p>递归写法和迭代写法，链接：<a href="https://blog.csdn.net/man_sion/article/details/74993907" target="_blank" rel="noopener">https://blog.csdn.net/man_sion/article/details/74993907</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/dfs和回溯模版/" data-id="cjwobdpfn001pnizut3itm4ja" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-回溯，递归，dp三法leetcode-题目“" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/03/回溯，递归，dp三法leetcode-题目“/" class="article-date">
-  <time datetime="2019-04-03T04:30:53.000Z" itemprop="datePublished">2019-04-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/03/回溯，递归，dp三法leetcode-题目“/">回溯，递归，dp三法leetcode 题目“ </a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>leetcode 10  regular expression matching 可以减去一字符<br>leetcode wildcard matching 可以匹配一个字符<br>leetcode edit distance<br>回溯三要素：选择，限制条件，结束条件<br>回溯是一种算法思想，它是用递归实现的。回溯的过程类似于穷举法，但回溯有“剪枝”功能，即自我判断过程。例如有求和问题，给定有 7 个元素的组合 [1, 2, 3, 4, 5, 6, 7]，求加和为 7 的子集。累加计算中，选择 1+2+3+4 时，判断得到结果为 10 大于 7，那么后面的 5, 6, 7 就没有必要计算了。这种方法属于搜索过程中的优化，即“剪枝”功能。</p>
-<p>回溯法解决leetcode10注意递归和回溯的区别<br>回溯具有剪枝的功能。当出现结束条件，自动回溯，不必再往不必要的地方搜索。</p>
-<p>我们在路上走着，前面是一个多岔路口，因为我们并不知道应该走哪条路，所以我们需要尝试。尝试的过程就是一个函数。<br>我们选择了一个方向，后来发现又有一个多岔路口，这时候又需要进行一次选择。所以我们需要在上一次尝试结果的基础上，再做一次尝试，即在函数内部再调用一次函数，这就是递归的过程。<br>这样重复了若干次之后，发现这次选择的这条路走不通，这时候我们知道我们上一个路口选错了，所以我们要回到上一个路口重新选择其他路，这就是回溯的思想。</p>
-<p>递归和回溯相关题目：<br>leetcode17 letter Combinations of a Phone Number<br>leetcode22 Generate Parentheses(最为经典)<br>leetcode46 permutations<br>在 Backtracking 标签中，有 30+ 道与递归、回溯相关的例题</p>
-<p>回溯搜索是深度优先搜索（DFS）的一种。对于某一个搜索树来说（搜索树是起记录路径和状态判断的作用），回溯和DFS，其主要的区别是，回溯法在求解过程中不保留完整的树结构，而深度优先搜索则记下完整的搜索树。</p>
-<p><a href="http://www.cnblogs.com/shizhh/p/5302852.html" target="_blank" rel="noopener">http://www.cnblogs.com/shizhh/p/5302852.html</a> 动态规划系列问题汇总</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/回溯，递归，dp三法leetcode-题目“/" data-id="cjwobdph5004bnizuyw5hn3d7" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-springSecurity-Bcrypt-hash-password" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/02/springSecurity-Bcrypt-hash-password/" class="article-date">
-  <time datetime="2019-04-02T04:12:46.000Z" itemprop="datePublished">2019-04-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/02/springSecurity-Bcrypt-hash-password/">springSecurity Bcrypt hash password</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>SpringSecurity之加密篇—BCryptpassword类</p>
-<ol>
-<li>要点概括<br>BCryptpassword类是SpringSecurity的加密工具，封装了对密码混淆加密的方法，主要是采用盐（salt）对原始密码进行混淆。<br>本篇介绍的是利用BCryptpassword随机生成盐（salt），使用该盐值对原始密码进行混淆加密。<br>这种加密方式有两个特点：（1）将随机生成的盐（salt）存到混淆后的代码中；（2）对于相同的明文每一次加密，加密之后的密文都是不一样的；因为盐值（salt）不同。这样的好处就是更增加了密码的安全性。</li>
-</ol>
-<p>SpringSecurity中的BCryptPassword采用Hash处理，其过程是不可逆的。</p>
-<p>BCryptPassword的加密过程：<br>（1）加密(encode)：用户注册时，使用SHA256+盐（salt）把用户输入的密码进行hash混淆处理，得到密码的hash值，然后将其存入数据库中。<br>（2）密码校验(matches)：用户登录时，密码匹配阶段并没有进行密码解密（因为密码经过Hash处理，是不可逆的），而是使用相同的算法结合盐值salt把用户输入的密码进行hash处理，得到密码的hash值，然后将其与从数据库中查询到的密码hash值进行比较。如果两者相同，说明用户输入的密码正确，这里的盐值（salt）是从数据库中查询到的密码hash值中解析出来的。</p>
-<ol start="2">
-<li>核心代码分析<br>//1. BCryptPasswordEncoder类，生成盐salt并混淆rawpassword的代码；<br>//涉及到两个问题，生成salt盐gensalt()，混淆密码hashpw()<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public String encode(CharSequence rawPassword) &#123;</span><br><span class="line">    String salt;</span><br><span class="line">    if (this.strength &gt; 0) &#123;</span><br><span class="line">        if (this.random != null) &#123;</span><br><span class="line">            salt = BCrypt.gensalt(this.strength, this.random);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            salt = BCrypt.gensalt(this.strength);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        salt = BCrypt.gensalt();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return BCrypt.hashpw(rawPassword.toString(), salt);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>2.1 生成盐（salt）：<br>:包名：org.springframework.security.crypto.bcrypt；类名：BCrypt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//生成salt盐gensalt() </span><br><span class="line">   public static String gensalt(int log_rounds, SecureRandom random) &#123;</span><br><span class="line">       if (log_rounds &gt;= 4 &amp;&amp; log_rounds &lt;= 31) &#123;</span><br><span class="line">           StringBuilder rs = new StringBuilder();</span><br><span class="line">           byte[] rnd = new byte[16];</span><br><span class="line">           random.nextBytes(rnd);</span><br><span class="line">           rs.append(&quot;$2a$&quot;);</span><br><span class="line">           if (log_rounds &lt; 10) &#123;</span><br><span class="line">               rs.append(&quot;0&quot;);</span><br><span class="line">           &#125;</span><br><span class="line">           </span><br><span class="line">           rs.append(log_rounds);</span><br><span class="line">           rs.append(&quot;$&quot;);</span><br><span class="line">           encode_base64(rnd, rnd.length, rs);</span><br><span class="line">           return rs.toString();</span><br><span class="line">       &#125; else &#123;</span><br><span class="line">           throw new IllegalArgumentException(&quot;Bad number of rounds&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
-<p>2.2 混淆方法：<br>包名：org.springframework.security.crypto.bcrypt；类名：BCrypt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">//混淆密码hashpw()</span><br><span class="line">public static String hashpw(String password, String salt) throws IllegalArgumentException &#123;</span><br><span class="line">        char minor = 0;</span><br><span class="line">        int off = false;</span><br><span class="line">        StringBuilder rs = new StringBuilder();</span><br><span class="line">        if (salt == null) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;salt cannot be null&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            int saltLength = salt.length();</span><br><span class="line">            if (saltLength &lt; 28) &#123;</span><br><span class="line">                throw new IllegalArgumentException(&quot;Invalid salt&quot;);</span><br><span class="line">            &#125; else if (salt.charAt(0) == &apos;$&apos; &amp;&amp; salt.charAt(1) == &apos;2&apos;) &#123;</span><br><span class="line">                byte off;</span><br><span class="line">                if (salt.charAt(2) == &apos;$&apos;) &#123;</span><br><span class="line">                    off = 3;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    minor = salt.charAt(2);</span><br><span class="line">                    if (minor != &apos;a&apos; || salt.charAt(3) != &apos;$&apos;) &#123;</span><br><span class="line">                        throw new IllegalArgumentException(&quot;Invalid salt revision&quot;);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    off = 4;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (saltLength - off &lt; 25) &#123;</span><br><span class="line">                    throw new IllegalArgumentException(&quot;Invalid salt&quot;);</span><br><span class="line">                &#125; else if (salt.charAt(off + 2) &gt; &apos;$&apos;) &#123;</span><br><span class="line">                    throw new IllegalArgumentException(&quot;Missing salt rounds&quot;);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    int rounds = Integer.parseInt(salt.substring(off, off + 2));</span><br><span class="line">                    String real_salt = salt.substring(off + 3, off + 25);</span><br><span class="line"></span><br><span class="line">                    byte[] passwordb;</span><br><span class="line">                    try &#123;</span><br><span class="line">                        passwordb = (password + (minor &gt;= &apos;a&apos; ? &quot;\u0000&quot; : &quot;&quot;)).getBytes(&quot;UTF-8&quot;);</span><br><span class="line">                    &#125; catch (UnsupportedEncodingException var13) &#123;</span><br><span class="line">                        throw new AssertionError(&quot;UTF-8 is not supported&quot;);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    byte[] saltb = decode_base64(real_salt, 16);</span><br><span class="line">                    BCrypt B = new BCrypt();</span><br><span class="line">                    byte[] hashed = B.crypt_raw(passwordb, saltb, rounds);</span><br><span class="line">                    rs.append(&quot;$2&quot;);</span><br><span class="line">                    if (minor &gt;= &apos;a&apos;) &#123;</span><br><span class="line">                        rs.append(minor);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    rs.append(&quot;$&quot;);</span><br><span class="line">                    if (rounds &lt; 10) &#123;</span><br><span class="line">                        rs.append(&quot;0&quot;);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    rs.append(rounds);</span><br><span class="line">                    rs.append(&quot;$&quot;);</span><br><span class="line">                    encode_base64(saltb, saltb.length, rs);</span><br><span class="line">                    encode_base64(hashed, bf_crypt_ciphertext.length * 4 - 1, rs);</span><br><span class="line">                    return rs.toString();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                throw new IllegalArgumentException(&quot;Invalid salt version&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>2.3 密码的校验<br>提供的密码与加密之后的密码的校验，使用是BCryptpassword的matches()接口；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public boolean matches(CharSequence rawPassword, String encodedPassword) &#123;</span><br><span class="line">    if (encodedPassword != null &amp;&amp; encodedPassword.length() != 0) &#123;</span><br><span class="line">        if (!this.BCRYPT_PATTERN.matcher(encodedPassword).matches()) &#123;</span><br><span class="line">            this.logger.warn(&quot;Encoded password does not look like BCrypt&quot;);</span><br><span class="line">            return false;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return BCrypt.checkpw(rawPassword.toString(), encodedPassword);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        this.logger.warn(&quot;Empty encoded password&quot;);</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<pre><code>/**
- * 密码比较入口，同样是调用了hashpw()方法: 使用的是hashpw()方法，有两个参数：原始明文与数据库中获取的密文。
- * hashpw()方法是从密文中解析出藏在其中的盐salt值，用此值混淆明文，与密文做比较。
- */
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">   public static boolean checkpw(String plaintext, String hashed) &#123;</span><br><span class="line">       return equalsNoEarlyReturn(hashed, hashpw(plaintext, hashed)); </span><br><span class="line">   &#125;</span><br><span class="line">//这个方法就是比较是否相同而已，无他。</span><br><span class="line">   static boolean equalsNoEarlyReturn(String a, String b) &#123;</span><br><span class="line">       char[] caa = a.toCharArray();</span><br><span class="line">       char[] cab = b.toCharArray();</span><br><span class="line">       if (caa.length != cab.length) &#123;</span><br><span class="line">           return false;</span><br><span class="line">       &#125; else &#123;</span><br><span class="line">           byte ret = 0;</span><br><span class="line"></span><br><span class="line">           for(int i = 0; i &lt; caa.length; ++i) &#123;</span><br><span class="line">               ret = (byte)(ret | caa[i] ^ cab[i]);</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           return ret == 0;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li><p>总结<br>以上是SpringSecurity的BCryptPassword加密方式，上面是介绍其SHA256+随机salt生成密文的基本点。应该还有其他的一些用法，容当后研究。</p>
-</li>
-<li><p>其它<br>Springboot框架整合SpringSecurity组件，使用需要使用该加密方式，有一点需要注意，就是在springSecurity的配置文件中注入PasswordEncode的bean</p>
-<p> //SpringSecurityConfigutarion配置类中加入<br> @Bean<br> public PasswordEncoder passwordEncoder() {</p>
-<pre><code>return new BCryptPasswordEncoder();
-</code></pre><p> }<br>代码示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">       String password = &quot;leo_epam&quot;;</span><br><span class="line">        System.out.println(password + &quot;: encrypt&quot;);</span><br><span class="line">        int i = 0;</span><br><span class="line">        while(i &lt; 10)&#123;</span><br><span class="line">            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();</span><br><span class="line">            String hashedPassword = passwordEncoder.encode(password);</span><br><span class="line">            System.out.println(&quot;encryptPassword:&quot; + hashedPassword);</span><br><span class="line">            System.out.println(&quot;match result:&quot; + passwordEncoder.matches(password,hashedPassword));</span><br><span class="line">            i ++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>代码输出：</p>
-<p>leo_epam: encrypt<br>encryptPassword:$2a$10$/WIa4YbBMGQX7dBbYwRKx.AmQ3sJ8Ta5wYHh8a7jPlYDbNgMSD/hC<br>match result:true<br>encryptPassword:$2a$10$VryRC1lFaTEqUbOUyvu18ulSSGH5hK7JPzAG17ehtkL8aV6fot1ru<br>match result:true<br>encryptPassword:$2a$10$0SVRXbfgsqMvpmNDeeqNl.eFPvQ0ojdazk5.x8YDZxIOOP1D4xXge<br>match result:true<br>encryptPassword:$2a$10$yWdI4q6DXDZhknTxiT/9ROdhcAARAEY5q4L2YI5uQ3C52Q7Lt/IAa<br>match result:true<br>encryptPassword:$2a$10$8yy0.NdQSD2Cig5yIri2eu1XmDRpZSPjsmxDyRg9CZ5afwp/36H2S<br>match result:true<br>encryptPassword:$2a$10$QTJpm3jYUCjAoHPVI/uon.FDusm.9tPSc.mk6m.l/kx8aKbIzov3i<br>match result:true<br>encryptPassword:$2a$10$CkoGrZqDE86LM1yiX89cpuNDAMdDqemEKMSS3/jquFsxocizgBbX2<br>match result:true<br>encryptPassword:$2a$10$6M0N6cQp6kKeXgRl8ftqyOlikAV9YwfMS93xlqTXbd/tmDjFDv3iG<br>match result:true<br>encryptPassword:$2a$10$LboMUNAF7vOmucxJI3G/w.cliDRxH1exOmsfy2IlPCUpZU8N7XoO.<br>match result:true<br>encryptPassword:$2a$10$ezB0okY.JHv1gt4Y3chiu.5e5R9.vXqd7kNaYH14Vigm9wZ02D8Pe<br>match result:true<br>以上代码就是BCryptPassword的代码简单效果示例，相同的明文，每次生成的密文都是不同的，但是和明文做密码校验都是通过的。<br>还有一个就是密码字段的长度，如果打算采用bcrypt加密存储，字段长度不得低于60.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/02/springSecurity-Bcrypt-hash-password/" data-id="cjwobdphi004qnizu89gu3cpf" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
 
     </footer>
   </div>
@@ -547,7 +521,7 @@ null must be assigned.
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
     </div>
   </div>
 
@@ -557,7 +531,7 @@ null must be assigned.
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
@@ -579,23 +553,23 @@ null must be assigned.
       <ul>
         
           <li>
+            <a href="/2019/06/11/Dry-Don-t-Repeat-Yourself/">Dry:Don&#39;t Repeat Yourself</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/09/Leetcode-987-Vertical-Order-Traversal-of-a-Binary-Tree/">Leetcode 987. Vertical Order Traversal of a Binary Tree</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/09/Leetcode-146-LRU-cache/">Leetcode 146. LRU cache</a>
+          </li>
+        
+          <li>
             <a href="/2019/06/08/Leetcode-967-Numbers-With-Same-Consecutive-Differences/">Leetcode 967. Numbers With Same Consecutive Differences</a>
           </li>
         
           <li>
             <a href="/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/">Inorder traversal iterative solution for multiple questions for Leetcode BST problem</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/06/Leetcode-333-Largest-BST-Subtree/">Leetcode.333 Largest BST Subtree</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/05/Design-a-transportation-payment-method/">Design a transportation payment method</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/05/Ways-to-center-CSS-element/">Ways to center CSS element</a>
           </li>
         
       </ul>
