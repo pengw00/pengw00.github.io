@@ -65,6 +65,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode-76-Minimum-window-string" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/29/leetcode-76-Minimum-window-string/" class="article-date">
+  <time datetime="2019-06-29T14:13:56.000Z" itemprop="datePublished">2019-06-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/29/leetcode-76-Minimum-window-string/">leetcode.76 Minimum window string</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>This Pro, at the first time I think of two pointer construct slidding windows, using map<br>but I find that it is so hard to continue with keep track of the status of  T string in the map. </p>
+<p>the idea is constructed a window, using two pointer, begin &amp; end, end go forward, when the windows first contain the target word, begin pointer start go right, and once the map[c] ==0, it means that this char is from T. so we make map[c]++, and invalid the counter for next window.<br>the core code:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">string minWindow(string s, string t)&#123;</span><br><span class="line">	vector&lt;int&gt; map(128, 0);</span><br><span class="line">	for(auto c: t) map[c]++;</span><br><span class="line">	int counter = t.size(), begin = 0, end = 0, d = INT_MAX, head = 0;</span><br><span class="line">	while(end &lt; s.size())&#123;</span><br><span class="line">		if(map[s[end++]]-- &gt; 0) counter--; //this is hard to read, it means that every time it will //decrease</span><br><span class="line">		while(counter==0)&#123;</span><br><span class="line">			if(end-begin &lt; d) d = end - (head = begin);</span><br><span class="line">			if(map[s[begin++]]++==0) counter++; //invalid the counter</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return d==INT_MAX?&quot;&quot;:s.substr(head, d);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>// here is the template for most substr problem using sliding window solution:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">int findSubstring(string s)&#123;</span><br><span class="line">        vector&lt;int&gt; map(128,0);</span><br><span class="line">        int counter; // check whether the substring is valid</span><br><span class="line">        int begin=0, end=0; //two pointers, one point to tail and one  head</span><br><span class="line">        int d; //the length of substring</span><br><span class="line"></span><br><span class="line">        for() &#123; /* initialize the hash map here */ &#125;</span><br><span class="line"></span><br><span class="line">        while(end&lt;s.size())&#123;</span><br><span class="line"></span><br><span class="line">            if(map[s[end++]]-- ?)&#123;  /* modify counter here */ &#125;</span><br><span class="line"></span><br><span class="line">            while(/* counter condition */)&#123; </span><br><span class="line">                 </span><br><span class="line">                 /* update d here if finding minimum*/</span><br><span class="line"></span><br><span class="line">                //increase begin to make it invalid/valid again</span><br><span class="line">                </span><br><span class="line">                if(map[s[begin++]]++ ?)&#123; /*modify counter here*/ &#125;</span><br><span class="line">            &#125;  </span><br><span class="line"></span><br><span class="line">            /* update d here if finding maximum*/</span><br><span class="line">        &#125;</span><br><span class="line">        return d;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>//One thing needs to be mentioned is that when asked to find maximum substring, we should update maximum after the inner while loop to guarantee that the substring is valid. On the other hand, when asked to find minimum substring, we should update minimum inside the inner while loop.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int lengthOfLongestSubstring(string s) &#123;</span><br><span class="line">        vector&lt;int&gt; map(128,0);</span><br><span class="line">        int counter=0, begin=0, end=0, d=0; </span><br><span class="line">        while(end&lt;s.size())&#123;</span><br><span class="line">            if(map[s[end++]]++&gt;0) counter++; </span><br><span class="line">            while(counter&gt;0) if(map[s[begin++]]--&gt;1) counter--;</span><br><span class="line">            d=max(d, end-begin); //while valid, update d</span><br><span class="line">        &#125;</span><br><span class="line">        return d;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/06/29/leetcode-76-Minimum-window-string/" data-id="cjxhmtcvg002bba242r3ea7gs" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Dry-Don-t-Repeat-Yourself" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/11/Dry-Don-t-Repeat-Yourself/" class="article-date">
@@ -92,7 +134,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/11/Dry-Don-t-Repeat-Yourself/" data-id="cjwsqb2pd0000ky247lz224q6" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/11/Dry-Don-t-Repeat-Yourself/" data-id="cjxhmtcu30008ba24khxu87jk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li></ul>
@@ -130,7 +172,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/09/Leetcode-987-Vertical-Order-Traversal-of-a-Binary-Tree/" data-id="cjwsqb2q2000vky24osyhmgw5" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/09/Leetcode-987-Vertical-Order-Traversal-of-a-Binary-Tree/" data-id="cjxhmtcup000yba2458kxpphv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -166,7 +208,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/09/Leetcode-146-LRU-cache/" data-id="cjwsqb2pu000hky240yrpfavd" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/09/Leetcode-146-LRU-cache/" data-id="cjxhmtcub000gba24jff3rz0r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -214,7 +256,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/08/Leetcode-967-Numbers-With-Same-Consecutive-Differences/" data-id="cjwsqb2pz000pky24jmraav2r" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/08/Leetcode-967-Numbers-With-Same-Consecutive-Differences/" data-id="cjxhmtcum000rba24vdixfc0k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li></ul>
@@ -262,7 +304,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/" data-id="cjwsqb2pq000bky24x9bc8fat" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/" data-id="cjxhmtcud000iba24ao7mcrxy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -329,7 +371,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/06/Leetcode-333-Largest-BST-Subtree/" data-id="cjwsqb2px000lky248gs8oq6y" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/06/Leetcode-333-Largest-BST-Subtree/" data-id="cjxhmtcun000vba24ken2lb07" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -380,7 +422,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Design-a-transportation-payment-method/" data-id="cjwsqb2pm0004ky24g9gu33ro" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/05/Design-a-transportation-payment-method/" data-id="cjxhmtcu00004ba243mfpa880" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li></ul>
@@ -469,7 +511,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Ways-to-center-CSS-element/" data-id="cjwsqb2r1001oky2499xbzlj0" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/05/Ways-to-center-CSS-element/" data-id="cjxhmtcv0001gba24vd9t2ts7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
@@ -538,61 +580,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Redux-starter-kit-usage/" data-id="cjwsqb2q50014ky24gw18skr3" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/05/Redux-starter-kit-usage/" data-id="cjxhmtcv2001jba2404kj809n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redux/">Redux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Leetcode-485-487-1004-Max-Consecutive-One" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" class="article-date">
-  <time datetime="2019-06-04T21:31:11.000Z" itemprop="datePublished">2019-06-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/">Leetcode.485&amp;487&amp;1004 Max Consecutive One</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="Max-Consecutive-One-serials"><a href="#Max-Consecutive-One-serials" class="headerlink" title="Max Consecutive One serials"></a>Max Consecutive One serials</h4><p>Find the longest consective subarray<br><em>Time: O(n)
-</em>Space: O(1) max and cur_max</p>
-<p>*Leetcode.485 findMaxConsecutiveOnes</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public int findMaxConsecutiveOnes(int[] nums)&#123;</span><br><span class="line">	int max, cur_max;</span><br><span class="line">	for(int i = 0; i &lt; nums.length; i++)&#123;</span><br><span class="line">		max = Math.max(max, cur_max= nums[i]==0?0:cur_max+1);</span><br><span class="line">	&#125;</span><br><span class="line">	return max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="Leetcode-487-findMaxConsecutiveOnesII"><a href="#Leetcode-487-findMaxConsecutiveOnesII" class="headerlink" title="Leetcode.487 findMaxConsecutiveOnesII"></a>Leetcode.487 findMaxConsecutiveOnesII</h4><ul>
-<li>condition: if you can flip at most one 0.</li>
-<li>Follow up: What if the input numbers come in one by one as an infinite stream? In other words, you can’t store all numbers coming from the stream as it’s too large to hold in memory. Could you solve it efficiently?</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public int findMaxConsecutiveOnesII()&#123;</span><br><span class="line">	int max = 0, zero = 0;</span><br><span class="line">	for(int l = 0, h = 0; h &lt; nums.length; h++)&#123;</span><br><span class="line">		if(nums[h] == 0) zero++;</span><br><span class="line">		while(zero &gt; 1)&#123;</span><br><span class="line">			if(nums[l++]==0)&#123;</span><br><span class="line">				zero--;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		max = Math.max(max, h-l+1);</span><br><span class="line">	&#125;</span><br><span class="line">	return max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="Leetcode-1004-findMaxConsecutiveOnesIII"><a href="#Leetcode-1004-findMaxConsecutiveOnesIII" class="headerlink" title="Leetcode.1004 findMaxConsecutiveOnesIII"></a>Leetcode.1004 findMaxConsecutiveOnesIII</h4><ul>
-<li>condition: if you can flip at most k times.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public int findMaxConsecutiveOnes(int[] nums) &#123;</span><br><span class="line">        int max = 0, zero = 0, k = 1; // flip at most k zero</span><br><span class="line">        for (int l = 0, h = 0; h &lt; nums.length; h++) &#123;</span><br><span class="line">            if (nums[h] == 0)                                           </span><br><span class="line">                zero++;</span><br><span class="line">            while (zero &gt; k)</span><br><span class="line">                if (nums[l++] == 0)</span><br><span class="line">                    zero--;                                     </span><br><span class="line">            max = Math.max(max, h - l + 1);</span><br><span class="line">        &#125;                                                               </span><br><span class="line">        return max;             </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" data-id="cjwsqb2q1000tky24nrwkqpe5" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
 
     </footer>
   </div>
@@ -605,7 +596,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -651,6 +642,10 @@
       <ul>
         
           <li>
+            <a href="/2019/06/29/leetcode-76-Minimum-window-string/">leetcode.76 Minimum window string</a>
+          </li>
+        
+          <li>
             <a href="/2019/06/11/Dry-Don-t-Repeat-Yourself/">Dry:Don&#39;t Repeat Yourself</a>
           </li>
         
@@ -664,10 +659,6 @@
         
           <li>
             <a href="/2019/06/08/Leetcode-967-Numbers-With-Same-Consecutive-Differences/">Leetcode 967. Numbers With Same Consecutive Differences</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/">Inorder traversal iterative solution for multiple questions for Leetcode BST problem</a>
           </li>
         
       </ul>

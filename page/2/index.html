@@ -65,6 +65,57 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Leetcode-485-487-1004-Max-Consecutive-One" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" class="article-date">
+  <time datetime="2019-06-04T21:31:11.000Z" itemprop="datePublished">2019-06-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/">Leetcode.485&amp;487&amp;1004 Max Consecutive One</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Max-Consecutive-One-serials"><a href="#Max-Consecutive-One-serials" class="headerlink" title="Max Consecutive One serials"></a>Max Consecutive One serials</h4><p>Find the longest consective subarray<br><em>Time: O(n)
+</em>Space: O(1) max and cur_max</p>
+<p>*Leetcode.485 findMaxConsecutiveOnes</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public int findMaxConsecutiveOnes(int[] nums)&#123;</span><br><span class="line">	int max, cur_max;</span><br><span class="line">	for(int i = 0; i &lt; nums.length; i++)&#123;</span><br><span class="line">		max = Math.max(max, cur_max= nums[i]==0?0:cur_max+1);</span><br><span class="line">	&#125;</span><br><span class="line">	return max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Leetcode-487-findMaxConsecutiveOnesII"><a href="#Leetcode-487-findMaxConsecutiveOnesII" class="headerlink" title="Leetcode.487 findMaxConsecutiveOnesII"></a>Leetcode.487 findMaxConsecutiveOnesII</h4><ul>
+<li>condition: if you can flip at most one 0.</li>
+<li>Follow up: What if the input numbers come in one by one as an infinite stream? In other words, you can’t store all numbers coming from the stream as it’s too large to hold in memory. Could you solve it efficiently?</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public int findMaxConsecutiveOnesII()&#123;</span><br><span class="line">	int max = 0, zero = 0;</span><br><span class="line">	for(int l = 0, h = 0; h &lt; nums.length; h++)&#123;</span><br><span class="line">		if(nums[h] == 0) zero++;</span><br><span class="line">		while(zero &gt; 1)&#123;</span><br><span class="line">			if(nums[l++]==0)&#123;</span><br><span class="line">				zero--;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		max = Math.max(max, h-l+1);</span><br><span class="line">	&#125;</span><br><span class="line">	return max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Leetcode-1004-findMaxConsecutiveOnesIII"><a href="#Leetcode-1004-findMaxConsecutiveOnesIII" class="headerlink" title="Leetcode.1004 findMaxConsecutiveOnesIII"></a>Leetcode.1004 findMaxConsecutiveOnesIII</h4><ul>
+<li>condition: if you can flip at most k times.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public int findMaxConsecutiveOnes(int[] nums) &#123;</span><br><span class="line">        int max = 0, zero = 0, k = 1; // flip at most k zero</span><br><span class="line">        for (int l = 0, h = 0; h &lt; nums.length; h++) &#123;</span><br><span class="line">            if (nums[h] == 0)                                           </span><br><span class="line">                zero++;</span><br><span class="line">            while (zero &gt; k)</span><br><span class="line">                if (nums[l++] == 0)</span><br><span class="line">                    zero--;                                     </span><br><span class="line">            max = Math.max(max, h - l + 1);</span><br><span class="line">        &#125;                                                               </span><br><span class="line">        return max;             </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" data-id="cjxhmtcul000pba24ftshx77s" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode-272-Closest-Binary-Search" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/04/leetcode-272-Closest-Binary-Search/" class="article-date">
@@ -112,7 +163,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/leetcode-272-Closest-Binary-Search/" data-id="cjwsqb2rw002vky24hd2t4e2b" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/leetcode-272-Closest-Binary-Search/" data-id="cjxhmtcvi002gba24rbpvhm72" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -153,7 +204,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/ActiveMQ-Help-Decouple-System/" data-id="cjwsqb2pi0001ky24o7d4foc3" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/ActiveMQ-Help-Decouple-System/" data-id="cjxhmtcts0000ba245zzvf5wm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li></ul>
@@ -197,7 +248,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/Leetcode-Contest-139/" data-id="cjwsqb2q60016ky24iqawyw61" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/Leetcode-Contest-139/" data-id="cjxhmtcuo000wba24sp455a6h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -240,7 +291,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/Responsive-Web-Design-I/" data-id="cjwsqb2qz001mky24dv5don0n" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/Responsive-Web-Design-I/" data-id="cjxhmtcuw0019ba24dkyf597k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li></ul>
@@ -290,7 +341,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/leetcode-201-Word-Search-II/" data-id="cjwsqb2rq002oky24w2vmdcaa" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/leetcode-201-Word-Search-II/" data-id="cjxhmtcvk002lba24fln8lzpi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -331,7 +382,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/" data-id="cjwsqb2s30038ky24mgng7u42" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/" data-id="cjxhmtcvs002zba246dlz0pyd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -402,7 +453,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/31/ACM-ICPC-Road-Map/" data-id="cjwsqb2pn0005ky249h22tzhw" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/31/ACM-ICPC-Road-Map/" data-id="cjxhmtcu20005ba24r63vk14o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -502,7 +553,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/31/stepsToBuildSpringbootRESTAPI/" data-id="cjwsqb2t3004uky24691nbgrm" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/31/stepsToBuildSpringbootRESTAPI/" data-id="cjxhmtcxm0055ba24gtypvhox" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Springboot/">Springboot</a></li></ul>
@@ -581,63 +632,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/30/systemDesignInterview/" data-id="cjwsqb2ss004gky24jox76zrd" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/30/systemDesignInterview/" data-id="cjxhmtcxa004uba246t3vnbxe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode671SecondMinNodeInBinaryTree" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/05/29/leetcode671SecondMinNodeInBinaryTree/" class="article-date">
-  <time datetime="2019-05-29T18:18:00.000Z" itemprop="datePublished">2019-05-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/29/leetcode671SecondMinNodeInBinaryTree/">leetcode671SecondMinNodeInBinaryTree</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Leetcode671-Second-Minimum-Node-In-a-Binary-Tree"><a href="#Leetcode671-Second-Minimum-Node-In-a-Binary-Tree" class="headerlink" title="Leetcode671. Second Minimum Node In a Binary Tree"></a>Leetcode671. Second Minimum Node In a Binary Tree</h3><p>//implementing in sort of bussiness logic in control component in<br>//flexibly used in front end or backend!!!</p>
-<p>Analysis:</p>
-<ol>
-<li>using dfs or bfs, search the val in range (min1, ans), update ans = val if val in (min1, ans); </li>
-<li>using dfs with divide and conque, dfs to get left and right of the subtree,  and only recursion on the condition of root.val == root.left.val or root.val == root.right.val;</li>
-</ol>
-<ul>
-<li>solution one<h4 id="dfs"><a href="#dfs" class="headerlink" title="dfs"></a>dfs</h4></li>
-</ul>
-<figure class="highlight plain"><figcaption><span>solution&#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">	int min1;</span><br><span class="line">	long ans = Long.MAX_VALUE;</span><br><span class="line">	public int findSecondMinimumValue(TreeNode root)&#123;</span><br><span class="line">		if(root==null) return -1;</span><br><span class="line">		dfs(root);</span><br><span class="line">		return ans ==Long.MAX_VALUE?-1:(int)ans;</span><br><span class="line">	&#125;</span><br><span class="line">	//once root.val &gt; min1, we never drill deeply</span><br><span class="line">	//only root.val == min1, we dfs left and right</span><br><span class="line">	private void dfs(TreeNode root)&#123;</span><br><span class="line">		if(root!=null)&#123;</span><br><span class="line">			if(root.val&gt;min1 &amp;&amp; root.val &lt; ans)&#123;</span><br><span class="line">				ans = root.val;</span><br><span class="line">			&#125;else if(root.val == min1)&#123;</span><br><span class="line">				dfs(root.left);</span><br><span class="line">				dfs(root.right);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="bfs"><a href="#bfs" class="headerlink" title="bfs"></a>bfs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class solution&#123;</span><br><span class="line">	public int findSecondMinimumValue(TreeNode root)&#123;</span><br><span class="line">		if(root==null) return -1;</span><br><span class="line">		int rootval = root.val;</span><br><span class="line">		long ans = Long.MAX_VALUE;</span><br><span class="line">		Queue&lt;Integer&gt; queue = new LinkedList&lt;&gt;();</span><br><span class="line">		queue.add(root);</span><br><span class="line">		while(!queue.isEmpty())&#123;</span><br><span class="line">			TreeNode tmp = queue.poll();</span><br><span class="line">			if(tmp.left != rootval &amp;&amp; head.val &lt; ans)&#123;</span><br><span class="line">				ans = head.val;</span><br><span class="line">			&#125;</span><br><span class="line">			if(tmp.left != null)&#123;</span><br><span class="line">				queue.add(tmp.left);</span><br><span class="line">				queue.add(tmp.right);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return ans == Long.MAX_VALUE ? -1: ans;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>solution two <h3 id="divide-and-conquer-with-dfs"><a href="#divide-and-conquer-with-dfs" class="headerlink" title="divide and conquer with dfs"></a>divide and conquer with dfs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//only left.val == root.val or right.val == root.val will be dfs</span><br><span class="line">//be familiar to implement condition returnning in order.</span><br><span class="line">class solution&#123;</span><br><span class="line">	public int findSecondMinimumValue(TreeNode root)&#123;</span><br><span class="line">		if(root==null) return -1;</span><br><span class="line">		if(root.left==null &amp;&amp; root.right==null) return -1;</span><br><span class="line">		int left = root.left.val;</span><br><span class="line">		int right = root.right.val;</span><br><span class="line">		if(root.left.val == root.val)&#123;</span><br><span class="line">			left = findSecondMinimumValue(root.left);</span><br><span class="line">			&#125;</span><br><span class="line">		if(root.right.val == root.val)&#123;</span><br><span class="line">			right = findSecondMinimumValue(root.right);</span><br><span class="line">		&#125;</span><br><span class="line">		if(left!=-1 &amp;&amp; right != -1)&#123;</span><br><span class="line">			return Math.min(left, rigth);</span><br><span class="line">		&#125;</span><br><span class="line">		if(left != -1)&#123;</span><br><span class="line">			return left;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">		return right;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/29/leetcode671SecondMinNodeInBinaryTree/" data-id="cjwsqb2s10033ky24t6h1wz59" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
 
     </footer>
   </div>
@@ -650,7 +648,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -696,6 +694,10 @@
       <ul>
         
           <li>
+            <a href="/2019/06/29/leetcode-76-Minimum-window-string/">leetcode.76 Minimum window string</a>
+          </li>
+        
+          <li>
             <a href="/2019/06/11/Dry-Don-t-Repeat-Yourself/">Dry:Don&#39;t Repeat Yourself</a>
           </li>
         
@@ -709,10 +711,6 @@
         
           <li>
             <a href="/2019/06/08/Leetcode-967-Numbers-With-Same-Consecutive-Differences/">Leetcode 967. Numbers With Same Consecutive Differences</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/">Inorder traversal iterative solution for multiple questions for Leetcode BST problem</a>
           </li>
         
       </ul>
