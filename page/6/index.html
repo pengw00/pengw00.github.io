@@ -65,6 +65,44 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Quick-Sort" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/03/Quick-Sort/" class="article-date">
+  <time datetime="2019-04-03T16:43:47.000Z" itemprop="datePublished">2019-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/03/Quick-Sort/">Quick Sort&#39; </a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public void quickSort(int[] arr, int low, int high)&#123;</span><br><span class="line">	if(low&gt;high) return;</span><br><span class="line">	int i = low, int j = high, base = arr[low];</span><br><span class="line">	while(i &lt; j)&#123;</span><br><span class="line">		while(arr[i]&lt;base &amp;&amp; i&lt;j)&#123;i++;&#125;</span><br><span class="line">		while(arr[j]&gt;base &amp;&amp; i &lt; j)&#123; j--;&#125;</span><br><span class="line">		//after that the order is messy</span><br><span class="line">		swap(arr, low, j);</span><br><span class="line">	&#125;</span><br><span class="line">	swap(arr, base, j);</span><br><span class="line">	quickSort(arr, low, j-1);</span><br><span class="line">	quickSort(arr, j+1, high);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void swap(int[] arr, int i, int j)&#123;</span><br><span class="line">	int temp = arr[i];</span><br><span class="line">	arr[i] = arr[j];</span><br><span class="line">	arr[j] = tamp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/03/Quick-Sort/" data-id="cjydugbc40012ky24utxpaowy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-axios-instance" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/03/axios-instance/" class="article-date">
@@ -95,7 +133,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/axios-instance/" data-id="cjxhmtcv3001mba24gjbav1pa" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/axios-instance/" data-id="cjydugbcy001uky248qe88g0p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -141,7 +179,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/dfs和回溯模版/" data-id="cjxhmtcv6001sba24bp786b5b" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/dfs和回溯模版/" data-id="cjydugbd50024ky24b6bgavma" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -185,7 +223,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/回溯，递归，dp三法leetcode-题目“/" data-id="cjxhmtcxb004xba2427el0pf1" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/回溯，递归，dp三法leetcode-题目“/" data-id="cjydugbeq004pky247wdrke70" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -253,7 +291,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/02/springSecurity-Bcrypt-hash-password/" data-id="cjxhmtcww004gba244l501w6r" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/02/springSecurity-Bcrypt-hash-password/" data-id="cjydugbf70050ky24skq70smz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
@@ -311,7 +349,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/02/Hibernate/" data-id="cjxhmtcu40009ba24gl8s148c" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/02/Hibernate/" data-id="cjydugbbf0004ky24oczu4od7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hibernate/">hibernate</a></li></ul>
@@ -362,7 +400,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/被amazon开出两次的经验总结/" data-id="cjxhmtcxd004zba24qgvgcajx" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/被amazon开出两次的经验总结/" data-id="cjydugber004rky247ngu63t3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/career/">career</a></li></ul>
@@ -402,7 +440,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/leetcode-10-Regular-expression/" data-id="cjxhmtcvc0024ba24tglwmt5k" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/leetcode-10-Regular-expression/" data-id="cjydugbde002kky24xh2rip3k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -451,7 +489,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/March-30-2019-Study-plan/" data-id="cjxhmtcuq0010ba24nwtqh1gv" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/March-30-2019-Study-plan/" data-id="cjydugbc2000yky246wwn9wpj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Study-plan/">Study plan</a></li></ul>
@@ -490,102 +528,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/react-factory-and-functional-component/" data-id="cjxhmtcw5003lba24flsfiw68" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/react-factory-and-functional-component/" data-id="cjydugbe7003vky24yfo72pj6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-factory-pattern" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/29/factory-pattern/" class="article-date">
-  <time datetime="2019-03-29T18:56:22.000Z" itemprop="datePublished">2019-03-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/29/factory-pattern/">factory pattern</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Factory  react example:</span><br></pre></td></tr></table></figure>
-<p>export default class SlideFactory {<br>    static build(data) {<br>        switch (data.source) {<br>            case ‘brand’:<br>                return <brandfeedslide slidedata="{data}/">;<br>            case ‘article’:<br>                return <articlefeedslide slidedata="{data}">;<br>            default:<br>                return undefined;<br>        }<br>    }<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">const  items = [</span><br><span class="line">   &#123;    </span><br><span class="line">          source: ‘brand’,</span><br><span class="line">        title: ‘title’</span><br><span class="line">   &#125;    </span><br><span class="line">]</span><br><span class="line">const renderedItems = items.map((item) =&gt; SlideFactory.build(item));</span><br></pre></td></tr></table></figure></articlefeedslide></brandfeedslide></p>
-<p>the items can have properties for different kinds of slider. </p>
-<p>// A design without factory pattern </p>
-<p>#include <iostream><br>using namespace std; </iostream></p>
-<p>// Library classes<br>class Vehicle {<br>public:<br>    virtual void printVehicle() = 0;<br>};<br>class TwoWheeler : public Vehicle {<br>public:<br>    void printVehicle()  {<br>        cout &lt;&lt; “I am two wheeler” &lt;&lt; endl;<br>    }<br>};<br>class FourWheeler : public Vehicle {<br>    public:<br>    void printVehicle()  {<br>        cout &lt;&lt; “I am four wheeler” &lt;&lt; endl;<br>    }<br>}; </p>
-<p>// Client (or user) class<br>class Client {<br>public:<br>    Client(int type)  { </p>
-<pre><code>    // Client explicitly creates classes according to type 
-    if (type == 1) 
-        pVehicle = new TwoWheeler(); 
-    else if (type == 2) 
-        pVehicle = new FourWheeler(); 
-    else
-        pVehicle = NULL; 
-} 
-
-~Client()   { 
-    if (pVehicle) 
-    { 
-        delete[] pVehicle; 
-        pVehicle = NULL; 
-    } 
-} 
-
-Vehicle* getVehicle() { 
-    return pVehicle; 
-} 
-</code></pre><p>private:<br>    Vehicle *pVehicle;<br>}; </p>
-<p>// Driver program<br>int main() {<br>    Client <em>pClient = new Client(1);<br>    Vehicle </em> pVehicle = pClient-&gt;getVehicle();<br>    pVehicle-&gt;printVehicle();<br>    return 0;<br>    }<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> What is the problems with above design?</span><br><span class="line">As you must have observed in the above example, Client creates objects of either TwoWheeler or FourWheeler based on some input during constructing its object.</span><br><span class="line">Say, library introduces a new class ThreeWheeler to incorporate three wheeler vehicles also. What would happen? Client will end up chaining a new else if in the conditional ladder to create objects of ThreeWheeler. Which in turn will need Client to be recompiled. So, each time a new change is made at the library side, Client would need to make some corresponding changes at its end and recompile the code. Sounds bad? This is a very bad practice of design.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">How to avoid the problem?</span><br><span class="line">The answer is, create a static (or factory) method. Let us see below code.</span><br></pre></td></tr></table></figure></p>
-<p>// C++ program to demonstrate factory method design pattern </p>
-<p>#include <iostream><br>using namespace std; </iostream></p>
-<p>enum VehicleType {<br>    VT_TwoWheeler,    VT_ThreeWheeler,    VT_FourWheeler<br>}; </p>
-<p>// Library classes<br>class Vehicle {<br>public:<br>    virtual void printVehicle() = 0;<br>    static Vehicle* Create(VehicleType type);<br>};<br>class TwoWheeler : public Vehicle {<br>public:<br>    void printVehicle() {<br>        cout &lt;&lt; “I am two wheeler” &lt;&lt; endl;<br>    }<br>};<br>class ThreeWheeler : public Vehicle {<br>public:<br>    void printVehicle() {<br>        cout &lt;&lt; “I am three wheeler” &lt;&lt; endl;<br>    }<br>};<br>class FourWheeler : public Vehicle {<br>    public:<br>    void printVehicle() {<br>        cout &lt;&lt; “I am four wheeler” &lt;&lt; endl;<br>    }<br>}; </p>
-<p>// Factory method to create objects of different types.<br>// Change is required only in this function to create a new object type<br>Vehicle* Vehicle::Create(VehicleType type) {<br>    if (type == VT_TwoWheeler)<br>        return new TwoWheeler();<br>    else if (type == VT_ThreeWheeler)<br>        return new ThreeWheeler();<br>    else if (type == VT_FourWheeler)<br>        return new FourWheeler();<br>    else return NULL;<br>} </p>
-<p>// Client class<br>class Client {<br>public: </p>
-<pre><code>// Client doesn&apos;t explicitly create objects 
-// but passes type to factory method &quot;Create()&quot; 
-Client() 
-{ 
-    VehicleType type = VT_ThreeWheeler; 
-    pVehicle = Vehicle::Create(type); 
-} 
-~Client() { 
-    if (pVehicle) { 
-        delete[] pVehicle; 
-        pVehicle = NULL; 
-    } 
-} 
-Vehicle* getVehicle()  { 
-    return pVehicle; 
-} 
-</code></pre><p>private:<br>    Vehicle *pVehicle;<br>}; </p>
-<p>// Driver program<br>int main() {<br>    Client <em>pClient = new Client();<br>    Vehicle </em> pVehicle = pClient-&gt;getVehicle();<br>    pVehicle-&gt;printVehicle();<br>    return 0;<br>}<br><code>`</code></p>
-<p>In the above example, we have totally decoupled the selection of type for object creation from Client. The library is now responsible to decide which object type to create based on an input. Client just needs to make call to library’s factory Create method and pass the type it wants without worrying about the actual implementation of creation of objects.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/29/factory-pattern/" data-id="cjxhmtcv7001vba247hspmjch" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li></ul>
 
     </footer>
   </div>
@@ -631,7 +577,7 @@ Vehicle* getVehicle()  {
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -642,6 +588,10 @@ Vehicle* getVehicle()  {
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/07/21/Leetcode-Contest-146/">Leetcode_Contest_146</a>
+          </li>
         
           <li>
             <a href="/2019/06/29/leetcode-76-Minimum-window-string/">leetcode.76 Minimum window string</a>
@@ -657,10 +607,6 @@ Vehicle* getVehicle()  {
         
           <li>
             <a href="/2019/06/09/Leetcode-146-LRU-cache/">Leetcode 146. LRU cache</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/08/Leetcode-967-Numbers-With-Same-Consecutive-Differences/">Leetcode 967. Numbers With Same Consecutive Differences</a>
           </li>
         
       </ul>

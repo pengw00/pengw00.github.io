@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-06-29T14:39:31.167Z</updated>
+  <updated>2019-07-22T03:41:57.083Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode_Contest_146</title>
+    <link href="http://pengw00.github.io/2019/07/21/Leetcode-Contest-146/"/>
+    <id>http://pengw00.github.io/2019/07/21/Leetcode-Contest-146/</id>
+    <published>2019-07-22T03:14:20.000Z</published>
+    <updated>2019-07-22T03:41:57.083Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1128-Number-of-Equivalent-Domino-Pairs"><a href="#1128-Number-of-Equivalent-Domino-Pairs" class="headerlink" title="1128. Number of Equivalent Domino Pairs"></a>1128. Number of Equivalent Domino Pairs</h2><p>check a list of dominoes, to see the number of pairs.<br>Ex: Input: dominoes = [[1, 2], [2,1], [3, 4], [5, 6]];<br>Outout: 1</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">int numEquivDominoPairs(vector&lt;vector&lt;int&gt;&gt;&amp; dominoes)&#123;</span><br><span class="line">map&lt;pair&lt;int, int&gt;, int&gt; freq;</span><br><span class="line">long long total = 0;</span><br><span class="line">for(vector&lt;int&gt; domino: dominoes)&#123;</span><br><span class="line">if(domino[0] &gt; domino[1])&#123;</span><br><span class="line">swap(domino[0], domino[1]);</span><br><span class="line">&#125;</span><br><span class="line">total += freq[make_pair(domino[0], domino[1])]++;</span><br><span class="line">&#125; </span><br><span class="line">return total;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="leetcode-1129-Shortest-Path-with-Alternating-Colors"><a href="#leetcode-1129-Shortest-Path-with-Alternating-Colors" class="headerlink" title="leetcode.1129 Shortest Path with Alternating Colors"></a>leetcode.1129 Shortest Path with Alternating Colors</h2>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;1128-Number-of-Equivalent-Domino-Pairs&quot;&gt;&lt;a href=&quot;#1128-Number-of-Equivalent-Domino-Pairs&quot; class=&quot;headerlink&quot; title=&quot;1128. Number of 
+      
+    
+    </summary>
+    
+    
+      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode.76 Minimum window string</title>
@@ -455,33 +478,6 @@
     
     
       <category term="Springboot" scheme="http://pengw00.github.io/tags/Springboot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>systemDesignInterview</title>
-    <link href="http://pengw00.github.io/2019/05/30/systemDesignInterview/"/>
-    <id>http://pengw00.github.io/2019/05/30/systemDesignInterview/</id>
-    <published>2019-05-30T05:17:56.000Z</published>
-    <updated>2019-05-30T18:55:18.102Z</updated>
-    
-    <content type="html"><![CDATA[<p>My question</p><ol><li>Design Pastebin, a website where you can store and share text online for a set period of time.</li></ol><p>Note: Bit.ly is a similar service, with the distinction that Pastebin requires storing the paste contents instead of the original unshortened URL.</p><ul><li>note: Use it to share thoughts and resources, such as:</li></ul><ul><li>Features scope</li><li>API design</li><li>Pseudo code for specific components</li><li>Data model/schema</li><li>Back-of-the-envelope calculations</li><li>Reference links</li><li>Link to whiteboard or diagram such as <a href="https://sketchboard.me/new" target="_blank" rel="noopener">https://sketchboard.me/new</a></li></ul><ul><li>hints: interview structure</li><li>Establish the feature scope and constraints</li><li>Describe high-level architecture</li><li>Drill Down: design and scale core components</li><li>Scaling the design</li><li>Tradeoffs and future improvements</li></ul><h3 id="Note-and-Solution"><a href="#Note-and-Solution" class="headerlink" title="Note and Solution"></a>Note and Solution</h3><p>text -&gt; pastebin  no expire time</p><p>build a restful api with post method store text in the dabase</p><p>api and then when hit api return text in brower. </p><p>txt file, service parse the text file, get string, and store in the backend. </p><p>txt -&gt; api -&gt; user want the text, url get list of text or one recent text</p><p>front end -&gt; save txt file -&gt; backend -&gt; id-&gt; bit.ly service -&gt; url for text </p><ol><li>user table<br> user id</li></ol><p>2 text table<br>    text id<br>    text content<br>    date </p><p>solution1: url for txt -&gt; backend -&gt; response with txt file</p><ul><li>solution2: optimized high level design<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">client -&gt;(LB) server -&gt; readApi-&gt; cache  duplicate</span><br><span class="line">          server    readApi                  DB</span><br><span class="line">                                             DB</span><br><span class="line">                                             ...</span><br><span class="line">                                             ...</span><br><span class="line">          server       -&gt; writeApi-&gt;  (master and slave DB) </span><br><span class="line">nosql</span><br></pre></td></tr></table></figure></li></ul><p>Pasterbin use case<br>Review this <a href="https://github.com/donnemartin/system-design-primer/tree/master/solutions/system_design/pastebin#design-pastebincom-or-bitly" target="_blank" rel="noopener">article</a> to learn about the use cases, high level design, core components and scale of a system like Pastebin.</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;My question&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Design Pastebin, a website where you can store and share text online for a set period of time.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Not
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="http://pengw00.github.io/tags/SystemDesign/"/>
     
   </entry>
   

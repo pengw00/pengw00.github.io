@@ -65,6 +65,85 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-systemDesignInterview" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/30/systemDesignInterview/" class="article-date">
+  <time datetime="2019-05-30T05:17:56.000Z" itemprop="datePublished">2019-05-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/30/systemDesignInterview/">systemDesignInterview</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>My question</p>
+<ol>
+<li>Design Pastebin, a website where you can store and share text online for a set period of time.</li>
+</ol>
+<p>Note: Bit.ly is a similar service, with the distinction that Pastebin requires storing the paste contents instead of the original unshortened URL.</p>
+<ul>
+<li>note: Use it to share thoughts and resources, such as:</li>
+</ul>
+<ul>
+<li>Features scope</li>
+<li>API design</li>
+<li>Pseudo code for specific components</li>
+<li>Data model/schema</li>
+<li>Back-of-the-envelope calculations</li>
+<li>Reference links</li>
+<li>Link to whiteboard or diagram such as <a href="https://sketchboard.me/new" target="_blank" rel="noopener">https://sketchboard.me/new</a></li>
+</ul>
+<ul>
+<li>hints: interview structure</li>
+<li>Establish the feature scope and constraints</li>
+<li>Describe high-level architecture</li>
+<li>Drill Down: design and scale core components</li>
+<li>Scaling the design</li>
+<li>Tradeoffs and future improvements</li>
+</ul>
+<h3 id="Note-and-Solution"><a href="#Note-and-Solution" class="headerlink" title="Note and Solution"></a>Note and Solution</h3><p>text -&gt; pastebin  no expire time</p>
+<p>build a restful api with post method store text in the dabase</p>
+<p>api and then when hit api return text in brower. </p>
+<p>txt file, service parse the text file, get string, and store in the backend. </p>
+<p>txt -&gt; api -&gt; user want the text, url get list of text or one recent text</p>
+<p>front end -&gt; save txt file -&gt; backend -&gt; id-&gt; bit.ly service -&gt; url for text </p>
+<ol>
+<li>user table<br> user id</li>
+</ol>
+<p>2 text table<br>    text id<br>    text content<br>    date </p>
+<p>solution1: url for txt -&gt; backend -&gt; response with txt file</p>
+<ul>
+<li>solution2: optimized high level design<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">client -&gt;(LB) server -&gt; readApi-&gt; cache  duplicate</span><br><span class="line">          server    readApi                  DB</span><br><span class="line">                                             DB</span><br><span class="line">                                             ...</span><br><span class="line">                                             ...</span><br><span class="line">          server       -&gt; writeApi-&gt;  (master and slave DB) </span><br><span class="line">nosql</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Pasterbin use case<br>Review this <a href="https://github.com/donnemartin/system-design-primer/tree/master/solutions/system_design/pastebin#design-pastebincom-or-bitly" target="_blank" rel="noopener">article</a> to learn about the use cases, high level design, core components and scale of a system like Pastebin.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/05/30/systemDesignInterview/" data-id="cjydugbej004bky24di917ywu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode671SecondMinNodeInBinaryTree" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/29/leetcode671SecondMinNodeInBinaryTree/" class="article-date">
@@ -106,7 +185,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/29/leetcode671SecondMinNodeInBinaryTree/" data-id="cjxhmtcvv0034ba2435kn2zww" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/29/leetcode671SecondMinNodeInBinaryTree/" data-id="cjydugbdy003hky245ml18kl7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -172,7 +251,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/29/leetcodeContest138/" data-id="cjxhmtcvw0037ba24ib5qpfnt" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/29/leetcodeContest138/" data-id="cjydugbdx003fky24ty4kvatm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/contest/">contest</a></li></ul>
@@ -239,7 +318,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/28/RabbitMQforMicroServicesCommunication/" data-id="cjxhmtcuy001eba24pa41dt0s" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/28/RabbitMQforMicroServicesCommunication/" data-id="cjydugbcw001pky24qnidq7q8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/microservice/">microservice</a></li></ul>
@@ -285,7 +364,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/28/rabbitMQForMicroServices/" data-id="cjxhmtcw6003nba2474r83zl5" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/28/rabbitMQForMicroServices/" data-id="cjydugbe6003sky2463zl3ryy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MicroService/">MicroService</a></li></ul>
@@ -372,7 +451,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="cjxhmtcwt004eba24imkljou5" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="cjydugbf4004xky24hqkv65oc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -412,7 +491,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/25/leetcode465/" data-id="cjxhmtcvx0039ba24yi7617e1" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/25/leetcode465/" data-id="cjydugbdu003bky2415gr6jl2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -454,7 +533,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/" data-id="cjxhmtcvf0029ba24es4ivh9u" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/" data-id="cjydugbdb002dky24ji5zyb12" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -509,7 +588,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="cjxhmtcvt0032ba24ipvnb905" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="cjydugbdv003dky24yynblp3s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Contest/">Contest</a></li></ul>
@@ -548,48 +627,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="cjxhmtcw0003eba2459fwgxuw" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="cjydugbdz003iky24aps1sbmq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-singleton-code-demo" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/05/02/singleton-code-demo/" class="article-date">
-  <time datetime="2019-05-02T05:59:31.000Z" itemprop="datePublished">2019-05-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/02/singleton-code-demo/">singleton_code_demo</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="SingleTon-basic-logic"><a href="#SingleTon-basic-logic" class="headerlink" title="SingleTon basic logic"></a>SingleTon basic logic</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class SingleTonClass &#123;</span><br><span class="line">	private static SingleTonClass obj = null;</span><br><span class="line">	private SingleTonClass()&#123;</span><br><span class="line">      /*Private Constructor will prevent </span><br><span class="line">       * the instantiation of this class directly*/</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public static SingleTonClass objectCreationMethod()&#123;</span><br><span class="line">	/*This logic will ensure that no more than</span><br><span class="line">	 * one object can be created at a time */</span><br><span class="line">	if(obj==null)&#123;</span><br><span class="line">	    obj= new SingleTonClass();</span><br><span class="line">	&#125;</span><br><span class="line">        return obj;</span><br><span class="line">   &#125;</span><br><span class="line">   public void display()&#123;</span><br><span class="line">	System.out.println(&quot;Singleton class Example&quot;);</span><br><span class="line">   &#125;</span><br><span class="line">   public static void main(String args[])&#123;</span><br><span class="line">	//Object cannot be created directly due to private constructor </span><br><span class="line">        //This way it is forced to create object via our method where</span><br><span class="line">        //we have logic for only one object creation</span><br><span class="line">	SingleTonClass myobject= SingleTonClass.objectCreationMethod();</span><br><span class="line">	myobject.display();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="cjxhmtcwc003zba24v03ogv3k" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
 
     </footer>
   </div>
@@ -635,7 +676,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -646,6 +687,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/07/21/Leetcode-Contest-146/">Leetcode_Contest_146</a>
+          </li>
         
           <li>
             <a href="/2019/06/29/leetcode-76-Minimum-window-string/">leetcode.76 Minimum window string</a>
@@ -661,10 +706,6 @@
         
           <li>
             <a href="/2019/06/09/Leetcode-146-LRU-cache/">Leetcode 146. LRU cache</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/08/Leetcode-967-Numbers-With-Same-Consecutive-Differences/">Leetcode 967. Numbers With Same Consecutive Differences</a>
           </li>
         
       </ul>
