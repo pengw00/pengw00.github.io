@@ -5,20 +5,20 @@
   
 
   
-  <title>axios instance | David w00&#39;s Tech Road</title>
+  <title>leetcode.528 Random Pick with Weight | David w00&#39;s Tech Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Question??axios.create({ baseURL: ajaxUrl,timeout: 30000,withCredentials: true}) 创建实例作用是啥 没有不行吗### 问题描述引入axios,然后在页面中进行请求axios.get(‘url’).then(res=&amp;gt;{}),这里的创建实例充当什么角色 Answer:默认会导出实例axios，通常你只需使用这个ax">
-<meta name="keywords" content="React">
+  <meta name="description" content="JS version123456789101112131415161718var solution = function(w)&amp;#123;	this.map = new Map();	this.sum = 0;	for(let i = 0; i &amp;lt; w.length; i++)&amp;#123;	this.sum += w[i];	this.map.set(this.sum, i);	this.k">
+<meta name="keywords" content="leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="axios instance">
-<meta property="og:url" content="http://pengw00.github.io/2019/04/03/axios-instance/index.html">
+<meta property="og:title" content="leetcode.528 Random Pick with Weight">
+<meta property="og:url" content="http://pengw00.github.io/2019/07/25/leetcode-528-Random-Pick-with-Weight/index.html">
 <meta property="og:site_name" content="David w00&#39;s Tech Road">
-<meta property="og:description" content="Question??axios.create({ baseURL: ajaxUrl,timeout: 30000,withCredentials: true}) 创建实例作用是啥 没有不行吗### 问题描述引入axios,然后在页面中进行请求axios.get(‘url’).then(res=&amp;gt;{}),这里的创建实例充当什么角色 Answer:默认会导出实例axios，通常你只需使用这个ax">
+<meta property="og:description" content="JS version123456789101112131415161718var solution = function(w)&amp;#123;	this.map = new Map();	this.sum = 0;	for(let i = 0; i &amp;lt; w.length; i++)&amp;#123;	this.sum += w[i];	this.map.set(this.sum, i);	this.k">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2019-04-03T14:32:46.136Z">
+<meta property="og:updated_time" content="2019-07-25T05:19:11.827Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="axios instance">
-<meta name="twitter:description" content="Question??axios.create({ baseURL: ajaxUrl,timeout: 30000,withCredentials: true}) 创建实例作用是啥 没有不行吗### 问题描述引入axios,然后在页面中进行请求axios.get(‘url’).then(res=&amp;gt;{}),这里的创建实例充当什么角色 Answer:默认会导出实例axios，通常你只需使用这个ax">
+<meta name="twitter:title" content="leetcode.528 Random Pick with Weight">
+<meta name="twitter:description" content="JS version123456789101112131415161718var solution = function(w)&amp;#123;	this.map = new Map();	this.sum = 0;	for(let i = 0; i &amp;lt; w.length; i++)&amp;#123;	this.sum += w[i];	this.map.set(this.sum, i);	this.k">
   
     <link rel="alternate" href="/atom.xml" title="David w00&#39;s Tech Road" type="application/atom+xml">
   
@@ -65,10 +65,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-axios-instance" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-leetcode-528-Random-Pick-with-Weight" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/04/03/axios-instance/" class="article-date">
-  <time datetime="2019-04-03T15:31:17.000Z" itemprop="datePublished">2019-04-03</time>
+    <a href="/2019/07/25/leetcode-528-Random-Pick-with-Weight/" class="article-date">
+  <time datetime="2019-07-25T05:15:39.000Z" itemprop="datePublished">2019-07-25</time>
 </a>
     
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      axios instance
+      leetcode.528 Random Pick with Weight
     </h1>
   
 
@@ -87,18 +87,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Question??<br>axios.create({ baseURL: ajaxUrl,timeout: 30000,withCredentials: true}) 创建实例作用是啥 没有不行吗### 问题描述<br>引入axios,然后在页面中进行请求axios.get(‘url’).then(res=&gt;{}),这里的创建实例充当什么角色</p>
-<p>Answer:<br>默认会导出实例axios，通常你只需使用这个axios就可以了。</p>
-<p>但是有时候你需要创建多个实例，比如你需要访问多个服务地址，而这些服务请求和响应的结构都完全不同，那么你可以通过axios.create创建不同的实例来处理。</p>
-<p>比如axios1是用http状态码确定响应是否正常，而axios2是服务器自己定义的状态码，又或者他们请求头不同，支持的content-type不同，那么我可以单独为axios1和axios2写拦截器。</p>
+        <h4 id="JS-version"><a href="#JS-version" class="headerlink" title="JS version"></a>JS version</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var solution = function(w)&#123;</span><br><span class="line">	this.map = new Map();</span><br><span class="line">	this.sum = 0;</span><br><span class="line">	for(let i = 0; i &lt; w.length; i++)&#123;</span><br><span class="line">	this.sum += w[i];</span><br><span class="line">	this.map.set(this.sum, i);</span><br><span class="line">	this.keys = [...this.map.keys()].sort((a, b) =&gt; a-b);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">solution.prototype.pickIndex = function()&#123;</span><br><span class="line">	const r = parseInt(Math.random() * this.sum);</span><br><span class="line">	for(const key of this.keys)&#123;</span><br><span class="line">		if(r &lt; key)&#123;</span><br><span class="line">			return this.map.get(key);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/axios-instance/" data-id="cjyi899yw001lv024csquprib" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/07/25/leetcode-528-Random-Pick-with-Weight/" data-id="cjyi899zc002cv024ivpxm3pg" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
 
     </footer>
   </div>
@@ -106,19 +103,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/04/03/Quick-Sort/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Quick Sort&#39; 
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/04/03/dfs和回溯模版/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/07/21/Leetcode-Contest-146/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">dfs和回溯模版</div>
+      <div class="article-nav-title">Leetcode_Contest_146</div>
     </a>
   
 </nav>
