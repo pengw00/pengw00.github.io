@@ -65,6 +65,57 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Design-a-transportation-payment-method" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/05/Design-a-transportation-payment-method/" class="article-date">
+  <time datetime="2019-06-05T17:30:09.000Z" itemprop="datePublished">2019-06-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/05/Design-a-transportation-payment-method/">Design a transportation payment method</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>For example design a payment system for New York’s MTA. Tell how you would handle thousands of requests per second. Also how will you handle the different notifications systems such as text alert. How would you handle faults? Was asked this on an onsite round.</p>
+<p><a href="https://leetcode.com/discuss/interview-question/system-design/305388/design-a-transportation-payment-system" target="_blank" rel="noopener">https://leetcode.com/discuss/interview-question/system-design/305388/design-a-transportation-payment-system</a></p>
+<h3 id="One-solution"><a href="#One-solution" class="headerlink" title="One solution"></a>One solution</h3><p>Basically you need to build two services, one to handle payment and one to handle notifications (can be email, whatsapp, text, etc.).</p>
+<p>Payment system’s responsibility to only deduct the payment using any of the payment gateways and call notification service to notify client. Payment needs to be done real-time and you have to handle client request through some HTTP API, so that you can show gateway page, amount, confirmation etc. After user consent is given you process the payment and queue a message to notification system to send alert. For payments, you can use any noSQL database, since we don’t have any relation as such and you get fast read/write.</p>
+<p>Notification service’s responsibility to notify users through channels. Notifications can be near realtime, so you can make use of queue/worker, so that you can autoscale your workers whenever there are more messages in queue. Workers are responsible for sending alerts. More workers you have, faster you process notifications to users. You can even distinguish different workers for different communication channel and scale them separately. As database you can use any noSQL, cause I don’t see any relation as such.</p>
+<p>You should ask more specific questions to interviewer during system design rounds to understand the scenario better.</p>
+<ul>
+<li><p>Replies<br>using SQL or noSQL</p>
+</li>
+<li><p>For payments it needs to be SQL . you want to maintain consistency in such highly atomic operations.</p>
+</li>
+<li>Need backup servers and replica in case some application servers or database severs fail.</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/06/05/Design-a-transportation-payment-method/" data-id="cjyn4d4eu0005m024tlnmqj4y" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Ways-to-center-CSS-element" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/05/Ways-to-center-CSS-element/" class="article-date">
@@ -142,7 +193,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Ways-to-center-CSS-element/" data-id="cjyi899yx001mv024fep1wqep" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/05/Ways-to-center-CSS-element/" data-id="cjyn4d4gb001pm024lrh1mpra" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
@@ -211,7 +262,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Redux-starter-kit-usage/" data-id="cjyi899yq001dv024xrt5ap4l" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/05/Redux-starter-kit-usage/" data-id="cjyn4d4gn0028m024conb069r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redux/">Redux</a></li></ul>
@@ -262,7 +313,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" data-id="cjyi899y8000ov024ndr1ypwq" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" data-id="cjyn4d4fd000sm024xjwjtc5p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -321,7 +372,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/leetcode-272-Closest-Binary-Search/" data-id="cjyi899zi002pv0240cuexfrc" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/leetcode-272-Closest-Binary-Search/" data-id="cjyn4d4h0002xm0244qfd6idg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -362,7 +413,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/ActiveMQ-Help-Decouple-System/" data-id="cjyi899xp0003v024jmaqi4ap" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/ActiveMQ-Help-Decouple-System/" data-id="cjyn4d4ep0002m024k7yydqjr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li></ul>
@@ -406,7 +457,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/Leetcode-Contest-139/" data-id="cjyi899yi0014v024mt05a4xr" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/Leetcode-Contest-139/" data-id="cjyn4d4fj0015m024my8fir8w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -449,7 +500,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/Responsive-Web-Design-I/" data-id="cjyi899yu001iv024oh5vnrzm" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/Responsive-Web-Design-I/" data-id="cjyn4d4fp001cm024h6bswn38" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li></ul>
@@ -499,7 +550,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/leetcode-201-Word-Search-II/" data-id="cjyi899zn0031v02484v7skn1" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/leetcode-201-Word-Search-II/" data-id="cjyn4d4h70038m024eytzzag8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -540,81 +591,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/" data-id="cjyi899zt003bv02409klfbd0" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/" data-id="cjyn4d4h60037m024gvs8b6lu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-ACM-ICPC-Road-Map" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/05/31/ACM-ICPC-Road-Map/" class="article-date">
-  <time datetime="2019-05-31T19:00:45.000Z" itemprop="datePublished">2019-05-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/31/ACM-ICPC-Road-Map/">ACM/ICPC Road Map</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="The-necessary-Topics-and-Algorithms"><a href="#The-necessary-Topics-and-Algorithms" class="headerlink" title="The necessary Topics and Algorithms."></a>The necessary Topics and Algorithms.</h3><p><img src="https://github.com/pengw00/pengw00.github.io/raw/master/image/Competitive-Programming.jpg" alt="image"></p>
-<h4 id="Elementary-Data-structure"><a href="#Elementary-Data-structure" class="headerlink" title="Elementary Data structure"></a>Elementary Data structure</h4><ul>
-<li>array</li>
-<li>stack</li>
-<li>queue</li>
-<li>string</li>
-<li>heap</li>
-<li>hash</li>
-</ul>
-<h4 id="Advanced-Data-Structrue"><a href="#Advanced-Data-Structrue" class="headerlink" title="Advanced Data Structrue"></a>Advanced Data Structrue</h4><ul>
-<li>Priority Queue</li>
-<li>Binary Indexed Tree or Fenwick Tree</li>
-<li>Segment Tree(RMQ, Range Sum and Lazy Propagation)</li>
-<li>K-D tree(insert, minimum, delete)</li>
-<li>Union Find Disjoint Set(cycle Detection and by range or path compression)</li>
-<li>Tries</li>
-<li>Interval Tree</li>
-</ul>
-<h4 id="Sorting-and-Search"><a href="#Sorting-and-Search" class="headerlink" title="Sorting and Search"></a>Sorting and Search</h4><ul>
-<li>binary Search</li>
-<li>Qucik Sort(Quick Select)</li>
-<li>Merge Sort</li>
-<li>Order Statistics</li>
-</ul>
-<h4 id="String-Manipulation"><a href="#String-Manipulation" class="headerlink" title="String Manipulation"></a>String Manipulation</h4><ul>
-<li>KMP algorithm</li>
-<li>Rabin Karp</li>
-<li>Z’s algorithm</li>
-<li>Aho Corasick String Matching</li>
-</ul>
-<h4 id="C-skillset"><a href="#C-skillset" class="headerlink" title="C++ skillset"></a>C++ skillset</h4><h4 id="Dynamic-Programming"><a href="#Dynamic-Programming" class="headerlink" title="Dynamic Programming"></a>Dynamic Programming</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Longest Common Subsequence</span><br><span class="line">Longest Increasing Subsequence</span><br><span class="line">Edit Distance</span><br><span class="line">Minimum Partition</span><br><span class="line">Ways to Cover a Distance</span><br><span class="line">Longest Path In Matrix</span><br><span class="line">Subset Sum Problem</span><br><span class="line">Optimal Strategy for a Game</span><br><span class="line">0-1 Knapsack Problem</span><br><span class="line">Assembly Line Scheduling</span><br><span class="line">Optimal Binary Search Tree</span><br></pre></td></tr></table></figure>
-<h4 id="backtracking"><a href="#backtracking" class="headerlink" title="backtracking"></a>backtracking</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Rat in a Maze</span><br><span class="line">N Queen Problem</span><br><span class="line">Subset Sum</span><br><span class="line">m Coloring Problem</span><br><span class="line">Hamiltonian Cycle</span><br></pre></td></tr></table></figure>
-<h4 id="Graph-Algorithms"><a href="#Graph-Algorithms" class="headerlink" title="Graph Algorithms"></a>Graph Algorithms</h4><p>One of the most important topic which you can not ignore if preparing for ACM – ICPC.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Breadth First Search (BFS)</span><br><span class="line">Depth First Search (DFS)</span><br><span class="line">Shortest Path from source to all vertices **Dijkstra**</span><br><span class="line">Shortest Path from every vertex to every other vertex **Floyd Warshall**</span><br><span class="line">Minimum Spanning tree **Prim**</span><br><span class="line">Minimum Spanning tree **Kruskal**</span><br><span class="line">Topological Sort</span><br><span class="line">Johnson’s algorithm</span><br><span class="line">Articulation Points (or Cut Vertices) in a Graph</span><br><span class="line">Bridges in a graph</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/31/ACM-ICPC-Road-Map/" data-id="cjyi899xo0002v024j8i67k2r" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
 
     </footer>
   </div>
@@ -673,6 +653,10 @@
       <ul>
         
           <li>
+            <a href="/2019/07/28/Leetcode-Contest-147-Jul-27-2019/">Leetcode Contest 147 Jul 27 2019</a>
+          </li>
+        
+          <li>
             <a href="/2019/07/25/leetcode-528-Random-Pick-with-Weight/">leetcode.528 Random Pick with Weight</a>
           </li>
         
@@ -686,10 +670,6 @@
         
           <li>
             <a href="/2019/06/11/Dry-Don-t-Repeat-Yourself/">Dry:Don&#39;t Repeat Yourself</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/09/Leetcode-987-Vertical-Order-Traversal-of-a-Binary-Tree/">Leetcode 987. Vertical Order Traversal of a Binary Tree</a>
           </li>
         
       </ul>
