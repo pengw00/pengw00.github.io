@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-07-28T15:24:35.643Z</updated>
+  <updated>2019-08-02T05:47:28.500Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode.975 Odd Even Jump</title>
+    <link href="http://pengw00.github.io/2019/08/01/leetcode-975-Odd-Even-Jump/"/>
+    <id>http://pengw00.github.io/2019/08/01/leetcode-975-Odd-Even-Jump/</id>
+    <published>2019-08-02T04:39:43.000Z</published>
+    <updated>2019-08-02T05:47:28.500Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="dynamic-Programming"><a href="#dynamic-Programming" class="headerlink" title="dynamic Programming"></a>dynamic Programming</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public int oddEvenJumps(int[] A) &#123;</span><br><span class="line">        int N = A.length;</span><br><span class="line">        if (N &lt;= 1) return N;</span><br><span class="line">        boolean[] odd = new boolean[N];</span><br><span class="line">        boolean[] even = new boolean[N];</span><br><span class="line">        odd[N-1] = even[N-1] = true;</span><br><span class="line"></span><br><span class="line">        TreeMap&lt;Integer, Integer&gt; vals = new TreeMap();</span><br><span class="line">        vals.put(A[N-1], N-1);</span><br><span class="line">        for (int i = N-2; i &gt;= 0; --i) &#123;</span><br><span class="line">            int v = A[i];</span><br><span class="line">            if (vals.containsKey(v)) &#123;</span><br><span class="line">                odd[i] = even[vals.get(v)];</span><br><span class="line">                even[i] = odd[vals.get(v)];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                Integer lower = vals.lowerKey(v);</span><br><span class="line">                Integer higher = vals.higherKey(v);</span><br><span class="line"></span><br><span class="line">                if (lower != null)</span><br><span class="line">                    even[i] = odd[vals.get(lower)];</span><br><span class="line">                if (higher != null) &#123;</span><br><span class="line">                    odd[i] = even[vals.get(higher)];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            vals.put(v, i);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int ans = 0;</span><br><span class="line">        for (boolean b: odd)</span><br><span class="line">            if (b) ans++;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;dynamic-Programming&quot;&gt;&lt;a href=&quot;#dynamic-Programming&quot; class=&quot;headerlink&quot; title=&quot;dynamic Programming&quot;&gt;&lt;/a&gt;dynamic Programming&lt;/h2&gt;&lt;figu
+      
+    
+    </summary>
+    
+    
+      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode Contest 147 Jul 27 2019</title>
@@ -447,30 +470,6 @@
 &lt;ul&gt;
 &lt;li&gt;Solution1: backtracking || dfs&lt;/li&gt;
 &lt;li&gt;Solution2: Trie&lt;figure class=&quot;highlight plain&quot;&gt;&lt;tab
-      
-    
-    </summary>
-    
-    
-      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode1033.Move Stones Until Consecutive</title>
-    <link href="http://pengw00.github.io/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/"/>
-    <id>http://pengw00.github.io/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/</id>
-    <published>2019-06-01T13:23:59.000Z</published>
-    <updated>2019-06-01T12:30:34.407Z</updated>
-    
-    <content type="html"><![CDATA[<p>Catogory: Brainteaser</p><p>-Edge case 1: all three stones are next to each other (z - x == 2). Return {0, 0}.<br>-Edge case 2: two stones are next to each other, or there is only one space in between. Minimum moves is 1.</p><p>-Otherwise; minimum moves are 2, maximum - z - x - 2.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; numMovesStones(int a, int b, int c) &#123;</span><br><span class="line">  vector&lt;int&gt; s = &#123; a, b, c &#125;;</span><br><span class="line">  sort(begin(s), end(s));</span><br><span class="line">  if (s[2] - s[0] == 2) return &#123; 0, 0 &#125;;</span><br><span class="line">  return &#123; min(s[1] - s[0], s[2] - s[1]) &lt;= 2 ? 1 : 2, s[2] - s[0] - 2 &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Catogory: Brainteaser&lt;/p&gt;
-&lt;p&gt;-Edge case 1: all three stones are next to each other (z - x == 2). Return {0, 0}.&lt;br&gt;-Edge case 2: two ston
       
     
     </summary>

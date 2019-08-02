@@ -65,6 +65,44 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode-975-Odd-Even-Jump" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/01/leetcode-975-Odd-Even-Jump/" class="article-date">
+  <time datetime="2019-08-02T04:39:43.000Z" itemprop="datePublished">2019-08-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/01/leetcode-975-Odd-Even-Jump/">leetcode.975 Odd Even Jump</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="dynamic-Programming"><a href="#dynamic-Programming" class="headerlink" title="dynamic Programming"></a>dynamic Programming</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public int oddEvenJumps(int[] A) &#123;</span><br><span class="line">        int N = A.length;</span><br><span class="line">        if (N &lt;= 1) return N;</span><br><span class="line">        boolean[] odd = new boolean[N];</span><br><span class="line">        boolean[] even = new boolean[N];</span><br><span class="line">        odd[N-1] = even[N-1] = true;</span><br><span class="line"></span><br><span class="line">        TreeMap&lt;Integer, Integer&gt; vals = new TreeMap();</span><br><span class="line">        vals.put(A[N-1], N-1);</span><br><span class="line">        for (int i = N-2; i &gt;= 0; --i) &#123;</span><br><span class="line">            int v = A[i];</span><br><span class="line">            if (vals.containsKey(v)) &#123;</span><br><span class="line">                odd[i] = even[vals.get(v)];</span><br><span class="line">                even[i] = odd[vals.get(v)];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                Integer lower = vals.lowerKey(v);</span><br><span class="line">                Integer higher = vals.higherKey(v);</span><br><span class="line"></span><br><span class="line">                if (lower != null)</span><br><span class="line">                    even[i] = odd[vals.get(lower)];</span><br><span class="line">                if (higher != null) &#123;</span><br><span class="line">                    odd[i] = even[vals.get(higher)];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            vals.put(v, i);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int ans = 0;</span><br><span class="line">        for (boolean b: odd)</span><br><span class="line">            if (b) ans++;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/08/01/leetcode-975-Odd-Even-Jump/" data-id="cjytos8j30031gs24y0xnjcpd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Leetcode-Contest-147-Jul-27-2019" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/28/Leetcode-Contest-147-Jul-27-2019/" class="article-date">
@@ -94,7 +132,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/07/28/Leetcode-Contest-147-Jul-27-2019/" data-id="cjyn4d4fc000rm024mm9s0vaq" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/07/28/Leetcode-Contest-147-Jul-27-2019/" data-id="cjytos8i10018gs243be70twu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -133,7 +171,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/07/25/leetcode-528-Random-Pick-with-Weight/" data-id="cjyn4d4gy002tm024blvtvv55" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/07/25/leetcode-528-Random-Pick-with-Weight/" data-id="cjytos8iu002mgs24qidi1mai" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -175,7 +213,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/07/21/Leetcode-Contest-146/" data-id="cjyn4d4fm0017m024o2uq9x5b" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/07/21/Leetcode-Contest-146/" data-id="cjytos8hw000wgs24tlz7373q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -217,7 +255,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/29/leetcode-76-Minimum-window-string/" data-id="cjyn4d4h30031m024svamxs4r" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/29/leetcode-76-Minimum-window-string/" data-id="cjytos8j40034gs24xvn61vv9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -256,7 +294,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/11/Dry-Don-t-Repeat-Yourself/" data-id="cjyn4d4ez000cm024cay6689z" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/11/Dry-Don-t-Repeat-Yourself/" data-id="cjytos8hi000bgs24h617sdkl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li></ul>
@@ -294,7 +332,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/09/Leetcode-987-Vertical-Order-Traversal-of-a-Binary-Tree/" data-id="cjyn4d4ff000vm024drpor9y1" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/09/Leetcode-987-Vertical-Order-Traversal-of-a-Binary-Tree/" data-id="cjytos8i9001lgs24jg17lu4x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -330,7 +368,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/09/Leetcode-146-LRU-cache/" data-id="cjyn4d4fa000mm024jt4lqjgl" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/09/Leetcode-146-LRU-cache/" data-id="cjytos8hv000sgs24q69kanli" class="article-share-link">Share</a>
       
       
     </footer>
@@ -378,7 +416,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/08/Leetcode-967-Numbers-With-Same-Consecutive-Differences/" data-id="cjyn4d4fb000om024bzhhrixv" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/08/Leetcode-967-Numbers-With-Same-Consecutive-Differences/" data-id="cjytos8i6001ggs241pxbqkly" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li></ul>
@@ -426,74 +464,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/" data-id="cjyn4d4ex0009m02424ly0wab" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Leetcode-333-Largest-BST-Subtree" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/06/Leetcode-333-Largest-BST-Subtree/" class="article-date">
-  <time datetime="2019-06-06T16:22:40.000Z" itemprop="datePublished">2019-06-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/06/Leetcode-333-Largest-BST-Subtree/">Leetcode.333 Largest BST Subtree</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>Given a binary tree, find the largest subtree which is a Binary Search Tree (BST), where largest means subtree with largest number of nodes in it.</li>
-</ul>
-<p><strong> Note: </strong><br>A subtree must include all of its descendants.</p>
-<h4 id="Similar-to-Leetcode-98"><a href="#Similar-to-Leetcode-98" class="headerlink" title="Similar to Leetcode.98"></a>Similar to Leetcode.98</h4><p><strong> Test Case </strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Input: [10,5,15,1,8,null,7]</span><br><span class="line"></span><br><span class="line">   10 </span><br><span class="line">   / \ </span><br><span class="line">  5  15 </span><br><span class="line"> / \   \ </span><br><span class="line">1   8   7</span><br><span class="line"></span><br><span class="line">Output: 3</span><br><span class="line">Explanation: The Largest BST Subtree in this case is the highlighted one.</span><br><span class="line">             The return value is the subtree&apos;s size, which is 3.</span><br></pre></td></tr></table></figure></p>
-<p><strong>Follow up:</strong><br>Can you figure out ways to solve it with O(n) time complexity?</p>
-<p><strong> logic </strong> </p>
-<ul>
-<li><ol>
-<li>dfs, get the information from bottom(top down), should return the max value in the left node and the min value in the right node.</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>a inner class is useful for the data</li>
-</ol>
-</li>
-<li><p>inner class:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Res&#123;</span><br><span class="line">        int size;</span><br><span class="line">        int lower;</span><br><span class="line">        int upper;</span><br><span class="line">        Res(int size, int lower, int upper)&#123;</span><br><span class="line">            this.size = size;</span><br><span class="line">            this.lower = lower;</span><br><span class="line">            this.upper = upper;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>main method:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public int largestBSTSubtree(TreeNode root) &#123;</span><br><span class="line">        if(root==null) return 0;</span><br><span class="line">        dfs(root);</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>dfs treversal</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private Res dfs(TreeNode root)&#123;</span><br><span class="line">    //fullfill the tree rule but the size = 0</span><br><span class="line">    if(root==null) &#123;return new Res(0, Integer.MAX_VALUE, Integer.MIN_VALUE);&#125;</span><br><span class="line">    Res left = dfs(root.left);</span><br><span class="line">    Res right = dfs(root.right);</span><br><span class="line">    //not fullfill the tree rule and size = -1 and the lower and upper is 0;</span><br><span class="line">    if(left.size==-1 || right.size == -1 || root.val &lt;= left.upper || root.val &gt;= right.lower)</span><br><span class="line">        return new Res(-1, 0, 0);</span><br><span class="line">    int size = left.size + 1 + right.size;</span><br><span class="line">    max = Math.max(size, max);</span><br><span class="line">    return new Res(size, Math.min(left.lower, root.val), Math.max(right.upper, root.val));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>the other way is to use parent as para in the dfs instead of use max and min value.</p>
-<h3 id="Leetcode-98-Validate-the-BST-tree"><a href="#Leetcode-98-Validate-the-BST-tree" class="headerlink" title="Leetcode.98 Validate the BST tree"></a>Leetcode.98 Validate the BST tree</h3><p>DFS search</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Solution&#123;</span><br><span class="line">    public boolean isValidBST(root, long minVal, long maxVal)&#123;</span><br><span class="line">        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);</span><br><span class="line">    &#125;</span><br><span class="line">    private boolean isValidBST(TreeNode root, long minVal, long maxVal)&#123;</span><br><span class="line">        if(root==null) return true;</span><br><span class="line">        if(root.val &gt;= maxVal || root.val &lt;= minVal) return false;</span><br><span class="line">        return isValidBST(root.left, minVal, root.val) &amp;&amp; isValidBST(root.right, root.val, maxVal);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/06/Leetcode-333-Largest-BST-Subtree/" data-id="cjyn4d4ff000xm0240spd07za" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/" data-id="cjytos8hj000dgs247yft4ms4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -542,7 +513,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -553,6 +524,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/08/01/leetcode-975-Odd-Even-Jump/">leetcode.975 Odd Even Jump</a>
+          </li>
         
           <li>
             <a href="/2019/07/28/Leetcode-Contest-147-Jul-27-2019/">Leetcode Contest 147 Jul 27 2019</a>
@@ -568,10 +543,6 @@
         
           <li>
             <a href="/2019/06/29/leetcode-76-Minimum-window-string/">leetcode.76 Minimum window string</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/11/Dry-Don-t-Repeat-Yourself/">Dry:Don&#39;t Repeat Yourself</a>
           </li>
         
       </ul>
