@@ -65,6 +65,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/" class="article-date">
+  <time datetime="2019-06-06T18:18:20.000Z" itemprop="datePublished">2019-06-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/">Inorder traversal iterative solution for multiple questions for Leetcode BST problem</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>for tree inorder traversal, we have many different coding solution: recursion and iterative with stack mainly. </li>
+</ul>
+<h4 id="Iterative-stack-for-basic-inorder-traversal"><a href="#Iterative-stack-for-basic-inorder-traversal" class="headerlink" title="Iterative stack for basic inorder traversal"></a>Iterative stack for basic inorder traversal</h4><p>leetcode 94. Binary Tree Inorder Traversal</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public List&lt;Integer&gt; inorderTraversal(TreeNode root)&#123;</span><br><span class="line">	List&lt;Integer&gt; res = new ArrayList&lt;&gt;();</span><br><span class="line">	if(root == null) return res;</span><br><span class="line">	Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">	while(root != null || !stack.empty())&#123;</span><br><span class="line">		while(root != null)&#123;</span><br><span class="line">			stack.push(root);</span><br><span class="line">			root = root.left;</span><br><span class="line">		&#125;</span><br><span class="line">		root = stack.pop();</span><br><span class="line">		res.add(root.val);</span><br><span class="line">		root = root.right;</span><br><span class="line">	&#125;</span><br><span class="line">	return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Use this basic structure to find the kth smallest node<h6 id="Leetcode-230-Kth-Smallest-Element-in-a-BST"><a href="#Leetcode-230-Kth-Smallest-Element-in-a-BST" class="headerlink" title="Leetcode 230. Kth Smallest Element in a BST"></a>Leetcode 230. Kth Smallest Element in a BST</h6></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public int KthSmallest(TreeNode root, int k)&#123;</span><br><span class="line">	Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">	while(root != null || !stack.isEmpty())&#123;</span><br><span class="line">		//go all the way down to the left bottom if root is valid</span><br><span class="line">		while(root != null)&#123;</span><br><span class="line">			stack.push(root);</span><br><span class="line">			root = root.left;</span><br><span class="line">		&#125;</span><br><span class="line">		//pop the top and get the value and then go the left</span><br><span class="line">		root = stack.pop();</span><br><span class="line">		if(--k == 0) break;</span><br><span class="line">		root = root.right;</span><br><span class="line">	&#125;</span><br><span class="line">	return root.val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Leetcode-98-Validate-Binary-Search-Tree"><a href="#Leetcode-98-Validate-Binary-Search-Tree" class="headerlink" title="Leetcode 98. Validate Binary Search Tree"></a>Leetcode 98. Validate Binary Search Tree</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public boolean isValidBST(TreeNode root)&#123;</span><br><span class="line">	if(root == null) return true;</span><br><span class="line">	Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">	TreeNode pre = null;</span><br><span class="line">	while(root != null || !stack.empty())&#123;</span><br><span class="line">		while(root != null)&#123;</span><br><span class="line">			stack.push(root);</span><br><span class="line">			root = root.left;</span><br><span class="line">		&#125;</span><br><span class="line">		root = stack.pop();</span><br><span class="line">		if(pre != null &amp;&amp; root.val &lt;= pre.val) return false;</span><br><span class="line">		pre = root;</span><br><span class="line">		root =root.right;</span><br><span class="line">	&#125;</span><br><span class="line">	return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/" data-id="ck017ejz5000hsq24pd789hys" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Leetcode-333-Largest-BST-Subtree" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/06/Leetcode-333-Largest-BST-Subtree/" class="article-date">
@@ -120,7 +168,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/06/Leetcode-333-Largest-BST-Subtree/" data-id="cjytos8hs000lgs24dxd74ocr" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/06/Leetcode-333-Largest-BST-Subtree/" data-id="ck017ejzb000psq24fi4qcehe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -171,7 +219,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Design-a-transportation-payment-method/" data-id="cjytos8he0005gs24h0fx9lch" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/05/Design-a-transportation-payment-method/" data-id="ck017ejyx0008sq24u72uht3t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li></ul>
@@ -260,7 +308,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Ways-to-center-CSS-element/" data-id="cjytos8ij0021gs24xw8l6oxq" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/05/Ways-to-center-CSS-element/" data-id="ck017ek02001rsq24hsaq5qbw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
@@ -329,7 +377,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Redux-starter-kit-usage/" data-id="cjytos8i4001dgs244z2r30wm" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/05/Redux-starter-kit-usage/" data-id="ck017ejzv001dsq24hzcl6rwp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redux/">Redux</a></li></ul>
@@ -380,7 +428,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" data-id="cjytos8hu000qgs24ld8gs58q" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" data-id="ck017ejzd000tsq24d37bcwn5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -439,7 +487,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/leetcode-272-Closest-Binary-Search/" data-id="cjytos8iv002pgs24h1aiy3de" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/leetcode-272-Closest-Binary-Search/" data-id="ck017ek0g002lsq24dcjum2wo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -480,7 +528,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/ActiveMQ-Help-Decouple-System/" data-id="cjytos8h80001gs24uj6ar2pe" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/ActiveMQ-Help-Decouple-System/" data-id="ck017ejyv0005sq244be2i40j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li></ul>
@@ -524,7 +572,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/Leetcode-Contest-139/" data-id="cjytos8hw000ugs24si83m6de" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/Leetcode-Contest-139/" data-id="ck017ejzh000zsq24ljhbmaxa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -567,60 +615,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/Responsive-Web-Design-I/" data-id="cjytos8i7001igs240dbxorv4" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/Responsive-Web-Design-I/" data-id="ck017ejzx001isq24folddt28" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode-201-Word-Search-II" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/01/leetcode-201-Word-Search-II/" class="article-date">
-  <time datetime="2019-06-01T17:16:45.000Z" itemprop="datePublished">2019-06-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/01/leetcode-201-Word-Search-II/">leetcode.201 Word Search II</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>*Check whether a word in a board</p>
-<ul>
-<li>Solution1: backtracking || dfs</li>
-<li>Solution2: Trie<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class solution1&#123;</span><br><span class="line">	Set&lt;String&gt; res = new HashSet&lt;&gt;();</span><br><span class="line">	public List&lt;String&gt; findWords(char[][] board, String[] words)&#123;</span><br><span class="line">		if(!res.contains(word) &amp;&amp; exist(board, word))&#123;</span><br><span class="line">			res.add(word);</span><br><span class="line">		&#125;</span><br><span class="line">		return new ArrayList&lt;&gt;(res);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private boolean exist(char[][] board, String word)&#123;</span><br><span class="line">		int m = board.length;</span><br><span class="line">		int n = board[0].length;</span><br><span class="line">		boolean[][] visisted = new boolean[m][n];</span><br><span class="line">		for(int i = 0; i &lt; m; i++)&#123;</span><br><span class="line">			for(int j = 0; j &lt; n; j++)&#123;</span><br><span class="line">				if(dfs(board, i, j, word, 0, visited)) return true;</span><br><span class="line">		&#125;</span><br><span class="line">		return false;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	private boolean dfs(char[][] board, int i, int j, String word, int index, boolean[][] visited)&#123;</span><br><span class="line">		if(index == word.length())&#123; return true;</span><br><span class="line">		boolean ret = false;</span><br><span class="line">		if(dfs(board, i+1, j, word, index+1, visited) || dfs(board, i-1, j, index +1, visited) ||</span><br><span class="line">		dfs(board, i, j+1, word, index+1, visited) || dfs(board, i, j-1, index + 1, visited) || </span><br><span class="line">		dfs(board, i, j-1, word, index+1, visited)) ret = true;</span><br><span class="line">		visited[i][j] = false;</span><br><span class="line">		&#125;</span><br><span class="line">		return ret;</span><br><span class="line">	&#125;</span><br><span class="line">	private boolean inboard(char[][] board, int i, int j)&#123;</span><br><span class="line">		return i &gt;= 0 &amp;&amp; i &lt; board.length &amp;&amp; j &gt;= 0 &amp;&amp; j &lt;board[0].length;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>Solution2: trie + dfs + backtracking</p>
-<ul>
-<li>Trie implementation<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">	class TrieNode &#123;</span><br><span class="line">		public TrieNode[] children = new TrieNode[26];</span><br><span class="line">		public String item = &quot;&quot;;</span><br><span class="line">		public TrieNode()&#123;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	class Trie()&#123;</span><br><span class="line">		private TrieNode root;</span><br><span class="line">		public Trie()&#123;</span><br><span class="line">			root = new TrieNode();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		//insert method -&gt; like data preprocess</span><br><span class="line">		public void insert(String word)&#123;</span><br><span class="line">			TrieNode node = root;</span><br><span class="line">			for(char c: word.toCharArray())&#123;</span><br><span class="line">				if(node.children[c-&apos;a&apos;]==null)&#123;</span><br><span class="line">					node.children[c-&apos;a&apos;] = new TrieNode();</span><br><span class="line">				&#125;</span><br><span class="line">				node = node.children[c-&apos;a&apos;];</span><br><span class="line">			&#125;</span><br><span class="line">			node.item = word; // the last node with the word</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		public boolean search(String word)&#123;</span><br><span class="line">			TrieNode node = root;</span><br><span class="line">			for(char c: word.toCharArray())&#123;</span><br><span class="line">				if(node.children[c-&apos;a&apos;]==null) return false;</span><br><span class="line">				node = node.children[c-&apos;a&apos;];</span><br><span class="line">			&#125;</span><br><span class="line">			//at the end, check the item == word</span><br><span class="line">			return node.item.equals(word);</span><br><span class="line">		&#125;</span><br><span class="line">		//check whether there is any word in the trie which start with the given prefix</span><br><span class="line">		public boolean startsWith(String prefix)&#123;</span><br><span class="line">			TrieNode node =root;</span><br><span class="line">			for(char c: prefix.toCharArray())&#123;</span><br><span class="line">				if(node.children[c-&apos;a&apos;]==null) return false;</span><br><span class="line">				node = node.children[c-&apos;a&apos;];</span><br><span class="line">			&#125;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="solution-II"><a href="#solution-II" class="headerlink" title="solution II"></a>solution II</h3><p>using trie, the time complexity got decreased while the space will be cratically increased!<br>so, when the words is big, the memory space limited will be hit!<br>Trie can be used in small dataset with a high performance!<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class solutionII&#123;</span><br><span class="line">	Set&lt;String&gt; res = new HashSet&lt;String&gt;();</span><br><span class="line">	public List&lt;String&gt; findwords(char[][] board, String[] words)&#123;</span><br><span class="line">		Trie trie = new Trie();</span><br><span class="line">		for(String word: words)&#123;</span><br><span class="line">			trie.insert(word);</span><br><span class="line">		&#125;</span><br><span class="line">		int m = board.length;</span><br><span class="line">		int n = board[0].length;</span><br><span class="line">		boolean[][] visited = new boolean[m][n];</span><br><span class="line">		for(int i = 0; i &lt; m; i++)&#123;</span><br><span class="line">			for(int j = 0; j &lt; n; j++)&#123;</span><br><span class="line">				dfs(board, visited, &quot;&quot;, i, j, trie);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return new ArrayList&lt;String&gt;(res);</span><br><span class="line">	&#125;</span><br><span class="line">	private void dfs(char[][] board, boolean[][] visited, String str, int x, int y, Trie trie)&#123;</span><br><span class="line">		if (x &lt; 0 || x &gt;= board.length || y &lt; 0 || y &gt;= board[0].length) return;</span><br><span class="line">        if (visited[x][y]) return;</span><br><span class="line"></span><br><span class="line">        str += board[x][y];</span><br><span class="line">        if(!trie.startsWith(str)) return;</span><br><span class="line">        if(trie.search(str))&#123;</span><br><span class="line">        	res.add(str);</span><br><span class="line">        &#125;</span><br><span class="line">        //still backtrack</span><br><span class="line">        visited[x][y] = true;</span><br><span class="line">        dfs(board, visited, str, x - 1, y, trie);</span><br><span class="line">        dfs(board, visited, str, x + 1, y, trie);</span><br><span class="line">        dfs(board, visited, str, x, y - 1, trie);</span><br><span class="line">        dfs(board, visited, str, x, y + 1, trie);</span><br><span class="line">        visited[x][y] = false;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/leetcode-201-Word-Search-II/" data-id="cjytos8ix002ugs24m2q779pg" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
 
     </footer>
   </div>
@@ -647,7 +645,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
     </div>
   </div>
 
@@ -657,7 +655,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
@@ -679,6 +677,10 @@
       <ul>
         
           <li>
+            <a href="/2019/08/31/Difference-between-patch-and-put-in-http-request/">Difference between patch and put in http request</a>
+          </li>
+        
+          <li>
             <a href="/2019/08/01/leetcode-975-Odd-Even-Jump/">leetcode.975 Odd Even Jump</a>
           </li>
         
@@ -692,10 +694,6 @@
         
           <li>
             <a href="/2019/07/21/Leetcode-Contest-146/">Leetcode_Contest_146</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/29/leetcode-76-Minimum-window-string/">leetcode.76 Minimum window string</a>
           </li>
         
       </ul>
