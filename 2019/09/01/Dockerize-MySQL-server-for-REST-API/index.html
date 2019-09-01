@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="David w00&#39;s Tech Road">
 <meta property="og:description" content="Dockerize MySQL serverA. launch a docker in localB. Hosting the MySQL server in Docker container in IMAGEC. Listening to the host port of MySQL server in local by whatever like SpringbootRest API or">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2019-09-01T21:55:11.630Z">
+<meta property="og:updated_time" content="2019-09-01T22:49:57.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dockerize MySQL server for REST API">
 <meta name="twitter:description" content="Dockerize MySQL serverA. launch a docker in localB. Hosting the MySQL server in Docker container in IMAGEC. Listening to the host port of MySQL server in local by whatever like SpringbootRest API or">
@@ -111,11 +111,23 @@ environment:
 <p>Access the mysql db with command:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -p findeasily  --protocol=tcp -u root -p</span><br></pre></td></tr></table></figure></p>
 <p>for the first docker-compose1.yml.</p>
 <p>And for second docker-compose2.yml, we can access the mysql database with<br>Command like:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up</span><br><span class="line">mysql -P 8083 --protocol=tcp -u root -p</span><br></pre></td></tr></table></figure></p>
+<p>– Running a Postgres using docker<br>Command lines:</p>
+<h5 id="laungch-a-docker-container"><a href="#laungch-a-docker-container" class="headerlink" title="laungch a docker container"></a>laungch a docker container</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Create the docker container over a specific image</span><br><span class="line">docker create -v /var/lib/postgresql/data --name postgres10.3-database alpine</span><br></pre></td></tr></table></figure>
+<p>if we already have the docker container running, then we can just launch an images and if there is not<br>local image it will pull from remote community server. </p>
+<p>Let’s now run a specific process in the container. This is going to be postgres. Here are the operations are broken down:<br>We’re naming the container local-postgres10.3.<br>Set the password to “password” using the environment tag -e.<br>Set the port to 5432 so we can access it from Postico later using -p.<br>The –volumes-from tells the container to mount the /var/lib/postgresql/data volume from the postgres10.3-database container that we created in the previous step.</p>
+<p>Lastly, use postgres:10.3 to launch the container.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name local-postgres10.3 -p 5432:5432 -e POSTGRES_PASSWORD=password -d --volumes-from postgres10.3-database postgres:10.3</span><br></pre></td></tr></table></figure>
+<p>this is running the images base on postgres in local, so since we do not have local-postgres10.3 images, it will just pull the image from remote and then we can run the image by the image id.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run dsf3edfdsfw</span><br></pre></td></tr></table></figure></p>
+<p>like that, so right now we running the postgres db in the docker, we can check by <figure class="highlight docker"><figcaption><span>ps ```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">now when we access the db by psql command, we can take like:</span><br><span class="line"> ``` docker exec -it cocky_varahamihira psql -U postgres</span><br></pre></td></tr></table></figure></p>
+<p> This is meaning that:</p>
+<p> docker exec command psql in database name as cocky_varahamihira.</p>
+<p>Notes: we don’t need to do like<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run --name local-postgres10.3 -p 5432:5432 -e POSTGRES_PASSWORD=password -d --volumes-from postgres10.3-database postgres:10.3</span><br><span class="line">&gt;&gt; Get into it</span><br><span class="line">psql -h localhost -p 5432 -U postgres</span><br><span class="line">&gt;&gt;</span><br><span class="line">Password for user postgres:</span><br><span class="line">psql (10.3 (Debian 10.3-1.pgdg90+1))</span><br><span class="line">Type &quot;help&quot; for help.</span><br><span class="line">postgres=#</span><br></pre></td></tr></table></figure></p>
+<p>Cauz it will run psql in local compouter instead of running in docker. so you will get in trouble of<br>install psql in your local computer, that will be not good I think. </p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/09/01/Dockerize-MySQL-server-for-REST-API/" data-id="ck01ik5ny0009rx24pl7xof3j" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/09/01/Dockerize-MySQL-server-for-REST-API/" data-id="ck01mivfn0009qb24631bkunw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li></ul>
