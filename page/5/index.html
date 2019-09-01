@@ -65,6 +65,100 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ngrx-for-flux" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/12/ngrx-for-flux/" class="article-date">
+  <time datetime="2019-04-12T06:22:31.000Z" itemprop="datePublished">2019-04-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/12/ngrx-for-flux/">ngrx for flux</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>github: <a href="https://github.com/SantiagoGdaR/angular-ngrx/blob/master/src/app/app-routing.module.ts" target="_blank" rel="noopener">https://github.com/SantiagoGdaR/angular-ngrx/blob/master/src/app/app-routing.module.ts</a></p>
+<p>What is NGRX<br>NGRX is a group of libraries “inspired” by the Redux pattern which in turn is “inspired” by the Flux pattern. Being a little more concise, this means that redux pattern is a simplified version of the Flux pattern and NGRX is an angular/rxjs version of the redux pattern.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">What do I mean with “angular/rxjs” version of redux… The “angular” part is because ngrx is a library to use within an angular application. The “rxjs” part is because the implementation of ngrx works around a rxjs flow. This means that it works using observables and the different observable operators provided by “rxjs”.</span><br></pre></td></tr></table></figure></p>
+<p>The main purpose of this pattern is<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">to provide a predictable state container, based on three main principles.</span><br></pre></td></tr></table></figure></p>
+<p>Let’s go through the three principles of the Redux pattern and point out the most important benefits they provide.</p>
+<p>Single source of truth<br>In the case of a redux/ngrx architecture, this means that the state of your whole application is <figure class="highlight plain"><figcaption><span>in an object tree within a single store.```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Within a single store? We are going to talk later about stores, but in a general definition, they have the responsibility of holding the state and applying changes to it when they are told to do so (when an action is dispatched, we are also going to talk about them later).</span><br><span class="line"></span><br><span class="line">The benefits of having a single source of truth are plenty, but for me, the most interesting one (because is the one that is going to impact on any angular app) is the following:</span><br><span class="line"></span><br><span class="line">When you are building an angular app ``` usually you have the state split and handle in multiple services ```. ``` As your app growth keeping track of your state changes starts to get messy and hard to debug and maintain. Having a single source of truth resolves this problem since the state is handled only in one object and in one place, so debugging or adding changes becomes way easier.</span><br></pre></td></tr></table></figure></p>
+<h2 id="State-is-read-only"><a href="#State-is-read-only" class="headerlink" title="State is read-only"></a>State is read-only</h2><p>You are never going to change the state directly instead you are going to dispatch actions. These actions describe what’s happening (can be things like getting, adding, removing, updating the state).</p>
+<p>####Dispatch an action?… We are going to talk about actions later but for a general point of view, they are identifiers of an operation on your application and they can be triggered (or dispatched) to tell the application to execute the operation that the action represents.####</p>
+<p>By avoiding to update the state from different places and having a centralized place to make changes, that responds to specific actions, you get a lot of benefits. Just to mention the most important ones:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">You know that any change to the state is going to happen only in one place. This has a great impact on debugging and testing.</span><br><span class="line">You know that if a certain action is dispatched the operation in the state is always the same. Again this impacts directly in debugging and testing.</span><br></pre></td></tr></table></figure>
+<h2 id="Changes-are-made-with-pure-functions"><a href="#Changes-are-made-with-pure-functions" class="headerlink" title="Changes are made with pure functions"></a>Changes are made with pure functions</h2><p>The operation triggered by dispatching an action is going to be a pure function called, within the redux architecture, reducers.</p>
+<p>These reducers (remember that they are just pure functions) receive an action and the state, depending on the action dispatched (usually with a switch statement) they execute an operation and return a new state object.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">State in a redux app is immutable! So when a reducer changes something in the state, it returns a new state object.</span><br></pre></td></tr></table></figure>
+<p>The benefits of using pure functions are well known, like the fact that they are immediately testable if you pass the same arguments you are going to get the same result.</p>
+<p>This approach also allows us to navigate between different instances of our state using Redux/ngrx dev tools and see what changed between instances and who change it, among other things. So using pure functions and returning new instances of the state has also a great impact on debugging.</p>
+<p>But the main benefit, in my opinion, is that by binding all our components inputs to state properties we can change the change detection strategy to on push, and this is going to be a boost on performance for the application.</p>
+<h2 id="where-is-the-example"><a href="#where-is-the-example" class="headerlink" title="where is the example???"></a>where is the example???</h2> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">This approach also allows us to navigate between different instances of our state using Redux/ngrx dev tools and see what changed between instances and who change it, among other things. So using pure functions and returning new instances of the state has also a great impact on debugging.</span><br></pre></td></tr></table></figure>
+<p>##<br>But the main benefit, in my opinion, is that by binding all our components inputs to state properties we can change the change detection strategy to on push, and this is going to be a boost on performance for the application.</p>
+<p>## </p>
+<h1 id="Great…-so-what-are-the-benefits-of-using-NGRX"><a href="#Great…-so-what-are-the-benefits-of-using-NGRX" class="headerlink" title="Great… so what are the benefits of using NGRX"></a>Great… so what are the benefits of using NGRX</h1><p>We have already mentioned most of them out while talking about the redux pattern principles. But let’s point out the most important benefits of using the redux pattern in an application (in my opinion):</p>
+<p>Since we have a single source of truth and you can’t directly change the state, applications are going to behave more consistently.<br>Using the redux pattern gives us a lot of cool features to make debugging easier.<br>Applications become easier to test since we are introducing pure functions to handle changes in the state and also because both, ngrx and rxjs, have a lot’s great features for testing.<br>As soon as you feel comfortable with using ngrx, understanding the flow of data in your applications becomes incredibly easy and predictable.</p>
+<h2 id="and-the-cons-are"><a href="#and-the-cons-are" class="headerlink" title="and the cons are"></a>and the cons are</h2><p>NGRX has, of course, a learning curve. Is not a big one, but not that small either, and I think it requires some experience or deep understanding of some program patters. Any mid-seniority dev should be ok but for a junior might be a little confusing at first.<br>For me, it feels a little verbose. So every time you add some property to the state, you need to add the actions, the dispatchers, you may need to update or add the selectors, the effects if any, update the store. And also you start piping (concatenating) rxjs operators and observables all over the place.<br>NGRX is not part of the angular core libraries and is not supported by Google, at least not directly because there are ngrx contributors that are part of the Angular team. Just something to consider since you are adding a library that is going to be a big dependency for your app.</p>
+<h2 id="When-to-use-NGRX"><a href="#When-to-use-NGRX" class="headerlink" title="When to use NGRX"></a>When to use NGRX</h2><p>So, in a general opinion ngrx should be used in medium/big projects were managing the state starts to become hard to maintain and overwhelming. Some other people, more fanatic of the pattern is going to say something like “if you have a state you have NGRX”.</p>
+<p>I do agree that it should be considered to be used in medium or big projects when you have a considerable state and a bunch of components using this state but you have to consider that Angular by itself provides plenty of solutions for managing the state and if you have a strong front-end angular team, then maybe you don’t need to bother about ngrx.</p>
+<p>That being said I consider that a strong Angular team may also decide to include ngrx to the solution because they know all the power of the redux pattern and also the power added by rxjs operators, and they feel comfortable working with both…</p>
+<p>That being said I consider that a strong Angular team may also decide to include ngrx to the solution because they know all the power of the redux pattern and also the power added by rxjs operators, and they feel comfortable working with both…</p>
+<p>If you were expecting a simple answer to decide when to use ngrx, you are not going to obtain it, and don’t trust anyone giving you this answer from outside your organization or team. The decision depends on studying the pros and cons, understanding your team and considering their opinion.</p>
+<h2 id="NGRX-Actions-Reducers-Selectors-Store-and-Effects"><a href="#NGRX-Actions-Reducers-Selectors-Store-and-Effects" class="headerlink" title="NGRX Actions, Reducers, Selectors, Store, and Effects"></a>NGRX Actions, Reducers, Selectors, Store, and Effects</h2><p>These are the core building units of the ngrx flow. Each of them takes care of a part of the process of starting an operation to changing our state and retrieving data.</p>
+<p><img src="https://github.com/pengw00/pengw00.github.io/raw/master/image/ngrx.png" alt="image"></p>
+<p>###<br><a href="https://medium.com/frontend-fun/angular-ngrx-a-clean-and-clear-introduction-4ed61c89c1fc" target="_blank" rel="noopener">https://medium.com/frontend-fun/angular-ngrx-a-clean-and-clear-introduction-4ed61c89c1fc</a></p>
+<p>###</p>
+<h4 id="payload-the-type-of-this-property-depends-on-what-type-of-data-this-action-needs-to-send-to-the-reducer-In-the-case-of-the-previous-example-is-going-to-be-a-string-containing-the-user-name-Not-all-actions-needs-a-payload"><a href="#payload-the-type-of-this-property-depends-on-what-type-of-data-this-action-needs-to-send-to-the-reducer-In-the-case-of-the-previous-example-is-going-to-be-a-string-containing-the-user-name-Not-all-actions-needs-a-payload" class="headerlink" title="payload: the type of this property depends on what type of data this action needs to send to the reducer. In the case of the previous example, is going to be a string containing the user name. Not all actions needs a payload."></a>payload: the type of this property depends on what type of data this action needs to send to the reducer. In the case of the previous example, is going to be a string containing the user name. Not all actions needs a payload.</h4><p>###</p>
+<ol>
+<li>view dispatch a actions. </li>
+</ol>
+<p>In the store object, you have a function to dispatch (trigger) actions. Actions are classes that implemenets the NGRX Action interface. These Action classes have two properties (let’s take as an example an action class called GetUserName):type: it’s a read only string describing what the action stand for. For example: ‘[User] Get User Name’</p>
+<p>2.1. If this action doesn’t trigger an effect then a reducer is going to analyze the action (usually using a switch statement) and return a new state that’s is going to be the result of merging the old state with the value that changed by calling the action.</p>
+<p>Reducers…<br>Reducers are pure functions accepting two arguments, the previous state and an Action. When an Action is dispatched ngrx goes through all the reducers passing as arguments the previous state and the Action, in the order that the reducers where created, until it finds a case for that action.</p>
+<p>2.2. If an effect gets triggered by dispatching an action is because some side effects are going to happen before calling the reducer. This can probably be something like calling an HTTP service to get data.</p>
+<p>Effects…<br>Effects, on the ngrx libraries ecosystem, allow us to deal with side-effects caused from dispatching an action outside angular components or the ngrx store.</p>
+<p>The Effects listen if any action is dispatched, then, similar to what reducers do, it checks if the action is one of the actions type it has a case for.<br>Then is going to perform a side-effect, usually getting or sending data to an API.<br>Finally is going to emit another action, usually, an action referring to the result-state of the side effect (success, error, etc), then a reducer is going to enter in the scene as we already mention in the ngrx flow.</p>
+<p>2.2.1. After the effect is done (side effects are finished) a new “state-result” action gets fired by the effect (it can be that the side effects succeeded or failed), and we are back to point 2.1.</p>
+<h2 id="why-we-need-selector"><a href="#why-we-need-selector" class="headerlink" title="why we need selector"></a>why we need selector</h2><p>###<br> Now the Store has a new state. The state can be a big object tree, so ngrx introduces selectors to be able to use only the slices of the object that we need in a specific component.</p>
+<p> As we mentioned before the state tree can become quite a big object, it doesn’t make sense to have all that object on places where we only need part of it.</p>
+<p> NGRX store provides us the function “select” to obtain slices of our store. But what if we need to apply some logic to that slice before using the data in the components.</p>
+<p>  They allow us to decouple any state slice data transformation from the components.<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The store “select” function accepts an an argument a pure function, this pure function is our selector.</span><br></pre></td></tr></table></figure></p>
+<p>###</p>
+<h2 id="NGRX-example"><a href="#NGRX-example" class="headerlink" title="NGRX example"></a>NGRX example</h2><p>Our example is going to have a list of users, the user detail page and some initial configuration information that you need to get when the app starts. We are going to be able to implement some important ngrx flows.</p>
+<p>These are the things that we are going to do:</p>
+<p>Installation of the library<br>Folder structure for the store<br>Create State and initial values<br>Create Actions<br>Create Reducers<br>Create Effects<br>Create Selectors<br>Setting everything up<br>Using the store in some components</p>
+<h2 id="1-Installation-of-the-library"><a href="#1-Installation-of-the-library" class="headerlink" title="1. Installation of the library"></a>1. Installation of the library</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng new angular-ngrx --style=scss</span><br></pre></td></tr></table></figure>
+<p>Let’s add the ngrx libraries that we are going to use:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install @ngrx/core @ngrx/store @ngrx/effects @ngrx/store-devtools @ngrx/router-store --save</span><br></pre></td></tr></table></figure></p>
+<p>We are installing almost all the libraries of the ngrx ecosystem. Most of them are quite clear about their purpose like core, store, effects, but there are a couple that you may wonder what they are for.</p>
+<h3 id="store-devtools-Some-powerful-tooling-for-debugging"><a href="#store-devtools-Some-powerful-tooling-for-debugging" class="headerlink" title="store-devtools. Some powerful tooling for debugging."></a>store-devtools. Some powerful tooling for debugging.</h3><h3 id="router-store-Keeps-the-state-of-the-angular-router-in-the-store"><a href="#router-store-Keeps-the-state-of-the-angular-router-in-the-store" class="headerlink" title="router-store. Keeps the state of the angular router in the store."></a>router-store. Keeps the state of the angular router in the store.</h3><h2 id="Folder-structure-for-the-Store"><a href="#Folder-structure-for-the-Store" class="headerlink" title="Folder structure for the Store"></a>Folder structure for the Store</h2><p>Let’s start by discussing the file structure of the store. This file structure and all the store configuration should exist within the core module of your application but in our example, we don’t have one so the store is going to exist within our app module (the steps are pretty much the same if you are doing it in your core module).</p>
+<p><img src="https://github.com/pengw00/pengw00.github.io/raw/master/image/folder.png" alt="image"></p>
+<p>The declaration of the reducer receive the state and, in this case, the user actions and returns an IUserState.<br>Using a switch statement we generate cases for each possible action type.<br>Each case returns a new object that is the result of merging the old state and the new value.<br>All reducers have a default result that just returns the state without any changes.</p>
+<p>You probably already notice that in the reducers we are not handling all the actions that we have created. This is because we are going to handle the missing actions in effects because these actions have side effects.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/12/ngrx-for-flux/" data-id="ck01fa3rj005cmz24pfh3zwez" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/">angular</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-TDD-concept" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/11/TDD-concept/" class="article-date">
@@ -93,7 +187,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/11/TDD-concept/" data-id="ck017ek00001nsq24gia4ok6l" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/11/TDD-concept/" data-id="ck01fa3p2001imz24deee9j1h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li></ul>
@@ -139,7 +233,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/11/Jest/" data-id="ck017ejz9000lsq24xb0l2mq9" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/11/Jest/" data-id="ck01fa3o7000lmz24zlp75rgi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -180,7 +274,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/10/leetcode380InsertDeleteGetRandom/" data-id="ck017ek0r003csq24ew2hciyz" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/10/leetcode380InsertDeleteGetRandom/" data-id="ck01fa3q0003hmz24ron21sow" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -220,7 +314,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/09/babel-gulp-ESlint/" data-id="ck017ek080021sq24x6tvqg5u" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/09/babel-gulp-ESlint/" data-id="ck01fa3pb0021mz24n2wyh4s8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
@@ -258,7 +352,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/06/stack-calculator-problem-recursive-a-little-bit/" data-id="ck017ek1j004esq24rcwuy6yu" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/06/stack-calculator-problem-recursive-a-little-bit/" data-id="ck01fa3ql004emz24vjjxpdrp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -296,7 +390,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/06/背包问题“/" data-id="ck017ek1r004qsq248bc3w8f7" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/06/背包问题“/" data-id="ck01fa3qx004tmz24o2z7arf8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -337,7 +431,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/06/find-celebrity/" data-id="ck017ek0b002asq241ozbanw3" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/06/find-celebrity/" data-id="ck01fa3ph002fmz24btx865wq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -375,7 +469,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/viewEncasulation/" data-id="ck017ek1o004nsq243gryeye7" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/viewEncasulation/" data-id="ck01fa3qv004rmz247gfpje2r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -428,59 +522,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/babel-and-webpack/" data-id="ck017ek05001wsq24wegmqw9o" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-js-null-vs-undefined" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/04/js-null-vs-undefined/" class="article-date">
-  <time datetime="2019-04-04T16:19:28.000Z" itemprop="datePublished">2019-04-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/04/js-null-vs-undefined/">js null vs undefined</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="null-vs-undefined"><a href="#null-vs-undefined" class="headerlink" title="null vs undefined"></a>null vs undefined</h1><p>What is null?<br>There are two features of null you should understand:</p>
-<pre><code>null is an empty or non-existent value.
-null must be assigned.
-</code></pre><p>ex:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let a = null;</span><br><span class="line">console.log(a);</span><br><span class="line">// null</span><br></pre></td></tr></table></figure></p>
-<p>Undefined most typically means a variable has been declared, but not defined. For example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let b;</span><br><span class="line">console.log(b);</span><br><span class="line">// undefined</span><br><span class="line"></span><br><span class="line">let c = undefined;</span><br><span class="line">console.log(c);</span><br><span class="line">// undefined</span><br></pre></td></tr></table></figure></p>
-<p>Finally, when looking up non-existent properties in an object, you will receive undefined:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var d = &#123;&#125;;</span><br><span class="line">console.log(d.fake);</span><br><span class="line">// undefined</span><br></pre></td></tr></table></figure></p>
-<p>Here’s a full list for six falsy values:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">false</span><br><span class="line">0 (zero)</span><br><span class="line">“” (empty string)</span><br><span class="line">null</span><br><span class="line">undefined</span><br><span class="line">NaN (Not A Number)</span><br></pre></td></tr></table></figure></p>
-<p>Interestingly enough, when using typeof to test null, it returns object:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let a = null;</span><br><span class="line">let b;</span><br><span class="line">console.log(typeof a);</span><br><span class="line">// object</span><br><span class="line">console.log(typeof b);</span><br><span class="line">// undefined</span><br></pre></td></tr></table></figure></p>
-<p>Null !== undefined<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">null !== undefined</span><br></pre></td></tr></table></figure></p>
-<p>But, and this may surprise you, null loosely equals undefined.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">null == undefined</span><br></pre></td></tr></table></figure></p>
-<p>a great example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let logHi = (str = &apos;hi&apos;) =&gt; &#123;</span><br><span class="line">  console.log(str);</span><br></pre></td></tr></table></figure></p>
-<p>This function requires one parameter and sets the default of that parameter to hi if it isn’t supplied. Here’s what that looks like:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">logHi();</span><br><span class="line">// hi</span><br><span class="line">logHi(&apos;bye&apos;);</span><br><span class="line">// bye</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>With default parameters, undefined will use the default while null does not.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">logHi(undefined);</span><br><span class="line">// hi</span><br><span class="line">logHi(null);</span><br><span class="line">// null</span><br></pre></td></tr></table></figure></p>
-<p>Summary<br>null is an assigned value. It means nothing.<br>undefined typically means a variable has been declared but not defined yet.<br>null and undefined are falsy values.<br>null and undefined are both primitives. However an error shows that typeof null = object.<br>null !== undefined but null == undefined.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/04/js-null-vs-undefined/" data-id="ck017ek0h002osq24fmewgkqo" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/04/babel-and-webpack/" data-id="ck01fa3p8001wmz244fzimftg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -510,7 +552,7 @@ null must be assigned.
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
     </div>
   </div>
 
@@ -520,7 +562,7 @@ null must be assigned.
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
@@ -529,7 +571,7 @@ null must be assigned.
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -540,6 +582,10 @@ null must be assigned.
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/09/01/Dockerize-MySQL-server-for-REST-API/">Dockerize MySQL server for REST API</a>
+          </li>
         
           <li>
             <a href="/2019/08/31/Difference-between-patch-and-put-in-http-request/">Difference between patch and put in http request</a>
@@ -555,10 +601,6 @@ null must be assigned.
         
           <li>
             <a href="/2019/07/25/leetcode-528-Random-Pick-with-Weight/">leetcode.528 Random Pick with Weight</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/21/Leetcode-Contest-146/">Leetcode_Contest_146</a>
           </li>
         
       </ul>
