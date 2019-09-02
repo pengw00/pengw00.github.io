@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-09-01T22:49:57.889Z</updated>
+  <updated>2019-09-02T04:09:17.707Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>how to design a online judgement system like leetcode</title>
+    <link href="http://pengw00.github.io/2019/09/01/how-to-design-a-online-judgement-system-like-leetcode/"/>
+    <id>http://pengw00.github.io/2019/09/01/how-to-design-a-online-judgement-system-like-leetcode/</id>
+    <published>2019-09-02T04:00:13.000Z</published>
+    <updated>2019-09-02T04:09:17.707Z</updated>
+    
+    <content type="html"><![CDATA[<p>– 1. user table for service<br>– 2. problem service, might be problem and solution and user’s solution<br>– 3. slave worker<br>– 4. socket for when the code compile finish, we will need to notice user, benchmark setting for runtime<br>API building.<br>–5. submit code is post operation, dispatch jobs for workers and notice<br>web socket consistant connenction</p><p>– core service: what users can do in the website?<br>submit code, get result, profile, problem, solution, and submission as well. </p><p>distribute system for worker? like even loop and thread pool stuff. Load balance..</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;– 1. user table for service&lt;br&gt;– 2. problem service, might be problem and solution and user’s solution&lt;br&gt;– 3. slave worker&lt;br&gt;– 4. socke
+      
+    
+    </summary>
+    
+    
+      <category term="System Design" scheme="http://pengw00.github.io/tags/System-Design/"/>
+    
+  </entry>
   
   <entry>
     <title>Dockerize MySQL server for REST API</title>
@@ -444,35 +467,6 @@
     
     
       <category term="ActiveMQ" scheme="http://pengw00.github.io/tags/ActiveMQ/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode Contest 139</title>
-    <link href="http://pengw00.github.io/2019/06/01/Leetcode-Contest-139/"/>
-    <id>http://pengw00.github.io/2019/06/01/Leetcode-Contest-139/</id>
-    <published>2019-06-02T04:56:09.000Z</published>
-    <updated>2019-06-02T03:57:07.914Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li><ol start="1071"><li>Greatest Common Divisor of Strings</li></ol></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ul&gt;
-&lt;li&gt;&lt;ol start=&quot;1071&quot;&gt;
-&lt;li&gt;Greatest Common Divisor of Strings&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-      
-    
-    </summary>
-    
-    
-      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
     
   </entry>
   

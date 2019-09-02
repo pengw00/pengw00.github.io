@@ -5,20 +5,20 @@
   
 
   
-  <title>leetcode671SecondMinNodeInBinaryTree | David w00&#39;s Tech Road</title>
+  <title>how to design a online judgement system like leetcode | David w00&#39;s Tech Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Leetcode671. Second Minimum Node In a Binary Tree//implementing in sort of bussiness logic in control component in//flexibly used in front end or backend!!! Analysis:  using dfs or bfs, search the val">
-<meta name="keywords" content="leetcode">
+  <meta name="description" content="– 1. user table for service– 2. problem service, might be problem and solution and user’s solution– 3. slave worker– 4. socket for when the code compile finish, we will need to notice user, benchmark">
+<meta name="keywords" content="System Design">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode671SecondMinNodeInBinaryTree">
-<meta property="og:url" content="http://pengw00.github.io/2019/05/29/leetcode671SecondMinNodeInBinaryTree/index.html">
+<meta property="og:title" content="how to design a online judgement system like leetcode">
+<meta property="og:url" content="http://pengw00.github.io/2019/09/01/how-to-design-a-online-judgement-system-like-leetcode/index.html">
 <meta property="og:site_name" content="David w00&#39;s Tech Road">
-<meta property="og:description" content="Leetcode671. Second Minimum Node In a Binary Tree//implementing in sort of bussiness logic in control component in//flexibly used in front end or backend!!! Analysis:  using dfs or bfs, search the val">
+<meta property="og:description" content="– 1. user table for service– 2. problem service, might be problem and solution and user’s solution– 3. slave worker– 4. socket for when the code compile finish, we will need to notice user, benchmark">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2019-05-29T18:33:39.358Z">
+<meta property="og:updated_time" content="2019-09-02T04:09:17.707Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode671SecondMinNodeInBinaryTree">
-<meta name="twitter:description" content="Leetcode671. Second Minimum Node In a Binary Tree//implementing in sort of bussiness logic in control component in//flexibly used in front end or backend!!! Analysis:  using dfs or bfs, search the val">
+<meta name="twitter:title" content="how to design a online judgement system like leetcode">
+<meta name="twitter:description" content="– 1. user table for service– 2. problem service, might be problem and solution and user’s solution– 3. slave worker– 4. socket for when the code compile finish, we will need to notice user, benchmark">
   
     <link rel="alternate" href="/atom.xml" title="David w00&#39;s Tech Road" type="application/atom+xml">
   
@@ -65,10 +65,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-leetcode671SecondMinNodeInBinaryTree" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-how-to-design-a-online-judgement-system-like-leetcode" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/05/29/leetcode671SecondMinNodeInBinaryTree/" class="article-date">
-  <time datetime="2019-05-29T18:18:00.000Z" itemprop="datePublished">2019-05-29</time>
+    <a href="/2019/09/01/how-to-design-a-online-judgement-system-like-leetcode/" class="article-date">
+  <time datetime="2019-09-02T04:00:13.000Z" itemprop="datePublished">2019-09-01</time>
 </a>
     
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      leetcode671SecondMinNodeInBinaryTree
+      how to design a online judgement system like leetcode
     </h1>
   
 
@@ -87,29 +87,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Leetcode671-Second-Minimum-Node-In-a-Binary-Tree"><a href="#Leetcode671-Second-Minimum-Node-In-a-Binary-Tree" class="headerlink" title="Leetcode671. Second Minimum Node In a Binary Tree"></a>Leetcode671. Second Minimum Node In a Binary Tree</h3><p>//implementing in sort of bussiness logic in control component in<br>//flexibly used in front end or backend!!!</p>
-<p>Analysis:</p>
-<ol>
-<li>using dfs or bfs, search the val in range (min1, ans), update ans = val if val in (min1, ans); </li>
-<li>using dfs with divide and conque, dfs to get left and right of the subtree,  and only recursion on the condition of root.val == root.left.val or root.val == root.right.val;</li>
-</ol>
-<ul>
-<li>solution one<h4 id="dfs"><a href="#dfs" class="headerlink" title="dfs"></a>dfs</h4></li>
-</ul>
-<figure class="highlight plain"><figcaption><span>solution&#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">	int min1;</span><br><span class="line">	long ans = Long.MAX_VALUE;</span><br><span class="line">	public int findSecondMinimumValue(TreeNode root)&#123;</span><br><span class="line">		if(root==null) return -1;</span><br><span class="line">		dfs(root);</span><br><span class="line">		return ans ==Long.MAX_VALUE?-1:(int)ans;</span><br><span class="line">	&#125;</span><br><span class="line">	//once root.val &gt; min1, we never drill deeply</span><br><span class="line">	//only root.val == min1, we dfs left and right</span><br><span class="line">	private void dfs(TreeNode root)&#123;</span><br><span class="line">		if(root!=null)&#123;</span><br><span class="line">			if(root.val&gt;min1 &amp;&amp; root.val &lt; ans)&#123;</span><br><span class="line">				ans = root.val;</span><br><span class="line">			&#125;else if(root.val == min1)&#123;</span><br><span class="line">				dfs(root.left);</span><br><span class="line">				dfs(root.right);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="bfs"><a href="#bfs" class="headerlink" title="bfs"></a>bfs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class solution&#123;</span><br><span class="line">	public int findSecondMinimumValue(TreeNode root)&#123;</span><br><span class="line">		if(root==null) return -1;</span><br><span class="line">		int rootval = root.val;</span><br><span class="line">		long ans = Long.MAX_VALUE;</span><br><span class="line">		Queue&lt;Integer&gt; queue = new LinkedList&lt;&gt;();</span><br><span class="line">		queue.add(root);</span><br><span class="line">		while(!queue.isEmpty())&#123;</span><br><span class="line">			TreeNode tmp = queue.poll();</span><br><span class="line">			if(tmp.left != rootval &amp;&amp; head.val &lt; ans)&#123;</span><br><span class="line">				ans = head.val;</span><br><span class="line">			&#125;</span><br><span class="line">			if(tmp.left != null)&#123;</span><br><span class="line">				queue.add(tmp.left);</span><br><span class="line">				queue.add(tmp.right);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return ans == Long.MAX_VALUE ? -1: ans;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>solution two <h3 id="divide-and-conquer-with-dfs"><a href="#divide-and-conquer-with-dfs" class="headerlink" title="divide and conquer with dfs"></a>divide and conquer with dfs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//only left.val == root.val or right.val == root.val will be dfs</span><br><span class="line">//be familiar to implement condition returnning in order.</span><br><span class="line">class solution&#123;</span><br><span class="line">	public int findSecondMinimumValue(TreeNode root)&#123;</span><br><span class="line">		if(root==null) return -1;</span><br><span class="line">		if(root.left==null &amp;&amp; root.right==null) return -1;</span><br><span class="line">		int left = root.left.val;</span><br><span class="line">		int right = root.right.val;</span><br><span class="line">		if(root.left.val == root.val)&#123;</span><br><span class="line">			left = findSecondMinimumValue(root.left);</span><br><span class="line">			&#125;</span><br><span class="line">		if(root.right.val == root.val)&#123;</span><br><span class="line">			right = findSecondMinimumValue(root.right);</span><br><span class="line">		&#125;</span><br><span class="line">		if(left!=-1 &amp;&amp; right != -1)&#123;</span><br><span class="line">			return Math.min(left, rigth);</span><br><span class="line">		&#125;</span><br><span class="line">		if(left != -1)&#123;</span><br><span class="line">			return left;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">		return right;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+        <p>– 1. user table for service<br>– 2. problem service, might be problem and solution and user’s solution<br>– 3. slave worker<br>– 4. socket for when the code compile finish, we will need to notice user, benchmark setting for runtime<br>API building.<br>–5. submit code is post operation, dispatch jobs for workers and notice<br>web socket consistant connenction</p>
+<p>– core service: what users can do in the website?<br>submit code, get result, profile, problem, solution, and submission as well. </p>
+<p>distribute system for worker? like even loop and thread pool stuff. Load balance..</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/29/leetcode671SecondMinNodeInBinaryTree/" data-id="ck01vx6q6003nat24it9x7wc0" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/09/01/how-to-design-a-online-judgement-system-like-leetcode/" data-id="ck01vx6pk002eat24z8xqgpn0" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/System-Design/">System Design</a></li></ul>
 
     </footer>
   </div>
@@ -117,19 +105,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/05/30/systemDesignInterview/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          systemDesignInterview
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/05/29/leetcodeContest138/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/09/01/Dockerize-MySQL-server-for-REST-API/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">leetcodeContest138</div>
+      <div class="article-nav-title">Dockerize MySQL server for REST API</div>
     </a>
   
 </nav>
