@@ -65,6 +65,73 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-RabbitMQforMicroServicesCommunication" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/28/RabbitMQforMicroServicesCommunication/" class="article-date">
+  <time datetime="2019-05-28T18:32:58.000Z" itemprop="datePublished">2019-05-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/28/RabbitMQforMicroServicesCommunication/">RabbitMQforMicroServicesCommunication</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Using-RabbitMQ-for-MicroSerices-Communication"><a href="#Using-RabbitMQ-for-MicroSerices-Communication" class="headerlink" title="Using RabbitMQ for MicroSerices Communication"></a>Using RabbitMQ for MicroSerices Communication</h2><p>Decomposing your monolith app into multiple, totally independently deployable and scalable services.</p>
+<p>The smaller apps are more modular with well-defined boundaries, can be written using different languages/frameworks, fail in isolation so that the entire app doesn’t go down (no SPOF).<br>Take a Cinema ticketing example:<br><img src="https://github.com/pengw00/pengw00.github.io/raw/master/image/microservices_architect.png" alt="image"></p>
+<h3 id="microservices-based-architecture"><a href="#microservices-based-architecture" class="headerlink" title="microservices-based architecture"></a>microservices-based architecture</h3><p>bad practce to have clients to communicate with each of the service instance separately. </p>
+<h4 id="Each-service-has-its-own-storage"><a href="#Each-service-has-its-own-storage" class="headerlink" title="Each service has its own storage"></a>Each service has its own storage</h4><p>Enables decoupling<br>Some queries will then need to join data that is owned by multiple services. To avoid this major performance hit, data may be replicated and sharded. This principle is not just tolerated in microservices, but encouraged.</p>
+<h4 id="a-single-request-should-ideally-only-invoke-one-service-to-fetch-the-response"><a href="#a-single-request-should-ideally-only-invoke-one-service-to-fetch-the-response" class="headerlink" title="a single request should, ideally, only invoke one service to fetch the response"></a>a single request should, ideally, only invoke one service to fetch the response</h4><p>not always possible,  mechanisms like gRPC, Thrift or even simple HTTP (as in our example) are commonly employed when necessary. As you may have guessed, this implies that data will have to be replicated across our services. Say, the GET /catalog/&lt;<cityid>&gt; endpoint is also supposed to return the premieres at each cinema in the city at that time. With our new strategy, the premieres will have to be stored in the database for the Cinema Catalog service as well. Hence, point iii).</cityid></p>
+<h4 id="REST-calls-made-to-our-API-gateway"><a href="#REST-calls-made-to-our-API-gateway" class="headerlink" title="REST calls made to our API gateway"></a>REST calls made to our API gateway</h4><p>request ==&gt; gateway ===&gt; complies result || response to clients</p>
+<p>Communication among services like this on one client request to the app should not happen. Otherwise we’ll be sacrificing performance, on account of another HTTP round-trip, for the newly introduced modularity.</p>
+<h3 id="Communicating-Asynchronously-Between-The-Services"><a href="#Communicating-Asynchronously-Between-The-Services" class="headerlink" title="Communicating Asynchronously Between The Services"></a>Communicating Asynchronously Between The Services</h3><p>the premieres change as a result of some CRUD operation on the Movies service. To keep the data in sync, that update event will have to be emitted and applied to the Cinema Catalog service as well</p>
+<h5 id="Try-to-picture-our-microservices-as-a-cluster-of-state-machines-where-updates-in-states-may-have-to-be-communicated-across-the-cluster-to-achieve-eventual-consistency"><a href="#Try-to-picture-our-microservices-as-a-cluster-of-state-machines-where-updates-in-states-may-have-to-be-communicated-across-the-cluster-to-achieve-eventual-consistency" class="headerlink" title="Try to picture our microservices as a cluster of state machines where updates in states may have to be communicated across the cluster to achieve eventual consistency."></a>Try to picture our microservices as a cluster of state machines where updates in states may have to be communicated across the cluster to achieve eventual consistency.</h5><p>Of course, we should never expect our end-users to have to wait longer for requests to finish and sacrifice their time for modularity to our benefit. Thereby, all of this communication has to be non-blocking. ### And that’s where RabbitMQ comes in. ###</p>
+<p>RabbitMQ: implements the AMQP messaging protocol.  first, you install a RabbitMQ server instance (broker) on a system. Then a publisher/producer program connects to this server and sends out a message. RabbitMQ queues that message and siphons it off to a single or multiple subscriber/consumer programs that are out there listening on the RabbitMQ server.</p>
+<p>microservices are way more complex and we won’t be covering critical topics like fault tolerance because of the intricacy of distributed systems, the full role of the API gateway, Service Discovery, data consistency patterns like Sagas, preventing service failure cascading using Circuit Breakers, health checks and architectural patterns like CQRS. Not to mention how to decide whether microservices will work for you or not.</p>
+<h2 id="How-RabbitMQ-Works"><a href="#How-RabbitMQ-Works" class="headerlink" title="How RabbitMQ Works"></a>How RabbitMQ Works</h2><p>Massages published to an exchange inside the RabbitMQ broker, then exchange copies of that message to queues on basis f certain developer-defined rules called binding. This journey called Routing. </p>
+<p>the direction is non-blocking message transmissions. Not exactly. There are four different types of exchanges and each, along with the bindings, defines a routing algorithm. “Routing algorithm” means, essentially, how the messages are distributed among the queues. Going into the details about each type might be an overkill here, so I’ll just expand on the one we’ll be using: the topic exchange.</p>
+<p>For an exchange to push a message onto a queue, that queue must be bound to the exchange. We can create multiple exchanges with unique names, explicitly. However, when you deploy RabbitMQ it comes with a default, nameless exchange. The exact way a binding key works, again, depends on the type of the exchange. Here’s how it works with a topic exchange:</p>
+<ol>
+<li><p>A queue is bound to an exchange using a string pattern (the binding key)<br>The published message is delivered to the exchange along with a routing key.</p>
+</li>
+<li><p>The exchange checks which queues match the routing key based on the binding key pattern defined before.</p>
+</li>
+</ol>
+<p><img src="https://github.com/pengw00/pengw00.github.io/raw/master/image/rabbitMQ.png" alt="image"><br><a href="https://www.rabbitmq.com/tutorials/tutorial-five-python.html" target="_blank" rel="noopener">source:</a></p>
+<p>Any message with a routing key ”quick.orange.rabbit” will be delivered to both queues. However, messages with ”lazy.brown.fox” will only reach Q2. Those with a routing key not matching any pattern will be lost.</p>
+<p>For some perspective, let’s just skim over two other exchange types:</p>
+<ul>
+<li>Fanout exchange: Messages sent to this kind of exchange will be sent to ALL the queues bound to it. The routing key, if provided, will be completely ignored. This can be used, for example, for broadcasting global configuration updates across a distributed system.</li>
+<li>Direct exchange (simplest): Sends the message to the queue whose binding key is exactly equal to the given routing key. If there are multiple consumers listening on the queue, then the messages will be load-balanced among them, hence, it is commonly used to distribute tasks between multiple workers in a round robin manner.</li>
+</ul>
+<p>//still need to follow up docker tutorial! and Circle.ci</p>
+<p><a href="https://codeburst.io/using-rabbitmq-for-microservices-communication-on-docker-a43840401819" target="_blank" rel="noopener">https://codeburst.io/using-rabbitmq-for-microservices-communication-on-docker-a43840401819</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/05/28/RabbitMQforMicroServicesCommunication/" data-id="ck0et90ia001lzw24kg423pfm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/microservice/">microservice</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-rabbitMQForMicroServices" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/28/rabbitMQForMicroServices/" class="article-date">
@@ -99,7 +166,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/28/rabbitMQForMicroServices/" data-id="ck01vx6qf0040at24xruxk0u2" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/28/rabbitMQForMicroServices/" data-id="ck0et90kb004ezw24ix94m5ic" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MicroService/">MicroService</a></li></ul>
@@ -186,7 +253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="ck01vx6rl005fat24kloqz54f" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="ck0et90l1005izw24fzcs4eki" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -226,7 +293,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/25/leetcode465/" data-id="ck01vx6q4003lat24u9oy42aa" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/25/leetcode465/" data-id="ck0et90jx003wzw249lmm2a6d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -268,7 +335,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/" data-id="ck01vx6ph0027at24rvjx9w0y" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/" data-id="ck0et90jd0030zw24t9tcbtqt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -323,7 +390,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="ck01vx6pz003bat24ljf3tvc0" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="ck0et90ju003tzw24e6ga897s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Contest/">Contest</a></li></ul>
@@ -362,7 +429,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="ck01vx6qc003vat24nf2vmzc0" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="ck0et90jz003yzw246vz2y0zz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li></ul>
@@ -400,7 +467,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="ck01vx6qo004dat24qk260fly" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="ck0et90kq0050zw24f2ev6iip" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -440,7 +507,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/sass-scss/" data-id="ck01vx6qm0049at24bhwf347a" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/17/sass-scss/" data-id="ck0et90kg004izw24lo7sxl20" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Front-end/">Front-end</a></li></ul>
@@ -483,48 +550,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/react-component-communication/" data-id="ck01vx6qi0044at24sjormg41" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-react-context-api" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/16/react-context-api/" class="article-date">
-  <time datetime="2019-04-16T06:25:24.000Z" itemprop="datePublished">2019-04-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/16/react-context-api/">react context api</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="react-contect-api-state-manage"><a href="#react-contect-api-state-manage" class="headerlink" title="react contect api state manage"></a>react contect api state manage</h1><h2 id="When-Should-I-Use-Context"><a href="#When-Should-I-Use-Context" class="headerlink" title="When Should I Use Context?"></a>When Should I Use Context?</h2><p>I would recommend reaching for Context when you find yourself passing props down through three or more levels in your component tree. You might notice that you have renamed your props, making it challenging to determine the data’s origin. You might consider implementing context if a bunch of your components know about irrelevant data.</p>
-<p>Rule of thumb: if you start to feel irritated by how long it takes to determine where data is coming from, introduce Context.</p>
-<p>Do not hesitate to still use the other tools you have available, like prop drilling and redux. While Context can make it easier to pass props around in certain scenarios, it doesn’t give you access to some of the benefits redux offers, and it’s a more complicated abstraction than prop drilling.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/16/react-context-api/" data-id="ck01vx6qo004bat243fh1q6hx" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/17/react-component-communication/" data-id="ck0et90ka004czw24b1qkp1oa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -554,7 +580,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System-Design/">System Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System-Design/">System Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
     </div>
   </div>
 
@@ -564,7 +590,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/System-Design/" style="font-size: 10px;">System Design</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/Leetcode/" style="font-size: 10px;">Leetcode</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/System-Design/" style="font-size: 10px;">System Design</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
   </div>
 
@@ -586,6 +612,10 @@
       <ul>
         
           <li>
+            <a href="/2019/09/11/Leetcode-124-Binary-Tree-Maximum-Path-Sum/">Leetcode 124 Binary Tree Maximum Path Sum</a>
+          </li>
+        
+          <li>
             <a href="/2019/09/01/how-to-design-a-online-judgement-system-like-leetcode/">how to design a online judgement system like leetcode</a>
           </li>
         
@@ -599,10 +629,6 @@
         
           <li>
             <a href="/2019/08/01/leetcode-975-Odd-Even-Jump/">leetcode.975 Odd Even Jump</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/28/Leetcode-Contest-147-Jul-27-2019/">Leetcode Contest 147 Jul 27 2019</a>
           </li>
         
       </ul>

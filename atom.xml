@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-09-02T04:09:17.707Z</updated>
+  <updated>2019-09-11T05:15:30.507Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode 124 Binary Tree Maximum Path Sum</title>
+    <link href="http://pengw00.github.io/2019/09/11/Leetcode-124-Binary-Tree-Maximum-Path-Sum/"/>
+    <id>http://pengw00.github.io/2019/09/11/Leetcode-124-Binary-Tree-Maximum-Path-Sum/</id>
+    <published>2019-09-11T05:02:12.000Z</published>
+    <updated>2019-09-11T05:15:30.507Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Leetcode-124-Binary-Tree-Maximum-Path-Sum"><a href="#Leetcode-124-Binary-Tree-Maximum-Path-Sum" class="headerlink" title="Leetcode 124. Binary Tree Maximum Path Sum"></a>Leetcode 124. Binary Tree Maximum Path Sum</h3><ul><li><p>Requirement:<br>  Get the maximum path with max sum, and the path should be with a highest tree node. </p>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2   3</span><br></pre></td></tr></table></figure></li><li><p>DFS Logic:  Design a function with returning the max left path, return like ~ max(left, right) + node.val, and<br>during the process, we have check the max( res, left + node.val + right);<br>the code will be as followed: </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> public class Solution &#123;</span><br><span class="line"> int maxValue; // res</span><br><span class="line"> public int maxPathSum(TreeNode root)&#123;</span><br><span class="line"> maxValue = Integer.MIN_VALUE;</span><br><span class="line"> maxPathDown(root);</span><br><span class="line"> return maxValue;</span><br><span class="line">&#125;</span><br><span class="line">private int maxPathDown(TreeNode node)&#123;</span><br><span class="line">if(node == null) return 0;</span><br><span class="line">//get the left max path(only drilling down from the left/right node)</span><br><span class="line">int left = Math.max(0, maxPathDown(node.left));</span><br><span class="line">int right = Math.max(0, maxPathDown(node.right));</span><br><span class="line">maxValue = Math.max(left, right) + node.val;</span><br><span class="line">&#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Leetcode-124-Binary-Tree-Maximum-Path-Sum&quot;&gt;&lt;a href=&quot;#Leetcode-124-Binary-Tree-Maximum-Path-Sum&quot; class=&quot;headerlink&quot; title=&quot;Leetcode 1
+      
+    
+    </summary>
+    
+    
+      <category term="Leetcode" scheme="http://pengw00.github.io/tags/Leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>how to design a online judgement system like leetcode</title>
@@ -441,32 +464,6 @@
     
     
       <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ActiveMQ Help Decouple System</title>
-    <link href="http://pengw00.github.io/2019/06/04/ActiveMQ-Help-Decouple-System/"/>
-    <id>http://pengw00.github.io/2019/06/04/ActiveMQ-Help-Decouple-System/</id>
-    <published>2019-06-04T18:34:47.000Z</published>
-    <updated>2019-06-04T17:37:33.756Z</updated>
-    
-    <content type="html"><![CDATA[<ol><li>应用1：异步处理才能应用解耦<br>用户注册后发送邮件/短信<br>传统:50+50+50<br>MQ异步处理：50+5</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ol&gt;
-&lt;li&gt;应用1：异步处理才能应用解耦&lt;br&gt;用户注册后发送邮件/短信&lt;br&gt;传统:50+50+50&lt;br&gt;MQ异步处理：50+5&lt;/li&gt;
-&lt;/ol&gt;
-
-      
-    
-    </summary>
-    
-    
-      <category term="ActiveMQ" scheme="http://pengw00.github.io/tags/ActiveMQ/"/>
     
   </entry>
   
