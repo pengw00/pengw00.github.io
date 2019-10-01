@@ -65,6 +65,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-dfs和回溯模版" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/03/dfs和回溯模版/" class="article-date">
+  <time datetime="2019-04-03T06:12:04.000Z" itemprop="datePublished">2019-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/03/dfs和回溯模版/">dfs和回溯模版</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>dfs template<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">void f()  </span><br><span class="line">&#123;  </span><br><span class="line">     if(符合边界条件)  </span><br><span class="line">     &#123;  </span><br><span class="line"></span><br><span class="line">        ///////  </span><br><span class="line">        return;  </span><br><span class="line">     &#125;  </span><br><span class="line"></span><br><span class="line">     //某种形式的调用  </span><br><span class="line">     f();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>回溯模版： 限制条件 if，选择 （for。。。）结束条件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">void DFS(int 当前状态)  </span><br><span class="line">&#123;  </span><br><span class="line">      if(当前状态为边界状态)  </span><br><span class="line">      &#123;  </span><br><span class="line">        记录或输出  </span><br><span class="line">        return;  </span><br><span class="line">      &#125;  </span><br><span class="line">      for(i=0;i&lt;n;i++)       //横向遍历解答树所有子节点  </span><br><span class="line">      &#123;  </span><br><span class="line">           //扩展出一个子状态。  </span><br><span class="line">           修改了全局变量  </span><br><span class="line">           if(子状态满足约束条件)  </span><br><span class="line">            &#123;  </span><br><span class="line">              dfs(子状态)  </span><br><span class="line">           &#125;  </span><br><span class="line">            恢复全局变量//回溯部分  </span><br><span class="line">      &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>BFS和DFS相似。BFS显式用队列，DFS隐式用栈，即递归。<br>当然，对于DFS，用递归可能会造成栈溢出，所以也可以更改为显示栈。</p>
+<p>经典例题： 走迷宫<br>*表示可走 </p>
+<p>#表示障碍<br>T表示出口<br>入口是(1,1)，数据保证左上角是入口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">char maze[100][100];</span><br><span class="line">bool flag[100][100];</span><br><span class="line">int dx[]=&#123;0,0,1,-1&#125;;</span><br><span class="line">int dy[]=&#123;1,-1,0,0&#125;;</span><br><span class="line">int m,n;</span><br><span class="line"></span><br><span class="line">bool dfs(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">    flag[x][y]=1;              //走过的路标记为1</span><br><span class="line">    if(maze[x][y]==&apos;T&apos;)return true;</span><br><span class="line">    for(int i=0;i&lt;4;i++)       //四个方向</span><br><span class="line">    &#123;</span><br><span class="line">        int nx=x+dx[i];</span><br><span class="line">        int ny=y+dy[i];</span><br><span class="line">        if(flag[nx][ny]==0||maze[nx][ny]==&apos;*&apos;||maze[nx][ny]==&apos;T&apos;&amp;&amp;nx&gt;0&amp;&amp;ny&gt;0&amp;&amp;nx&lt;m+1&amp;&amp;ny&lt;n+1)</span><br><span class="line">        &#123;</span><br><span class="line">            return dfs(nx,ny);   </span><br><span class="line">            flag[nx][ny]=0;    //回溯，将标记重新标记为0</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;             //找不到返回false</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    while(cin&gt;&gt;m&gt;&gt;n)&#123;</span><br><span class="line">    memset(maze,0,sizeof(maze));</span><br><span class="line">    memset(flag,0,sizeof(flag));</span><br><span class="line">    for(int i=1;i&lt;=m;i++)</span><br><span class="line">        for(int j=1;j&lt;=n;j++)</span><br><span class="line">            cin&gt;&gt;maze[i][j];</span><br><span class="line">    if(dfs(1,1))cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl;</span><br><span class="line">    else cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>回溯的两种写法：</p>
+<p>递归写法和迭代写法，链接：<a href="https://blog.csdn.net/man_sion/article/details/74993907" target="_blank" rel="noopener">https://blog.csdn.net/man_sion/article/details/74993907</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/04/03/dfs和回溯模版/" data-id="ck17dh9ie001yye241jxy9a7m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-回溯，递归，dp三法leetcode-题目“" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/03/回溯，递归，dp三法leetcode-题目“/" class="article-date">
@@ -97,7 +143,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/03/回溯，递归，dp三法leetcode-题目“/" data-id="ck0et90kr0054zw241nst9ngz" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/03/回溯，递归，dp三法leetcode-题目“/" data-id="ck17dh9l1005gye24a0qg24vb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -165,7 +211,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/02/springSecurity-Bcrypt-hash-password/" data-id="ck0et90l2005kzw247jf5aa7h" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/02/springSecurity-Bcrypt-hash-password/" data-id="ck17dh9la005oye24x1sdl99s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
@@ -223,7 +269,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/02/Hibernate/" data-id="ck0et90hd000bzw24mu5qjsyg" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/02/Hibernate/" data-id="ck17dh9h20009ye24doir51ch" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hibernate/">hibernate</a></li></ul>
@@ -274,7 +320,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/被amazon开出两次的经验总结/" data-id="ck0et90kt0059zw24mi0l8bj6" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/被amazon开出两次的经验总结/" data-id="ck17dh9l3005iye24v03tgag9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/career/">career</a></li></ul>
@@ -314,7 +360,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/leetcode-10-Regular-expression/" data-id="ck0et90je0032zw24gcl4clw2" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/leetcode-10-Regular-expression/" data-id="ck17dh9is002lye248uw6v9no" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -363,7 +409,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/March-30-2019-Study-plan/" data-id="ck0et90i7001bzw24e7oq3jcg" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/March-30-2019-Study-plan/" data-id="ck17dh9i10019ye240xh5hcci" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Study-plan/">Study plan</a></li></ul>
@@ -402,7 +448,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/30/react-factory-and-functional-component/" data-id="ck0et90k80049zw24c4gi4w8i" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/30/react-factory-and-functional-component/" data-id="ck17dh9js0048ye24mahmyc3s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -494,7 +540,7 @@ Vehicle* getVehicle()  {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/29/factory-pattern/" data-id="ck0et90il0027zw24c2m2aggi" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/29/factory-pattern/" data-id="ck17dh9in002aye248vmz2381" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li></ul>
@@ -540,65 +586,7 @@ Vehicle* getVehicle()  {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/Design-high-quality-React-component/" data-id="ck0et90h80006zw2474ch9h3e" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-props-and-state-new-example" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/28/props-and-state-new-example/" class="article-date">
-  <time datetime="2019-03-28T15:08:40.000Z" itemprop="datePublished">2019-03-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/28/props-and-state-new-example/">props and state new example</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[转载]<a href="https://www.jianshu.com/p/3cb5026edee8" target="_blank" rel="noopener">https://www.jianshu.com/p/3cb5026edee8</a></p>
-<ol>
-<li><p>props传值，直接在组件初始化的时候赋予参数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">    &lt;script src=&quot;https://zhangpeiyue.com/wp-content/uploads/2018/08/react.development.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;https://zhangpeiyue.com/wp-content/uploads/2018/08/react-dom.development.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;https://zhangpeiyue.com/wp-content/uploads/2018/08/babel.min_.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div id=&quot;wrap&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;script type=&quot;text/babel&quot;&gt;</span><br><span class="line">    class MyComponent extends React.Component &#123;</span><br><span class="line">        //此处的构造器是可以省略的</span><br><span class="line">        constructor(props)&#123;</span><br><span class="line">            super(props);</span><br><span class="line">        &#125;</span><br><span class="line">        render() &#123;</span><br><span class="line">            return &lt;div&gt;好神奇！ &#123;this.props.siteName&#125;!&lt;/div&gt;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    var element = &lt;MyComponent siteName=&quot;zhangpeiyue.com&quot;/&gt;;</span><br><span class="line">    ReactDOM.render(</span><br><span class="line">        element,</span><br><span class="line">        document.querySelector(&quot;#wrap&quot;)</span><br><span class="line">    );</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过defaltProps 添加默认的props</p>
-</li>
-</ol>
-<p>defaultProps是一个对象，放添加的值到defaultProps的属性中即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class MyComponent extends React.Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        //此处返回   &lt;div&gt;小张今年18岁了&lt;/div&gt;</span><br><span class="line">        return &lt;div&gt;</span><br><span class="line">            &#123;this.props.userName&#125;今年&#123;this.props.age&#125;岁了！</span><br><span class="line">        &lt;/div&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//为组件添加默认属性 userName与age</span><br><span class="line">MyComponent.defaultProps=&#123;</span><br><span class="line">    userName:&quot;小张&quot;,</span><br><span class="line">    age:18</span><br><span class="line">&#125;</span><br><span class="line">var element = &lt;MyComponent/&gt;;</span><br><span class="line">ReactDOM.render(</span><br><span class="line">    element,</span><br><span class="line">    document.querySelector(&quot;#wrap&quot;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
-<ol start="3">
-<li>可以通过父组件设置state，然后子组件通过props接收父组件的state值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">//父组件</span><br><span class="line">class MyComponent extends React.Component &#123;</span><br><span class="line">    constructor()&#123;</span><br><span class="line">        super();</span><br><span class="line">        //设置sate,添加name与age属性</span><br><span class="line">        this.state=&#123;</span><br><span class="line">            name:&quot;张培跃&quot;,</span><br><span class="line">            age:18</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return &lt;div&gt;</span><br><span class="line">            &lt;Name name=&#123;this.state.name&#125;/&gt;</span><br><span class="line">            &lt;Age age=&#123;this.state.age&#125;/&gt;</span><br><span class="line">        &lt;/div&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//子组件Name</span><br><span class="line">class Name extends React.Component&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        return &lt;div&gt;&#123;this.props.name&#125;&lt;/div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//子组件Age</span><br><span class="line">class Age extends React.Component&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        return &lt;div&gt;&#123;this.props.age&#125;&lt;/div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var element = &lt;MyComponent/&gt;;</span><br><span class="line">ReactDOM.render(</span><br><span class="line">    element,</span><br><span class="line">    document.querySelector(&quot;#wrap&quot;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>4.使用propTypes进行类型检测</p>
-<p>React提供了可以对Props进行验证的功能PropTypes。PropTypes为组件类自身的属性，提供了很多验证器，来验证传入的数据是否有效。当传入的数据无效时，JavaScript控制台会抛出警告。<br>另外需要注意的是，在开发环境下，当你使用了一个无效的值作为prop时，控件台会出现警告;在生产环境下，为了性能考虑会将PropTypes忽略掉！<br>要想使用propTypes,首先要对prop-type.js文件进行引入。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;https://zhangpeiyue.com/wp-content/uploads/2018/08/prop-types.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
-<p>Example<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var name=&quot;老大&quot;</span><br><span class="line">var age=18;</span><br><span class="line">class MyComponent extends React.Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return &lt;div&gt;</span><br><span class="line">            &#123;this.props.name&#125;今年&#123;this.props.age&#125;岁了！</span><br><span class="line">        &lt;/div&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//propTypes是组件类的静态属性</span><br><span class="line">MyComponent.propTypes=&#123;</span><br><span class="line">    //将name设置为string类型</span><br><span class="line">    name:PropTypes.string,</span><br><span class="line">    //将age设置为number类型</span><br><span class="line">    age:PropTypes.number</span><br><span class="line">&#125;;</span><br><span class="line">var element = &lt;MyComponent name=&#123;name&#125; age=&#123;age&#125; /&gt;;</span><br><span class="line">ReactDOM.render(</span><br><span class="line">    element,</span><br><span class="line">    document.querySelector(&quot;#wrap&quot;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
-<p>以上示例当中的name与age不合法时，会弹出类型不符的警告！所以在项目开发中使用PropTypes进行对props的验证还是很有好处的！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">More Validator:</span><br><span class="line">MyComponent.propTypes = &#123;</span><br><span class="line">    // 可以声明 prop 为指定的 JS 基本数据类型，默认情况，这些数据是可选的</span><br><span class="line">   optionalArray: React.PropTypes.array,</span><br><span class="line">    optionalBool: React.PropTypes.bool,</span><br><span class="line">    optionalFunc: React.PropTypes.func,</span><br><span class="line">    optionalNumber: React.PropTypes.number,</span><br><span class="line">    optionalObject: React.PropTypes.object,</span><br><span class="line">    optionalString: React.PropTypes.string,</span><br><span class="line"> </span><br><span class="line">    // 可以被渲染的对象 numbers, strings, elements 或 array</span><br><span class="line">    optionalNode: React.PropTypes.node,</span><br><span class="line"> </span><br><span class="line">    //  React 元素</span><br><span class="line">    optionalElement: React.PropTypes.element,</span><br><span class="line"> </span><br><span class="line">    // 用 JS 的 instanceof 操作符声明 prop 为类的实例。</span><br><span class="line">    optionalMessage: React.PropTypes.instanceOf(Message),</span><br><span class="line"> </span><br><span class="line">    // 用 enum 来限制 prop 只接受指定的值。</span><br><span class="line">    optionalEnum: React.PropTypes.oneOf([&apos;News&apos;, &apos;Photos&apos;]),</span><br><span class="line"> </span><br><span class="line">    // 可以是多个对象类型中的一个</span><br><span class="line">    optionalUnion: React.PropTypes.oneOfType([</span><br><span class="line">      React.PropTypes.string,</span><br><span class="line">      React.PropTypes.number,</span><br><span class="line">      React.PropTypes.instanceOf(Message)</span><br><span class="line">    ]),</span><br><span class="line"> </span><br><span class="line">    // 指定类型组成的数组</span><br><span class="line">    optionalArrayOf: React.PropTypes.arrayOf(React.PropTypes.number),</span><br><span class="line"> </span><br><span class="line">    // 指定类型的属性构成的对象</span><br><span class="line">    optionalObjectOf: React.PropTypes.objectOf(React.PropTypes.number),</span><br><span class="line"> </span><br><span class="line">    // 特定 shape 参数的对象</span><br><span class="line">    optionalObjectWithShape: React.PropTypes.shape(&#123;</span><br><span class="line">      color: React.PropTypes.string,</span><br><span class="line">      fontSize: React.PropTypes.number</span><br><span class="line">    &#125;),</span><br><span class="line"> </span><br><span class="line">    // 任意类型加上 `isRequired` 来使 prop 不可空。</span><br><span class="line">    requiredFunc: React.PropTypes.func.isRequired,</span><br><span class="line"> </span><br><span class="line">    // 不可空的任意类型</span><br><span class="line">    requiredAny: React.PropTypes.any.isRequired,</span><br><span class="line"> </span><br><span class="line">    // 自定义验证器。如果验证失败需要返回一个 Error 对象。不要直接使用 `console.warn` 或抛异常，因为这样 `oneOfType` 会失效。</span><br><span class="line">    customProp: function(props, propName, componentName) &#123;</span><br><span class="line">      if (!/matchme/.test(props[propName])) &#123;</span><br><span class="line">        return new Error(&apos;Validation failed!&apos;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>现在我们来总结下,props与state的区别：</p>
-<p>props是指组件间传递的一种方式，props自然也可以传递state。由于React的数据流是自上而下的，所以是从父组件向子组件进行传递；另外组件内部的this.props属性是只读的不可修改！<br>state是组件内部的状态（数据），不能够直接修改，必须要通过setState来改变值的状态，从而达到更新组件内部数据的作用。</p>
-<p>props和state是经常要结合使用的，父组件的state可以转化为props来为子组件进行传值。在这种情况下，子组件接收的props是只读的，想要改变值，只能通过父组件的state对其进行更改。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/03/28/props-and-state-new-example/" data-id="ck0et90k30044zw24j8e1ok86" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/03/28/Design-high-quality-React-component/" data-id="ck17dh9h3000aye24z45lwivh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
@@ -660,6 +648,10 @@ Vehicle* getVehicle()  {
       <ul>
         
           <li>
+            <a href="/2019/09/30/leetcode-927-Three-Equal-Parts/">leetcode 927 Three Equal Parts</a>
+          </li>
+        
+          <li>
             <a href="/2019/09/11/Leetcode-124-Binary-Tree-Maximum-Path-Sum/">Leetcode 124 Binary Tree Maximum Path Sum</a>
           </li>
         
@@ -673,10 +665,6 @@ Vehicle* getVehicle()  {
         
           <li>
             <a href="/2019/08/31/Difference-between-patch-and-put-in-http-request/">Difference between patch and put in http request</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/01/leetcode-975-Odd-Even-Jump/">leetcode.975 Odd Even Jump</a>
           </li>
         
       </ul>
