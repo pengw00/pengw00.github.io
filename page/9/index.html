@@ -65,6 +65,49 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-spring-depend-injection-md" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/01/spring-depend-injection-md/" class="article-date">
+  <time datetime="2018-11-01T17:23:34.000Z" itemprop="datePublished">2018-11-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/01/spring-depend-injection-md/">spring_depend_injection</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Two Types of Dependency injection types</p>
+<h3 id="1-the-setter-injection"><a href="#1-the-setter-injection" class="headerlink" title="1. the setter injection"></a>1. the setter injection</h3><p>The setter injection is used to inject the dependencies through setter methods. In the following example, the instance of DataService uses the setter injection:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> public class BusinessServiceImpl &#123;</span><br><span class="line">         private DataService dataService;</span><br><span class="line">         @Autowired</span><br><span class="line">         public void setDataService(DataService dataService) &#123;</span><br><span class="line">           this.dataService = dataService;</span><br><span class="line">         &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Actually, in order to use the setter injection, you do not even need to declare a setter method. If you specify @Autowired on the variable, Spring automatically uses the setter injection. So, the following code is all that you need for the setter injection for DataService:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class BusinessServiceImpl &#123;</span><br><span class="line">        @Autowired</span><br><span class="line">        private DataService dataService;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-the-constructor-injection"><a href="#2-the-constructor-injection" class="headerlink" title="2. the constructor injection"></a>2. the constructor injection</h3><p>The constructor injection, on the other hand, uses a constructor to inject dependencies. The following code shows how to use a constructor for injecting in DataService:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   public class BusinessServiceImpl &#123;</span><br><span class="line">       private DataService dataService;</span><br><span class="line">       @Autowired</span><br><span class="line">       public BusinessServiceImpl(DataService dataService) &#123;</span><br><span class="line">	super();</span><br><span class="line">          this.dataService = dataService;</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>When you run the code with the preceding implementation of BusinessServiceImpl, you will see this statement in the log, asserting that autowiring took place using the constructor:<br>       Autowiring by type from bean name ‘businessServiceImpl’ via<br>       constructor to bean named ‘dataServiceImpl’</p>
+<h2 id="From"><a href="#From" class="headerlink" title="From "></a>From <master-spring></master-spring></h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2018/11/01/spring-depend-injection-md/" data-id="ck1xyhvad004pp224ygwir4me" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Persistence" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/10/08/Persistence/" class="article-date">
@@ -99,7 +142,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/10/08/Persistence/" data-id="ck17dnmg7001czs24hgi5b8ui" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/10/08/Persistence/" data-id="ck1xyhv7p0018p2244lcdxbix" class="article-share-link">Share</a>
       
       
     </footer>
@@ -135,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/10/08/maxcycle-subarray/" data-id="ck17dnmhn0040zs24clavixda" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/10/08/maxcycle-subarray/" data-id="ck1xyhv9t0044p2244s45a9fa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -172,7 +215,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="ck17dnmhe003gzs24qensxklq" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="ck1xyhv8x003kp224c8pivbkz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -222,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="ck17dnmgz002qzs244ygg8z5b" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="ck1xyhv8h002rp224775hqmld" class="article-share-link">Share</a>
       
       
     </footer>
@@ -259,7 +302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/" data-id="ck17dnmez0004zs244dvuspc3" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/" data-id="ck1xyhv6k0001p224yi9asdyq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -286,7 +329,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/18/dailylearning/" data-id="ck17dnmgo0022zs247cc7u72k" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/18/dailylearning/" data-id="ck1xyhv840022p224uf08jagc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -327,7 +370,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/14/Daily-Friday/" data-id="ck17dnmex0003zs24rotml8o6" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/14/Daily-Friday/" data-id="ck1xyhv6q0004p224owtt87vi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -364,7 +407,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/" data-id="ck17dnmh40031zs24xn6y7c4v" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/14/leetcode-752-Open-the-lock/" data-id="ck1xyhv8p0036p224bvgkbjsi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -407,52 +450,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/13/leetcode474/" data-id="ck17dnmhi003qzs24oe2cclkr" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/13/hello-world/" class="article-date">
-  <time datetime="2018-09-13T16:23:36.826Z" itemprop="datePublished">2018-09-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/13/hello-world/">Welcome to Pengw00&#39;s Blog!</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/13/hello-world/" data-id="ck17dnmgu002gzs24vkvcstf9" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/13/leetcode474/" data-id="ck1xyhv9i003wp224ayyyzzen" class="article-share-link">Share</a>
       
       
     </footer>
@@ -466,7 +464,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span>
+    <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -499,7 +497,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -510,6 +508,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/10/16/js-asyc-promise-reading-summary/">js-asyc-promise-reading-summary</a>
+          </li>
         
           <li>
             <a href="/2019/09/30/leetcode-927-Three-Equal-Parts/">leetcode 927 Three Equal Parts</a>
@@ -525,10 +527,6 @@
         
           <li>
             <a href="/2019/09/01/Dockerize-MySQL-server-for-REST-API/">Dockerize MySQL server for REST API</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/31/Difference-between-patch-and-put-in-http-request/">Difference between patch and put in http request</a>
           </li>
         
       </ul>

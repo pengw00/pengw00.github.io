@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-10-01T05:04:17.283Z</updated>
+  <updated>2019-10-17T04:54:37.164Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>js-asyc-promise-reading-summary</title>
+    <link href="http://pengw00.github.io/2019/10/16/js-asyc-promise-reading-summary/"/>
+    <id>http://pengw00.github.io/2019/10/16/js-asyc-promise-reading-summary/</id>
+    <published>2019-10-17T04:12:02.000Z</published>
+    <updated>2019-10-17T04:54:37.164Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="nested-promise"><a href="#nested-promise" class="headerlink" title="nested promise"></a>nested promise</h2><ol><li><p>Request code:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const makeRequest = async() =&gt; &#123;</span><br><span class="line">const response = await fetch(url);</span><br><span class="line">if(response.needAnotherRequest)&#123;</span><br><span class="line">const secondResponse = await makeAnotherRequest(reponse);</span><br><span class="line">console.log(secondResponse);</span><br><span class="line">return secondResponse;</span><br><span class="line">&#125;</span><br><span class="line">console.log(response);</span><br><span class="line">return response;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>sync a list post Request: </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let promise = Promise.resolve();</span><br><span class="line">let posts = [&#123;&#125;, &#123;&#125;, &#123;&#125;];</span><br><span class="line"></span><br><span class="line">posts.forEach(post =&gt; &#123;</span><br><span class="line">    //construct a new promise and replace the old one</span><br><span class="line">    //promise return the resove callback</span><br><span class="line">promise = promise.then(()=&gt;&#123;</span><br><span class="line">return db.insert(post);</span><br><span class="line">&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">promise.then(()=&gt;&#123;</span><br><span class="line">///all you post request has been make one by one</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li></ol><h3 id="if-you-want-to-make-it-concurrently-post-it-will-looks-like"><a href="#if-you-want-to-make-it-concurrently-post-it-will-looks-like" class="headerlink" title="if you want to make it concurrently post, it will looks like:"></a>if you want to make it concurrently post, it will looks like:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">posts.forEach(post=&gt;&#123;</span><br><span class="line">promise = promise.then(db.insert(post));</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>// this might not be correct.</p><p>sequential vs parallism</p><p>promise.all and yield all in generator as well as generate a list of promise and promise all of them immedieately</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;nested-promise&quot;&gt;&lt;a href=&quot;#nested-promise&quot; class=&quot;headerlink&quot; title=&quot;nested promise&quot;&gt;&lt;/a&gt;nested promise&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Request code:
+      
+    
+    </summary>
+    
+    
+      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode 927 Three Equal Parts</title>
@@ -441,29 +465,6 @@
     
     
       <category term="Redux" scheme="http://pengw00.github.io/tags/Redux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode.485&amp;487&amp;1004 Max Consecutive One</title>
-    <link href="http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/"/>
-    <id>http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/</id>
-    <published>2019-06-04T21:31:11.000Z</published>
-    <updated>2019-06-04T21:38:39.536Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="Max-Consecutive-One-serials"><a href="#Max-Consecutive-One-serials" class="headerlink" title="Max Consecutive One serials"></a>Max Consecutive One serials</h4><p>Find the longest consective subarray<br><em>Time: O(n)</em>Space: O(1) max and cur_max</p><p>*Leetcode.485 findMaxConsecutiveOnes</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public int findMaxConsecutiveOnes(int[] nums)&#123;</span><br><span class="line">int max, cur_max;</span><br><span class="line">for(int i = 0; i &lt; nums.length; i++)&#123;</span><br><span class="line">max = Math.max(max, cur_max= nums[i]==0?0:cur_max+1);</span><br><span class="line">&#125;</span><br><span class="line">return max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="Leetcode-487-findMaxConsecutiveOnesII"><a href="#Leetcode-487-findMaxConsecutiveOnesII" class="headerlink" title="Leetcode.487 findMaxConsecutiveOnesII"></a>Leetcode.487 findMaxConsecutiveOnesII</h4><ul><li>condition: if you can flip at most one 0.</li><li>Follow up: What if the input numbers come in one by one as an infinite stream? In other words, you can’t store all numbers coming from the stream as it’s too large to hold in memory. Could you solve it efficiently?</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public int findMaxConsecutiveOnesII()&#123;</span><br><span class="line">int max = 0, zero = 0;</span><br><span class="line">for(int l = 0, h = 0; h &lt; nums.length; h++)&#123;</span><br><span class="line">if(nums[h] == 0) zero++;</span><br><span class="line">while(zero &gt; 1)&#123;</span><br><span class="line">if(nums[l++]==0)&#123;</span><br><span class="line">zero--;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">max = Math.max(max, h-l+1);</span><br><span class="line">&#125;</span><br><span class="line">return max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="Leetcode-1004-findMaxConsecutiveOnesIII"><a href="#Leetcode-1004-findMaxConsecutiveOnesIII" class="headerlink" title="Leetcode.1004 findMaxConsecutiveOnesIII"></a>Leetcode.1004 findMaxConsecutiveOnesIII</h4><ul><li>condition: if you can flip at most k times.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public int findMaxConsecutiveOnes(int[] nums) &#123;</span><br><span class="line">        int max = 0, zero = 0, k = 1; // flip at most k zero</span><br><span class="line">        for (int l = 0, h = 0; h &lt; nums.length; h++) &#123;</span><br><span class="line">            if (nums[h] == 0)                                           </span><br><span class="line">                zero++;</span><br><span class="line">            while (zero &gt; k)</span><br><span class="line">                if (nums[l++] == 0)</span><br><span class="line">                    zero--;                                     </span><br><span class="line">            max = Math.max(max, h - l + 1);</span><br><span class="line">        &#125;                                                               </span><br><span class="line">        return max;             </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h4 id=&quot;Max-Consecutive-One-serials&quot;&gt;&lt;a href=&quot;#Max-Consecutive-One-serials&quot; class=&quot;headerlink&quot; title=&quot;Max Consecutive One serials&quot;&gt;&lt;/a&gt;Max C
-      
-    
-    </summary>
-    
-    
-      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
     
   </entry>
   

@@ -65,6 +65,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-js-asyc-promise-reading-summary" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/16/js-asyc-promise-reading-summary/" class="article-date">
+  <time datetime="2019-10-17T04:12:02.000Z" itemprop="datePublished">2019-10-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/16/js-asyc-promise-reading-summary/">js-asyc-promise-reading-summary</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="nested-promise"><a href="#nested-promise" class="headerlink" title="nested promise"></a>nested promise</h2><ol>
+<li><p>Request code:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const makeRequest = async() =&gt; &#123;</span><br><span class="line">	const response = await fetch(url);</span><br><span class="line">	if(response.needAnotherRequest)&#123;</span><br><span class="line">		const secondResponse = await makeAnotherRequest(reponse);</span><br><span class="line">		console.log(secondResponse);</span><br><span class="line">		return secondResponse;</span><br><span class="line">	&#125;</span><br><span class="line">	console.log(response);</span><br><span class="line">	return response;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>sync a list post Request: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let promise = Promise.resolve();</span><br><span class="line">let posts = [&#123;&#125;, &#123;&#125;, &#123;&#125;];</span><br><span class="line"></span><br><span class="line">posts.forEach(post =&gt; &#123;</span><br><span class="line">    //construct a new promise and replace the old one</span><br><span class="line">    //promise return the resove callback</span><br><span class="line">	promise = promise.then(()=&gt;&#123;</span><br><span class="line">		return db.insert(post);</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">promise.then(()=&gt;&#123;</span><br><span class="line">	///all you post request has been make one by one</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="if-you-want-to-make-it-concurrently-post-it-will-looks-like"><a href="#if-you-want-to-make-it-concurrently-post-it-will-looks-like" class="headerlink" title="if you want to make it concurrently post, it will looks like:"></a>if you want to make it concurrently post, it will looks like:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">posts.forEach(post=&gt;&#123;</span><br><span class="line">	promise = promise.then(db.insert(post));</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>// this might not be correct.</p>
+<p>sequential vs parallism</p>
+<p>promise.all and yield all in generator as well as generate a list of promise and promise all of them immedieately</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/10/16/js-asyc-promise-reading-summary/" data-id="ck1xyhv8d002hp224edpsc0j5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode-927-Three-Equal-Parts" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/09/30/leetcode-927-Three-Equal-Parts/" class="article-date">
@@ -92,7 +142,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/09/30/leetcode-927-Three-Equal-Parts/" data-id="ck17dnmhh003nzs24k4xee1tl" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/09/30/leetcode-927-Three-Equal-Parts/" data-id="ck1xyhv8v003ip224ek5xvm4f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -137,7 +187,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/09/11/Leetcode-124-Binary-Tree-Maximum-Path-Sum/" data-id="ck17dnmfj000rzs248e1gzy2f" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/09/11/Leetcode-124-Binary-Tree-Maximum-Path-Sum/" data-id="ck1xyhv75000mp224cbg68q1o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li></ul>
@@ -178,7 +228,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/09/01/how-to-design-a-online-judgement-system-like-leetcode/" data-id="ck17dnmgw002lzs24chr1kp7s" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/09/01/how-to-design-a-online-judgement-system-like-leetcode/" data-id="ck1xyhv8o0033p2247uinr2ld" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/System-Design/">System Design</a></li></ul>
@@ -252,7 +302,7 @@ environment:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/09/01/Dockerize-MySQL-server-for-REST-API/" data-id="ck17dnmf7000bzs24ug22sxh7" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/09/01/Dockerize-MySQL-server-for-REST-API/" data-id="ck1xyhv6u0009p2247xpk8os7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li></ul>
@@ -298,7 +348,7 @@ environment:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/08/31/Difference-between-patch-and-put-in-http-request/" data-id="ck17dnmf50009zs24e66eq7xl" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/08/31/Difference-between-patch-and-put-in-http-request/" data-id="ck1xyhv6r0005p22419nnlu34" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Http/">Http</a></li></ul>
@@ -336,7 +386,7 @@ environment:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/08/01/leetcode-975-Odd-Even-Jump/" data-id="ck17dnmh80039zs24cw408xme" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/08/01/leetcode-975-Odd-Even-Jump/" data-id="ck1xyhv8t003fp224az23w85h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -377,7 +427,7 @@ environment:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/07/28/Leetcode-Contest-147-Jul-27-2019/" data-id="ck17dnmg40018zs24j4py9u1s" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/07/28/Leetcode-Contest-147-Jul-27-2019/" data-id="ck1xyhv7o0015p224gmpq52f2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -416,7 +466,7 @@ environment:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/07/25/leetcode-528-Random-Pick-with-Weight/" data-id="ck17dnmh2002zzs243aq1qw37" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/07/25/leetcode-528-Random-Pick-with-Weight/" data-id="ck1xyhv8l002yp224bnb773gk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -458,49 +508,7 @@ environment:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/07/21/Leetcode-Contest-146/" data-id="ck17dnmg30015zs24k6xj51l0" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode-76-Minimum-window-string" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/29/leetcode-76-Minimum-window-string/" class="article-date">
-  <time datetime="2019-06-29T14:13:56.000Z" itemprop="datePublished">2019-06-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/29/leetcode-76-Minimum-window-string/">leetcode.76 Minimum window string</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>This Pro, at the first time I think of two pointer construct slidding windows, using map<br>but I find that it is so hard to continue with keep track of the status of  T string in the map. </p>
-<p>the idea is constructed a window, using two pointer, begin &amp; end, end go forward, when the windows first contain the target word, begin pointer start go right, and once the map[c] ==0, it means that this char is from T. so we make map[c]++, and invalid the counter for next window.<br>the core code:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">string minWindow(string s, string t)&#123;</span><br><span class="line">	vector&lt;int&gt; map(128, 0);</span><br><span class="line">	for(auto c: t) map[c]++;</span><br><span class="line">	int counter = t.size(), begin = 0, end = 0, d = INT_MAX, head = 0;</span><br><span class="line">	while(end &lt; s.size())&#123;</span><br><span class="line">		if(map[s[end++]]-- &gt; 0) counter--; //this is hard to read, it means that every time it will //decrease</span><br><span class="line">		while(counter==0)&#123;</span><br><span class="line">			if(end-begin &lt; d) d = end - (head = begin);</span><br><span class="line">			if(map[s[begin++]]++==0) counter++; //invalid the counter</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return d==INT_MAX?&quot;&quot;:s.substr(head, d);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>// here is the template for most substr problem using sliding window solution:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">int findSubstring(string s)&#123;</span><br><span class="line">        vector&lt;int&gt; map(128,0);</span><br><span class="line">        int counter; // check whether the substring is valid</span><br><span class="line">        int begin=0, end=0; //two pointers, one point to tail and one  head</span><br><span class="line">        int d; //the length of substring</span><br><span class="line"></span><br><span class="line">        for() &#123; /* initialize the hash map here */ &#125;</span><br><span class="line"></span><br><span class="line">        while(end&lt;s.size())&#123;</span><br><span class="line"></span><br><span class="line">            if(map[s[end++]]-- ?)&#123;  /* modify counter here */ &#125;</span><br><span class="line"></span><br><span class="line">            while(/* counter condition */)&#123; </span><br><span class="line">                 </span><br><span class="line">                 /* update d here if finding minimum*/</span><br><span class="line"></span><br><span class="line">                //increase begin to make it invalid/valid again</span><br><span class="line">                </span><br><span class="line">                if(map[s[begin++]]++ ?)&#123; /*modify counter here*/ &#125;</span><br><span class="line">            &#125;  </span><br><span class="line"></span><br><span class="line">            /* update d here if finding maximum*/</span><br><span class="line">        &#125;</span><br><span class="line">        return d;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
-<p>//One thing needs to be mentioned is that when asked to find maximum substring, we should update maximum after the inner while loop to guarantee that the substring is valid. On the other hand, when asked to find minimum substring, we should update minimum inside the inner while loop.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int lengthOfLongestSubstring(string s) &#123;</span><br><span class="line">        vector&lt;int&gt; map(128,0);</span><br><span class="line">        int counter=0, begin=0, end=0, d=0; </span><br><span class="line">        while(end&lt;s.size())&#123;</span><br><span class="line">            if(map[s[end++]]++&gt;0) counter++; </span><br><span class="line">            while(counter&gt;0) if(map[s[begin++]]--&gt;1) counter--;</span><br><span class="line">            d=max(d, end-begin); //while valid, update d</span><br><span class="line">        &#125;</span><br><span class="line">        return d;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/29/leetcode-76-Minimum-window-string/" data-id="ck17dnmh60034zs24dv1qvh8s" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/07/21/Leetcode-Contest-146/" data-id="ck1xyhv7h0012p224rj1r228v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -516,7 +524,7 @@ environment:
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -549,7 +557,7 @@ environment:
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -560,6 +568,10 @@ environment:
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/10/16/js-asyc-promise-reading-summary/">js-asyc-promise-reading-summary</a>
+          </li>
         
           <li>
             <a href="/2019/09/30/leetcode-927-Three-Equal-Parts/">leetcode 927 Three Equal Parts</a>
@@ -575,10 +587,6 @@ environment:
         
           <li>
             <a href="/2019/09/01/Dockerize-MySQL-server-for-REST-API/">Dockerize MySQL server for REST API</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/31/Difference-between-patch-and-put-in-http-request/">Difference between patch and put in http request</a>
           </li>
         
       </ul>
