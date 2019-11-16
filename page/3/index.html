@@ -65,6 +65,75 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Redux-starter-kit-usage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/05/Redux-starter-kit-usage/" class="article-date">
+  <time datetime="2019-06-05T14:02:13.000Z" itemprop="datePublished">2019-06-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/05/Redux-starter-kit-usage/">Redux-starter-kit usage</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Why"><a href="#Why" class="headerlink" title="Why?"></a>Why?</h3><ul>
+<li>Use redux-starter-kit to general boilerplate code for redux to faster the development for react app. <h5 id="setup-store-is-anoying"><a href="#setup-store-is-anoying" class="headerlink" title="setup store is anoying"></a>setup store is anoying</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import &#123; applyMiddleware, compose, createStore &#125; from &apos;redux&apos;;</span><br><span class="line">import &#123; composeWithDevTools &#125; from &apos;redux-devtools-extension&apos;;</span><br><span class="line">import thunkMiddleware from &apos;redux-thunk&apos;</span><br><span class="line"></span><br><span class="line">import monitorReducersEnhancer from &apos;./enhancers/monitorReducers&apos;;</span><br><span class="line">import loggerMiddleware from &apos;./middleware/logger&apos;;</span><br><span class="line">import rootReducer from &apos;./reducers&apos;</span><br><span class="line"></span><br><span class="line">export default function configureStore(preloadedState) &#123;</span><br><span class="line">  const middlewares = [loggerMiddleware, thunkMiddleware];</span><br><span class="line">  const middlewareEnhancer = applyMiddleware(...middlewares);</span><br><span class="line"></span><br><span class="line">  const enhancers = [middlewareEnhancer, monitorReducersEnhancer];</span><br><span class="line">  const composedEnhancers = composeWithDevTools(...enhancers);</span><br><span class="line"></span><br><span class="line">  const store = createStore(rootReducer, preloadedState, composedEnhancers);</span><br><span class="line"></span><br><span class="line">  if (process.env.NODE_ENV !== &apos;production&apos; &amp;&amp; module.hot) &#123;</span><br><span class="line">    module.hot.accept(&apos;./reducers&apos;, () =&gt; store.replaceReducer(rootReducer));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return store;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li>typically you will first create the const action type and action creaters in two different file2.<br>For example: you have a container component that has a button that when clicked, dispatches an action thru a bound action creator. To see how Redux handles this action (e.g. state changes via reducer and side effect via middleware), you would typically do the following steps:</li>
+</ol>
+<p>Go to the file where the action creator was defined and see what action type constant is being used.<br>Go to the reducer file where the action type constant you found in the previous step is being used and see how the action is being handled via the switch statement in your reducer.<br>If you have a middleware like redux-saga, you would go to the saga file and also look for the the action-type constant and see how the action is being handled. Also in this file, you would normally see both the action type constant and action creator being imported.</p>
+<h5 id="two-seperate-files-for-action-type-and-creaters"><a href="#two-seperate-files-for-action-type-and-creaters" class="headerlink" title="two seperate files for action type and creaters"></a>two seperate files for action type and creaters</h5><p>the first steps const and creaters is anoying, right?</p>
+<p>What if you could skip step one and just use your action creator to handle an action in your reducers and middleware? What if you could reduce the amount of files that are being imported/used and just have one file that represents an action?</p>
+<h5 id="Problem-Touching-4-files-to-implement-a-simple-state"><a href="#Problem-Touching-4-files-to-implement-a-simple-state" class="headerlink" title="Problem Touching 4 files to implement a simple state"></a>Problem Touching 4 files to implement a simple state</h5><p>Have you added a state in your component using redux and you end up touching constants.js, actions.js, reducer.js and container-component.js? What more if you have a middleware for side-effect like saga?</p>
+<p>This process can be tedious for implementing things that are so simple. Also, having too many files just make your code fragmented that it ends up difficult to reason about.</p>
+<p>What if you could increase cohesion by bundling these pieces together into an isolated, self-contained module?</p>
+<h3 id="What"><a href="#What" class="headerlink" title="What?"></a>What?</h3><p>Addressing Problems above with Redux Starter Kit<br>Redux Starter Kit is a library created by the same team who maintains Redux, and it offers a set of tools to make using Redux easier. Now, let’s see how this library can solve the 3 problems we mentioned above.</p>
+<h3 id="How"><a href="#How" class="headerlink" title="How?"></a>How?</h3><ul>
+<li>configureStore<br>Redux Starter Kit has a configureStore function that abstract a lot of boilerplate code (like we had on Problem #1) and adds some defaults to make setting up a Redux store a breeze</li>
+</ul>
+<p>Setup store will be like:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import &#123; configureStore &#125; from &apos;redux-starter-kit&apos;;</span><br><span class="line">import rootReducer from &apos;./reducers&apos;;</span><br><span class="line"></span><br><span class="line">const store = configureStore(&#123; reducer: rootReducer &#125;); </span><br><span class="line"></span><br><span class="line">export default store;</span><br></pre></td></tr></table></figure></p>
+<p>configureStore also allows you to pass some options so you could customize your store:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import &#123; configureStore, getDefaultMiddleware &#125; from &apos;redux-starter-kit&apos;;</span><br><span class="line">import monitorReducersEnhancer from &apos;./enhancers/monitorReducers&apos;; </span><br><span class="line">import loggerMiddleware from &apos;./middleware/logger&apos;;</span><br><span class="line">import rootReducer from &apos;./reducers&apos;;</span><br><span class="line"></span><br><span class="line">const store = configureStore(&#123; </span><br><span class="line">   reducer: rootReducer, </span><br><span class="line">   middleware: [loggerMiddleware, …getDefaultMiddleware()],</span><br><span class="line">   preloadedState, </span><br><span class="line">   enhancers: [monitorReducersEnhancer],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>createAction</li>
+</ul>
+<p>This library has a createAction function that combines action type and action creator declarations into one, so you don’t have to create 2 separate files (constant.js and some-action.js).</p>
+<p>This function returns an action creator that exposes a .type property so you can use it in your reducer and middleware to handle dispatched action. Here is an example of have you would create an action creator using createAction and how you can use the .type property in a reducer and saga:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">// todo-actions.js</span><br><span class="line">import &#123; createAction &#125; from &apos;redux-starter-kit&apos;;</span><br><span class="line"></span><br><span class="line">// Create an action creator</span><br><span class="line">export const addTodo = createAction(&apos;TODO/ADD_TODO&apos;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// todo-reducers.js</span><br><span class="line">import &#123; addTodo &#125; from &apos;./todo-actions&apos;;</span><br><span class="line"></span><br><span class="line">export function todosReducer(state = [], action) &#123;</span><br><span class="line">  switch(action.type) &#123;</span><br><span class="line">    // Use the action creator&apos;s type property to handle action</span><br><span class="line">    case addTodo.type: </span><br><span class="line">      return state.concat(action.payload);   </span><br><span class="line">    default: </span><br><span class="line">      return state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// todo-sagas.js</span><br><span class="line">import &#123; addTodo &#125; from &apos;./todo-actions&apos;;</span><br><span class="line"></span><br><span class="line">function* addTodoSaga(&#123; payload &#125;) &#123;</span><br><span class="line">  // Some side effects</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Use the action creator&apos;s type property to handle action</span><br><span class="line">export default takeLatest(addTodo.type, addTodoSaga);</span><br><span class="line">By getting rid of the constant file for your action type, we reduce the amount of mappings we have to make between your React component and your Redux files when debugging. Plus, less files to import!</span><br><span class="line"></span><br><span class="line">* Solution to Problem #3 — createSlice</span><br><span class="line"></span><br><span class="line">Redux Starter Kit has a createSlice that allows you to put together pieces in Redux that are logically related to each other into a module.</span><br><span class="line"></span><br><span class="line">Think of it as putting together pieces that works on a slice of state in the Redux state tree.</span><br><span class="line"></span><br><span class="line">Example:</span><br></pre></td></tr></table></figure>
+<p>import { createSlice } from ‘redux-starter-kit’;</p>
+<p>const todoSlice = createSlice({<br>  slice: ‘todos’,<br>  initialState: [],<br>  reducers: {<br>    addTodo(state, action) =&gt; [ …state, action.payload],<br>    removeTodo(state, action) =&gt; state.filter(todo =&gt; todo !== action.payload),<br>  },<br>});</p>
+<p>// Extract the action creators object and the reducer<br>export const { actions, reducer } = todoSlice;</p>
+<p>// Export the reducer, either as a default or named export<br>export default reducer;<br><code>`</code></p>
+<p>Isn’t that better than creating 4 files for just a single state?</p>
+<p>To know more about the concept behind createSlice, take a look at the “Redux Ducks” pattern.<br><a href="https://github.com/erikras/ducks-modular-redux" target="_blank" rel="noopener">https://github.com/erikras/ducks-modular-redux</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/06/05/Redux-starter-kit-usage/" data-id="ck323os1k001nct24rvkg3nzg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redux/">Redux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Leetcode-485-487-1004-Max-Consecutive-One" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" class="article-date">
@@ -104,7 +173,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" data-id="ck1xyhv7b000vp224tpo3g2d3" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" data-id="ck323os1b0014ct24jbir27id" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -163,7 +232,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/leetcode-272-Closest-Binary-Search/" data-id="ck1xyhv8k002wp224uyway7mn" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/leetcode-272-Closest-Binary-Search/" data-id="ck323os28002tct24uaytkxn0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -204,7 +273,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/ActiveMQ-Help-Decouple-System/" data-id="ck1xyhv6p0003p224ewwesgtz" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/ActiveMQ-Help-Decouple-System/" data-id="ck323os090001ct24ed8e6v5t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li></ul>
@@ -248,7 +317,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/Leetcode-Contest-139/" data-id="ck1xyhv7q001ap2248gclmvz6" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/Leetcode-Contest-139/" data-id="ck323os11000vct2402f2gwyy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -291,7 +360,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/Responsive-Web-Design-I/" data-id="ck1xyhv7x001op224cq3y9m3r" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/Responsive-Web-Design-I/" data-id="ck323os1j001kct24avz9ld4t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li></ul>
@@ -341,7 +410,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/leetcode-201-Word-Search-II/" data-id="ck1xyhv8q003ap2248hj4l6hf" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/leetcode-201-Word-Search-II/" data-id="ck323os2x003hct24lweyklb3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -382,7 +451,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/" data-id="ck1xyhv8s003dp224zu4l5xzv" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/" data-id="ck323os35003rct247e1a0z2d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -453,7 +522,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/31/ACM-ICPC-Road-Map/" data-id="ck1xyhv6g0000p224z4g9je1u" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/31/ACM-ICPC-Road-Map/" data-id="ck323os040000ct24m84g1bfj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -553,89 +622,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/31/stepsToBuildSpringbootRESTAPI/" data-id="ck1xyhvb8005pp224a6px10kf" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/31/stepsToBuildSpringbootRESTAPI/" data-id="ck323os4m005qct24jj3f004k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Springboot/">Springboot</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-systemDesignInterview" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/05/30/systemDesignInterview/" class="article-date">
-  <time datetime="2019-05-30T05:17:56.000Z" itemprop="datePublished">2019-05-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/30/systemDesignInterview/">systemDesignInterview</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>My question</p>
-<ol>
-<li>Design Pastebin, a website where you can store and share text online for a set period of time.</li>
-</ol>
-<p>Note: Bit.ly is a similar service, with the distinction that Pastebin requires storing the paste contents instead of the original unshortened URL.</p>
-<ul>
-<li>note: Use it to share thoughts and resources, such as:</li>
-</ul>
-<ul>
-<li>Features scope</li>
-<li>API design</li>
-<li>Pseudo code for specific components</li>
-<li>Data model/schema</li>
-<li>Back-of-the-envelope calculations</li>
-<li>Reference links</li>
-<li>Link to whiteboard or diagram such as <a href="https://sketchboard.me/new" target="_blank" rel="noopener">https://sketchboard.me/new</a></li>
-</ul>
-<ul>
-<li>hints: interview structure</li>
-<li>Establish the feature scope and constraints</li>
-<li>Describe high-level architecture</li>
-<li>Drill Down: design and scale core components</li>
-<li>Scaling the design</li>
-<li>Tradeoffs and future improvements</li>
-</ul>
-<h3 id="Note-and-Solution"><a href="#Note-and-Solution" class="headerlink" title="Note and Solution"></a>Note and Solution</h3><p>text -&gt; pastebin  no expire time</p>
-<p>build a restful api with post method store text in the dabase</p>
-<p>api and then when hit api return text in brower. </p>
-<p>txt file, service parse the text file, get string, and store in the backend. </p>
-<p>txt -&gt; api -&gt; user want the text, url get list of text or one recent text</p>
-<p>front end -&gt; save txt file -&gt; backend -&gt; id-&gt; bit.ly service -&gt; url for text </p>
-<ol>
-<li>user table<br> user id</li>
-</ol>
-<p>2 text table<br>    text id<br>    text content<br>    date </p>
-<p>solution1: url for txt -&gt; backend -&gt; response with txt file</p>
-<ul>
-<li>solution2: optimized high level design<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">client -&gt;(LB) server -&gt; readApi-&gt; cache  duplicate</span><br><span class="line">          server    readApi                  DB</span><br><span class="line">                                             DB</span><br><span class="line">                                             ...</span><br><span class="line">                                             ...</span><br><span class="line">          server       -&gt; writeApi-&gt;  (master and slave DB) </span><br><span class="line">nosql</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>Pasterbin use case<br>Review this <a href="https://github.com/donnemartin/system-design-primer/tree/master/solutions/system_design/pastebin#design-pastebincom-or-bitly" target="_blank" rel="noopener">article</a> to learn about the use cases, high level design, core components and scale of a system like Pastebin.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/30/systemDesignInterview/" data-id="ck1xyhvah004up224ac7wn4lo" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li></ul>
 
     </footer>
   </div>
@@ -662,7 +652,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System-Design/">System Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System-Design/">System Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a></li></ul>
     </div>
   </div>
 
@@ -672,7 +662,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/Leetcode/" style="font-size: 10px;">Leetcode</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/System-Design/" style="font-size: 10px;">System Design</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/Leetcode/" style="font-size: 10px;">Leetcode</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/System-Design/" style="font-size: 10px;">System Design</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a>
     </div>
   </div>
 
@@ -681,7 +671,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -692,6 +682,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/11/16/benefit-from-spring-data/">benefit from spring data</a>
+          </li>
         
           <li>
             <a href="/2019/10/16/js-asyc-promise-reading-summary/">js-asyc-promise-reading-summary</a>
@@ -707,10 +701,6 @@
         
           <li>
             <a href="/2019/09/01/how-to-design-a-online-judgement-system-like-leetcode/">how to design a online judgement system like leetcode</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/01/Dockerize-MySQL-server-for-REST-API/">Dockerize MySQL server for REST API</a>
           </li>
         
       </ul>
