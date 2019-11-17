@@ -65,6 +65,45 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-leetcode-528-Random-Pick-with-Weight" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/25/leetcode-528-Random-Pick-with-Weight/" class="article-date">
+  <time datetime="2019-07-25T05:15:39.000Z" itemprop="datePublished">2019-07-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/25/leetcode-528-Random-Pick-with-Weight/">leetcode.528 Random Pick with Weight</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="JS-version"><a href="#JS-version" class="headerlink" title="JS version"></a>JS version</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var solution = function(w)&#123;</span><br><span class="line">	this.map = new Map();</span><br><span class="line">	this.sum = 0;</span><br><span class="line">	for(let i = 0; i &lt; w.length; i++)&#123;</span><br><span class="line">	this.sum += w[i];</span><br><span class="line">	this.map.set(this.sum, i);</span><br><span class="line">	this.keys = [...this.map.keys()].sort((a, b) =&gt; a-b);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">solution.prototype.pickIndex = function()&#123;</span><br><span class="line">	const r = parseInt(Math.random() * this.sum);</span><br><span class="line">	for(const key of this.keys)&#123;</span><br><span class="line">		if(r &lt; key)&#123;</span><br><span class="line">			return this.map.get(key);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/07/25/leetcode-528-Random-Pick-with-Weight/" data-id="ck32bpzdc0034qe24iqv85ywz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Leetcode-Contest-146" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/21/Leetcode-Contest-146/" class="article-date">
@@ -95,7 +134,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/07/21/Leetcode-Contest-146/" data-id="ck323os1d0018ct248fz7075m" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/07/21/Leetcode-Contest-146/" data-id="ck32bpzch0014qe24htjccuph" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -137,7 +176,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/29/leetcode-76-Minimum-window-string/" data-id="ck323os32003nct24dmrlogpd" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/29/leetcode-76-Minimum-window-string/" data-id="ck32bpzde0038qe24sr23ho9e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -176,7 +215,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/11/Dry-Don-t-Repeat-Yourself/" data-id="ck323os0k000bct246ek4j2w5" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/11/Dry-Don-t-Repeat-Yourself/" data-id="ck32bpzbw000fqe24bqro5gbr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li></ul>
@@ -214,7 +253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/09/Leetcode-987-Vertical-Order-Traversal-of-a-Binary-Tree/" data-id="ck323os12000yct2403lqp5ar" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/09/Leetcode-987-Vertical-Order-Traversal-of-a-Binary-Tree/" data-id="ck32bpzcd000zqe24anoqfbx3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -250,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/09/Leetcode-146-LRU-cache/" data-id="ck323os0y000rct24ffod4s6c" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/09/Leetcode-146-LRU-cache/" data-id="ck32bpzc9000qqe245iamre56" class="article-share-link">Share</a>
       
       
     </footer>
@@ -298,7 +337,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/08/Leetcode-967-Numbers-With-Same-Consecutive-Differences/" data-id="ck323os1a0012ct24vw1pf48x" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/08/Leetcode-967-Numbers-With-Same-Consecutive-Differences/" data-id="ck32bpzcf0011qe249lgqsdv7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li></ul>
@@ -346,7 +385,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/" data-id="ck323os0q000hct24s3ipy03m" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/" data-id="ck32bpzby000hqe24ymshwn50" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -413,7 +452,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/06/Leetcode-333-Largest-BST-Subtree/" data-id="ck323os180010ct24n9tjoc4o" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/06/Leetcode-333-Largest-BST-Subtree/" data-id="ck32bpzcc000xqe24wgb8ve1m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -464,99 +503,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Design-a-transportation-payment-method/" data-id="ck323os0i0008ct24m41nbus4" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/05/Design-a-transportation-payment-method/" data-id="ck32bpzbo0005qe24qm1100ks" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Ways-to-center-CSS-element" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/05/Ways-to-center-CSS-element/" class="article-date">
-  <time datetime="2019-06-05T16:23:32.000Z" itemprop="datePublished">2019-06-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/05/Ways-to-center-CSS-element/">Ways to center CSS element</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="1-Most-common-one-Use-parent-and-child-div-as-well-as-text-align-center"><a href="#1-Most-common-one-Use-parent-and-child-div-as-well-as-text-align-center" class="headerlink" title="1. Most common one, Use parent and child div as well as text-align: center"></a>1. Most common one, Use parent and child div as well as text-align: center</h4><p><em>first, enclose the div you want to center with a parent element(wrapper or containner)
-</em>second, set the text-align: center to the parent element. </p>
-<ul>
-<li>third, set the target div to display: inline-block.</li>
-</ul>
-<p>By default, the div dispaly property is block, which will span the div to the whole<br>width of the page. By setting the display to inline-block, it ensure the div to the width which we set. </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.blue-square-container &#123;</span><br><span class="line">  text-align: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.blue-square &#123;</span><br><span class="line">  background-color: #0074D9;</span><br><span class="line">  width: 100px;</span><br><span class="line">  height: 100px;</span><br><span class="line">  display: inline-block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="Margin-Auto-Method"><a href="#Margin-Auto-Method" class="headerlink" title="Margin Auto Method"></a>Margin Auto Method</h4><ul>
-<li><p>do not need a parent element.</p>
-<h6 id="simply-apply-“margin-0-auto”-to-our-yellow-box-as-long-as-we-have-a-defined-width"><a href="#simply-apply-“margin-0-auto”-to-our-yellow-box-as-long-as-we-have-a-defined-width" class="headerlink" title="simply apply “margin: 0 auto” to our yellow box, as long as we have a defined width."></a>simply apply “margin: 0 auto” to our yellow box, as long as we have a defined width.</h6></li>
-<li><p>“margin: 0 auto” is shorthand for setting the top and bottom margins to zero, and the left and right margins to auto.</p>
-</li>
-</ul>
-<p>The width is important, since without the width defined, the browser will not<br>able to render the left and right margins to center the element. By setting the width the vbrowser will automatically distribute the right amount of margin on either side of the element.</p>
-<p>The “0” portion can be set to any number of pixels you want for the top and bottom margins.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.yellow-square &#123;</span><br><span class="line">  background-color: #FFDC00;</span><br><span class="line">  width: 100px;</span><br><span class="line">  height: 100px;</span><br><span class="line">  margin: 0 auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Another cool trick is just setting either margin-left to auto or margin-right to auto, which allows us to push our div to either the right or left side of the page, respectively (give this a try!).</p>
-<h4 id="Absolute-Positioning-Method"><a href="#Absolute-Positioning-Method" class="headerlink" title="Absolute Positioning Method"></a>Absolute Positioning Method</h4><p>Absolute positioning an element allows us to essentially place the element wherever we want it on the page…with one drawback.</p>
-<h5 id="Absolute-positioning-removes-the-element-from-the-flow-of-the-page"><a href="#Absolute-positioning-removes-the-element-from-the-flow-of-the-page" class="headerlink" title="Absolute positioning removes the element from the flow of the page."></a>Absolute positioning removes the element from the flow of the page.</h5><p>there are three steps we need to remember:</p>
-<ul>
-<li>1.Set the element’s position property to absolute</li>
-<li>2.Apply “left: 50%” to the element</li>
-<li>3.Set a margin-left of half of the element’s width(negative adjust)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.green-square &#123;</span><br><span class="line">  background-color: #3D9970;</span><br><span class="line">  width: 100px;</span><br><span class="line">  height: 100px;</span><br><span class="line">  position: absolute;</span><br><span class="line">  left: 50%;</span><br><span class="line">  margin-left: -50px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="Transform-Translate-Method"><a href="#Transform-Translate-Method" class="headerlink" title="Transform/Translate Method"></a>Transform/Translate Method</h4><p>*Up until now we’ve only dealt with centering things horizontally, but what if we want to put something right in the middle of the page? both horizontally and vertically.</p>
-<ul>
-<li>transform property set as translate can shift the x and y axios.</li>
-</ul>
-<p>so the code like this, set both the left and top edge to 50%; and shift negative -50% for both sides.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.red-square &#123;</span><br><span class="line">  background-color: #FF4136;</span><br><span class="line">  width: 300px;</span><br><span class="line">  height: 300px;</span><br><span class="line">  position: absolute;</span><br><span class="line">  left: 50%;</span><br><span class="line">  top: 50%;</span><br><span class="line">  transform: translate(-50%, -50%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>By setting the top property to 50% as well, I’m telling the browser to line up the top edge of our red square with the middle of the page vertically. But like in the previous example, we don’t want the edges to be lined up with the center, we want the center of our square to fit right on top of the center of our page.</p>
-<p>There are many cool things you can do with transform, such as translating, rotating, and scaling animations, but for this example, we’ll be using translate.</p>
-<p>We give the transform property “transform: translate(-50%, -50%)” and voila!</p>
-<p>Our red square is centered both horizontally and vertically!</p>
-<p>I love this method, because regardless of what the width or the height of our element is, it will always be in the center of the page.</p>
-<p>This method is used frequently in responsive design and doesn’t require margins to be defined, like in the absolute positioning method.</p>
-<h4 id="Flexbox-Method"><a href="#Flexbox-Method" class="headerlink" title="Flexbox Method"></a>Flexbox Method</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">html,</span><br><span class="line">body &#123;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.purple-square-container &#123;</span><br><span class="line">  height: 100%;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  justify-content: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.purple-square &#123;</span><br><span class="line">  background-color: #B10DC9;</span><br><span class="line">  width: 300px;</span><br><span class="line">  height: 300px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The four steps to centering horizontally and vertically with Flexbox are the following:</p>
-<ul>
-<li>HTML, body, and parent container need to have a height of 100%</li>
-<li>Set display to flex on parent container</li>
-<li>Set align-items to center on parent container</li>
-<li>Set justify-content to center on parent container</li>
-</ul>
-<p>Setting display to flex on the parent defines it as a flex container.</p>
-<p>By setting align-items to center, we’re saying that the children or flex items are to be centered vertically within the parent.</p>
-<p>Justify-content works in the same way, but in the horizontal direction for our example.</p>
-<p>This method goes well because again, it’s both responsive and doesn’t require any margin calculations.</p>
-<p>A tutorial about <a href="https://flexboxfroggy.com/" target="_blank" rel="noopener">flexbox</a></p>
-<p><a href="https://www.freecodecamp.org/news/how-to-center-things-with-style-in-css-dc87b7542689/" target="_blank" rel="noopener">source link</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Ways-to-center-CSS-element/" data-id="ck323os1q001tct2470ogwhk9" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
 
     </footer>
   </div>
@@ -593,7 +543,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/Leetcode/" style="font-size: 10px;">Leetcode</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/System-Design/" style="font-size: 10px;">System Design</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/Leetcode/" style="font-size: 10px;">Leetcode</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/System-Design/" style="font-size: 12px;">System Design</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a>
     </div>
   </div>
 
@@ -615,6 +565,10 @@
       <ul>
         
           <li>
+            <a href="/2019/11/16/System-design-for-instagram/">System design for instagram</a>
+          </li>
+        
+          <li>
             <a href="/2019/11/16/benefit-from-spring-data/">benefit from spring data</a>
           </li>
         
@@ -628,10 +582,6 @@
         
           <li>
             <a href="/2019/09/11/Leetcode-124-Binary-Tree-Maximum-Path-Sum/">Leetcode 124 Binary Tree Maximum Path Sum</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/01/how-to-design-a-online-judgement-system-like-leetcode/">how to design a online judgement system like leetcode</a>
           </li>
         
       </ul>
