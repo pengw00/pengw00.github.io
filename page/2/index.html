@@ -65,6 +65,47 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Leetcode-Contest-147-Jul-27-2019" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/28/Leetcode-Contest-147-Jul-27-2019/" class="article-date">
+  <time datetime="2019-07-28T15:13:37.000Z" itemprop="datePublished">2019-07-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/28/Leetcode-Contest-147-Jul-27-2019/">Leetcode Contest 147 Jul 27 2019</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="No-1-DP-problem"><a href="#No-1-DP-problem" class="headerlink" title="No.1 DP problem"></a>No.1 DP problem</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public int tribonacci(int n) &#123;</span><br><span class="line">        if(n==0) return 0;</span><br><span class="line">        if(n==1) return 1;</span><br><span class="line">        if(n==2) return 1;</span><br><span class="line">        int[] dp = new int[n+1];</span><br><span class="line">        dp[0] = 0;</span><br><span class="line">        dp[1] = 1;</span><br><span class="line">        dp[2] = 1;</span><br><span class="line">        for(int i = 3; i &lt;= n; i++)&#123;</span><br><span class="line">            dp[i] = dp[i-1] + dp[i-2] + dp[i-3];</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="No-2-Alphebatic"><a href="#No-2-Alphebatic" class="headerlink" title="No.2 Alphebatic"></a>No.2 Alphebatic</h3><p>//Be careful to process from the<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    string alphabetBoardPath(string target) &#123;</span><br><span class="line">        int r = 0, c = 0;</span><br><span class="line">        string moves = &quot;&quot;;</span><br><span class="line"></span><br><span class="line">        for (char letter : target) &#123;</span><br><span class="line">            int row = (letter - &apos;a&apos;) / 5, col = (letter - &apos;a&apos;) % 5;</span><br><span class="line"></span><br><span class="line">            while (c &gt; col) &#123;</span><br><span class="line">                moves += &apos;L&apos;;</span><br><span class="line">                c--;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            while (r &gt; row) &#123;</span><br><span class="line">                moves += &apos;U&apos;;</span><br><span class="line">                r--;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            while (r &lt; row) &#123;</span><br><span class="line">                moves += &apos;D&apos;;</span><br><span class="line">                r++;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            while (c &lt; col) &#123;</span><br><span class="line">                moves += &apos;R&apos;;</span><br><span class="line">                c++;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            moves += &apos;!&apos;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return moves;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="No-3-Most-number-of-Largest-grid-border"><a href="#No-3-Most-number-of-Largest-grid-border" class="headerlink" title="No.3 Most number of Largest grid border"></a>No.3 Most number of Largest grid border</h3><p>// accumulated grid solution </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">int findLargestSquare(vector&lt;vector&lt;int&gt;&gt;&amp; mat) </span><br><span class="line">    &#123; </span><br><span class="line">    int max = 0; int m = mat.size() , n = mat[0].size();</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; hor(m,vector&lt;int&gt; (n,0)) , ver(m,vector&lt;int&gt; (n,0));</span><br><span class="line">   </span><br><span class="line">    for (int i=0; i&lt;m; i++) &#123; </span><br><span class="line">        for (int j=0; j&lt;n; j++) &#123; </span><br><span class="line">            if (mat[i][j] == 1) </span><br><span class="line">            &#123; </span><br><span class="line">                hor[i][j] = (j==0)? 1: hor[i][j-1] + 1;   // auxillary horizontal array</span><br><span class="line">                ver[i][j] = (i==0)? 1: ver[i-1][j] + 1;  // auxillary vertical array</span><br><span class="line">            &#125; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">        </span><br><span class="line">    for (int i = m-1; i&gt;=0; i--) &#123; </span><br><span class="line">        for (int j = n-1; j&gt;=0; j--) &#123; </span><br><span class="line">            int small = min(hor[i][j], ver[i][j]);  // choose smallest of horizontal and vertical value</span><br><span class="line">            while (small &gt; max) &#123; </span><br><span class="line">                if (ver[i][j-small+1] &gt;= small &amp;&amp;  hor[i-small+1][j] &gt;= small)  // check if square exists with &apos;small&apos; length</span><br><span class="line">                    max = small; </span><br><span class="line">                small--; </span><br><span class="line">            &#125; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">    return max*max; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/07/28/Leetcode-Contest-147-Jul-27-2019/" data-id="ck3nct7lf001efv247v17lcf2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode-528-Random-Pick-with-Weight" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/25/leetcode-528-Random-Pick-with-Weight/" class="article-date">
@@ -92,7 +133,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/07/25/leetcode-528-Random-Pick-with-Weight/" data-id="ck32bpzdc0034qe24iqv85ywz" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/07/25/leetcode-528-Random-Pick-with-Weight/" data-id="ck3nct7mu003mfv24xcl4yakw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -134,7 +175,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/07/21/Leetcode-Contest-146/" data-id="ck32bpzch0014qe24htjccuph" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/07/21/Leetcode-Contest-146/" data-id="ck3nct7la001cfv2468azfylz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -176,7 +217,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/29/leetcode-76-Minimum-window-string/" data-id="ck32bpzde0038qe24sr23ho9e" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/29/leetcode-76-Minimum-window-string/" data-id="ck3nct7mv003ofv248a60gsxk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -215,7 +256,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/11/Dry-Don-t-Repeat-Yourself/" data-id="ck32bpzbw000fqe24bqro5gbr" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/11/Dry-Don-t-Repeat-Yourself/" data-id="ck3nct7kf0009fv24kw5uafc1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li></ul>
@@ -253,7 +294,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/09/Leetcode-987-Vertical-Order-Traversal-of-a-Binary-Tree/" data-id="ck32bpzcd000zqe24anoqfbx3" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/09/Leetcode-987-Vertical-Order-Traversal-of-a-Binary-Tree/" data-id="ck3nct7l60015fv24jdmoahvl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -289,7 +330,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/09/Leetcode-146-LRU-cache/" data-id="ck32bpzc9000qqe245iamre56" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/09/Leetcode-146-LRU-cache/" data-id="ck3nct7ky000vfv24p1xrfazo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -337,7 +378,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/08/Leetcode-967-Numbers-With-Same-Consecutive-Differences/" data-id="ck32bpzcf0011qe249lgqsdv7" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/08/Leetcode-967-Numbers-With-Same-Consecutive-Differences/" data-id="ck3nct7l30012fv24fv0178p6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li></ul>
@@ -385,7 +426,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/" data-id="ck32bpzby000hqe24ymshwn50" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/" data-id="ck3nct7kn000hfv24pmf1y5w5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -452,61 +493,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/06/Leetcode-333-Largest-BST-Subtree/" data-id="ck32bpzcc000xqe24wgb8ve1m" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/06/Leetcode-333-Largest-BST-Subtree/" data-id="ck3nct7kx000tfv24rlpc6zrr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Design-a-transportation-payment-method" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/05/Design-a-transportation-payment-method/" class="article-date">
-  <time datetime="2019-06-05T17:30:09.000Z" itemprop="datePublished">2019-06-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/05/Design-a-transportation-payment-method/">Design a transportation payment method</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>For example design a payment system for New York’s MTA. Tell how you would handle thousands of requests per second. Also how will you handle the different notifications systems such as text alert. How would you handle faults? Was asked this on an onsite round.</p>
-<p><a href="https://leetcode.com/discuss/interview-question/system-design/305388/design-a-transportation-payment-system" target="_blank" rel="noopener">https://leetcode.com/discuss/interview-question/system-design/305388/design-a-transportation-payment-system</a></p>
-<h3 id="One-solution"><a href="#One-solution" class="headerlink" title="One solution"></a>One solution</h3><p>Basically you need to build two services, one to handle payment and one to handle notifications (can be email, whatsapp, text, etc.).</p>
-<p>Payment system’s responsibility to only deduct the payment using any of the payment gateways and call notification service to notify client. Payment needs to be done real-time and you have to handle client request through some HTTP API, so that you can show gateway page, amount, confirmation etc. After user consent is given you process the payment and queue a message to notification system to send alert. For payments, you can use any noSQL database, since we don’t have any relation as such and you get fast read/write.</p>
-<p>Notification service’s responsibility to notify users through channels. Notifications can be near realtime, so you can make use of queue/worker, so that you can autoscale your workers whenever there are more messages in queue. Workers are responsible for sending alerts. More workers you have, faster you process notifications to users. You can even distinguish different workers for different communication channel and scale them separately. As database you can use any noSQL, cause I don’t see any relation as such.</p>
-<p>You should ask more specific questions to interviewer during system design rounds to understand the scenario better.</p>
-<ul>
-<li><p>Replies<br>using SQL or noSQL</p>
-</li>
-<li><p>For payments it needs to be SQL . you want to maintain consistency in such highly atomic operations.</p>
-</li>
-<li>Need backup servers and replica in case some application servers or database severs fail.</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Design-a-transportation-payment-method/" data-id="ck32bpzbo0005qe24qm1100ks" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li></ul>
 
     </footer>
   </div>
@@ -543,7 +533,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/Leetcode/" style="font-size: 10px;">Leetcode</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/System-Design/" style="font-size: 12px;">System Design</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/Leetcode/" style="font-size: 12px;">Leetcode</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/System-Design/" style="font-size: 12px;">System Design</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a>
     </div>
   </div>
 
@@ -552,7 +542,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -563,6 +553,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/12/01/Cherry-Pickup/">Cherry Pickup</a>
+          </li>
         
           <li>
             <a href="/2019/11/16/System-design-for-instagram/">System design for instagram</a>
@@ -578,10 +572,6 @@
         
           <li>
             <a href="/2019/09/30/leetcode-927-Three-Equal-Parts/">leetcode 927 Three Equal Parts</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/11/Leetcode-124-Binary-Tree-Maximum-Path-Sum/">Leetcode 124 Binary Tree Maximum Path Sum</a>
           </li>
         
       </ul>
