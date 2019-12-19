@@ -5,20 +5,20 @@
   
 
   
-  <title>find celebrity | David w00&#39;s Tech Road</title>
+  <title>golang tutorial | David w00&#39;s Tech Road</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这道题类似于997 find the town judge。但可以采用graph的方法，topological的bfs方法，计算每个点的入度和出度，找出那个入读为n-1的就是解。另一个种方法是find celebrity的方法，先定义i=0；遍历找出一个candidate， 再遍历判断是否这个candidate满足谁都认识他和他不认识任何人两个条件，如果可以100%确定就是他。废话不说：codin">
-<meta name="keywords" content="leetcode">
+  <meta name="description" content="go object pass by value, so it won’t affect the original object 12345678  func UpdateEmployee(empDetails Employee)&amp;#123;  		empDetails.Name = &amp;quot;Anshul&amp;quot;;&amp;#125;var newEmp = Employee&amp;#123; Name">
+<meta name="keywords" content="golang">
 <meta property="og:type" content="article">
-<meta property="og:title" content="find celebrity">
-<meta property="og:url" content="http://pengw00.github.io/2019/04/06/find-celebrity/index.html">
+<meta property="og:title" content="golang tutorial">
+<meta property="og:url" content="http://pengw00.github.io/2019/12/18/golang-tutorial/index.html">
 <meta property="og:site_name" content="David w00&#39;s Tech Road">
-<meta property="og:description" content="这道题类似于997 find the town judge。但可以采用graph的方法，topological的bfs方法，计算每个点的入度和出度，找出那个入读为n-1的就是解。另一个种方法是find celebrity的方法，先定义i=0；遍历找出一个candidate， 再遍历判断是否这个candidate满足谁都认识他和他不认识任何人两个条件，如果可以100%确定就是他。废话不说：codin">
+<meta property="og:description" content="go object pass by value, so it won’t affect the original object 12345678  func UpdateEmployee(empDetails Employee)&amp;#123;  		empDetails.Name = &amp;quot;Anshul&amp;quot;;&amp;#125;var newEmp = Employee&amp;#123; Name">
 <meta property="og:locale" content="us-EN">
-<meta property="og:updated_time" content="2019-04-06T04:48:52.976Z">
+<meta property="og:updated_time" content="2019-12-19T03:33:31.121Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="find celebrity">
-<meta name="twitter:description" content="这道题类似于997 find the town judge。但可以采用graph的方法，topological的bfs方法，计算每个点的入度和出度，找出那个入读为n-1的就是解。另一个种方法是find celebrity的方法，先定义i=0；遍历找出一个candidate， 再遍历判断是否这个candidate满足谁都认识他和他不认识任何人两个条件，如果可以100%确定就是他。废话不说：codin">
+<meta name="twitter:title" content="golang tutorial">
+<meta name="twitter:description" content="go object pass by value, so it won’t affect the original object 12345678  func UpdateEmployee(empDetails Employee)&amp;#123;  		empDetails.Name = &amp;quot;Anshul&amp;quot;;&amp;#125;var newEmp = Employee&amp;#123; Name">
   
     <link rel="alternate" href="/atom.xml" title="David w00&#39;s Tech Road" type="application/atom+xml">
   
@@ -65,10 +65,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-find-celebrity" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-golang-tutorial" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/04/06/find-celebrity/" class="article-date">
-  <time datetime="2019-04-06T05:42:24.000Z" itemprop="datePublished">2019-04-06</time>
+    <a href="/2019/12/18/golang-tutorial/" class="article-date">
+  <time datetime="2019-12-19T03:08:58.000Z" itemprop="datePublished">2019-12-18</time>
 </a>
     
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      find celebrity
+      golang tutorial
     </h1>
   
 
@@ -87,17 +87,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这道题类似于997 find the town judge。<br>但可以采用graph的方法，topological的bfs方法，计算每个点的入度和出度，找出那个入读为n-1的就是解。<br>另一个种方法是find celebrity的方法，先定义i=0；遍历找出一个candidate， 再遍历判断是否这个candidate满足谁都认识他和他不认识任何人两个条件，如果可以100%确定就是他。<br>废话不说：coding：<br>方法1: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int findJudge(int N, vector&lt;vector&lt;int&gt;&gt;&amp; trust) &#123;</span><br><span class="line">  vector&lt;vector&lt;int&gt;&gt; knows(N + 1, vector&lt;int&gt;(N + 1));</span><br><span class="line">  for (auto &amp;t : trust) knows[t[0]][t[1]] = 1;</span><br><span class="line">  return findCelebrity(N, knows);</span><br><span class="line">&#125;</span><br><span class="line">int findCelebrity(int n, vector&lt;vector&lt;int&gt;&gt;&amp; knows, int i = 1) &#123;</span><br><span class="line">  for (auto j = i + 1; j &lt;= n; ++j) if (knows[i][j]) i = j;</span><br><span class="line">  for (auto j = 1; j &lt; i; ++j) if (knows[i][j]) return -1;</span><br><span class="line">  for (auto j = 1; j &lt;= n; ++j) if (i != j &amp;&amp; !knows[j][i]) return -1;</span><br><span class="line">  return i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>方法二：<br>directed graph：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int findJudge(int N, vector&lt;vector&lt;int&gt;&gt;&amp; trust) &#123;</span><br><span class="line">        vector&lt;int&gt; count(N + 1, 0);</span><br><span class="line">        for (auto&amp; t : trust)</span><br><span class="line">            count[t[0]]--, count[t[1]]++;</span><br><span class="line">        for (int i = 1; i &lt;= N; ++i) &#123;</span><br><span class="line">            if (count[i] == N - 1) return i;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+        <ol>
+<li><p>go object pass by value, so it won’t affect the original object</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  func UpdateEmployee(empDetails Employee)&#123;</span><br><span class="line">  		empDetails.Name = &quot;Anshul&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var newEmp = Employee&#123; Name: : &quot;Mayank&quot;, Age: 40, Destination: &quot;Developer&quot;&#125;</span><br><span class="line"></span><br><span class="line">UpdateEmployee(newEmp);</span><br><span class="line">fmt.println(newEmp)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>if you want pass go object by reference, you need to use reference syntax, * and &amp;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> func UpdateEmployee(empDetail *Employee)&#123;</span><br><span class="line"> 	empDetail.Name = &quot;Anshul&quot;;</span><br><span class="line">&#125;</span><br><span class="line"> var newEmployee = Employee&#123;Name: &quot;fdfdsf&quot;, Age: 40, Destination: &quot;fdfdsfdsf&quot;&#125;;</span><br><span class="line"></span><br><span class="line"> UpdateEmployee(&amp;newEmployee);</span><br><span class="line"> //&amp; is used to extract the reference of a object</span><br><span class="line"> // * is used to attacked the reference of an object.</span><br><span class="line"></span><br><span class="line"> //the original object sent to the function updated</span><br><span class="line"></span><br><span class="line"> fmt.Println(newEmployee.Name);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>if using the new keyword to create a new object, it will returns the address of the object. that is reference.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> type Employee struct &#123;</span><br><span class="line">  Name string</span><br><span class="line">  Age int</span><br><span class="line">  Designation string</span><br><span class="line">  Salary int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var newEmployee = new(Employee)</span><br><span class="line"></span><br><span class="line">fmt.Println(newEmployee.Name)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>*1 But one thing need to point out is that we’re using the new keyword, we can’t provide the default values to the object properties. When the object is created, Golang provides the default values to the object properties. In the above case, the access to the Name property will return an empty string (“”).</p>
+<p>So Any changes made to the input object parameter will be reflected in the original object.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">func UpdateEmployee(empDetials *Employee) &#123;</span><br><span class="line">  empDetails.Name = &quot;Anshul&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var newEmployee = new(Employee)</span><br><span class="line"></span><br><span class="line">newEmployee.Name = &quot;Mayank&quot;</span><br><span class="line">newEmployee.Age = 30</span><br><span class="line"></span><br><span class="line">UpdateEmployee(newEmployee)</span><br><span class="line"></span><br><span class="line">fmt.Println(newEmployee.Name)</span><br></pre></td></tr></table></figure>
+<p>In the above case, the object reference is returned from the new keyword. Therefore, while invoking the function, we don’t need to use &amp; to send the reference of the object.</p>
+<p>*2 Adding a Function to the Struct<br>The struct not only defines the properties associated with the object but also represents the behavior of the object. We can add functions to the struct that can add behavior to it. The code to associate a function to the struct is pretty different in Golang.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">type Employee struct &#123;</span><br><span class="line">  Name string</span><br><span class="line">  Age int</span><br><span class="line">  Designation string</span><br><span class="line">  Salary int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (emp Employee) ShowDetails() &#123;</span><br><span class="line">  fmt.Println(&quot;User Name: &quot;, emp.Name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>In the above code, we’re adding a new function that’s bound to the Employee struct. We need to explicitly bind the function to the struct. This function defined can then take the reference of the object created using emp.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">type Employee struct &#123;</span><br><span class="line">  Name string</span><br><span class="line">  Age int</span><br><span class="line">  Designation string</span><br><span class="line">  Salary int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (emp Employee) ShowDetails() &#123;</span><br><span class="line">  fmt.Println(&quot;User Name: &quot;, emp.Name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var newEmployee = new(Employee)</span><br><span class="line">newEmployee.Name = &quot;Mayank&quot;</span><br><span class="line"></span><br><span class="line">newEmployee.ShowDetails()</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/06/find-celebrity/" data-id="ck4c6779c002kq024r4merq05" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/12/18/golang-tutorial/" data-id="ck4c67798002bq024czjbl5w9" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/">golang</a></li></ul>
 
     </footer>
   </div>
@@ -105,19 +120,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/04/06/背包问题“/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          背包问题 
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/04/04/viewEncasulation/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/12/01/Cherry-Pickup/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">viewEncasulation</div>
+      <div class="article-nav-title">Cherry Pickup</div>
     </a>
   
 </nav>

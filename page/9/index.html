@@ -65,6 +65,96 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-JavaBeans" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/23/JavaBeans/" class="article-date">
+  <time datetime="2018-12-24T01:24:58.000Z" itemprop="datePublished">2018-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/23/JavaBeans/">JavaBeans Definition</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Definition:<br>JavaBean 是一种JAVA语言写成的可重用组件。为写成JavaBean，类必须是具体的和公共的，并且具有无参数的构造器。JavaBean 通过提供符合一致性设计模式的公共方法将内部域暴露成员属性，long和class方法获取。众所周知，属性名称符合这种模式，其他Java 类可以通过自省机制发现和操作这些JavaBean 的属性。</p>
+<p>Description:<br>JavaBean在MVC设计模型中是model，又称模型层，在一般的程序中，我们称它为数据层，就是用来设置数据的属性和一些行为，然后我会提供获取属性和设置属性的get/set方法.</p>
+<p>MVC:<br>MVC的概念，即M-model-模型：JavaBean；V-view-表现：JSP页面；C-control-控制和处理：Servlet.</p>
+<p>Disadvantage:<br>1.提高代码的可复用性：对于通用的事务处理逻辑，数据库操作等都可以封装在JavaBean中，通过调用JavaBean的属性和方法可快速进行程序设计。<br>    2.程序易于开发维护：实现逻辑的封装，使事务处理和显示互不干扰。<br>    3.支持分布式运用：多用JavaBean，尽量减少java代码和html的混编。<br>    4.可以便捷地传递数据</p>
+<p>Rule: Javabean类必须是public类 2、提供给JSP页面的调用方法必须富裕public访问权限 3、bean中属性必须给get和set方法 4、必须由空构造方法.</p>
+<p>Example: </p>
+<p>package Server;</p>
+<p>import java.io.Serializable;<br>public class Product implements Serializable<br>{<br>    private static final long serialVersionUID = 1L;<br>    private String product_id;<br>    private String product_name;<br>    private double price;<br>    private String info;</p>
+<pre><code>public Product()
+{
+    super();
+}
+
+public void setPrice(double price) {
+    this.price = price;
+}
+
+public double getPrice() {
+    return price;
+}
+
+public void setInfo(String info) {
+    this.info = info;
+}
+public String getInfo() {
+    return info;
+}
+
+
+public void setProduct_id(String product_id) {
+    this.product_id = product_id;
+}
+
+
+public String getProduct_id() {
+    return product_id;
+}
+
+
+public void setProduct_name(String product_name) {
+    this.product_name = product_name;
+}
+
+public String getProduct_name() {
+    return product_name;
+}
+</code></pre><p>}<br>Example Usage: </p>
+<p>在页面中要导入相应的Bean类，并用<a href="jsp:usebean" target="_blank" rel="noopener">jsp:usebean</a>标签获取Bean对象<br>＜jsp:useBean id=”自定义该Bean名字” class=”Bean类位置” scope=”Bean有效范围”/＞<br>Bean有效范围：page、request、session、application<br>设置Bean属性<a href="jsp:setProperty" target="_blank" rel="noopener">jsp:setProperty</a>，获取Bean属性<a href="jsp:getProperty" target="_blank" rel="noopener">jsp:getProperty</a><br>&lt;jsp:setProperty name=”Bean的id” property=”Bean类属性名” param=”表单参数名”/&gt;<br>&lt;jsp:getProperty property=”Bean类属性名” name=”Bean的id”/&gt;</p>
+<p>Example:<br>&lt;%@ page language=”java” contentType=”text/html; charset=utf-8”<br>    pageEncoding=”utf-8”%&gt;<br>&lt;%@ page import=”java.util.*” %&gt;<br>&lt;%request.setCharacterEncoding(“utf-8”); %&gt;<br>&lt;jsp:useBean id=”product” class=”Server.Product” scope=”page” /&gt;<br>&lt;!DOCTYPE html PUBLIC “-//W3C//DTD HTML 4.01 Transitional//EN” “<a href="http://www.w3.org/TR/html4/loose.dtd&quot;&gt;" target="_blank" rel="noopener">http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</a></p>
+<html><br><head><meta name="generator" content="Hexo 3.8.0"><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>通过表单参数设置Bean属性值</title><br></head><br><body><br><form action method="post"><br><br><br>输入产品名称：<input type="text" name="product_name"><br><br>输入产品编号：<input type="text" name="product_id"><br><br>输入产品价格：<input type="text" name="price"><br><br>输入产品信息：<input type="text" name="info"><br><br><input type="submit" value="提交"><br></form><br><!-- 设置product名称 --><br>&lt;jsp:setProperty property=”product_name” name=”product” value=”struts开发教程”/&gt;<br><br>产品名称是：<br><!-- 获取产品名称 --><br>&lt;jsp:getProperty property=”product_name” name=”product”/&gt;<br>&lt;%=product.getProduct_name() %&gt;<br><br><br><br><!-- 设置产品编号 --><br>&lt;jsp:setProperty property=”product_id” name=”product” value=”111100123689”/&gt;<br><br>产品编号是：<br><!-- 获取产品编号 --><br>&lt;jsp:getProperty property=”product_id” name=”product”/&gt;<br>&lt;%=product.getProduct_id() %&gt;<br><br><br><!-- 设置产品价格 --><br>&lt;%<br>double price=68.23;<br>%&gt;<br>&lt;jsp:setProperty property=”price” name=”product” value=”&lt;%=price +23.67%&gt;”/&gt;<br><br>产品价格是：<br><!-- 获取产品价格 --><br>&lt;jsp:getProperty property=”price” name=”product”/&gt;<br><br><br><br><!-- 设置产品信息 --><br>&lt;jsp:setProperty property=”info” name=”product” value=”Structs开发教程是一本介绍秿Struct的专业书籍….”/&gt;<br><br>产品信息：<br><!-- 获取产品信息 --><br>&lt;jsp:getProperty property=”info” name=”product”/&gt;<br></body><br></html>
+
+<p>Cons:<br>其实所有的程序都可以写在jsp页面里，但是存在以下问题：<br>1、执行效率低下；<br>2、不安全，所有的程序都在jsp文件中可见，毫无知识保护可言；<br>3、逻辑混乱。这样让JSP文件的逻辑很难懂。<br>    于是提出了MVC模式，即将一些处理用的程序从JSP中分离出来，让JSP页面只负责显示，几乎是html，只不过可以动态的读取数据和进行少量的逻辑处理，比如循环、判断等。<br>    可能不举例说你还是不懂，我就举个最简单的例子——留言板。<br>    JSP的职责：从数据库取出数据，显示所有的留言信息（当中要用少量的，简单的逻辑处理：循环）、显示签写留言的页面（几乎全部都是html）。<br>    Servlet的职责：接受签写留言页面提交过来的标单数据，进行数据检验，如果正确，则存入数据库并返回留言的显示页面；如果数据有误，给出错误提示后返回签写留言的页面。可以看到，这个就叫做逻辑处理。这些你也完全可以放在JSP中实现，但是用Servlet，其效率和安全性高多了，也让JSP页面变得很简洁明了。<br>    JavaBean的职责：其实一般的留言板是不需要用到JavaBean的，但在这里，为了让你明白，还是牵强的把JavaBean用进来。所谓JavaBean，就是一个很简单的Java类，比如说，网上商城的所有商品是一个商品类，论坛中所有的帖子是一个帖子类，这里，留言板的所有留言是一个留言类，叫做Message类。每个类有着它特定的属性和方法。对于Message类，其属性有主题、内容、日期、留言者等，其方法可以有添加留言、删除留言、修改留言等。使用JavaBean，主要是为了让JSP编程能够适应Java程序员的习惯，直接对类和实例进行操作，而不是直接去操作数据库。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2018/12/23/JavaBeans/" data-id="ck4c67783000mq024ycdzxio0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-JavaSpringApp" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/12/23/JavaSpringApp/" class="article-date">
@@ -101,7 +191,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/12/23/JavaSpringApp/" data-id="ck3nct7ku000pfv24ehleyjcf" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/12/23/JavaSpringApp/" data-id="ck4c67781000lq024vwl1npw8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li></ul>
@@ -142,7 +232,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/11/07/StdinStdout/" data-id="ck3nct7lj001mfv243uhxgwx1" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/11/07/StdinStdout/" data-id="ck4c6778x001tq024q9ziotf5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hackrrank/">hackrrank</a></li></ul>
@@ -267,7 +357,7 @@ txt[i] and pat[j] match, do i++ and j++
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/11/03/KMP-algorithm/" data-id="ck3nct7kr000lfv24bxt8osjw" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/11/03/KMP-algorithm/" data-id="ck4c6778b000yq02448h6foms" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -310,7 +400,7 @@ txt[i] and pat[j] match, do i++ and j++
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/11/01/spring-depend-injection-md/" data-id="ck3nct7nn004ufv2480kpdojx" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/11/01/spring-depend-injection-md/" data-id="ck4c677al004vq0249i1hrlta" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
@@ -356,7 +446,7 @@ txt[i] and pat[j] match, do i++ and j++
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/10/08/Persistence/" data-id="ck3nct7l80018fv2439m727jl" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/10/08/Persistence/" data-id="ck4c6778l0019q0247tbeliiv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -392,7 +482,7 @@ txt[i] and pat[j] match, do i++ and j++
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/10/08/maxcycle-subarray/" data-id="ck3nct7n40046fv24mu8ts47q" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/10/08/maxcycle-subarray/" data-id="ck4c677a2003zq0244fu2zrz0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -429,7 +519,7 @@ txt[i] and pat[j] match, do i++ and j++
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="ck3nct7n0003yfv24q0h7j46h" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/20/leetcode260-singlenumberIII/" data-id="ck4c6779u003lq024ifq64dn0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -479,7 +569,7 @@ txt[i] and pat[j] match, do i++ and j++
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="ck3nct7mn003bfv24grjherpg" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/19/lecture9-computerArchiture/" data-id="ck4c6779i002xq024e6fo8cde" class="article-share-link">Share</a>
       
       
     </footer>
@@ -516,34 +606,7 @@ txt[i] and pat[j] match, do i++ and j++
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/" data-id="ck3nct7kc0005fv24v0ve37t1" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-dailylearning" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/18/dailylearning/" class="article-date">
-  <time datetime="2018-09-18T19:09:37.865Z" itemprop="datePublished">2018-09-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>add header and footer partials<br>add in bootstrap</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2018/09/18/dailylearning/" data-id="ck3nct7lx002bfv24vdvys6os" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2018/09/18/Daily-KMP-Algrithm/" data-id="ck4c6777f0001q024oegzm20t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -571,7 +634,7 @@ txt[i] and pat[j] match, do i++ and j++
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System-Design/">System Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System-Design/">System Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/golang/">golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a></li></ul>
     </div>
   </div>
 
@@ -581,7 +644,7 @@ txt[i] and pat[j] match, do i++ and j++
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/Leetcode/" style="font-size: 12px;">Leetcode</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/System-Design/" style="font-size: 12px;">System Design</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/Leetcode/" style="font-size: 12px;">Leetcode</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/System-Design/" style="font-size: 12px;">System Design</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/golang/" style="font-size: 10px;">golang</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a>
     </div>
   </div>
 
@@ -603,6 +666,10 @@ txt[i] and pat[j] match, do i++ and j++
       <ul>
         
           <li>
+            <a href="/2019/12/18/golang-tutorial/">golang tutorial</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/01/Cherry-Pickup/">Cherry Pickup</a>
           </li>
         
@@ -616,10 +683,6 @@ txt[i] and pat[j] match, do i++ and j++
         
           <li>
             <a href="/2019/10/16/js-asyc-promise-reading-summary/">js-asyc-promise-reading-summary</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/30/leetcode-927-Three-Equal-Parts/">leetcode 927 Three Equal Parts</a>
           </li>
         
       </ul>

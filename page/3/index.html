@@ -65,6 +65,73 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Leetcode-333-Largest-BST-Subtree" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/06/Leetcode-333-Largest-BST-Subtree/" class="article-date">
+  <time datetime="2019-06-06T16:22:40.000Z" itemprop="datePublished">2019-06-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/06/Leetcode-333-Largest-BST-Subtree/">Leetcode.333 Largest BST Subtree</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>Given a binary tree, find the largest subtree which is a Binary Search Tree (BST), where largest means subtree with largest number of nodes in it.</li>
+</ul>
+<p><strong> Note: </strong><br>A subtree must include all of its descendants.</p>
+<h4 id="Similar-to-Leetcode-98"><a href="#Similar-to-Leetcode-98" class="headerlink" title="Similar to Leetcode.98"></a>Similar to Leetcode.98</h4><p><strong> Test Case </strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Input: [10,5,15,1,8,null,7]</span><br><span class="line"></span><br><span class="line">   10 </span><br><span class="line">   / \ </span><br><span class="line">  5  15 </span><br><span class="line"> / \   \ </span><br><span class="line">1   8   7</span><br><span class="line"></span><br><span class="line">Output: 3</span><br><span class="line">Explanation: The Largest BST Subtree in this case is the highlighted one.</span><br><span class="line">             The return value is the subtree&apos;s size, which is 3.</span><br></pre></td></tr></table></figure></p>
+<p><strong>Follow up:</strong><br>Can you figure out ways to solve it with O(n) time complexity?</p>
+<p><strong> logic </strong> </p>
+<ul>
+<li><ol>
+<li>dfs, get the information from bottom(top down), should return the max value in the left node and the min value in the right node.</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>a inner class is useful for the data</li>
+</ol>
+</li>
+<li><p>inner class:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Res&#123;</span><br><span class="line">        int size;</span><br><span class="line">        int lower;</span><br><span class="line">        int upper;</span><br><span class="line">        Res(int size, int lower, int upper)&#123;</span><br><span class="line">            this.size = size;</span><br><span class="line">            this.lower = lower;</span><br><span class="line">            this.upper = upper;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>main method:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public int largestBSTSubtree(TreeNode root) &#123;</span><br><span class="line">        if(root==null) return 0;</span><br><span class="line">        dfs(root);</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>dfs treversal</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private Res dfs(TreeNode root)&#123;</span><br><span class="line">    //fullfill the tree rule but the size = 0</span><br><span class="line">    if(root==null) &#123;return new Res(0, Integer.MAX_VALUE, Integer.MIN_VALUE);&#125;</span><br><span class="line">    Res left = dfs(root.left);</span><br><span class="line">    Res right = dfs(root.right);</span><br><span class="line">    //not fullfill the tree rule and size = -1 and the lower and upper is 0;</span><br><span class="line">    if(left.size==-1 || right.size == -1 || root.val &lt;= left.upper || root.val &gt;= right.lower)</span><br><span class="line">        return new Res(-1, 0, 0);</span><br><span class="line">    int size = left.size + 1 + right.size;</span><br><span class="line">    max = Math.max(size, max);</span><br><span class="line">    return new Res(size, Math.min(left.lower, root.val), Math.max(right.upper, root.val));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>the other way is to use parent as para in the dfs instead of use max and min value.</p>
+<h3 id="Leetcode-98-Validate-the-BST-tree"><a href="#Leetcode-98-Validate-the-BST-tree" class="headerlink" title="Leetcode.98 Validate the BST tree"></a>Leetcode.98 Validate the BST tree</h3><p>DFS search</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Solution&#123;</span><br><span class="line">    public boolean isValidBST(root, long minVal, long maxVal)&#123;</span><br><span class="line">        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);</span><br><span class="line">    &#125;</span><br><span class="line">    private boolean isValidBST(TreeNode root, long minVal, long maxVal)&#123;</span><br><span class="line">        if(root==null) return true;</span><br><span class="line">        if(root.val &gt;= maxVal || root.val &lt;= minVal) return false;</span><br><span class="line">        return isValidBST(root.left, minVal, root.val) &amp;&amp; isValidBST(root.right, root.val, maxVal);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/06/06/Leetcode-333-Largest-BST-Subtree/" data-id="ck4c67786000qq024vukk65fz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Design-a-transportation-payment-method" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/05/Design-a-transportation-payment-method/" class="article-date">
@@ -104,7 +171,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Design-a-transportation-payment-method/" data-id="ck3nct7kk000ffv24afe9az1j" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/05/Design-a-transportation-payment-method/" data-id="ck4c6777p0009q0242errz1qh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li></ul>
@@ -193,7 +260,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Ways-to-center-CSS-element/" data-id="ck3nct7lr0022fv241w9uf1mw" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/05/Ways-to-center-CSS-element/" data-id="ck4c67790001wq024zs6szgvf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
@@ -262,7 +329,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/05/Redux-starter-kit-usage/" data-id="ck3nct7lm001rfv247a913822" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/05/Redux-starter-kit-usage/" data-id="ck4c6778s001mq0249srl7era" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redux/">Redux</a></li></ul>
@@ -313,7 +380,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" data-id="ck3nct7l40014fv24sl42wenm" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/Leetcode-485-487-1004-Max-Consecutive-One/" data-id="ck4c6778g0011q024rfutxat2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -372,7 +439,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/leetcode-272-Closest-Binary-Search/" data-id="ck3nct7ms003jfv24vklcjcay" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/leetcode-272-Closest-Binary-Search/" data-id="ck4c6779m0038q024n3qo3k3r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -413,7 +480,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/04/ActiveMQ-Help-Decouple-System/" data-id="ck3nct7ka0004fv24ypeemekd" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/04/ActiveMQ-Help-Decouple-System/" data-id="ck4c6777b0000q024zr0zj5wi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li></ul>
@@ -457,7 +524,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/Leetcode-Contest-139/" data-id="ck3nct7l1000zfv24eid4h13t" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/Leetcode-Contest-139/" data-id="ck4c6778j0018q02401u1j9kf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -500,7 +567,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/Responsive-Web-Design-I/" data-id="ck3nct7lp001wfv24jdak96c9" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/Responsive-Web-Design-I/" data-id="ck4c6778u001oq024whdj7utt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li></ul>
@@ -550,48 +617,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/leetcode-201-Word-Search-II/" data-id="ck3nct7mw003qfv249rywwqd2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode1033-Move-Stones-Until-Consecutive" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/" class="article-date">
-  <time datetime="2019-06-01T13:23:59.000Z" itemprop="datePublished">2019-06-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/">leetcode1033.Move Stones Until Consecutive</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Catogory: Brainteaser</p>
-<p>-Edge case 1: all three stones are next to each other (z - x == 2). Return {0, 0}.<br>-Edge case 2: two stones are next to each other, or there is only one space in between. Minimum moves is 1.</p>
-<p>-Otherwise; minimum moves are 2, maximum - z - x - 2.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; numMovesStones(int a, int b, int c) &#123;</span><br><span class="line">  vector&lt;int&gt; s = &#123; a, b, c &#125;;</span><br><span class="line">  sort(begin(s), end(s));</span><br><span class="line">  if (s[2] - s[0] == 2) return &#123; 0, 0 &#125;;</span><br><span class="line">  return &#123; min(s[1] - s[0], s[2] - s[1]) &lt;= 2 ? 1 : 2, s[2] - s[0] - 2 &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/06/01/leetcode1033-Move-Stones-Until-Consecutive/" data-id="ck3nct7mx003sfv24q073rf8f" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/06/01/leetcode-201-Word-Search-II/" data-id="ck4c6779o003bq024qshr8ok7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -621,7 +647,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System-Design/">System Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System-Design/">System Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/golang/">golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a></li></ul>
     </div>
   </div>
 
@@ -631,7 +657,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/Leetcode/" style="font-size: 12px;">Leetcode</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/System-Design/" style="font-size: 12px;">System Design</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/Leetcode/" style="font-size: 12px;">Leetcode</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/System-Design/" style="font-size: 12px;">System Design</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/golang/" style="font-size: 10px;">golang</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a>
     </div>
   </div>
 
@@ -653,6 +679,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/18/golang-tutorial/">golang tutorial</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/01/Cherry-Pickup/">Cherry Pickup</a>
           </li>
         
@@ -666,10 +696,6 @@
         
           <li>
             <a href="/2019/10/16/js-asyc-promise-reading-summary/">js-asyc-promise-reading-summary</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/30/leetcode-927-Three-Equal-Parts/">leetcode 927 Three Equal Parts</a>
           </li>
         
       </ul>

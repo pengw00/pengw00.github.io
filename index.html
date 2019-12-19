@@ -65,6 +65,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-golang-tutorial" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/18/golang-tutorial/" class="article-date">
+  <time datetime="2019-12-19T03:08:58.000Z" itemprop="datePublished">2019-12-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/18/golang-tutorial/">golang tutorial</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>go object pass by value, so it won’t affect the original object</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  func UpdateEmployee(empDetails Employee)&#123;</span><br><span class="line">  		empDetails.Name = &quot;Anshul&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var newEmp = Employee&#123; Name: : &quot;Mayank&quot;, Age: 40, Destination: &quot;Developer&quot;&#125;</span><br><span class="line"></span><br><span class="line">UpdateEmployee(newEmp);</span><br><span class="line">fmt.println(newEmp)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>if you want pass go object by reference, you need to use reference syntax, * and &amp;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> func UpdateEmployee(empDetail *Employee)&#123;</span><br><span class="line"> 	empDetail.Name = &quot;Anshul&quot;;</span><br><span class="line">&#125;</span><br><span class="line"> var newEmployee = Employee&#123;Name: &quot;fdfdsf&quot;, Age: 40, Destination: &quot;fdfdsfdsf&quot;&#125;;</span><br><span class="line"></span><br><span class="line"> UpdateEmployee(&amp;newEmployee);</span><br><span class="line"> //&amp; is used to extract the reference of a object</span><br><span class="line"> // * is used to attacked the reference of an object.</span><br><span class="line"></span><br><span class="line"> //the original object sent to the function updated</span><br><span class="line"></span><br><span class="line"> fmt.Println(newEmployee.Name);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>if using the new keyword to create a new object, it will returns the address of the object. that is reference.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> type Employee struct &#123;</span><br><span class="line">  Name string</span><br><span class="line">  Age int</span><br><span class="line">  Designation string</span><br><span class="line">  Salary int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var newEmployee = new(Employee)</span><br><span class="line"></span><br><span class="line">fmt.Println(newEmployee.Name)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>*1 But one thing need to point out is that we’re using the new keyword, we can’t provide the default values to the object properties. When the object is created, Golang provides the default values to the object properties. In the above case, the access to the Name property will return an empty string (“”).</p>
+<p>So Any changes made to the input object parameter will be reflected in the original object.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">func UpdateEmployee(empDetials *Employee) &#123;</span><br><span class="line">  empDetails.Name = &quot;Anshul&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var newEmployee = new(Employee)</span><br><span class="line"></span><br><span class="line">newEmployee.Name = &quot;Mayank&quot;</span><br><span class="line">newEmployee.Age = 30</span><br><span class="line"></span><br><span class="line">UpdateEmployee(newEmployee)</span><br><span class="line"></span><br><span class="line">fmt.Println(newEmployee.Name)</span><br></pre></td></tr></table></figure>
+<p>In the above case, the object reference is returned from the new keyword. Therefore, while invoking the function, we don’t need to use &amp; to send the reference of the object.</p>
+<p>*2 Adding a Function to the Struct<br>The struct not only defines the properties associated with the object but also represents the behavior of the object. We can add functions to the struct that can add behavior to it. The code to associate a function to the struct is pretty different in Golang.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">type Employee struct &#123;</span><br><span class="line">  Name string</span><br><span class="line">  Age int</span><br><span class="line">  Designation string</span><br><span class="line">  Salary int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (emp Employee) ShowDetails() &#123;</span><br><span class="line">  fmt.Println(&quot;User Name: &quot;, emp.Name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>In the above code, we’re adding a new function that’s bound to the Employee struct. We need to explicitly bind the function to the struct. This function defined can then take the reference of the object created using emp.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">type Employee struct &#123;</span><br><span class="line">  Name string</span><br><span class="line">  Age int</span><br><span class="line">  Designation string</span><br><span class="line">  Salary int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (emp Employee) ShowDetails() &#123;</span><br><span class="line">  fmt.Println(&quot;User Name: &quot;, emp.Name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var newEmployee = new(Employee)</span><br><span class="line">newEmployee.Name = &quot;Mayank&quot;</span><br><span class="line"></span><br><span class="line">newEmployee.ShowDetails()</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/12/18/golang-tutorial/" data-id="ck4c67798002bq024czjbl5w9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/">golang</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Cherry-Pickup" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/01/Cherry-Pickup/" class="article-date">
@@ -105,7 +161,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/12/01/Cherry-Pickup/" data-id="ck3nct7k00000fv24avkp4l3r" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/12/01/Cherry-Pickup/" data-id="ck4c6777j0003q024gjssiw9z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li></ul>
@@ -221,7 +277,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/11/16/System-design-for-instagram/" data-id="ck3nct7me002wfv244v241lqt" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/11/16/System-design-for-instagram/" data-id="ck4c677b9005nq02419ulteg0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/System-Design/">System Design</a></li></ul>
@@ -267,7 +323,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/11/16/benefit-from-spring-data/" data-id="ck3nct7ly002dfv24iclsr77w" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/11/16/benefit-from-spring-data/" data-id="ck4c6779b002hq0244yiwtvqx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/">springboot</a></li></ul>
@@ -317,7 +373,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/10/16/js-asyc-promise-reading-summary/" data-id="ck3nct7mh0032fv24ilwzwyux" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/10/16/js-asyc-promise-reading-summary/" data-id="ck4c6779g002sq024x4blox78" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -356,7 +412,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/09/30/leetcode-927-Three-Equal-Parts/" data-id="ck3nct7mx003ufv24z5x53d6t" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/09/30/leetcode-927-Three-Equal-Parts/" data-id="ck4c6779t003iq0244l8jcz75" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -401,7 +457,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/09/11/Leetcode-124-Binary-Tree-Maximum-Path-Sum/" data-id="ck3nct7l0000xfv24dh1ice7a" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/09/11/Leetcode-124-Binary-Tree-Maximum-Path-Sum/" data-id="ck4c67789000uq024wr1r6ioi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li></ul>
@@ -442,7 +498,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/09/01/how-to-design-a-online-judgement-system-like-leetcode/" data-id="ck3nct7mp003ffv24jv534i8m" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/09/01/how-to-design-a-online-judgement-system-like-leetcode/" data-id="ck4c6779k0032q024ey60g8fp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/System-Design/">System Design</a></li></ul>
@@ -516,7 +572,7 @@ environment:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/09/01/Dockerize-MySQL-server-for-REST-API/" data-id="ck3nct7ke0008fv2433n6gka2" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/09/01/Dockerize-MySQL-server-for-REST-API/" data-id="ck4c6777r000bq024ye46cwy7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li></ul>
@@ -562,48 +618,10 @@ environment:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/08/31/Difference-between-patch-and-put-in-http-request/" data-id="ck3nct7kg000bfv24e5jqtw8a" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/08/31/Difference-between-patch-and-put-in-http-request/" data-id="ck4c6777o0008q024nwxplsf8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Http/">Http</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-leetcode-975-Odd-Even-Jump" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/01/leetcode-975-Odd-Even-Jump/" class="article-date">
-  <time datetime="2019-08-02T04:39:43.000Z" itemprop="datePublished">2019-08-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/01/leetcode-975-Odd-Even-Jump/">leetcode.975 Odd Even Jump</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="dynamic-Programming"><a href="#dynamic-Programming" class="headerlink" title="dynamic Programming"></a>dynamic Programming</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public int oddEvenJumps(int[] A) &#123;</span><br><span class="line">        int N = A.length;</span><br><span class="line">        if (N &lt;= 1) return N;</span><br><span class="line">        boolean[] odd = new boolean[N];</span><br><span class="line">        boolean[] even = new boolean[N];</span><br><span class="line">        odd[N-1] = even[N-1] = true;</span><br><span class="line"></span><br><span class="line">        TreeMap&lt;Integer, Integer&gt; vals = new TreeMap();</span><br><span class="line">        vals.put(A[N-1], N-1);</span><br><span class="line">        for (int i = N-2; i &gt;= 0; --i) &#123;</span><br><span class="line">            int v = A[i];</span><br><span class="line">            if (vals.containsKey(v)) &#123;</span><br><span class="line">                odd[i] = even[vals.get(v)];</span><br><span class="line">                even[i] = odd[vals.get(v)];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                Integer lower = vals.lowerKey(v);</span><br><span class="line">                Integer higher = vals.higherKey(v);</span><br><span class="line"></span><br><span class="line">                if (lower != null)</span><br><span class="line">                    even[i] = odd[vals.get(lower)];</span><br><span class="line">                if (higher != null) &#123;</span><br><span class="line">                    odd[i] = even[vals.get(higher)];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            vals.put(v, i);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int ans = 0;</span><br><span class="line">        for (boolean b: odd)</span><br><span class="line">            if (b) ans++;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/08/01/leetcode-975-Odd-Even-Jump/" data-id="ck3nct7n60047fv2463gh58q3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
 
     </footer>
   </div>
@@ -630,7 +648,7 @@ environment:
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System-Design/">System Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System-Design/">System Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/golang/">golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a></li></ul>
     </div>
   </div>
 
@@ -640,7 +658,7 @@ environment:
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/Leetcode/" style="font-size: 12px;">Leetcode</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/System-Design/" style="font-size: 12px;">System Design</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/Leetcode/" style="font-size: 12px;">Leetcode</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/System-Design/" style="font-size: 12px;">System Design</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/golang/" style="font-size: 10px;">golang</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a>
     </div>
   </div>
 
@@ -662,6 +680,10 @@ environment:
       <ul>
         
           <li>
+            <a href="/2019/12/18/golang-tutorial/">golang tutorial</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/01/Cherry-Pickup/">Cherry Pickup</a>
           </li>
         
@@ -675,10 +697,6 @@ environment:
         
           <li>
             <a href="/2019/10/16/js-asyc-promise-reading-summary/">js-asyc-promise-reading-summary</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/30/leetcode-927-Three-Equal-Parts/">leetcode 927 Three Equal Parts</a>
           </li>
         
       </ul>
