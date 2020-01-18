@@ -65,6 +65,133 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-practices-to-boost-react-performance" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/27/practices-to-boost-react-performance/" class="article-date">
+  <time datetime="2019-05-27T23:58:06.000Z" itemprop="datePublished">2019-05-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/27/practices-to-boost-react-performance/">practices to boost react performance</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Practices to Boost React Performance</p>
+<h3 id="1-React-under-the-hood"><a href="#1-React-under-the-hood" class="headerlink" title="1. React under the hood?"></a>1. React under the hood?</h3><p>React DOM wasn’t created with dynamic UI in mind. When the DOM needs to be updated, it has to go through a Reflow/Layout stage and the DOM nodes need to be repainted, which is slow. When you have an application with thousands of <div>s, there is a severe performance issue.</div></p>
+<p>React uses a different strategy to update your DOM. The process is popularly known as Reconciliation. When your browser initially renders your application, React builds a tree of elements. Let’s imagine that this how React builds its tree.</p>
+<p>But what when a component’s state changes, the render() method returns a different tree of React elements. React has to calculate the changes it has to make to the DOM, and it does so by creating a virtual DOM and then comparing that to the real DOM.</p>
+<p>The good thing about virtual DOM is that it updates only the part of the DOM that needs to be updated. React uses a diffing algorithm that tries to minimize the number of operations to transform the tree. However, the diffing algorithm isn’t perfect. Let’s say that values of the nodes in yellow has changed, and needs to be updated.</p>
+<p>However, the diffing algorithm isn’t perfect. If the updated props were passed in from the com React ends up updating entire subtree like this.</p>
+<p>As you can see, React is unnecessarily rendering and diffing component subtrees. Instead, there are ways that you can re-render only the nodes that are directly affected by the props change and not the entire subtree.</p>
+<p>When React wastes resources and CPU on rendering components that haven’t changed, we call it wasted renders. Wasted renders can throttle performance — but if we could streamline the diffing process further, we might be able to boost the speed significantly. The rest of the post will cover how to boost React performance.</p>
+<p>Benchmark your Application to Improve Performance — Tools and Techniques</p>
+<p>React used to have a tool called react-addon-perf that was recently retired and it isn’t available in the latest version of React. Instead, React recommends using the browTo create a performance profile for your application, follow the steps below:</p>
+<p>Make sure that you’ve exported the JS with source-maps or that you’re in development mode.<br>Temporarily disable all React extensions, like React DevTools, because they can impact the results.<br>Set up the profiling tool. Open the Chrome developer tools and go to the performance tab. You can slow down the JavaScript execution so that the performance issues become more apparent.<br>Now, navigate to the page that you would like to profile and then press the red button that says “Record.” If you would like to create a performance trace of the initial render, you should choose the start profiling and reload button. Now, perform the desired action and stop the recording.<br>Chrome will return visualization of the performance data in vertical bands. Zoom in onto the User Timing band to see each component’s performance.<br>You can select individual components and the bottom up tab will give you insights into activities that take up most of the time.ser’s profiling tools to get the same result.</p>
+<p>To create a performance profile for your application, follow the steps below:</p>
+<p>Make sure that you’ve exported the JS with source-maps or that you’re in development mode.<br>Temporarily disable all React extensions, like React DevTools, because they can impact the results.<br>Set up the profiling tool. Open the Chrome developer tools and go to the performance tab. You can slow down the JavaScript execution so that the performance issues become more apparent.<br>Now, navigate to the page that you would like to profile and then press the red button that says “Record.” If you would like to create a performance trace of the initial render, you should choose the start profiling and reload button. Now, perform the desired action and stop the recording.<br>Chrome will return visualization of the performance data in vertical bands. Zoom in onto the User Timing band to see each component’s performance.<br>You can select individual components and the bottom up tab will give you insights into activities that take up most of the time.</p>
+<p>a library, known as why-did-you-update, that is an excellent tool for component analysis. It gives you a visualization of the props before and after and notifies you about components that shouldn’t have been rerendered.To install the tool, run<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save why-did-you-update</span><br></pre></td></tr></table></figure></p>
+<p>Add this code into your index.js file.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">if (process.env.NODE_ENV !== &apos;production&apos;) &#123;</span><br><span class="line">  const &#123;whyDidYouUpdate&#125; = require(&apos;why-did-you-update&apos;);</span><br><span class="line">  whyDidYouUpdate(React);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-Prevent-Unnecessary-Rendering"><a href="#2-Prevent-Unnecessary-Rendering" class="headerlink" title="2. Prevent Unnecessary Rendering"></a>2. Prevent Unnecessary Rendering</h3><p>React re-renders a component when its props or state gets updated:default behaviors.</p>
+<p>A. shouldComponentUpdate(). This lifecycle hook doesn’t get invoked during the initial render, but only on subsequent re-renders. shouldComponentUpdate() is triggered when the props have changed and it returns true by default.</p>
+<p>If you’re sure that your component doesn’t need to re-render regardless of whether the props have updated or not, you can return false to skip the rendering process.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class ListItem extends Component &#123;</span><br><span class="line">    shouldComponentUpdate(nextProps, nextState) &#123;</span><br><span class="line">     return false</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    render() &#123;</span><br><span class="line">    // Let the new props flow, I am not rendering again.</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Alternatively, if you need to update only when certain props are updated, you can do something like this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class ListItem extends Component &#123;</span><br><span class="line">    shouldComponentUpdate(nextProps, nextState) &#123;</span><br><span class="line">        return nextProps.isFavourite != this.props.isFavourite;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Pure-Component"><a href="#Pure-Component" class="headerlink" title="Pure Component"></a>Pure Component</h3><p>A React.PureComponent is pretty much like a normal Component but the key difference being, it handles the shouldComponentUpdate() method for you. When the props or the state update, PureComponent will do a shallow comparison on them and update the state.</p>
+<p>So, what is shallow comparison? Here’s excerpt from an answer on StackOverflow:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Shallow compare does check for equality. When comparing scalar values (numbers, strings) it compares their values. When comparing objects, it does not compare their&apos;s attributes - only their references are compared (e.g. &quot;do they point to same object?).</span><br></pre></td></tr></table></figure></p>
+<p>reference: immutable.js is coming!!! //topics involved here.</p>
+<p>Personally, you should use PureComponent only if you have a clear understanding of how immutable data works and when to use forceUpdate() to update your component.</p>
+<h2 id="3-Debouncing-input-handlers"><a href="#3-Debouncing-input-handlers" class="headerlink" title="3.  Debouncing input handlers"></a>3.  Debouncing input handlers</h2><p>This concept is not specific to React, or any other front-end library. Debouncing has long been used in JavaScript to successfully run expensive tasks without hindering performance. </p>
+<p>A debounce function can be used to delay certain events so that it doesn’t get fired up every millisecond. This helps you limit the number of API calls, DOM updates, and time consuming tasks. For instance, when you’re typing something into the search menu, there is a short delay before all of the suggestions pop up. The debounce function limits the calls to onChange event handler. In many cases, the API request is usually made after the user has stopped typing.</p>
+<p>Let me focus more on the debouncing strategy for input handlers and DOM updates. Input handlers are a potential cause of performance issues. Let me explain how:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">export default class SearchBar extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.onChange = this.onChange.bind(this);</span><br><span class="line">  &#125;</span><br><span class="line">  onChange(e) &#123;</span><br><span class="line">    this.props.onChange(e.target.value);</span><br><span class="line">  &#125;</span><br><span class="line">  render () &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;label&gt; Search &lt;/label&gt;</span><br><span class="line">      &lt;input onChange=&#123;this.onChange&#125;/&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>On every input change, we’re calling this.props.onChange(). What if there is a long-running sequence of actions inside that callback? That’s where debounce comes it handy. You can do something like this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import &#123;debounce&#125; from &apos;throttle-debounce&apos;;</span><br><span class="line"></span><br><span class="line">export default class SearchBarWithDebounce extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.onChange = this.onChange.bind(this);</span><br><span class="line">    this.onChangeDebounce = debounce( 300, </span><br><span class="line">         value =&gt; this.props.onChange(value)</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  onChange(e) &#123;</span><br><span class="line">    this.onChangeDebounce(e.target.value);</span><br><span class="line">  &#125;</span><br><span class="line">  render () &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;input onChange=&#123;this.onChange&#125;/&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>The DOM update happens after the user has finished typing, which is exactly what we need. If you’re curious about debouncing AJAX calls, you can do something like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import &#123;debounce&#125; from &apos;throttle-debounce&apos;;</span><br><span class="line"></span><br><span class="line">export default class Comp extends Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.callAPI = debounce(500, this.callAPI);</span><br><span class="line">  &#125;</span><br><span class="line">  onChange(e) &#123;</span><br><span class="line">    this.callAPI(e.target.value);</span><br><span class="line">  &#125;</span><br><span class="line">  callAjax(value) &#123;</span><br><span class="line">    console.log(&apos;value :: &apos;, value);</span><br><span class="line">    // AJAX call here</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;input type=&quot;text&quot; onKeyUp=&#123;this.onChange.bind(this)&#125;/&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Optimize-React-for-Production"><a href="#Optimize-React-for-Production" class="headerlink" title="Optimize React for Production"></a>Optimize React for Production</h3><p>A minified production build is faster and more optimized for heavy workloads, whereas a development build is meant to highlight errors and warnings in the console. Although these warnings help the developer debug errors, they can directly impact the performance of the application.</p>
+<p>You can use the Network tab in your Developer Tools to see what is actually slowing you down. React bundle size is usually the culprit, and you need to minify it before you push it for production. If you bootstrapped the application using create-react-app, you can get a production build by running npm run build.</p>
+<p>When you run this, create-react-app will minify the code, obfuscate/uglify it (that happens as a result of minification) and generate source maps. The end user is able to load the scripts faster than the version that was not minified. The source maps generated are particularly handy if you decide to navigate around the code through the Developer console. The source maps are loaded on demand and you can delete it before actual deployment.</p>
+<p>If you’re using webpack, you can build a production environment by running webpack -p. React also offers production-ready single files for React and ReactDOM.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script </span><br><span class="line">src=&quot;https://unpkg.com/react@16/umd/react.production.min.js&quot;&gt;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;https://unpkg.com/react-dom@16/umd/react-dom.production.min.js&quot;&gt;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>There are ways to reduce the bundle size even further, like using Preact, but you need to take that path only if the initial load time is noticeably slow.</p>
+<p>Optimizing your application’s resource is another thing that you need to consider. This has nothing to do with React, but can indeed speed up your application. Resources such as images, icons and other media files can slow down the application if they are rendered uncompressed. The Network tab in the Developer Tools should give you insights into that too. If you’re using static resources, optimize and compress them before pushing them into the server. Use a CDN if your server and the potential users are not in close proximity. Here is a nice article written by David Lazic that covers optimizing the production build further. <a href="https://medium.com/netscape/webpack-3-react-production-build-tips-d20507dba99a" target="_blank" rel="noopener">https://medium.com/netscape/webpack-3-react-production-build-tips-d20507dba99a</a></p>
+<h3 id="Micro-optimizations-To-Boost-React-Performance"><a href="#Micro-optimizations-To-Boost-React-Performance" class="headerlink" title="Micro-optimizations To Boost React Performance"></a>Micro-optimizations To Boost React Performance</h3><p>Micro-optimizations are certain details that won’t have an immediate impact on your application, but will help you in the long run. There are many-micro optimizations around that you should know about. Some of these practices also help you improve the readability and maintainability of your codebase.</p>
+<h4 id="Functional-components-vs-Class-components"><a href="#Functional-components-vs-Class-components" class="headerlink" title="Functional components vs. Class components"></a>Functional components vs. Class components</h4><p>Functional components are easier to write and read, and they are particularly useful for building the UI or the presentational layer. Class components, on the other hand, are ideal for building containers. The containers make API calls, dispatch actions to the store, and use the state to hold data. They then pass the data as props to the presentational components.</p>
+<p>Until React v16 was released, both the functional components and the class components had the same code path. Although the functional components appeared to have fewer lines of code, they were neither optimized nor offered speed improvements because they were converted to Class components under the hood. However, the scenario has changed with the release of V6.</p>
+<p>Here is an excerpt from the official docs:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Functional components in React 16 don&apos;t go through the same code path as class components, unlike in previous versions, where they were converted to classes and would have the same code path. Class components have additional checks required and overhead in creating the instances that simple functions don&apos;t have.</span><br></pre></td></tr></table></figure></p>
+<h3 id="Bind-Function-Early"><a href="#Bind-Function-Early" class="headerlink" title="Bind Function Early"></a>Bind Function Early</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Button extends React.Component &#123;</span><br><span class="line">  handleClick() &#123;</span><br><span class="line">    console.log(&apos;Yay!&apos;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;button onClick=&#123;this.handleClick.bind(this)&#125;/&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Arrow functions inside the render method is bad too, unfortunately.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Button extends React.Component &#123;</span><br><span class="line">  handleClick() &#123;</span><br><span class="line">    console.log(&apos;Yay&apos;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;button onClick=&#123;() =&gt; this.handleClick()&#125;/&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>The process of creating a new function is usually fast and won’t slow you down, to be honest. But if you’ve implemented shouldComponentUpdate() or if you’re using PureComponent base class, React sees new props on each render and the child components are re-rendered unnecessarily.</p>
+<p>To fix this issue, you can bind functions early like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Button extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line"></span><br><span class="line">    this.handleClick = this.handleClick.bind(this);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleClick() &#123;</span><br><span class="line">    console.log(&apos;Yay!&apos;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;button onClick=&#123;this.handleClick&#125;/&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Alternatively you can use something like class instance fields. However, it’s an experimental feature that has not yet made it to the standards. But you can use it in your project with the help of Babel.</p>
+<h3 id="Final-Words"><a href="#Final-Words" class="headerlink" title="Final Words"></a>Final Words</h3><p>In this post, I’ve covered some of the popular and clever ways to boost React’s performance. On a general note, you don’t have to be concerned until you start seeing actual bottlenecks. I prefer to go with the “Don’t optimize unless you need to” approach. That’s why I’d recommend benchmarking components first and measuring whether they are actually slowing you down. Your browser’s developer tools will also give insights into other non-React factors that could be affecting your app. Use that as a starting point and that should help you get started.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/05/27/practices-to-boost-react-performance/" data-id="ck5j0bgm30060s724hd683650" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-leetcode465" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/25/leetcode465/" class="article-date">
+  <time datetime="2019-05-25T19:05:33.000Z" itemprop="datePublished">2019-05-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/25/leetcode465/">leetcode465</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Optimal Account Balancing, hard<br>Settling Multiple Debts Efficiently: An Invitation to Computing Science by T. Verhoeff, June 2003. <a href="http://www.mathmeth.com/tom/files/settling-debts.pdf" target="_blank" rel="noopener">http://www.mathmeth.com/tom/files/settling-debts.pdf</a><br>The question can be transferred to a 3-partition problem, which is NP-Complete.</p>
+<p>recursion + backtracking, get the total transaction and then dfs and backtracing every trans.<br>Core code:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int backtrack(Long[] debts, int pos, int count)&#123;</span><br><span class="line">        while(pos &lt; debts.length &amp;&amp; debts[pos] == 0) pos++;</span><br><span class="line">        if (pos &gt;= debts.length) &#123;</span><br><span class="line">            return count;</span><br><span class="line">        &#125;</span><br><span class="line">        int res = Integer.MAX_VALUE;</span><br><span class="line">        for(int i = pos + 1; i &lt; debts.length; i++)&#123;</span><br><span class="line">            if(debts[pos] * debts[i] &lt; 0)&#123;</span><br><span class="line">              debts[i] += debts[pos];</span><br><span class="line">              res = Math.min(res, helper(debts, pos + 1, count + 1));</span><br><span class="line">              debts[i] = debts[i] - debts[pos];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pengw00.github.io/2019/05/25/leetcode465/" data-id="ck5j0bgjw0045s7245po405d8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-edit-distance-modified-version-bus-station-problemq" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/21/edit-distance-modified-version-bus-station-problemq/" class="article-date">
@@ -95,7 +222,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/" data-id="ck4c6779f002rq024u6rvkjtp" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/21/edit-distance-modified-version-bus-station-problemq/" data-id="ck5j0bgj1002xs724gyf11me0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -150,7 +277,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="ck4c6779z003vq024nm2lmju8" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode137Contest/" data-id="ck5j0bgjn003ts724wgqsql10" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Contest/">Contest</a></li></ul>
@@ -189,7 +316,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="ck4c677a40042q0241e98tk0t" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/20/leetcode804/" data-id="ck5j0bgjs0040s724vioum78r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li></ul>
@@ -227,7 +354,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="ck4c677ap0055q0240twfj6f0" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/05/02/singleton-code-demo/" data-id="ck5j0bgl6005cs724jbc36vu3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -267,7 +394,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/sass-scss/" data-id="ck4c677ak004tq024zeana959" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/17/sass-scss/" data-id="ck5j0bgkx004xs724wowr5djr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Front-end/">Front-end</a></li></ul>
@@ -310,7 +437,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/17/react-component-communication/" data-id="ck4c677ai004oq024eddmogyu" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/17/react-component-communication/" data-id="ck5j0bgl00050s724lyfx7fuo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -351,7 +478,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/16/react-context-api/" data-id="ck4c677ah004mq0243n3n20yt" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/16/react-context-api/" data-id="ck5j0bgkz004zs724kdo33iol" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -415,144 +542,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/15/transaction-meaning/" data-id="ck4c677bl005vq024gfxdx5ai" class="article-share-link">Share</a>
+      <a data-url="http://pengw00.github.io/2019/04/15/transaction-meaning/" data-id="ck5j0bgld005os724h3ic8w3y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-ngrx-for-flux" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/12/ngrx-for-flux/" class="article-date">
-  <time datetime="2019-04-12T06:22:31.000Z" itemprop="datePublished">2019-04-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/12/ngrx-for-flux/">ngrx for flux</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>github: <a href="https://github.com/SantiagoGdaR/angular-ngrx/blob/master/src/app/app-routing.module.ts" target="_blank" rel="noopener">https://github.com/SantiagoGdaR/angular-ngrx/blob/master/src/app/app-routing.module.ts</a></p>
-<p>What is NGRX<br>NGRX is a group of libraries “inspired” by the Redux pattern which in turn is “inspired” by the Flux pattern. Being a little more concise, this means that redux pattern is a simplified version of the Flux pattern and NGRX is an angular/rxjs version of the redux pattern.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">What do I mean with “angular/rxjs” version of redux… The “angular” part is because ngrx is a library to use within an angular application. The “rxjs” part is because the implementation of ngrx works around a rxjs flow. This means that it works using observables and the different observable operators provided by “rxjs”.</span><br></pre></td></tr></table></figure></p>
-<p>The main purpose of this pattern is<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">to provide a predictable state container, based on three main principles.</span><br></pre></td></tr></table></figure></p>
-<p>Let’s go through the three principles of the Redux pattern and point out the most important benefits they provide.</p>
-<p>Single source of truth<br>In the case of a redux/ngrx architecture, this means that the state of your whole application is <figure class="highlight plain"><figcaption><span>in an object tree within a single store.```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Within a single store? We are going to talk later about stores, but in a general definition, they have the responsibility of holding the state and applying changes to it when they are told to do so (when an action is dispatched, we are also going to talk about them later).</span><br><span class="line"></span><br><span class="line">The benefits of having a single source of truth are plenty, but for me, the most interesting one (because is the one that is going to impact on any angular app) is the following:</span><br><span class="line"></span><br><span class="line">When you are building an angular app ``` usually you have the state split and handle in multiple services ```. ``` As your app growth keeping track of your state changes starts to get messy and hard to debug and maintain. Having a single source of truth resolves this problem since the state is handled only in one object and in one place, so debugging or adding changes becomes way easier.</span><br></pre></td></tr></table></figure></p>
-<h2 id="State-is-read-only"><a href="#State-is-read-only" class="headerlink" title="State is read-only"></a>State is read-only</h2><p>You are never going to change the state directly instead you are going to dispatch actions. These actions describe what’s happening (can be things like getting, adding, removing, updating the state).</p>
-<p>####Dispatch an action?… We are going to talk about actions later but for a general point of view, they are identifiers of an operation on your application and they can be triggered (or dispatched) to tell the application to execute the operation that the action represents.####</p>
-<p>By avoiding to update the state from different places and having a centralized place to make changes, that responds to specific actions, you get a lot of benefits. Just to mention the most important ones:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">You know that any change to the state is going to happen only in one place. This has a great impact on debugging and testing.</span><br><span class="line">You know that if a certain action is dispatched the operation in the state is always the same. Again this impacts directly in debugging and testing.</span><br></pre></td></tr></table></figure>
-<h2 id="Changes-are-made-with-pure-functions"><a href="#Changes-are-made-with-pure-functions" class="headerlink" title="Changes are made with pure functions"></a>Changes are made with pure functions</h2><p>The operation triggered by dispatching an action is going to be a pure function called, within the redux architecture, reducers.</p>
-<p>These reducers (remember that they are just pure functions) receive an action and the state, depending on the action dispatched (usually with a switch statement) they execute an operation and return a new state object.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">State in a redux app is immutable! So when a reducer changes something in the state, it returns a new state object.</span><br></pre></td></tr></table></figure>
-<p>The benefits of using pure functions are well known, like the fact that they are immediately testable if you pass the same arguments you are going to get the same result.</p>
-<p>This approach also allows us to navigate between different instances of our state using Redux/ngrx dev tools and see what changed between instances and who change it, among other things. So using pure functions and returning new instances of the state has also a great impact on debugging.</p>
-<p>But the main benefit, in my opinion, is that by binding all our components inputs to state properties we can change the change detection strategy to on push, and this is going to be a boost on performance for the application.</p>
-<h2 id="where-is-the-example"><a href="#where-is-the-example" class="headerlink" title="where is the example???"></a>where is the example???</h2> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">This approach also allows us to navigate between different instances of our state using Redux/ngrx dev tools and see what changed between instances and who change it, among other things. So using pure functions and returning new instances of the state has also a great impact on debugging.</span><br></pre></td></tr></table></figure>
-<p>##<br>But the main benefit, in my opinion, is that by binding all our components inputs to state properties we can change the change detection strategy to on push, and this is going to be a boost on performance for the application.</p>
-<p>## </p>
-<h1 id="Great…-so-what-are-the-benefits-of-using-NGRX"><a href="#Great…-so-what-are-the-benefits-of-using-NGRX" class="headerlink" title="Great… so what are the benefits of using NGRX"></a>Great… so what are the benefits of using NGRX</h1><p>We have already mentioned most of them out while talking about the redux pattern principles. But let’s point out the most important benefits of using the redux pattern in an application (in my opinion):</p>
-<p>Since we have a single source of truth and you can’t directly change the state, applications are going to behave more consistently.<br>Using the redux pattern gives us a lot of cool features to make debugging easier.<br>Applications become easier to test since we are introducing pure functions to handle changes in the state and also because both, ngrx and rxjs, have a lot’s great features for testing.<br>As soon as you feel comfortable with using ngrx, understanding the flow of data in your applications becomes incredibly easy and predictable.</p>
-<h2 id="and-the-cons-are"><a href="#and-the-cons-are" class="headerlink" title="and the cons are"></a>and the cons are</h2><p>NGRX has, of course, a learning curve. Is not a big one, but not that small either, and I think it requires some experience or deep understanding of some program patters. Any mid-seniority dev should be ok but for a junior might be a little confusing at first.<br>For me, it feels a little verbose. So every time you add some property to the state, you need to add the actions, the dispatchers, you may need to update or add the selectors, the effects if any, update the store. And also you start piping (concatenating) rxjs operators and observables all over the place.<br>NGRX is not part of the angular core libraries and is not supported by Google, at least not directly because there are ngrx contributors that are part of the Angular team. Just something to consider since you are adding a library that is going to be a big dependency for your app.</p>
-<h2 id="When-to-use-NGRX"><a href="#When-to-use-NGRX" class="headerlink" title="When to use NGRX"></a>When to use NGRX</h2><p>So, in a general opinion ngrx should be used in medium/big projects were managing the state starts to become hard to maintain and overwhelming. Some other people, more fanatic of the pattern is going to say something like “if you have a state you have NGRX”.</p>
-<p>I do agree that it should be considered to be used in medium or big projects when you have a considerable state and a bunch of components using this state but you have to consider that Angular by itself provides plenty of solutions for managing the state and if you have a strong front-end angular team, then maybe you don’t need to bother about ngrx.</p>
-<p>That being said I consider that a strong Angular team may also decide to include ngrx to the solution because they know all the power of the redux pattern and also the power added by rxjs operators, and they feel comfortable working with both…</p>
-<p>That being said I consider that a strong Angular team may also decide to include ngrx to the solution because they know all the power of the redux pattern and also the power added by rxjs operators, and they feel comfortable working with both…</p>
-<p>If you were expecting a simple answer to decide when to use ngrx, you are not going to obtain it, and don’t trust anyone giving you this answer from outside your organization or team. The decision depends on studying the pros and cons, understanding your team and considering their opinion.</p>
-<h2 id="NGRX-Actions-Reducers-Selectors-Store-and-Effects"><a href="#NGRX-Actions-Reducers-Selectors-Store-and-Effects" class="headerlink" title="NGRX Actions, Reducers, Selectors, Store, and Effects"></a>NGRX Actions, Reducers, Selectors, Store, and Effects</h2><p>These are the core building units of the ngrx flow. Each of them takes care of a part of the process of starting an operation to changing our state and retrieving data.</p>
-<p><img src="https://github.com/pengw00/pengw00.github.io/raw/master/image/ngrx.png" alt="image"></p>
-<p>###<br><a href="https://medium.com/frontend-fun/angular-ngrx-a-clean-and-clear-introduction-4ed61c89c1fc" target="_blank" rel="noopener">https://medium.com/frontend-fun/angular-ngrx-a-clean-and-clear-introduction-4ed61c89c1fc</a></p>
-<p>###</p>
-<h4 id="payload-the-type-of-this-property-depends-on-what-type-of-data-this-action-needs-to-send-to-the-reducer-In-the-case-of-the-previous-example-is-going-to-be-a-string-containing-the-user-name-Not-all-actions-needs-a-payload"><a href="#payload-the-type-of-this-property-depends-on-what-type-of-data-this-action-needs-to-send-to-the-reducer-In-the-case-of-the-previous-example-is-going-to-be-a-string-containing-the-user-name-Not-all-actions-needs-a-payload" class="headerlink" title="payload: the type of this property depends on what type of data this action needs to send to the reducer. In the case of the previous example, is going to be a string containing the user name. Not all actions needs a payload."></a>payload: the type of this property depends on what type of data this action needs to send to the reducer. In the case of the previous example, is going to be a string containing the user name. Not all actions needs a payload.</h4><p>###</p>
-<ol>
-<li>view dispatch a actions. </li>
-</ol>
-<p>In the store object, you have a function to dispatch (trigger) actions. Actions are classes that implemenets the NGRX Action interface. These Action classes have two properties (let’s take as an example an action class called GetUserName):type: it’s a read only string describing what the action stand for. For example: ‘[User] Get User Name’</p>
-<p>2.1. If this action doesn’t trigger an effect then a reducer is going to analyze the action (usually using a switch statement) and return a new state that’s is going to be the result of merging the old state with the value that changed by calling the action.</p>
-<p>Reducers…<br>Reducers are pure functions accepting two arguments, the previous state and an Action. When an Action is dispatched ngrx goes through all the reducers passing as arguments the previous state and the Action, in the order that the reducers where created, until it finds a case for that action.</p>
-<p>2.2. If an effect gets triggered by dispatching an action is because some side effects are going to happen before calling the reducer. This can probably be something like calling an HTTP service to get data.</p>
-<p>Effects…<br>Effects, on the ngrx libraries ecosystem, allow us to deal with side-effects caused from dispatching an action outside angular components or the ngrx store.</p>
-<p>The Effects listen if any action is dispatched, then, similar to what reducers do, it checks if the action is one of the actions type it has a case for.<br>Then is going to perform a side-effect, usually getting or sending data to an API.<br>Finally is going to emit another action, usually, an action referring to the result-state of the side effect (success, error, etc), then a reducer is going to enter in the scene as we already mention in the ngrx flow.</p>
-<p>2.2.1. After the effect is done (side effects are finished) a new “state-result” action gets fired by the effect (it can be that the side effects succeeded or failed), and we are back to point 2.1.</p>
-<h2 id="why-we-need-selector"><a href="#why-we-need-selector" class="headerlink" title="why we need selector"></a>why we need selector</h2><p>###<br> Now the Store has a new state. The state can be a big object tree, so ngrx introduces selectors to be able to use only the slices of the object that we need in a specific component.</p>
-<p> As we mentioned before the state tree can become quite a big object, it doesn’t make sense to have all that object on places where we only need part of it.</p>
-<p> NGRX store provides us the function “select” to obtain slices of our store. But what if we need to apply some logic to that slice before using the data in the components.</p>
-<p>  They allow us to decouple any state slice data transformation from the components.<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The store “select” function accepts an an argument a pure function, this pure function is our selector.</span><br></pre></td></tr></table></figure></p>
-<p>###</p>
-<h2 id="NGRX-example"><a href="#NGRX-example" class="headerlink" title="NGRX example"></a>NGRX example</h2><p>Our example is going to have a list of users, the user detail page and some initial configuration information that you need to get when the app starts. We are going to be able to implement some important ngrx flows.</p>
-<p>These are the things that we are going to do:</p>
-<p>Installation of the library<br>Folder structure for the store<br>Create State and initial values<br>Create Actions<br>Create Reducers<br>Create Effects<br>Create Selectors<br>Setting everything up<br>Using the store in some components</p>
-<h2 id="1-Installation-of-the-library"><a href="#1-Installation-of-the-library" class="headerlink" title="1. Installation of the library"></a>1. Installation of the library</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng new angular-ngrx --style=scss</span><br></pre></td></tr></table></figure>
-<p>Let’s add the ngrx libraries that we are going to use:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install @ngrx/core @ngrx/store @ngrx/effects @ngrx/store-devtools @ngrx/router-store --save</span><br></pre></td></tr></table></figure></p>
-<p>We are installing almost all the libraries of the ngrx ecosystem. Most of them are quite clear about their purpose like core, store, effects, but there are a couple that you may wonder what they are for.</p>
-<h3 id="store-devtools-Some-powerful-tooling-for-debugging"><a href="#store-devtools-Some-powerful-tooling-for-debugging" class="headerlink" title="store-devtools. Some powerful tooling for debugging."></a>store-devtools. Some powerful tooling for debugging.</h3><h3 id="router-store-Keeps-the-state-of-the-angular-router-in-the-store"><a href="#router-store-Keeps-the-state-of-the-angular-router-in-the-store" class="headerlink" title="router-store. Keeps the state of the angular router in the store."></a>router-store. Keeps the state of the angular router in the store.</h3><h2 id="Folder-structure-for-the-Store"><a href="#Folder-structure-for-the-Store" class="headerlink" title="Folder structure for the Store"></a>Folder structure for the Store</h2><p>Let’s start by discussing the file structure of the store. This file structure and all the store configuration should exist within the core module of your application but in our example, we don’t have one so the store is going to exist within our app module (the steps are pretty much the same if you are doing it in your core module).</p>
-<p><img src="https://github.com/pengw00/pengw00.github.io/raw/master/image/folder.png" alt="image"></p>
-<p>The declaration of the reducer receive the state and, in this case, the user actions and returns an IUserState.<br>Using a switch statement we generate cases for each possible action type.<br>Each case returns a new object that is the result of merging the old state and the new value.<br>All reducers have a default result that just returns the state without any changes.</p>
-<p>You probably already notice that in the reducers we are not handling all the actions that we have created. This is because we are going to handle the missing actions in effects because these actions have side effects.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/12/ngrx-for-flux/" data-id="ck4c677ba005oq024h6ln5dwm" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/">angular</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-TDD-concept" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/11/TDD-concept/" class="article-date">
-  <time datetime="2019-04-12T04:26:17.000Z" itemprop="datePublished">2019-04-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/11/TDD-concept/">TDD concept</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://medium.com/javascript-scene/unit-testing-react-components-aeda9a44aae2" target="_blank" rel="noopener">https://medium.com/javascript-scene/unit-testing-react-components-aeda9a44aae2</a></p>
-<p>Favor pure components for UI code: given same props, always render the same component. If you need state from the app, you can wrap those pure components with a container component which manages state and side-effects.<br>Isolate application logic/business rules in pure reducer functions.<br>Isolate side effects using container components.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pengw00.github.io/2019/04/11/TDD-concept/" data-id="ck4c67792001yq02479nee3a2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li></ul>
 
     </footer>
   </div>
@@ -579,7 +572,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System-Design/">System Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/golang/">golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contest/">Contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DesignPattern/">DesignPattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Http/">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MicroService/">MicroService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResponsiveWebDesign/">ResponsiveWebDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Java/">Spring&Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study-plan/">Study plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System-Design/">System Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SystemDesign/">SystemDesign</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/career/">career</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/">contest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/golang/">golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hackrrank/">hackrrank</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcodeDynamicProgramming/">leetcodeDynamicProgramming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microservice/">microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a></li></ul>
     </div>
   </div>
 
@@ -589,7 +582,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/Leetcode/" style="font-size: 12px;">Leetcode</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/System-Design/" style="font-size: 12px;">System Design</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/golang/" style="font-size: 10px;">golang</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Contest/" style="font-size: 10px;">Contest</a> <a href="/tags/Design-pattern/" style="font-size: 12px;">Design pattern</a> <a href="/tags/DesignPattern/" style="font-size: 10px;">DesignPattern</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Http/" style="font-size: 10px;">Http</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Javascript/" style="font-size: 12px;">Javascript</a> <a href="/tags/Leetcode/" style="font-size: 12px;">Leetcode</a> <a href="/tags/MicroService/" style="font-size: 10px;">MicroService</a> <a href="/tags/React/" style="font-size: 18px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a> <a href="/tags/ResponsiveWebDesign/" style="font-size: 10px;">ResponsiveWebDesign</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/Spring-Java/" style="font-size: 10px;">Spring&Java</a> <a href="/tags/Springboot/" style="font-size: 10px;">Springboot</a> <a href="/tags/Study-plan/" style="font-size: 10px;">Study plan</a> <a href="/tags/System-Design/" style="font-size: 12px;">System Design</a> <a href="/tags/SystemDesign/" style="font-size: 12px;">SystemDesign</a> <a href="/tags/algorithm/" style="font-size: 16px;">algorithm</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/career/" style="font-size: 10px;">career</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/contest/" style="font-size: 10px;">contest</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/golang/" style="font-size: 12px;">golang</a> <a href="/tags/hackrrank/" style="font-size: 10px;">hackrrank</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/leetcodeDynamicProgramming/" style="font-size: 10px;">leetcodeDynamicProgramming</a> <a href="/tags/microservice/" style="font-size: 10px;">microservice</a> <a href="/tags/react/" style="font-size: 14px;">react</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a>
     </div>
   </div>
 
@@ -598,7 +591,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -611,6 +604,14 @@
       <ul>
         
           <li>
+            <a href="/2020/01/16/ms-interview-alg/">ms-interview-alg</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/18/Concurrency-in-Golang/">Concurrency in Golang</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/18/golang-tutorial/">golang tutorial</a>
           </li>
         
@@ -620,14 +621,6 @@
         
           <li>
             <a href="/2019/11/16/System-design-for-instagram/">System design for instagram</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/16/benefit-from-spring-data/">benefit from spring data</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/16/js-asyc-promise-reading-summary/">js-asyc-promise-reading-summary</a>
           </li>
         
       </ul>
@@ -644,7 +637,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 David w00<br>
+      &copy; 2020 David w00<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

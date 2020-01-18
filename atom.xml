@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2019-12-19T03:33:31.121Z</updated>
+  <updated>2020-01-18T03:02:57.375Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ms-interview-alg</title>
+    <link href="http://pengw00.github.io/2020/01/16/ms-interview-alg/"/>
+    <id>http://pengw00.github.io/2020/01/16/ms-interview-alg/</id>
+    <published>2020-01-17T03:23:29.000Z</published>
+    <updated>2020-01-18T03:02:57.375Z</updated>
+    
+    <content type="html"><![CDATA[<p>最新2019/12月面筋</p><h2 id="no-1"><a href="#no-1" class="headerlink" title="no.1"></a>no.1</h2><p>在code里面找错，两个人，给两个数组分别表示他们喜欢的数，X， Y，找到一个highestIndex表示拥有他们两人喜欢的数的最多的。<br>类似max network。<br>【1， 2， 3， 4】， 【2， 3， 4， 3】<br>算法： 建立一个map，遍历保存每个index为key，value为</p><h2 id="No-2"><a href="#No-2" class="headerlink" title="No.2"></a>No.2</h2><p>给一个string只有两个字母会出现，找最少次数砍掉这两个字母还可以保持它们的alphabetaical order</p><h2 id="No。3"><a href="#No。3" class="headerlink" title="No。3"></a>No。3</h2><p>给一串字母，有重复，算出砍掉最少的字母让这段字母不会有三个同样的字母连续。<br>采用cnt方法计算连续的字符</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;最新2019/12月面筋&lt;/p&gt;
+&lt;h2 id=&quot;no-1&quot;&gt;&lt;a href=&quot;#no-1&quot; class=&quot;headerlink&quot; title=&quot;no.1&quot;&gt;&lt;/a&gt;no.1&lt;/h2&gt;&lt;p&gt;在code里面找错，两个人，给两个数组分别表示他们喜欢的数，X， Y，找到一个hig
+      
+    
+    </summary>
+    
+    
+      <category term="coding" scheme="http://pengw00.github.io/tags/coding/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Concurrency in Golang</title>
+    <link href="http://pengw00.github.io/2019/12/18/Concurrency-in-Golang/"/>
+    <id>http://pengw00.github.io/2019/12/18/Concurrency-in-Golang/</id>
+    <published>2019-12-19T03:36:55.000Z</published>
+    <updated>2019-12-19T05:53:43.493Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="understand-the-concept-of-parallelism-and-concurrency"><a href="#understand-the-concept-of-parallelism-and-concurrency" class="headerlink" title="understand the concept of parallelism and concurrency"></a>understand the concept of parallelism and concurrency</h3>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;understand-the-concept-of-parallelism-and-concurrency&quot;&gt;&lt;a href=&quot;#understand-the-concept-of-parallelism-and-concurrency&quot; class=&quot;heade
+      
+    
+    </summary>
+    
+    
+      <category term="golang" scheme="http://pengw00.github.io/tags/golang/"/>
+    
+  </entry>
   
   <entry>
     <title>golang tutorial</title>
@@ -420,58 +467,6 @@
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode 967. Numbers With Same Consecutive Differences</title>
-    <link href="http://pengw00.github.io/2019/06/08/Leetcode-967-Numbers-With-Same-Consecutive-Differences/"/>
-    <id>http://pengw00.github.io/2019/06/08/Leetcode-967-Numbers-With-Same-Consecutive-Differences/</id>
-    <published>2019-06-09T02:00:10.000Z</published>
-    <updated>2019-06-09T02:14:00.799Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>Solution 1</li></ul><p>Logic: BFS level by level, the previous level is diffrent from other level by the length, DP for state transformation. </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Java:</span><br><span class="line">public int[] numsSameConsecDiff(int N, int K) &#123;</span><br><span class="line">        List&lt;Integer&gt; cur = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);</span><br><span class="line">        for (int i = 2; i &lt;= N; ++i) &#123;</span><br><span class="line">            List&lt;Integer&gt; cur2 = new ArrayList&lt;&gt;();</span><br><span class="line">            for (int x : cur) &#123;</span><br><span class="line">                int y = x % 10;</span><br><span class="line">                if (x &gt; 0 &amp;&amp; y + K &lt; 10)</span><br><span class="line">                    cur2.add(x * 10 + y + K);</span><br><span class="line">                if (x &gt; 0 &amp;&amp; K &gt; 0 &amp;&amp; y - K &gt;= 0)</span><br><span class="line">                    cur2.add(x * 10 + y - K);</span><br><span class="line">            &#125;</span><br><span class="line">            cur = cur2;</span><br><span class="line">        &#125;</span><br><span class="line">        return cur.stream().mapToInt(j-&gt;j).toArray();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p>C++:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; numsSameConsecDiff(int N, int K) &#123;</span><br><span class="line">        vector&lt;int&gt; cur = &#123;1, 2, 3, 4, 5, 6, 7, 8, 9, 0&#125;;</span><br><span class="line">        for (int i = 2; i &lt;= N; ++i) &#123;</span><br><span class="line">            vector&lt;int&gt; cur2;</span><br><span class="line">            for (int x : cur) &#123;</span><br><span class="line">                int y = x % 10;</span><br><span class="line">                if (x &gt; 0 &amp;&amp; y + K &lt; 10)</span><br><span class="line">                    cur2.push_back(x * 10 + y + K);</span><br><span class="line">                if (x &gt; 0 &amp;&amp; K &gt; 0 &amp;&amp; y - K &gt;= 0)</span><br><span class="line">                    cur2.push_back(x * 10 + y - K);</span><br><span class="line">            &#125;</span><br><span class="line">            cur = cur2;</span><br><span class="line">        &#125;</span><br><span class="line">        return cur;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p><ul><li>Solution 2: dfs find the path to construct a number and until all the number is added.</li></ul><p>Below are two different coding style for DFS. The point is that which one is more efficiency.<br>In C++ solution, it start from 1 to 9, and the dfs path is directly find the num+K or num-K, as goes further.<br>the Java solution start from the 0 case, and dfs by 0 to 9 check every possible case. </p><h5 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; numsSameConsecDiff(int N, int K)&#123;</span><br><span class="line">//base case from 1</span><br><span class="line">if(N==1) return &#123;0, 1, 2, 3, 4, 5, 6, 7, 8, 9&#125;;</span><br><span class="line">vector&lt;int&gt; res;</span><br><span class="line">//from 1 ... dfs, because 0 can not be in the front</span><br><span class="line">for(auto num = 1; num &lt;= 9; ++num)&#123;</span><br><span class="line">dfs(num, N-1, K, res);</span><br><span class="line">&#125;</span><br><span class="line">return res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//dfs method</span><br><span class="line">void dfs(int num, int N, int K, vector&lt;int&gt; &amp;res)&#123;</span><br><span class="line">//terinal cases</span><br><span class="line">if(N==0) res.push_back(num);</span><br><span class="line">else&#123;</span><br><span class="line">//two path to find the final possible number</span><br><span class="line">if(num%10 + K&lt;=9) dfs(num*10 + num%10 + K, N-1, K, res);</span><br><span class="line">if(nums10 -K &gt;= 0) dfs(nums*10 + num%10 -K, N-1, K, res);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h5 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public int[] numsSameConsecDiff(int N, int K) &#123;</span><br><span class="line">        List&lt;Integer&gt; list = new ArrayList&lt;&gt;();</span><br><span class="line">        if(N==0)</span><br><span class="line">            return new int[0];</span><br><span class="line">        if(N==1)</span><br><span class="line">list.add(0);      // edge case</span><br><span class="line">        dfs(N, K, list, 0);</span><br><span class="line">        return list.stream().mapToInt(i-&gt;i).toArray();   //list.toArray(new int[list.size()]); doesn&apos;t work for primitives</span><br><span class="line">    &#125;</span><br><span class="line">    public void dfs(int N, int K, List&lt;Integer&gt; list, int number)&#123;</span><br><span class="line">        if(N == 0)&#123;   // base case, if you have added enough number of integers then append it to list; Here N is used as the total digits in temporary number </span><br><span class="line">            list.add(number);</span><br><span class="line">            return ;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0; i&lt;10; ++i)&#123;</span><br><span class="line">            if(i==0 &amp;&amp; number ==0)    // Do not add 0 at begining of a number</span><br><span class="line">                continue;</span><br><span class="line">            else if(number == 0 &amp;&amp; i!=0)&#123;     // base case, we add all the digits when we do not have any previous digit to check if difference = K</span><br><span class="line">                dfs(N-1, K, list, i);</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                if(Math.abs((number%10) - i )==K)&#123;</span><br><span class="line">                    dfs(N-1, K, list, number*10+i);    // General dfs to add the digit at the units place and reducing the number of digits by 1.</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ul&gt;
-&lt;li&gt;Solution 1&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Logic: BFS level by level, the previous level is diffrent from other level by the length, DP for state tra
-      
-    
-    </summary>
-    
-    
-      <category term="leetcodeDynamicProgramming" scheme="http://pengw00.github.io/tags/leetcodeDynamicProgramming/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Inorder traversal iterative solution for multiple questions for Leetcode BST problem</title>
-    <link href="http://pengw00.github.io/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/"/>
-    <id>http://pengw00.github.io/2019/06/06/Inorder-traversal-iterative-solution-for-multiple-questions-for-Leetcode-BST-problem/</id>
-    <published>2019-06-06T18:18:20.000Z</published>
-    <updated>2019-06-06T17:38:02.412Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>for tree inorder traversal, we have many different coding solution: recursion and iterative with stack mainly. </li></ul><h4 id="Iterative-stack-for-basic-inorder-traversal"><a href="#Iterative-stack-for-basic-inorder-traversal" class="headerlink" title="Iterative stack for basic inorder traversal"></a>Iterative stack for basic inorder traversal</h4><p>leetcode 94. Binary Tree Inorder Traversal</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public List&lt;Integer&gt; inorderTraversal(TreeNode root)&#123;</span><br><span class="line">List&lt;Integer&gt; res = new ArrayList&lt;&gt;();</span><br><span class="line">if(root == null) return res;</span><br><span class="line">Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">while(root != null || !stack.empty())&#123;</span><br><span class="line">while(root != null)&#123;</span><br><span class="line">stack.push(root);</span><br><span class="line">root = root.left;</span><br><span class="line">&#125;</span><br><span class="line">root = stack.pop();</span><br><span class="line">res.add(root.val);</span><br><span class="line">root = root.right;</span><br><span class="line">&#125;</span><br><span class="line">return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>Use this basic structure to find the kth smallest node<h6 id="Leetcode-230-Kth-Smallest-Element-in-a-BST"><a href="#Leetcode-230-Kth-Smallest-Element-in-a-BST" class="headerlink" title="Leetcode 230. Kth Smallest Element in a BST"></a>Leetcode 230. Kth Smallest Element in a BST</h6></li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public int KthSmallest(TreeNode root, int k)&#123;</span><br><span class="line">Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">while(root != null || !stack.isEmpty())&#123;</span><br><span class="line">//go all the way down to the left bottom if root is valid</span><br><span class="line">while(root != null)&#123;</span><br><span class="line">stack.push(root);</span><br><span class="line">root = root.left;</span><br><span class="line">&#125;</span><br><span class="line">//pop the top and get the value and then go the left</span><br><span class="line">root = stack.pop();</span><br><span class="line">if(--k == 0) break;</span><br><span class="line">root = root.right;</span><br><span class="line">&#125;</span><br><span class="line">return root.val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h5 id="Leetcode-98-Validate-Binary-Search-Tree"><a href="#Leetcode-98-Validate-Binary-Search-Tree" class="headerlink" title="Leetcode 98. Validate Binary Search Tree"></a>Leetcode 98. Validate Binary Search Tree</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public boolean isValidBST(TreeNode root)&#123;</span><br><span class="line">if(root == null) return true;</span><br><span class="line">Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">TreeNode pre = null;</span><br><span class="line">while(root != null || !stack.empty())&#123;</span><br><span class="line">while(root != null)&#123;</span><br><span class="line">stack.push(root);</span><br><span class="line">root = root.left;</span><br><span class="line">&#125;</span><br><span class="line">root = stack.pop();</span><br><span class="line">if(pre != null &amp;&amp; root.val &lt;= pre.val) return false;</span><br><span class="line">pre = root;</span><br><span class="line">root =root.right;</span><br><span class="line">&#125;</span><br><span class="line">return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ul&gt;
-&lt;li&gt;for tree inorder traversal, we have many different coding solution: recursion and iterative with stack mainly. &lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;
-      
-    
-    </summary>
-    
-    
-      <category term="leetcode" scheme="http://pengw00.github.io/tags/leetcode/"/>
     
   </entry>
   
