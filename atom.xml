@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://pengw00.github.io/"/>
-  <updated>2020-01-18T03:02:57.375Z</updated>
+  <updated>2020-02-15T06:19:43.342Z</updated>
   <id>http://pengw00.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>spring-boot-transaction</title>
+    <link href="http://pengw00.github.io/2020/02/15/spring-boot-transaction/"/>
+    <id>http://pengw00.github.io/2020/02/15/spring-boot-transaction/</id>
+    <published>2020-02-15T06:14:02.000Z</published>
+    <updated>2020-02-15T06:19:43.342Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Transaction-anotation"><a href="#Transaction-anotation" class="headerlink" title="Transaction anotation"></a>Transaction anotation</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">At a high level, when a class declares @Transactional on itself or its members, Spring creates a proxy that implements the same interface(s) as the class you’re annotating. In other words, Spring wraps the bean in the proxy and the bean itself has no knowledge of it. A proxy provides a way for Spring to inject behaviors before, after, or around method calls into the object being proxied.</span><br><span class="line"></span><br><span class="line">Internally, its the same as using a transaction advice (using AOP), where a proxy is created first and is invoked before/after the target bean’s method.</span><br><span class="line"></span><br><span class="line">The generated proxy object is supplied with a TransactionInterceptor, which is created by Spring. So when the @Transactional method is called from client code, the TransactionInterceptor gets invoked first from the proxy object, which begins the transaction and eventually invokes the method on the target bean. When the invocation finishes, the TransactionInterceptor commits/rolls back the transaction accordingly.</span><br></pre></td></tr></table></figure><h2 id="Understanding-Propagate-and-readOnly-annotation-attributes"><a href="#Understanding-Propagate-and-readOnly-annotation-attributes" class="headerlink" title="Understanding Propagate and readOnly annotation attributes"></a>Understanding Propagate and readOnly annotation attributes</h2><p>Transaction propagation is REQUIRED by default, which means that the same transaction will propagate from a transactional caller to transactional callee. It will create a new transaction or reuse the one if available. For example, if a read-only transaction calls a read-write transaction method, the whole transaction will be read-only.</p><p>Depending on the transaction propagation attribute (like for REQUIRES_NEW), sometimes the existing transaction is suspended/paused at some point, a new one is always started and eventually committed, and after that the first transaction is resumed.</p><h2 id="Isolation-Level"><a href="#Isolation-Level" class="headerlink" title="Isolation Level"></a>Isolation Level</h2><p>Read Uncommitted – Allows dirty reads, when a transaction is not yet committed by a thread and another thread is reading the dirty data.<br>Read Committed – Does not allow dirty reads. Only lets a thread to read values which have already been committed by other running transactions in another threads.<br>Repeatable Read – If the same data is read twice in the same transaction, it will always be the same. This level guarantees that any data once read cannot change.<br>Serializable – Transactions occur with locking at all levels (read, range and write locking), because of which they are executed in a fixed sequence. It doesn’t allow concurrent transactions and leads to a performance hit.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Transaction-anotation&quot;&gt;&lt;a href=&quot;#Transaction-anotation&quot; class=&quot;headerlink&quot; title=&quot;Transaction anotation&quot;&gt;&lt;/a&gt;Transaction anotation&lt;/
+      
+    
+    </summary>
+    
+    
+      <category term="spring-boot" scheme="http://pengw00.github.io/tags/spring-boot/"/>
+    
+  </entry>
   
   <entry>
     <title>ms-interview-alg</title>
@@ -448,20 +471,6 @@
     <id>http://pengw00.github.io/2019/06/09/Leetcode-987-Vertical-Order-Traversal-of-a-Binary-Tree/</id>
     <published>2019-06-09T20:28:10.000Z</published>
     <updated>2019-06-09T19:28:10.254Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode 146. LRU cache</title>
-    <link href="http://pengw00.github.io/2019/06/09/Leetcode-146-LRU-cache/"/>
-    <id>http://pengw00.github.io/2019/06/09/Leetcode-146-LRU-cache/</id>
-    <published>2019-06-09T05:15:22.000Z</published>
-    <updated>2019-06-09T04:15:22.111Z</updated>
     
     <summary type="html">
     
